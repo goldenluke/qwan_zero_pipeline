@@ -65,16 +65,21 @@
                 <i data-lucide="trending-up" class="text-indigo-500"></i>
                 <span class="font-extrabold text-xl tracking-tighter uppercase">MARKET-<span class="text-indigo-400">QWAN</span></span>
             </div>
-            <div class="hidden md:flex gap-8 text-[10px] uppercase tracking-widest font-bold text-slate-500">
+            <div class="hidden lg:flex gap-8 text-[10px] uppercase tracking-widest font-bold text-slate-500">
                 <a href="#overview" class="hover:text-white transition">Visão Geral</a>
                 <a href="#architecture" class="hover:text-white transition">Arquitetura</a>
                 <a href="#formalism" class="hover:text-white transition">Funcional Φ</a>
                 <a href="#criticality" class="hover:text-white transition">Criticidade</a>
                 <a href="#dashboard" class="hover:text-white transition">Plataforma</a>
             </div>
-            <a href="https://github.com/goldenluke/qwan_zero_pipeline" target="_blank" class="flex items-center gap-2 bg-white text-black px-4 py-2 rounded-lg text-xs font-bold hover:bg-slate-200 transition">
-                <i data-lucide="github" class="w-4 h-4"></i> GITHUB
-            </a>
+            <div class="flex gap-3">
+                <a href="https://github.com/goldenluke/qwan_zero_pipeline" target="_blank" class="hidden sm:flex items-center gap-2 bg-white/5 border border-white/10 text-white px-3 py-1.5 rounded-lg text-[10px] font-bold hover:bg-white/10 transition">
+                    <i data-lucide="cpu" class="w-3 h-3"></i> MODELO
+                </a>
+                <a href="https://github.com/goldenluke/market-qwan" target="_blank" class="flex items-center gap-2 bg-white text-black px-3 py-1.5 rounded-lg text-[10px] font-bold hover:bg-slate-200 transition">
+                    <i data-lucide="layout" class="w-3 h-3"></i> DASHBOARD
+                </a>
+            </div>
         </div>
     </nav>
 
@@ -89,12 +94,17 @@
                 Inteligência Preditiva em <br><span class="gradient-text">Regimes de Mercado.</span>
             </h1>
             <p class="text-xl md:text-2xl text-slate-400 max-w-4xl mx-auto mb-12 leading-relaxed font-light">
-                O Market-QWAN é uma plataforma quantitativa de próxima geração que funde **Modelos de Markov Ocultos (HMM)**, **Forecast Neural NHITS** e **Econofísica** para detectar transições estruturais e otimizar portfólios sob criticidade.
+                O Market-QWAN é um ecossistema quantitativo que funde **Modelos de Markov Ocultos (HMM)** e **Forecast Neural** para detectar transições estruturais e otimizar portfólios sob criticidade.
             </p>
-            <div class="flex justify-center">
-                <a href="https://github.com/goldenluke/qwan_zero_pipeline" target="_blank" class="group relative px-12 py-5 bg-indigo-600 rounded-2xl font-black text-lg hover:shadow-[0_0_60px_rgba(99,102,241,0.4)] transition-all duration-300">
-                    <span class="flex items-center gap-3 italic">
-                        REPOSITÓRIO INSTITUCIONAL <i data-lucide="external-link" class="w-5 h-5 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform"></i>
+            <div class="flex flex-col sm:flex-row justify-center gap-4">
+                <a href="https://github.com/goldenluke/qwan_zero_pipeline" target="_blank" class="group relative px-8 py-5 bg-indigo-600 rounded-2xl font-black text-sm hover:shadow-[0_0_60px_rgba(99,102,241,0.4)] transition-all duration-300">
+                    <span class="flex items-center justify-center gap-3">
+                        <i data-lucide="cpu" class="w-5 h-5 text-indigo-200"></i> PIPELINE & MODELO <i data-lucide="external-link" class="w-4 h-4 opacity-50"></i>
+                    </span>
+                </a>
+                <a href="https://github.com/goldenluke/market-qwan" target="_blank" class="group relative px-8 py-5 bg-white/5 border border-white/10 backdrop-blur rounded-2xl font-black text-sm hover:bg-white/10 transition-all duration-300">
+                    <span class="flex items-center justify-center gap-3">
+                        <i data-lucide="layout" class="w-5 h-5 text-emerald-400"></i> DASHBOARD APP <i data-lucide="external-link" class="w-4 h-4 opacity-50"></i>
                     </span>
                 </a>
             </div>
@@ -109,41 +119,37 @@
             <div class="lg:col-span-2">
                 <h2 class="text-4xl font-black mb-8 uppercase tracking-tight italic">Estratégia <span class="text-indigo-500">Regime-Aware</span></h2>
                 <p class="text-slate-400 text-lg leading-relaxed mb-8">
-                    Mercados financeiros não são sistemas lineares estáveis; eles operam em regimes estruturais distintos que alternam entre calmaria, euforia e colapso. O Market-QWAN utiliza inferência Bayesiana para identificar o estado latente atual e ajustar dinamicamente a exposição ao risco.
+                    Mercados financeiros não são sistemas lineares estáveis; eles operam em regimes estruturais distintos. O Market-QWAN utiliza inferência Bayesiana para identificar o estado latente atual e ajustar dinamicamente a exposição ao risco.
                 </p>
                 <div class="grid md:grid-cols-2 gap-8">
                     <div class="glass p-8 rounded-3xl border-indigo-500/20">
                         <h4 class="text-white font-bold mb-4 flex items-center gap-2">
                             <i data-lucide="database" class="text-indigo-400"></i> Camada de Dados
                         </h4>
-                        <p class="text-sm text-slate-500 leading-relaxed">Pipeline robusto com tratamento de MultiIndex, conversão log-retorno e alimentação via yfinance pronto para gestão multi-asset institucional.</p>
+                        <p class="text-sm text-slate-500 leading-relaxed">Pipeline robusto via `qwan_zero_pipeline` com tratamento de MultiIndex e conversão log-retorno institucional.</p>
                     </div>
                     <div class="glass p-8 rounded-3xl border-emerald-500/20">
                         <h4 class="text-white font-bold mb-4 flex items-center gap-2">
-                            <i data-lucide="bar-chart-3" class="text-emerald-400"></i> Otimização Φ
+                            <i data-lucide="bar-chart-3" class="text-emerald-400"></i> Aplicação Market-QWAN
                         </h4>
-                        <p class="text-sm text-slate-500 leading-relaxed">Motor de alocação que maximiza o funcional estrutural QWAN, equilibrando ganho anualizado, entropia de risco e momentum de regime.</p>
+                        <p class="text-sm text-slate-500 leading-relaxed">Dashboard interativo para visualização de Alpha, Sharpe e superfícies Φ em tempo real para tomada de decisão.</p>
                     </div>
                 </div>
             </div>
             <div class="glass p-10 rounded-[3rem] border-white/5 flex flex-col justify-center">
-                <h3 class="text-2xl font-black mb-6 uppercase tracking-tighter">Principais <br>Fundamentos</h3>
+                <h3 class="text-2xl font-black mb-6 uppercase tracking-tighter">Ecossistema <br>Integrado</h3>
                 <ul class="space-y-6">
                     <li class="flex items-start gap-4 text-sm text-slate-400">
-                        <i data-lucide="check-circle" class="text-indigo-500 shrink-0"></i>
-                        <span>Modelagem Probabilística HMM (Hidden Markov Models).</span>
+                        <i data-lucide="code" class="text-indigo-500 shrink-0"></i>
+                        <span><strong>Backend:</strong> Pipeline de treinamento e inferência HMM.</span>
                     </li>
                     <li class="flex items-start gap-4 text-sm text-slate-400">
-                        <i data-lucide="check-circle" class="text-indigo-500 shrink-0"></i>
-                        <span>Otimização de Portfólio baseada no Funcional Φ.</span>
+                        <i data-lucide="monitor" class="text-indigo-500 shrink-0"></i>
+                        <span><strong>Frontend:</strong> Dashboard Streamlit para monitoramento de risco.</span>
                     </li>
                     <li class="flex items-start gap-4 text-sm text-slate-400">
-                        <i data-lucide="check-circle" class="text-indigo-500 shrink-0"></i>
-                        <span>Volatility Targeting e Stop Estrutural Adaptativo.</span>
-                    </li>
-                    <li class="flex items-start gap-4 text-sm text-slate-400">
-                        <i data-lucide="check-circle" class="text-indigo-500 shrink-0"></i>
-                        <span>Forecast Neural NHITS multi-passo.</span>
+                        <i data-lucide="globe" class="text-indigo-500 shrink-0"></i>
+                        <span><strong>API:</strong> Endpoints FastAPI para alocação dinâmica.</span>
                     </li>
                 </ul>
             </div>
@@ -163,17 +169,12 @@
                     <div class="relative pl-10 border-l-2 border-indigo-500/30">
                         <div class="absolute -left-[9px] top-0 w-4 h-4 rounded-full bg-indigo-500 shadow-[0_0_15px_rgba(99,102,241,0.5)]"></div>
                         <h4 class="text-white font-bold text-xl mb-3">RegimeAware Engine</h4>
-                        <p class="text-slate-500 text-sm leading-relaxed">O núcleo operacional realiza o ajuste de HMMs Gaussianos para inferir a matriz de transição de estados. Para cada regime detectado, um peso específico é calculado via otimização estrutural, resultando em uma combinação Bayesiana final ($w_{final} = \Sigma p_k \times w_k$).</p>
+                        <p class="text-slate-500 text-sm leading-relaxed">O núcleo operacional realiza o ajuste de HMMs Gaussianos para inferir a matriz de transição de estados latentes do mercado.</p>
                     </div>
                     <div class="relative pl-10 border-l-2 border-emerald-500/30">
                         <div class="absolute -left-[9px] top-0 w-4 h-4 rounded-full bg-emerald-500 shadow-[0_0_15px_rgba(16,185,129,0.5)]"></div>
                         <h4 class="text-white font-bold text-xl mb-3">Institutional Backtest</h4>
-                        <p class="text-slate-500 text-sm leading-relaxed">Framework de validação rigoroso com Walk-forward rolling, janelas de lookback configuráveis, rebalanceamento dinâmico e métricas completas: CAGR, Sharpe, Sortino e Alpha contra benchmark.</p>
-                    </div>
-                    <div class="relative pl-10 border-l-2 border-purple-500/30">
-                        <div class="absolute -left-[9px] top-0 w-4 h-4 rounded-full bg-purple-500 shadow-[0_0_15px_rgba(168,85,247,0.5)]"></div>
-                        <h4 class="text-white font-bold text-xl mb-3">Quant Fund Engine</h4>
-                        <p class="text-slate-500 text-sm leading-relaxed">Camada avançada que executa buscas de hiperparâmetros ($\alpha, \gamma$) aninhadas, Risk Parity baselines e ensembles estruturais para garantir robustez em cenários fora da amostra.</p>
+                        <p class="text-slate-500 text-sm leading-relaxed">Framework de validação com Walk-forward rolling, janelas de lookback e métricas completas: CAGR e Sharpe.</p>
                     </div>
                 </div>
 
@@ -188,20 +189,8 @@
                                 <span class="text-slate-500"># Hidden Markov Model Fitting</span><br>
                                 hmm_model = GaussianHMM(n_components=K)<br>
                                 hmm_model.fit(returns)<br><br>
-                                <span class="text-slate-500"># Posterior Computation</span><br>
-                                posteriors = hmm_model.predict_proba(current_data)<br><br>
                                 <span class="text-slate-500"># Bayesian Weighted Allocation</span><br>
                                 final_weights = np.dot(posteriors, regime_opt_weights)
-                            </div>
-                            <div class="grid grid-cols-2 gap-4">
-                                <div class="p-4 bg-white/5 rounded-xl border border-white/10 text-center">
-                                    <div class="text-[8px] text-slate-500 uppercase mb-1">Confidence Score</div>
-                                    <div class="text-lg font-black text-indigo-400">92.4%</div>
-                                </div>
-                                <div class="p-4 bg-white/5 rounded-xl border border-white/10 text-center">
-                                    <div class="text-[8px] text-slate-500 uppercase mb-1">State Entropy</div>
-                                    <div class="text-lg font-black text-emerald-400">0.34</div>
-                                </div>
                             </div>
                         </div>
                     </div>
@@ -216,38 +205,27 @@
             <div>
                 <h2 class="text-4xl font-black mb-8 uppercase italic">O Funcional <span class="text-indigo-500">Φ (Phi)</span></h2>
                 <div class="prose prose-invert max-w-none text-slate-400 leading-relaxed space-y-6">
-                    <p>O núcleo da decisão do portfólio não é uma simples média-variância. O Market-QWAN maximiza o funcional de informação estrutural:</p>
+                    <p>O núcleo da alocação maximiza o funcional de informação estrutural presente no pipeline do modelo:</p>
                     <div class="text-2xl mono text-white py-8 px-10 glass rounded-3xl border-indigo-500/20 text-center">
                         Φ = G − αH − γμ − Penalizações
                     </div>
                     <ul class="space-y-4 text-sm">
-                        <li><strong>G (Ganho Anualizado):</strong> Retorno geométrico esperado por regime.</li>
-                        <li><strong>H (Entropia de Risco):</strong> Controla a diversificação estrutural das contribuições de risco.</li>
-                        <li><strong>μ (Momentum):</strong> Captura a persistência de regime para evitar rebalanceamento prematuro.</li>
-                        <li><strong>Penalizações:</strong> Fatores que limitam a concentração sistêmica, CVaR excessivo e turnover cost.</li>
+                        <li><strong>G (Ganho):</strong> Retorno geométrico esperado por regime.</li>
+                        <li><strong>H (Entropia):</strong> Diversificação estrutural das contribuições de risco.</li>
+                        <li><strong>μ (Momentum):</strong> Persistência estratégica de regime.</li>
                     </ul>
                 </div>
             </div>
             <div class="grid grid-cols-2 gap-6">
                 <div class="glass p-8 rounded-3xl hover:border-indigo-500/40 transition-all group">
-                    <i data-lucide="shield-check" class="text-indigo-400 mb-6 group-hover:scale-110 transition-transform"></i>
-                    <h4 class="font-bold text-white mb-2 italic">Robust Covariance</h4>
-                    <p class="text-xs text-slate-500 leading-relaxed">Uso de Ledoit-Wolf e Clipping para matrizes de covariância limpas e operáveis.</p>
+                    <i data-lucide="cpu" class="text-indigo-400 mb-6 group-hover:scale-110 transition-transform"></i>
+                    <h4 class="font-bold text-white mb-2 italic">NHITS Forecast</h4>
+                    <p class="text-xs text-slate-500 leading-relaxed">Previsões neurais multi-passo integradas via `NeuralForecast`.</p>
                 </div>
                 <div class="glass p-8 rounded-3xl hover:border-emerald-500/40 transition-all group">
-                    <i data-lucide="zap" class="text-emerald-400 mb-6 group-hover:scale-110 transition-transform"></i>
-                    <h4 class="font-bold text-white mb-2 italic">CVaR Constraint</h4>
-                    <p class="text-xs text-slate-500 leading-relaxed">Otimização sob restrição de Conditional Value at Risk para proteção em caudas longas.</p>
-                </div>
-                <div class="glass p-8 rounded-3xl hover:border-purple-500/40 transition-all group">
-                    <i data-lucide="refresh-cw" class="text-purple-400 mb-6 group-hover:scale-110 transition-transform"></i>
-                    <h4 class="font-bold text-white mb-2 italic">Turnover Penalty</h4>
-                    <p class="text-xs text-slate-500 leading-relaxed">Penalização de custos de transação integrada diretamente na função objetivo.</p>
-                </div>
-                <div class="glass p-8 rounded-3xl hover:border-amber-500/40 transition-all group">
-                    <i data-lucide="share-2" class="text-amber-400 mb-6 group-hover:scale-110 transition-transform"></i>
-                    <h4 class="font-bold text-white mb-2 italic">Ensemble Allocation</h4>
-                    <p class="text-xs text-slate-500 leading-relaxed">Meta-alocador que combina múltiplos modelos via ranking de Sharpe dinâmico.</p>
+                    <i data-lucide="terminal" class="w-8 h-8 text-emerald-400 mb-6 group-hover:scale-110 transition-transform"></i>
+                    <h4 class="font-bold text-white mb-2 italic">FastAPI Endpoints</h4>
+                    <p class="text-xs text-slate-500 leading-relaxed">Infraestrutura escalável para integração com sistemas externos.</p>
                 </div>
             </div>
         </div>
@@ -265,89 +243,55 @@
                         <div>
                             <div class="flex justify-between mb-4">
                                 <span class="text-xs uppercase font-bold text-slate-400">Suscetibilidade ($\chi$)</span>
-                                <span class="text-xs mono text-red-400">Peak Detection Active</span>
+                                <span class="text-xs mono text-red-400">Active Monitoring</span>
                             </div>
-                            <p class="text-sm text-slate-500">Mede o risco coletivo através da variância das flutuações sistêmicas. Altas suscetibilidades precedem transições de fase e colapsos de mercado.</p>
+                            <p class="text-sm text-slate-500">Detecção de picos de correlação coletiva antes de eventos de drawdown.</p>
                         </div>
-                        <div>
-                            <div class="flex justify-between mb-4">
-                                <span class="text-xs uppercase font-bold text-slate-400">Autovalor Dominante ($\lambda_{max}$)</span>
-                                <span class="text-xs mono text-indigo-400">Stress Index: 3.82</span>
-                            </div>
-                            <p class="text-sm text-slate-500">Calcula o grau de acoplamento do mercado. Quando $\lambda_{max}$ diverge da média, o sistema perde diversificação e torna-se um bloco coeso vulnerável.</p>
-                        </div>
-                        <div class="p-6 bg-red-500/5 rounded-2xl border border-red-500/10">
-                            <h5 class="text-red-400 font-bold text-xs uppercase mb-3">Overlay Crítico Ativo</h5>
-                            <p class="text-xs text-slate-400 italic">"Se a densidade da rede de correlação excede o threshold dinâmico, a exposição global é reduzida preventivamente via Regime-Aware Overlay."</p>
+                        <div class="p-6 bg-red-500/5 rounded-2xl border border-red-500/10 text-center">
+                            <a href="https://github.com/goldenluke/market-qwan" target="_blank" class="text-red-400 font-bold text-xs uppercase hover:underline">Ver Heatmaps no Dashboard →</a>
                         </div>
                     </div>
                 </div>
                 <div class="order-1 lg:order-2">
                     <h2 class="text-4xl font-black mb-8 uppercase italic">A Camada de <span class="text-red-500">Risco Coletivo</span></h2>
                     <p class="text-slate-400 leading-relaxed mb-8">
-                        Inspirado na Econofísica, o Market-QWAN mede o risco não pelo ativo individual, mas pela **conectividade do sistema**. Monitoramos o heatmap de correlação e o índice composto sistêmico para detectar o "Estado Crítico" antes que ele resulte em drawdown.
+                        Inspirado na Econofísica, o Market-QWAN monitora o heatmap de correlação e o índice composto sistêmico para detectar o "Estado Crítico".
                     </p>
-                    <div class="flex flex-col gap-4">
-                        <div class="flex items-center gap-4 p-4 glass rounded-2xl border-white/5">
-                            <i data-lucide="network" class="text-indigo-400 shrink-0"></i>
-                            <span class="text-xs text-slate-400">Análise de Densidade de Rede e Clustering dinâmico.</span>
-                        </div>
-                        <div class="flex items-center gap-4 p-4 glass rounded-2xl border-white/5">
-                            <i data-lucide="activity" class="text-emerald-400 shrink-0"></i>
-                            <span class="text-xs text-slate-400">Cálculo de χ = N (⟨x²⟩ − ⟨x⟩²) para variância estrutural.</span>
-                        </div>
-                    </div>
                 </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Dashboard & API Section -->
-    <section id="dashboard" class="py-32 max-w-7xl mx-auto px-6">
-        <div class="text-center mb-20">
-            <h2 class="text-4xl font-black uppercase mb-4">Interface <span class="text-indigo-500">Institucional</span></h2>
-            <p class="text-slate-400">Controle total sobre alocação, stress tests e projeções neurais.</p>
-        </div>
-
-        <div class="grid md:grid-cols-3 gap-8">
-            <div class="glass p-10 rounded-[2.5rem] border-white/5 space-y-6">
-                <i data-lucide="layout-dashboard" class="text-indigo-400 w-8 h-8"></i>
-                <h4 class="font-bold text-xl text-white">Dashboard Streamlit</h4>
-                <p class="text-sm text-slate-500 leading-relaxed">Visualização completa de Equity Curves, Attribution de Regime, Superfícies Φ em 3D e Simulações Monte Carlo com regime-switching.</p>
-            </div>
-            <div class="glass p-10 rounded-[2.5rem] border-white/5 space-y-6">
-                <i data-lucide="server" class="text-emerald-400 w-8 h-8"></i>
-                <h4 class="font-bold text-xl text-white">API REST FastAPI</h4>
-                <p class="text-sm text-slate-500 leading-relaxed">Endpoints institucionais para `/optimize` e `/weights`. Integração direta com OMS e sistemas de gestão de risco externos via JSON robusto.</p>
-            </div>
-            <div class="glass p-10 rounded-[2.5rem] border-white/5 space-y-6">
-                <i data-lucide="brain-circuit" class="text-purple-400 w-8 h-8"></i>
-                <h4 class="font-bold text-xl text-white">Forecast Neural</h4>
-                <p class="text-sm text-slate-500 leading-relaxed">Arquitetura NHITS integrada via NeuralForecast para previsões multi-passo de horizonte configurável e treinamento supervisionado.</p>
             </div>
         </div>
     </section>
 
     <!-- Footer -->
     <footer class="py-24 border-t border-white/5 text-center">
-        <div class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-12">
+        <div class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-start gap-12">
             <div class="text-left">
                 <div class="flex items-center gap-2 mb-4">
                     <i data-lucide="trending-up" class="text-indigo-500"></i>
                     <span class="font-black text-2xl tracking-tighter italic">MARKET-QWAN</span>
                 </div>
                 <p class="text-slate-500 text-sm max-w-sm leading-relaxed">
-                    Plataforma Quantitativa de Alta Densidade. Combinando Sistemas Complexos, Econofísica e Machine Learning para Gestão Institucional.
+                    Plataforma Quantitativa de Alta Densidade. Combinando Sistemas Complexos e Machine Learning para Gestão Institucional.
                 </p>
             </div>
-            <div class="flex flex-col sm:flex-row gap-6">
-                <a href="https://github.com/goldenluke/qwan_zero_pipeline" target="_blank" class="bg-white text-black px-10 py-4 rounded-2xl font-black flex items-center gap-3 hover:bg-slate-200 transition">
-                    <i data-lucide="github"></i> CONTRIBUA NO GITHUB
-                </a>
+            
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 w-full md:w-auto">
+                <div class="text-left">
+                    <h5 class="text-white font-bold text-xs uppercase mb-4 tracking-widest opacity-50 underline">Pipeline & Modelo</h5>
+                    <a href="https://github.com/goldenluke/qwan_zero_pipeline" target="_blank" class="bg-white/5 border border-white/10 px-6 py-4 rounded-2xl font-bold flex items-center gap-3 hover:bg-white/10 transition">
+                        <i data-lucide="cpu" class="text-indigo-400"></i> GITHUB MODELO
+                    </a>
+                </div>
+                <div class="text-left">
+                    <h5 class="text-white font-bold text-xs uppercase mb-4 tracking-widest opacity-50 underline">Dashboard & App</h5>
+                    <a href="https://github.com/goldenluke/market-qwan" target="_blank" class="bg-white text-black px-6 py-4 rounded-2xl font-bold flex items-center gap-3 hover:bg-slate-200 transition">
+                        <i data-lucide="layout" class="text-emerald-600"></i> GITHUB DASHBOARD
+                    </a>
+                </div>
             </div>
         </div>
         <div class="mt-24 text-[10px] text-slate-700 uppercase tracking-[0.6em] font-bold">
-            Complex Systems Research • Lucas Dourado • v5.0.0 Stable Build
+            Complex Systems Research • Lucas Dourado • v5.1.0 Stable Build
         </div>
     </footer>
 
@@ -370,24 +314,6 @@
                     }
                 }
             });
-        });
-
-        // Simple opacity fade-in on scroll
-        const observerOptions = { threshold: 0.1 };
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.style.opacity = '1';
-                    entry.target.style.transform = 'translateY(0)';
-                }
-            });
-        }, observerOptions);
-
-        document.querySelectorAll('section').forEach(section => {
-            section.style.opacity = '0.5';
-            section.style.transform = 'translateY(20px)';
-            section.style.transition = 'all 0.8s ease-out';
-            observer.observe(section);
         });
     </script>
 </body>
