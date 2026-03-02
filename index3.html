@@ -74,21 +74,28 @@
 
         .feature-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
             gap: 1rem;
         }
 
         .feature-tag {
             background: rgba(6, 182, 212, 0.05);
             border: 1px solid rgba(6, 182, 212, 0.15);
-            padding: 4px 10px;
-            border-radius: 6px;
-            font-size: 0.7rem;
+            padding: 6px 12px;
+            border-radius: 8px;
+            font-size: 0.75rem;
             color: #22d3ee;
             font-family: 'JetBrains Mono', monospace;
             display: flex;
             align-items: center;
-            gap: 6px;
+            gap: 8px;
+            transition: all 0.2s ease;
+        }
+
+        .feature-tag:hover {
+            background: rgba(6, 182, 212, 0.15);
+            border-color: var(--primary);
+            transform: translateX(4px);
         }
 
         .math-box {
@@ -97,10 +104,6 @@
             padding: 1.5rem;
             border-radius: 1rem;
             margin-top: 1rem;
-        }
-        
-        .accent-math {
-            color: var(--accent) !important;
         }
     </style>
 </head>
@@ -115,9 +118,10 @@
             </div>
             <div class="hidden lg:flex gap-8 text-[10px] uppercase tracking-widest font-bold text-slate-500">
                 <a href="#stack" class="hover:text-white transition">Arquitetura</a>
-                <a href="#math" class="hover:text-white transition text-cyan-400 font-black">Fundamentação</a>
+                <a href="#math" class="hover:text-white transition text-cyan-400">Modelos Matemática</a>
+                <a href="#features" class="hover:text-white transition">Catálogo Features</a>
                 <a href="#fazenda" class="hover:text-white transition text-amber-400">Modelo Fazenda</a>
-                <a href="#governance" class="hover:text-white transition">Governança</a>
+                <a href="#governance" class="hover:text-white transition text-rose-500">Governança</a>
             </div>
             <div class="flex gap-3">
                 <a href="https://github.com/goldenluke/labsus" target="_blank" class="flex items-center gap-2 bg-slate-800 text-white px-4 py-1.5 rounded-lg text-[10px] font-bold hover:bg-slate-700 transition border border-white/10">
@@ -132,14 +136,15 @@
         <div class="absolute top-0 left-1/2 -translate-x-1/2 w-[1200px] h-[600px] bg-cyan-600/10 blur-[160px] rounded-full -z-10"></div>
         <div class="max-w-6xl mx-auto">
             <div class="inline-block px-4 py-1.5 rounded-full border border-cyan-500/30 bg-cyan-500/5 text-cyan-400 text-[10px] font-black mb-8 uppercase tracking-[0.4em]">
-                Framework de Inteligência Estatal Multi-Domínio
+                Framework Transversal de Inteligência Estatal Multi-Domínio
             </div>
             <h1 class="text-6xl md:text-8xl font-black mb-10 tracking-tighter leading-[0.85]">
-                Engenharia de Dados <br><span class="gradient-text">e Lógica de Estado.</span>
+                Padrão de Projeto <br><span class="gradient-text">de Inteligência Estatal.</span>
             </h1>
             <p class="text-xl md:text-2xl text-slate-400 max-w-4xl mx-auto mb-12 leading-relaxed font-light">
                 O <b>LabSUS</b> operacionaliza um <b>Padrão de Projeto Estatal</b> agnóstico. Uma infraestrutura full-stack que orquestra <b>aproximadamente 40 modelos matemáticos</b> para transformar o caos dos dados brutos em decisões acionáveis.
             </p>
+            <!-- Autor -->
             <div class="flex items-center justify-center gap-2 text-cyan-500/80 font-mono text-sm tracking-widest uppercase mb-12 border-y border-white/5 py-2 inline-flex mx-auto">
                 <i data-lucide="user" class="w-4 h-4"></i>
                 Autor: <span class="font-bold text-cyan-400">Lucas Amaral Dourado</span>
@@ -147,89 +152,124 @@
         </div>
     </header>
 
-    <div class="section-divider" id="math"></div>
+    <div class="section-divider" id="stack"></div>
 
-    <!-- FUNDAMENTAÇÃO MATEMÁTICA AVANÇADA (SRC) -->
-    <section class="py-32 max-w-7xl mx-auto px-6">
+    <!-- 1. ARQUITETURA E FUNDAMENTAÇÃO MATEMÁTICA -->
+    <section class="py-32 max-w-7xl mx-auto px-6" id="math">
         <div class="text-center mb-24">
             <h2 class="text-5xl font-black uppercase mb-4 italic tracking-tight underline decoration-cyan-500/30 underline-offset-8 text-cyan-400">Fundamentação Matemática</h2>
             <p class="text-slate-500 max-w-3xl mx-auto font-light text-sm italic leading-relaxed">
-                Abaixo detalhamos o motor analítico do LabSUS. O sistema integra <b>aproximadamente 40 módulos especializados</b>, dos quais os pilares algorítmicos estão formalizados nesta seção.
+                Detalhes dos pilares algorítmicos que regem os <b>~40 modelos especializados</b> do motor analítico <code>src/</code>.
             </p>
         </div>
 
         <div class="grid lg:grid-cols-2 gap-12">
-            
-            <!-- Módulo 1: Normalização e Interpolação Spline -->
+            <!-- Normalização Spline -->
             <div class="glass p-10 rounded-[3rem] border-white/5 math-box">
                 <h4 class="font-bold text-white uppercase text-xs tracking-widest mb-6 text-cyan-400">1. Normalização Dinâmica (ETL)</h4>
-                <p class="text-xs text-slate-400 mb-6 italic">Aplica Interpolação por Spline Cúbica para garantir denominadores populacionais contínuos:</p>
+                <p class="text-xs text-slate-400 mb-6 italic">Garante denominadores populacionais contínuos via Spline Cúbica:</p>
                 $$S_i(x) = a_i(x-x_i)^3 + b_i(x-x_i)^2 + c_i(x-x_i) + d_i$$
                 <p class="text-[10px] text-slate-500 mt-4 leading-relaxed">
-                    A taxa final (\(I\)) para qualquer indicador municipal é normalizada pela estimativa \(\hat{P}\) do instante \(t\):
-                    $$I_t = \frac{\sum \text{Eventos}_t}{\hat{P}_t} \times 10^k$$
+                    Taxa final normalizada: $$I_t = \frac{\sum \text{Eventos}_t}{\hat{P}_t} \times 10^k$$
                 </p>
             </div>
 
-            <!-- Módulo 2: Agrupamento K-Means e Arquétipos -->
+            <!-- K-Means Arquétipos -->
             <div class="glass p-10 rounded-[3rem] border-white/5 math-box">
                 <h4 class="font-bold text-white uppercase text-xs tracking-widest mb-6 text-emerald-400">2. Geometria de Agrupamento</h4>
-                <p class="text-xs text-slate-400 mb-6 italic">Otimização via algoritmo de Lloyd para minimização da inércia intra-cluster:</p>
+                <p class="text-xs text-slate-400 mb-6 italic">Minimização da inércia intra-cluster para perfis estatais:</p>
                 $$\min_{S} \sum_{i=1}^{k} \sum_{x \in S_i} ||x - \mu_i||^2$$
-                <p class="text-xs text-slate-500 mt-4 text-justify">
-                    A <b>Lógica de Arquétipos</b> rotula grupos medindo a Distância Euclidiana para vetores ideais \(A\):
-                    $$Label(C_i) = \text{arg min}_{j} \sqrt{\sum_{d=1}^D (C_{id} - A_{jd})^2}$$
+                <p class="text-[10px] text-slate-500 mt-4">
+                    Distância Euclidiana para Arquétipos: $$Label(C_i) = \text{arg min}_{j} \sqrt{\sum (C_{id} - A_{jd})^2}$$
                 </p>
             </div>
 
-            <!-- Módulo 3: Séries Temporais (Prophet) -->
+            <!-- Prophet -->
             <div class="glass p-10 rounded-[3rem] border-white/5 math-box">
                 <h4 class="font-bold text-white uppercase text-xs tracking-widest mb-6 text-amber-400">3. Decomposição de Séries (Prophet)</h4>
-                <p class="text-xs text-slate-400 mb-6 italic">Modelo aditivo generalizado para predição de demanda ou arrecadação:</p>
+                <p class="text-xs text-slate-400 mb-6 italic">Modelo aditivo generalizado para predição de demanda:</p>
                 $$y(t) = g(t) + s(t) + h(t) + \epsilon_t$$
-                <p class="text-[10px] text-slate-500 mt-4">
-                    Sazonalidade (\(s(t)\)) modelada via Séries de Fourier truncadas:
-                    $$s(t) = \sum_{n=1}^N (a_n \cos(\frac{2\pi nt}{P}) + b_n \sin(\frac{2\pi nt}{P}))$$
-                </p>
+                <p class="text-[10px] text-slate-500 mt-4">Sazonalidade via Fourier: $$s(t) = \sum_{n=1}^N (a_n \cos(\frac{2\pi nt}{P}) + b_n \sin(\frac{2\pi nt}{P}))$$</p>
             </div>
 
-            <!-- Módulo 4: Risco Clínico/Fiscal (Logit) -->
+            <!-- Logit/SHAP -->
             <div class="glass p-10 rounded-[3rem] border-white/5 math-box">
-                <h4 class="font-bold text-white uppercase text-xs tracking-widest mb-6 text-rose-400">4. Probabilidade de Desfecho (Logit)</h4>
-                <p class="text-xs text-slate-400 mb-6 italic">Mapeamento linear para o espaço sigmoide \((0,1)\):</p>
+                <h4 class="font-bold text-white uppercase text-xs tracking-widest mb-6 text-rose-400">4. Probabilidade e Explicabilidade</h4>
+                <p class="text-xs text-slate-400 mb-6 italic">Mapeamento linear para o espaço sigmoide e valores SHAP:</p>
                 $$P(y=1) = \frac{1}{1 + e^{-(\beta_0 + \sum \beta_i x_i)}}$$
-                <p class="text-xs text-slate-500 mt-4 leading-relaxed">
-                    A explicabilidade é calculada via <b>Odds Ratio</b> (\(e^{\beta}\)) e valores <b>SHAP</b> baseados na Teoria dos Jogos:
-                    $$\phi_i = \sum_{S \subseteq \{x_1, \dots, x_n\} \setminus \{x_i\}} \frac{|S|!(n-|S|-1)!}{n!} [f(S \cup \{x_i\}) - f(S)]$$
-                </p>
-            </div>
-
-            <!-- Módulo 5: Grafos e Redes Complexas -->
-            <div class="glass p-10 rounded-[3rem] border-white/5 math-box">
-                <h4 class="font-bold text-white uppercase text-xs tracking-widest mb-6 text-indigo-400">5. Teoria de Grafos (Fluxos)</h4>
-                <p class="text-xs text-slate-400 mb-6 italic">Centralidade de Intermediação para identificar hubs estruturais de saúde ou crédito:</p>
-                $$g(v) = \sum_{s \neq v \neq t} \frac{\sigma_{st}(v)}{\sigma_{st}}$$
-                <p class="text-[10px] text-slate-500 mt-4">
-                    Onde \(\sigma_{st}\) é o número total de caminhos mínimos e \(\sigma_{st}(v)\) os que passam por \(v\).
-                </p>
-            </div>
-
-            <!-- Módulo 6: Auditoria Estatística -->
-            <div class="glass p-10 rounded-[3rem] border-white/5 math-box">
-                <h4 class="font-bold text-white uppercase text-xs tracking-widest mb-6 text-slate-300">6. Auditoria de Anomalias</h4>
-                <p class="text-xs text-slate-400 mb-6 italic">Identificação de outliers em faturamento ou notificações via Z-Score robusto:</p>
-                $$Z = \frac{x - \text{median}(x)}{\text{MAD}(x) \times 1.4826}$$
-                <p class="text-[10px] text-slate-500 mt-4 italic">
-                    Utiliza o desvio absoluto da mediana (MAD) para evitar que erros de preenchimento contaminem o limiar de detecção.
-                </p>
+                <p class="text-[10px] text-slate-500 mt-4 italic">Fatores de risco via Odds Ratio: \(e^{\beta}\).</p>
             </div>
         </div>
+    </section>
 
-        <div class="mt-20 p-8 glass rounded-[2.5rem] border-cyan-500/10 text-center">
-            <p class="text-slate-400 text-sm font-light leading-relaxed italic">
-                <i data-lucide="info" class="inline-block w-4 h-4 mr-2 text-cyan-400"></i>
-                Estes módulos representam o núcleo do diretório <code>src/</code>. No total, a arquitetura gerencia <b>aproximadamente 40 modelos</b> que cobrem desde NLP (TF-IDF) até simulações de custo-efetividade incremental (RCEI).
+    <div class="section-divider" id="features"></div>
+
+    <!-- NOVO: CATÁLOGO DE FEATURES COMPLETO -->
+    <section class="py-32 max-w-7xl mx-auto px-6">
+        <div class="text-center mb-16">
+            <h2 class="text-4xl font-black uppercase mb-4 italic tracking-tighter text-cyan-500">Catálogo de Features</h2>
+            <p class="text-slate-500 max-w-2xl mx-auto font-light text-sm italic">
+                A listagem completa de indicadores, algoritmos e modelos integrados no Padrão de Projeto estatal.
             </p>
+        </div>
+
+        <div class="grid lg:grid-cols-3 gap-12">
+            <!-- Indicadores Epidemiológicos -->
+            <div class="space-y-6">
+                <h3 class="text-white font-bold text-sm uppercase tracking-widest border-b border-cyan-500/20 pb-2 flex items-center gap-2">
+                    <i data-lucide="bar-chart-2" class="text-cyan-400 w-4 h-4"></i> Indicadores SUS
+                </h3>
+                <div class="feature-grid grid-cols-1">
+                    <div class="feature-tag"><i data-lucide="baby"></i> Mortalidade Infantil (TMI)</div>
+                    <div class="feature-tag"><i data-lucide="activity"></i> Cobertura Pré-Natal (7+)</div>
+                    <div class="feature-tag"><i data-lucide="stethoscope"></i> Médicos por 1.000 hab.</div>
+                    <div class="feature-tag"><i data-lucide="home"></i> Cobertura Estratégia Saúde Família</div>
+                    <div class="feature-tag"><i data-lucide="alert-triangle"></i> Óbitos Causas Mal Definidas</div>
+                    <div class="feature-tag"><i data-lucide="hospital"></i> Internações Condições Sensíveis (ICSAP)</div>
+                    <div class="feature-tag"><i data-lucide="user-plus"></i> Nascimentos Mães Adolescentes</div>
+                    <div class="feature-tag"><i data-lucide="search"></i> Taxa Detecção Hanseníase</div>
+                    <div class="feature-tag"><i data-lucide="bug"></i> Incidência Dengue / Zika / Chik</div>
+                    <div class="feature-tag"><i data-lucide="lungs"></i> Indicadores TB (Cura/Abandono)</div>
+                </div>
+            </div>
+
+            <!-- Modelos Analíticos e IA -->
+            <div class="space-y-6">
+                <h3 class="text-white font-bold text-sm uppercase tracking-widest border-b border-emerald-500/20 pb-2 flex items-center gap-2">
+                    <i data-lucide="brain-circuit" class="text-emerald-400 w-4 h-4"></i> Análises Avançadas
+                </h3>
+                <div class="feature-grid grid-cols-1">
+                    <div class="feature-tag"><i data-lucide="git-pull-request"></i> Fluxo de Pacientes (Origem-Destino)</div>
+                    <div class="feature-tag"><i data-lucide="network"></i> Centralidade de Rede Hospitalar</div>
+                    <div class="feature-tag"><i data-lucide="shield-alert"></i> Predição Risco Óbito (LightGBM)</div>
+                    <div class="feature-tag"><i data-lucide="type"></i> Requalificação de Causa via NLP</div>
+                    <div class="feature-tag"><i data-lucide="clock"></i> Análise de Sobrevida (Cox PH)</div>
+                    <div class="feature-tag"><i data-lucide="target"></i> Escore de Propensão Causal (PSM)</div>
+                    <div class="feature-tag"><i data-lucide="trending-up"></i> Forecast de Internações (Prophet)</div>
+                    <div class="feature-tag"><i data-lucide="dollar-sign"></i> Análise Custo-Efetividade (RCEI)</div>
+                    <div class="feature-tag"><i data-lucide="map-pin"></i> Clusters de Vulnerabilidade Social</div>
+                    <div class="feature-tag"><i data-lucide="database"></i> Motor ETL Multi-fonte (PySUS)</div>
+                </div>
+            </div>
+
+            <!-- Transposição Fazendária -->
+            <div class="space-y-6">
+                <h3 class="text-white font-bold text-sm uppercase tracking-widest border-b border-amber-500/20 pb-2 flex items-center gap-2">
+                    <i data-lucide="landmark" class="text-amber-400 w-4 h-4"></i> Inteligência Fazendária
+                </h3>
+                <div class="feature-grid grid-cols-1">
+                    <div class="feature-tag"><i data-lucide="coins"></i> Yield Tributário Municipal</div>
+                    <div class="feature-tag"><i data-lucide="pie-chart"></i> PIB Municipal Estimado (Spline)</div>
+                    <div class="feature-tag"><i data-lucide="trending-up"></i> Previsão Receita ICMS / ISS</div>
+                    <div class="feature-tag"><i data-lucide="shield-x"></i> Risco de Inadimplência / Evasão</div>
+                    <div class="feature-tag"><i data-lucide="users"></i> Perfis de Conformidade Fiscal</div>
+                    <div class="feature-tag"><i data-lucide="arrow-right-left"></i> Fluxos de Transferência de Crédito</div>
+                    <div class="feature-tag"><i data-lucide="file-check"></i> Auditoria Estatística de Notas</div>
+                    <div class="feature-tag"><i data-lucide="layers"></i> Agrupamento de Dependência Fiscal</div>
+                    <div class="feature-tag"><i data-lucide="cpu"></i> Orquestração Assíncrona de Auditoria</div>
+                    <div class="feature-tag"><i data-lucide="eye"></i> Explicabilidade de Malha Fina (SHAP)</div>
+                </div>
+            </div>
         </div>
     </section>
 
@@ -240,16 +280,16 @@
         <div class="grid lg:grid-cols-2 gap-16 items-center">
             <div>
                 <h2 class="text-4xl font-black uppercase mb-6 italic tracking-tighter text-amber-500">LabSUS na Gestão Fazendária</h2>
-                <p class="text-slate-400 leading-relaxed font-light mb-8 text-justify">
-                    O Padrão de Projeto Estatal permite transpor os 40 módulos para o domínio fiscal. Substituímos variáveis epidemiológicas por métricas tributárias, mantendo a integridade matemática da arquitetura.
+                <p class="text-slate-400 leading-relaxed font-light mb-8 text-justify italic">
+                    A transposição do motor analítico permite processar fluxos fiscais com o mesmo rigor. Substituímos variáveis epidemiológicas por métricas tributárias, mantendo a integridade matemática da arquitetura full-stack.
                 </p>
                 <div class="math-box bg-amber-500/5 border-amber-500/10">
-                    <h5 class="text-xs font-bold text-amber-400 uppercase mb-4 tracking-widest">Exemplo: Yield Tributário Municipal</h5>
-                    $$\text{Tax\_Yield}_{mun} = \frac{\text{Arrecadação}_{real}}{\widehat{\text{PIB}}_{spline}}$$
+                    <h5 class="text-xs font-bold text-amber-400 uppercase mb-4 tracking-widest text-center">Exemplo: Yield Tributário Municipal</h5>
+                    $$\text{Tax\_Yield}_{mun} = \frac{\text{Arrecadação}_{real}}{\widehat{\text{Base\_Tributável}}_{spline}}$$
                 </div>
             </div>
             <div class="glass p-10 rounded-[3rem] border-white/5">
-                <h4 class="text-sm font-bold text-white uppercase mb-6">Equivalência Funcional de Modelos</h4>
+                <h4 class="text-sm font-bold text-white uppercase mb-6">Equivalência Funcional (SUS ↔ Fazenda)</h4>
                 <div class="space-y-4">
                     <div class="flex justify-between items-center text-[10px] border-b border-white/5 pb-3">
                         <span class="text-cyan-400 font-mono">Survival analysis</span>
@@ -288,9 +328,9 @@
                 <div class="absolute top-0 right-0 p-6 opacity-10 rotate-12">
                     <i data-lucide="flask-conical" class="w-32 h-32 text-amber-500"></i>
                 </div>
-                <h3 class="text-2xl font-bold text-white mb-4 italic uppercase">1. Ambiente de Pesquisa (P&D)</h3>
+                <h3 class="text-2xl font-bold text-white mb-4 italic uppercase tracking-tight">1. Ambiente de Pesquisa (P&D)</h3>
                 <p class="text-sm text-slate-400 mb-8 leading-relaxed font-light">
-                    O <b>Sandbox de Investigação</b> permite a experimentação científica. É aqui que o autor e colaboradores validam novas hipóteses através de modelos candidatos, sem impacto na infraestrutura de decisão oficial.
+                    O <b>Sandbox de Investigação</b> permite a experimentação científica. É aqui que novas hipóteses são validadas através de modelos candidatos, sem impacto na infraestrutura de decisão oficial.
                 </p>
                 <div class="flex flex-wrap gap-2">
                     <span class="feature-tag border-amber-500/30 text-amber-400">Validação K-Fold</span>
@@ -303,7 +343,7 @@
                 <div class="absolute top-0 right-0 p-6 opacity-10 -rotate-12">
                     <i data-lucide="shield-check" class="w-32 h-32 text-cyan-500"></i>
                 </div>
-                <h3 class="text-2xl font-bold text-white mb-4 italic uppercase">2. Ambiente de Produção</h3>
+                <h3 class="text-2xl font-bold text-white mb-4 italic uppercase tracking-tight">2. Ambiente de Produção</h3>
                 <p class="text-sm text-slate-400 mb-8 leading-relaxed font-light">
                     O <b>Domínio de Estabilidade Pública</b>. Apenas algoritmos validados e pipelines auditadas operam neste nível, garantindo 99.9% de disponibilidade e integridade nas métricas governamentais.
                 </p>
