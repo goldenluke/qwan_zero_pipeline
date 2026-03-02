@@ -59,14 +59,14 @@
         ::-webkit-scrollbar-thumb { background: #164e63; border-radius: 10px; }
         
         .mjx-container {
-            color: inherit !important;
+            color: #22d3ee !important;
             font-size: 1.1em !important;
             margin: 10px 0 !important;
         }
 
         .pdf-container {
             width: 100%;
-            height: 600px;
+            height: 700px;
             border-radius: 1.5rem;
             overflow: hidden;
             border: 1px solid rgba(255, 255, 255, 0.1);
@@ -83,14 +83,17 @@
                 <span class="font-extrabold text-xl tracking-tighter uppercase">Lab<span class="text-cyan-400">SUS</span></span>
             </div>
             <div class="hidden lg:flex gap-8 text-[10px] uppercase tracking-widest font-bold text-slate-500">
-                <a href="#overview" class="hover:text-white transition">Panorama</a>
                 <a href="#architecture" class="hover:text-white transition">Arquitetura</a>
-                <a href="#modeling" class="hover:text-white transition">Modelagem</a>
+                <a href="#backend" class="hover:text-white transition">Backend/Algoritmos</a>
+                <a href="#frontend" class="hover:text-white transition">Frontend/UI</a>
                 <a href="#documentation" class="hover:text-white transition">Documentação</a>
             </div>
             <div class="flex gap-3">
+                <a href="https://github.com/goldenluke/qwan_zero_pipeline" target="_blank" class="flex items-center gap-2 bg-slate-800 text-white px-4 py-1.5 rounded-lg text-[10px] font-bold hover:bg-slate-700 transition border border-white/10">
+                    <i data-lucide="github" class="w-3 h-3"></i> REPOSITÓRIO
+                </a>
                 <a href="https://github.com/goldenluke/qwan_zero_pipeline/blob/main/Padr%C3%A3o%20de%20Projeto%20LabSUS%20-%20Manual%20de%20Refer%C3%AAncia%20T%C3%A9cnica.pdf" target="_blank" class="flex items-center gap-2 bg-cyan-600 text-white px-4 py-1.5 rounded-lg text-[10px] font-bold hover:bg-cyan-500 transition shadow-lg shadow-cyan-900/20">
-                    <i data-lucide="file-text" class="w-3 h-3"></i> ABRIR MANUAL PDF
+                    <i data-lucide="file-text" class="w-3 h-3"></i> ABRIR PDF
                 </a>
             </div>
         </div>
@@ -101,181 +104,219 @@
         <div class="absolute top-0 left-1/2 -translate-x-1/2 w-[1200px] h-[600px] bg-cyan-600/10 blur-[160px] rounded-full -z-10"></div>
         <div class="max-w-6xl mx-auto text-center">
             <div class="inline-block px-4 py-1.5 rounded-full border border-cyan-500/30 bg-cyan-500/5 text-cyan-400 text-[10px] font-black mb-8 uppercase tracking-[0.4em]">
-                Referência Técnica de Saúde Digital
+                Especificação Técnica e Algorítmica
             </div>
             <h1 class="text-6xl md:text-8xl font-black mb-10 tracking-tighter leading-[0.85]">
-                Engenharia de Dados <br><span class="gradient-text">para a Saúde Pública.</span>
+                Manual de Lógica <br><span class="gradient-text">Full-Stack LabSUS.</span>
             </h1>
             <p class="text-xl md:text-2xl text-slate-400 max-w-4xl mx-auto mb-12 leading-relaxed font-light">
-                O <b>LabSUS</b> operacionaliza o ciclo de vida completo da inteligência em saúde brasileira. Este hub centraliza o <b>Manual de Referência Técnica</b> para modelagem preditiva e governança de dados do SUS.
+                O <b>LabSUS</b> materializa a união entre a engenharia de dados e a epidemiologia digital. Esta seção detalha a fundamentação matemática do <b>Backend</b> e a reatividade do <b>Frontend</b>.
             </p>
-            <div class="flex flex-col sm:flex-row justify-center gap-4">
-                <a href="#documentation" class="group relative px-12 py-5 bg-white text-black rounded-2xl font-black text-sm hover:shadow-[0_0_60px_rgba(255,255,255,0.2)] transition-all duration-300 flex items-center justify-center gap-3">
-                    <i data-lucide="book-open" class="w-5 h-5"></i> LER DOCUMENTAÇÃO
-                </a>
-            </div>
         </div>
     </header>
 
-    <div class="section-divider" id="overview"></div>
+    <div class="section-divider" id="architecture"></div>
 
-    <!-- Arquitetura Section -->
-    <section id="architecture" class="py-32 max-w-7xl mx-auto px-6">
-        <div class="grid lg:grid-cols-2 gap-20 items-center">
+    <!-- Arquitetura e Orquestração -->
+    <section class="py-32 max-w-7xl mx-auto px-6">
+        <div class="grid lg:grid-cols-2 gap-20 items-start">
             <div>
-                <h2 class="text-4xl font-black mb-8 uppercase italic">Padrões de <span class="text-cyan-500">Projeto</span></h2>
-                <p class="text-slate-400 text-lg leading-relaxed mb-8 font-light">
-                    A arquitetura do LabSUS é desenhada para converter o caos do DATASUS em ativos de inteligência acionáveis através de dois domínios isolados:
+                <h2 class="text-4xl font-black mb-8 uppercase italic">Arquitetura de <span class="text-cyan-500">Orquestração</span></h2>
+                <p class="text-slate-400 text-lg leading-relaxed mb-8 font-light italic">
+                    Como processamos bilhões de registros sem comprometer a experiência do usuário.
                 </p>
                 <div class="space-y-6">
                     <div class="p-6 glass rounded-2xl border-cyan-500/20">
-                        <h4 class="font-bold text-white mb-2 flex items-center gap-2 uppercase tracking-tighter text-sm">
-                            <i data-lucide="database" class="text-cyan-400 w-4 h-4"></i> Camada de Abstração (Features)
+                        <h4 class="font-bold text-white mb-2 flex items-center gap-2 uppercase tracking-tighter text-sm text-cyan-400">
+                            Orquestração Assíncrona (Backend)
                         </h4>
-                        <p class="text-xs text-slate-500 italic text-justify leading-relaxed">Normalização demográfica utilizando o IBGE como denominador comum e abstração de numeradores epidemiológicos (SIM, SINASC, SINAN, SIH).</p>
+                        <p class="text-xs text-slate-500 leading-relaxed italic text-justify">
+                            Utilizamos <b>Celery</b> e <b>Redis</b>. O servidor Django dispara a <i>task</i>, retornando imediatamente um <code class="text-cyan-400">task_id</code>. O processamento pesado ocorre em <i>workers</i> isolados, notificando o status via banco de dados ou mensageria.
+                        </p>
                     </div>
                     <div class="p-6 glass rounded-2xl border-emerald-500/20">
-                        <h4 class="font-bold text-white mb-2 flex items-center gap-2 uppercase tracking-tighter text-sm">
-                            <i data-lucide="cpu" class="text-emerald-400 w-4 h-4"></i> Orquestração Preditiva
+                        <h4 class="font-bold text-white mb-2 flex items-center gap-2 uppercase tracking-tighter text-sm text-emerald-400">
+                            Reatividade por Polling (Frontend)
                         </h4>
-                        <p class="text-xs text-slate-500 italic text-justify leading-relaxed">Cerca de 40 modelos especializados integrados via scripts modulares em <code>src/modelagem/</code>, cobrindo de clusterização a simulação de eventos discretos.</p>
+                        <p class="text-xs text-slate-500 leading-relaxed italic text-justify">
+                            O hook customizado <code class="text-emerald-400">useCeleryTaskStatus</code> monitora o endpoint de status a cada 2 segundos. Isso permite atualizar barras de progresso e botões dinâmicos em tempo real no React.
+                        </p>
                     </div>
                 </div>
             </div>
             <div class="relative glass p-2 rounded-[2.5rem] health-glow">
                 <div class="bg-black/60 p-10 rounded-[2.4rem] mono text-[11px] text-cyan-300 leading-relaxed overflow-x-auto">
-                    <span class="text-slate-500 italic"># Definição do Pipeline no Manual</span><br>
-                    pipeline_config = {<br>
-                    &nbsp;&nbsp;&nbsp;&nbsp;"meta": "Redução da Mortalidade Infantil",<br>
-                    &nbsp;&nbsp;&nbsp;&nbsp;"modelo": "LightGBM_Classifier",<br>
-                    &nbsp;&nbsp;&nbsp;&nbsp;"metrica": "SHAP_Explicability"<br>
-                    }<br><br>
-                    <span class="text-slate-500 italic"># Normalização de Taxas</span><br>
-                    \[ Rate = \frac{n_{eventos}}{População_{IBGE}} \times 10^k \]
+                    <span class="text-slate-500 italic">// Exemplo de Hook no Frontend</span><br>
+                    const { status, progress } = useCeleryTaskStatus(taskId);<br><br>
+                    <span class="text-slate-500 italic"># Exemplo de Task no Backend</span><br>
+                    @shared_task(bind=True)<br>
+                    def run_pipeline(self, ...):<br>
+                    &nbsp;&nbsp;self.update_state(state='PROGRESS', meta={'progress': 50})
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Modelagem Resumo -->
-    <section id="modeling" class="py-32 bg-white/[0.01] border-y border-white/5">
+    <!-- BACKEND Section -->
+    <section id="backend" class="py-32 bg-white/[0.01] border-y border-white/5">
         <div class="max-w-7xl mx-auto px-6">
             <div class="text-center mb-20">
-                <h2 class="text-4xl font-black uppercase mb-4 italic tracking-tight">Capacidade <span class="text-cyan-500">Analítica</span></h2>
-                <p class="text-slate-400 max-w-2xl mx-auto font-light text-sm italic">Principais domínios técnicos descritos no Manual de Referência.</p>
+                <h2 class="text-5xl font-black uppercase mb-4 italic tracking-tight">Backend & <span class="text-cyan-500">Algoritmos</span></h2>
+                <p class="text-slate-400 max-w-2xl mx-auto font-light text-sm italic">Formalização matemática dos processos de ciência de dados.</p>
             </div>
-            <div class="grid md:grid-cols-3 gap-8">
-                <div class="glass p-8 rounded-3xl space-y-4 hover:border-cyan-500/30 transition-colors">
-                    <i data-lucide="bar-chart-3" class="text-cyan-400"></i>
-                    <h4 class="font-bold text-white uppercase text-xs tracking-widest">Modelos Descritivos</h4>
-                    <p class="text-[10px] text-slate-500 leading-relaxed italic">Análise de clusters via <b>K-Means</b> para identificação de perfis de vulnerabilidade e polos de atendimento regional.</p>
+            
+            <div class="grid md:grid-cols-2 gap-8">
+                <!-- K-Means e Arquétipos -->
+                <div class="glass p-10 rounded-[3rem] border-white/5">
+                    <h4 class="font-bold text-white uppercase text-xs tracking-widest mb-6 text-cyan-400">Agrupamento e Inteligência (K-Means)</h4>
+                    <p class="text-xs text-slate-400 mb-6 leading-relaxed italic">Normalizamos indicadores via <b>Z-Score</b> para eliminar distorções de escala antes da clusterização.</p>
+                    <div class="math-block">
+                        $$ z = \frac{x - \mu}{\sigma} $$
+                    </div>
+                    <p class="text-xs text-slate-500 mt-6 text-justify">
+                        Aplicamos a <b>Lógica de Arquétipos</b>: comparamos o centroide do cluster \(C\) com o vetor do arquétipo \(A\) via distância euclidiana para nomeação automática dos perfis:
+                    </p>
+                    <div class="math-block">
+                        $$ d(C, A) = \sqrt{\sum_{i=1}^{n} (C_i - A_i)^2} $$
+                    </div>
                 </div>
-                <div class="glass p-8 rounded-3xl space-y-4 hover:border-cyan-500/30 transition-colors">
-                    <i data-lucide="zap" class="text-emerald-400"></i>
-                    <h4 class="font-bold text-white uppercase text-xs tracking-widest">Modelos Preditivos</h4>
-                    <p class="text-[10px] text-slate-500 leading-relaxed italic">Predição de óbito infantil e abandono de tratamento (TB) com foco em explicabilidade variável por variável.</p>
+
+                <!-- Predição (Prophet) -->
+                <div class="glass p-10 rounded-[3rem] border-white/5">
+                    <h4 class="font-bold text-white uppercase text-xs tracking-widest mb-6 text-emerald-400">Análise Temporal (Prophet)</h4>
+                    <p class="text-xs text-slate-400 mb-6 leading-relaxed italic">O LabSUS decompõe séries de internações utilizando um modelo aditivo para isolar tendências e sazonalidades.</p>
+                    <div class="math-block">
+                        $$ y(t) = g(t) + s(t) + h(t) + \epsilon_t $$
+                    </div>
+                    <div class="space-y-2 mt-6 text-[10px] text-slate-500">
+                        <p>• \( g(t) \): Tendência linear ou logística.</p>
+                        <p>• \( s(t) \): Periodicidade (semanal/anual).</p>
+                        <p>• \( h(t) \): Efeitos de feriados/eventos atípicos.</p>
+                    </div>
                 </div>
-                <div class="glass p-8 rounded-3xl space-y-4 hover:border-cyan-500/30 transition-colors">
-                    <i data-lucide="activity" class="text-amber-400"></i>
-                    <h4 class="font-bold text-white uppercase text-xs tracking-widest">Simulação & DES</h4>
-                    <p class="text-[10px] text-slate-500 leading-relaxed italic">Gêmeos digitais para simulação de fluxo em UTIs e otimização de alocação de equipes de saúde da família.</p>
+
+                <!-- Risco Clínico -->
+                <div class="glass p-10 rounded-[3rem] border-white/5">
+                    <h4 class="font-bold text-white uppercase text-xs tracking-widest mb-6 text-rose-400">Risco Clínico (Regressão Logística)</h4>
+                    <p class="text-xs text-slate-400 mb-6 leading-relaxed italic">Determinação da probabilidade de óbito \(P\) baseada em variáveis demográficas e comorbidades.</p>
+                    <div class="math-block">
+                        $$ P = \frac{1}{1 + e^{-(\beta_0 + \beta_1x_1 + ...)}} $$
+                    </div>
+                    <p class="text-xs text-slate-500 mt-4">Os coeficientes são expressos em <b>Odds Ratio</b> (\( e^{\beta} \)) para explicabilidade variável por variável.</p>
+                </div>
+
+                <!-- Fluxo de Pacientes -->
+                <div class="glass p-10 rounded-[3rem] border-white/5">
+                    <h4 class="font-bold text-white uppercase text-xs tracking-widest mb-6 text-amber-400">Fluxo e Redes de Saúde</h4>
+                    <p class="text-xs text-slate-400 mb-6 leading-relaxed italic">Mapeamento de rotas de referência cruzando Município de Residência (\(M_{res}\)) e Município de Movimentação (\(M_{mov}\)).</p>
+                    <div class="math-block">
+                        $$ Flow_{i \to j} = \sum P_{AIH} \mid (M_{res}=i, M_{mov}=j) $$
+                    </div>
+                    <p class="text-xs text-slate-500 mt-4">Aplicamos um filtro de relevância \( Flow > k \) para remover ruídos de fluxo esporádico.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Documentação / PDF Preview -->
+    <!-- FRONTEND Section -->
+    <section id="frontend" class="py-32 max-w-7xl mx-auto px-6">
+        <div class="grid lg:grid-cols-2 gap-20 items-center">
+            <div class="order-1">
+                <h2 class="text-4xl font-black mb-8 uppercase italic tracking-tighter">Frontend & <span class="text-emerald-500">Visualização</span></h2>
+                <p class="text-slate-400 text-lg leading-relaxed mb-8 font-light">
+                    Construído com <b>React</b> e <b>Plotly.js</b>, o frontend materializa dados complexos em interfaces acionáveis.
+                </p>
+                <ul class="space-y-6">
+                    <li class="flex gap-4">
+                        <div class="w-8 h-8 rounded-lg bg-emerald-500/10 flex items-center justify-center flex-shrink-0">
+                            <i data-lucide="map" class="text-emerald-400 w-4 h-4"></i>
+                        </div>
+                        <div>
+                            <h5 class="text-sm font-bold text-white uppercase mb-1">Injeção Dinâmica de GeoJSON</h5>
+                            <p class="text-xs text-slate-500 italic">Carregamento de malhas municipais sob demanda por UF, otimizando o consumo de memória do navegador.</p>
+                        </div>
+                    </li>
+                    <li class="flex gap-4">
+                        <div class="w-8 h-8 rounded-lg bg-cyan-500/10 flex items-center justify-center flex-shrink-0">
+                            <i data-lucide="git-pull-request" class="text-cyan-400 w-4 h-4"></i>
+                        </div>
+                        <div>
+                            <h5 class="text-sm font-bold text-white uppercase mb-1">Diagramas de Sankey</h5>
+                            <p class="text-xs text-slate-500 italic">Visualização de fluxos onde a largura do nó \(W\) é proporcional ao volume de pacientes.</p>
+                        </div>
+                    </li>
+                    <li class="flex gap-4">
+                        <div class="w-8 h-8 rounded-lg bg-rose-500/10 flex items-center justify-center flex-shrink-0">
+                            <i data-lucide="eye" class="text-rose-400 w-4 h-4"></i>
+                        </div>
+                        <div>
+                            <h5 class="text-sm font-bold text-white uppercase mb-1">Intervalos de Incerteza</h5>
+                            <p class="text-xs text-slate-500 italic">Renderização de áreas sombreadas para representar a confiança estatística (\( \hat{y} \pm \sigma \)).</p>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <div class="order-2 glass rounded-3xl p-6 border-white/5">
+                <div class="bg-black/40 rounded-2xl p-4 mb-4">
+                    <h5 class="text-[10px] uppercase font-bold text-slate-500 mb-4 tracking-widest">Stack Tecnológica</h5>
+                    <div class="flex flex-wrap gap-3">
+                        <span class="px-3 py-1 bg-blue-500/10 text-blue-400 rounded text-[9px] font-bold border border-blue-500/20">REACT</span>
+                        <span class="px-3 py-1 bg-cyan-500/10 text-cyan-400 rounded text-[9px] font-bold border border-cyan-500/20">PLOTLY.JS</span>
+                        <span class="px-3 py-1 bg-emerald-500/10 text-emerald-400 rounded text-[9px] font-bold border border-emerald-500/20">TAILWIND</span>
+                        <span class="px-3 py-1 bg-slate-500/10 text-slate-400 rounded text-[9px] font-bold border border-slate-500/20">AXIOS</span>
+                    </div>
+                </div>
+                <img src="https://images.unsplash.com/photo-1551288049-bbbda536339a?auto=format&fit=crop&q=80&w=800" class="rounded-2xl opacity-50 grayscale hover:grayscale-0 transition duration-700" alt="Data Visualization Example">
+            </div>
+        </div>
+    </section>
+
+    <!-- Documentação / PDF Section -->
     <section id="documentation" class="py-32 max-w-7xl mx-auto px-6">
         <div class="text-center mb-16">
-            <h2 class="text-4xl font-black uppercase mb-4 italic">Prévia da <span class="text-cyan-500">Documentação</span></h2>
-            <p class="text-slate-400 max-w-3xl mx-auto font-light mb-12">Consulte abaixo o Manual de Referência Técnica ou faça o download completo para acesso offline.</p>
+            <h2 class="text-4xl font-black uppercase mb-4 italic">Referência <span class="text-cyan-500">Técnica Completa</span></h2>
+            <p class="text-slate-400 max-w-3xl mx-auto font-light mb-12">Consulte o Manual de Projeto detalhado para obter informações sobre implementação, infraestrutura e governança de dados.</p>
         </div>
 
         <div class="pdf-container glass relative group">
-            <div class="absolute inset-0 bg-black/40 flex items-center justify-center opacity-100 group-hover:opacity-0 transition-opacity pointer-events-none z-10">
-                <div class="text-center">
-                    <i data-lucide="eye" class="w-12 h-12 text-cyan-400 mx-auto mb-4 animate-pulse"></i>
-                    <p class="font-bold text-white uppercase tracking-widest text-xs">Visualizar Documento</p>
-                </div>
-            </div>
             <iframe 
                 src="https://goldenluke.github.io/qwan_zero_pipeline/Padr%C3%A3o%20de%20Projeto%20LabSUS%20-%20Manual%20de%20Refer%C3%AAncia%20T%C3%A9cnica.pdf" 
                 class="w-full h-full grayscale hover:grayscale-0 transition-all duration-700" 
                 frameborder="0">
-                <!-- Fallback se o iframe falhar -->
-                <div class="p-20 text-center">
-                    <p class="text-slate-400 mb-6 italic">O navegador não suporta visualização direta de PDF.</p>
-                    <a href="https://github.com/goldenluke/qwan_zero_pipeline/blob/main/Padr%C3%A3o%20de%20Projeto%20LabSUS%20-%20Manual%20de%20Refer%C3%AAncia%20T%C3%A9cnica.pdf" class="bg-cyan-600 px-6 py-3 rounded-xl font-bold text-sm">Download Manual Técnico</a>
-                </div>
             </iframe>
         </div>
 
         <div class="mt-12 flex flex-col md:flex-row items-center justify-between p-10 glass rounded-3xl border-white/5 gap-8">
             <div class="space-y-2">
-                <h4 class="text-xl font-bold text-white uppercase italic tracking-tighter">Estrutura do Manual</h4>
-                <p class="text-sm text-slate-500 font-light italic">Fundamentos teóricos, Engenharia de Atributos, Orquestração e XAI.</p>
+                <h4 class="text-xl font-bold text-white uppercase italic tracking-tighter">Repositório do Projeto</h4>
+                <p class="text-sm text-slate-500 font-light italic">Acesse o código-fonte, pipelines e os módulos de inteligência no GitHub.</p>
             </div>
-            <a href="https://github.com/goldenluke/qwan_zero_pipeline/blob/main/Padr%C3%A3o%20de%20Projeto%20LabSUS%20-%20Manual%20de%20Refer%C3%AAncia%20T%C3%A9cnica.pdf" target="_blank" class="flex items-center gap-3 bg-white text-black px-8 py-4 rounded-2xl font-black text-xs hover:scale-105 transition-transform">
-                <i data-lucide="download" class="w-4 h-4"></i> DOWNLOAD PDF COMPLETO
+            <a href="https://github.com/goldenluke/qwan_zero_pipeline" target="_blank" class="flex items-center gap-3 bg-white text-black px-8 py-4 rounded-2xl font-black text-xs hover:scale-105 transition-transform">
+                <i data-lucide="github" class="w-4 h-4"></i> VER CÓDIGO NO GITHUB
             </a>
         </div>
     </section>
 
     <!-- Footer -->
     <footer class="py-24 border-t border-white/5 text-center">
-        <div class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-start gap-12 text-left">
+        <div class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-12 text-left">
             <div class="space-y-4">
                 <div class="flex items-center gap-2">
                     <i data-lucide="activity" class="text-cyan-500"></i>
                     <span class="font-black text-2xl tracking-tighter italic">LabSUS Project</span>
                 </div>
                 <p class="text-slate-500 text-sm max-w-sm leading-relaxed font-light italic">
-                    Centro de excelência em ciência de dados aplicada ao SUS. Rigor estatístico e relevância clínica integrados.
+                    Tecnologia Full-Stack aplicada à eficiência do Sistema Único de Saúde.
                 </p>
             </div>
-            
-            <div class="grid grid-cols-1 sm:grid-cols-2 gap-12 w-full md:w-auto">
-                <div class="space-y-4">
-                    <h5 class="text-white font-bold text-[10px] uppercase tracking-[0.2em] opacity-50">Manual Técnico</h5>
-                    <div class="flex flex-col gap-2">
-                        <a href="#documentation" class="text-xs font-bold text-slate-400 hover:text-cyan-400 transition-colors">Visão PDF</a>
-                        <a href="https://github.com/goldenluke/qwan_zero_pipeline/blob/main/Padr%C3%A3o%20de%20Projeto%20LabSUS%20-%20Manual%20de%20Refer%C3%AAncia%20T%C3%A9cnica.pdf" class="text-xs font-bold text-slate-400 hover:text-cyan-400 transition-colors">Versão de Impressão</a>
-                    </div>
-                </div>
-                <div class="space-y-4">
-                    <h5 class="text-white font-bold text-[10px] uppercase tracking-[0.2em] opacity-50">Contato</h5>
-                    <div class="flex flex-col gap-2">
-                        <span class="text-xs font-bold text-slate-400 uppercase italic">Suporte à Modelagem</span>
-                        <span class="text-xs font-bold text-slate-400 uppercase italic">Dados e ETL</span>
-                    </div>
-                </div>
+            <div class="mt-2 text-[10px] text-slate-700 uppercase tracking-[0.4em] font-bold">
+                Django • React • Python • Machine Learning
             </div>
-        </div>
-        <div class="mt-24 text-[10px] text-slate-700 uppercase tracking-[0.6em] font-bold">
-            Health Data Science • v1.0.0 Alpha • <b>Documentação Técnica Central</b>
         </div>
     </footer>
 
     <script>
-        // Inicializar ícones
         lucide.createIcons();
-
-        // Lógica de scroll suave
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                const targetId = this.getAttribute('href');
-                if (targetId.startsWith('#')) {
-                    e.preventDefault();
-                    const element = document.querySelector(targetId);
-                    if (element) {
-                        window.scrollTo({
-                            top: element.offsetTop - 80,
-                            behavior: 'smooth'
-                        });
-                    }
-                }
-            });
-        });
     </script>
 </body>
 </html>
