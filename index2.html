@@ -64,11 +64,13 @@
             margin: 10px 0 !important;
         }
 
+        /* Estilos para o Showcase e Ampliação */
         .img-card {
-            transition: transform 0.3s ease, border-color 0.3s ease;
+            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), border-color 0.3s ease;
+            cursor: zoom-in;
         }
         .img-card:hover {
-            transform: translateY(-5px);
+            transform: translateY(-8px) scale(1.02);
             border-color: var(--primary);
         }
         .img-container img {
@@ -80,6 +82,27 @@
         }
         .img-card:hover img {
             opacity: 1;
+        }
+
+        /* Modal Lightbox */
+        #image-lightbox {
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+            backdrop-filter: blur(12px);
+        }
+        #image-lightbox.hidden {
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+        }
+        #lightbox-img {
+            max-height: 80vh;
+            max-width: 90vw;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.8);
+            transform: scale(0.95);
+            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        #image-lightbox:not(.hidden) #lightbox-img {
+            transform: scale(1);
         }
     </style>
 </head>
@@ -121,10 +144,10 @@
                 Sistemas Económicos <br><span class="gradient-text">Metaestáveis.</span>
             </h1>
             <p class="text-xl md:text-2xl text-slate-400 max-w-4xl mx-auto mb-12 leading-relaxed font-light">
-                O Market-QWAN implementa um algoritmo de vanguarda para detecção de anomalias e estabilidade estrutural via **Expoente de Hurst**, **Matrizes de Difusão** e análise de **Criticidade Sistémica**.
+                O Market-QWAN implementa um algoritmo de vanguarda para detecção de anomalias e estabilidade estrutural via <b>Expoente de Hurst</b>, <b>Matrizes de Difusão</b> e análise de <b>Criticidade Sistémica</b>.
             </p>
             <div class="flex flex-col sm:flex-row justify-center gap-4">
-                <a href="https://github.com/goldenluke/qwan_zero_pipeline" target="_blank" class="group relative px-8 py-5 bg-indigo-600 rounded-2xl font-black text-sm hover:shadow-[0_0_60px_rgba(99,102,241,0.4)] transition-all duration-300">
+                <a href="https://github.com/goldenluke/qwan_zero_pipeline" target="_blank" class="group relative px-8 py-5 bg-indigo-600 rounded-2xl font-black text-sm hover:shadow-[0_0_60px_rgba(99,102,241,0.3)] transition-all duration-300">
                     <span class="flex items-center justify-center gap-3 italic">
                         <i data-lucide="cpu" class="w-5 h-5 text-indigo-200"></i> PIPELINE & MODELO <i data-lucide="external-link" class="w-4 h-4 opacity-50"></i>
                     </span>
@@ -182,6 +205,41 @@
         </div>
     </section>
 
+    <!-- Architecture Breakdown -->
+    <section class="py-32 max-w-7xl mx-auto px-6">
+        <div class="grid lg:grid-cols-2 gap-20 items-center">
+            <div class="order-2 lg:order-1 relative glass p-2 rounded-[2.5rem] critical-glow">
+                <div class="bg-black/60 p-10 rounded-[2.4rem] mono text-[11px] text-indigo-300 leading-relaxed overflow-x-auto">
+                    <span class="text-slate-500 italic"># QuantFundEngine Integrated Strategy</span><br>
+                    engine = QuantFundEngine(<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;returns=returns,<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;lookback=504,<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;target_vol=0.15,<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;cvar_limit=0.05<br>
+                    )<br>
+                    equity = engine.run()<br>
+                    <span class="text-slate-500 italic"># Optimization incorporates structural entropy</span>
+                </div>
+            </div>
+            <div class="order-1 lg:order-2">
+                <h2 class="text-4xl font-black mb-8 uppercase italic">Gestão <span class="text-indigo-500">Institucional</span></h2>
+                <p class="text-slate-400 text-lg leading-relaxed mb-8 font-light">
+                    O <code>QuantFundEngine</code> integra o modelo RegimeAwareQWAN com pesos de <b>Risk Parity</b> robustos, utilizando <b>Ledoit-Wolf</b> e <b>Eigenvalue Clipping</b> para garantir a estabilidade operacional sob criticidade.
+                </p>
+                <ul class="space-y-4 text-slate-300">
+                    <li class="flex items-center gap-3">
+                        <i data-lucide="check" class="text-accent w-5 h-5"></i>
+                        <span>Walk-forward rolling para validação out-of-sample.</span>
+                    </li>
+                    <li class="flex items-center gap-3">
+                        <i data-lucide="check" class="text-accent w-5 h-5"></i>
+                        <span>Target volatility adaptativo e stop estrutural por drawdown.</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
     <!-- Formalismo Matemático -->
     <section id="formalism" class="py-32 bg-white/[0.01] border-y border-white/5">
         <div class="max-w-7xl mx-auto px-6">
@@ -230,89 +288,89 @@
     <section id="showcase" class="py-32 max-w-7xl mx-auto px-6">
         <div class="text-center mb-20">
             <h2 class="text-4xl font-black uppercase mb-4 italic">Interface do <span class="text-indigo-500">Ecossistema</span></h2>
-            <p class="text-slate-400 max-w-2xl mx-auto font-light">Documentação visual dos módulos de análise, otimização e inferência neural.</p>
+            <p class="text-slate-400 max-w-2xl mx-auto font-light italic text-sm">Clique em qualquer captura de ecrã para ampliar os detalhes técnicos.</p>
         </div>
 
         <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             <!-- 1. Performance -->
-            <div class="glass p-4 rounded-3xl border-white/5 img-card">
+            <div class="glass p-4 rounded-3xl border-white/5 img-card" onclick="openLightbox(this)">
                 <div class="rounded-2xl overflow-hidden mb-4 aspect-video bg-slate-900 img-container">
-                    <img src="https://github.com/goldenluke/qwan_zero_pipeline/blob/main/WhatsApp%20Image%202026-03-01%20at%2015.26.10.jpeg?raw=true" alt="Performance Dashboard">
+                    <img src="https://github.com/goldenluke/qwan_zero_pipeline/blob/main/WhatsApp%20Image%202026-03-01%20at%2015.26.10.jpeg?raw=true" alt="Dashboard de Performance Global">
                 </div>
-                <h4 class="text-white font-bold px-2 uppercase text-xs tracking-widest">Performance Global</h4>
-                <p class="text-[10px] text-slate-500 px-2 mt-1 italic">Equity Curve, Drawdown e métricas institucionais (CAGR, Sharpe).</p>
+                <h4 class="text-white font-bold px-2 uppercase text-[10px] tracking-widest">Performance Global</h4>
+                <p class="text-[9px] text-slate-500 px-2 mt-1 italic">Equity Curve, Drawdown e métricas institucionais.</p>
             </div>
 
             <!-- 2. Rolling Metrics -->
-            <div class="glass p-4 rounded-3xl border-white/5 img-card">
+            <div class="glass p-4 rounded-3xl border-white/5 img-card" onclick="openLightbox(this)">
                 <div class="rounded-2xl overflow-hidden mb-4 aspect-video bg-slate-900 img-container">
-                    <img src="https://github.com/goldenluke/qwan_zero_pipeline/blob/main/WhatsApp%20Image%202026-03-01%20at%2015.26.10%20(1).jpeg?raw=true" alt="Rolling Metrics">
+                    <img src="https://github.com/goldenluke/qwan_zero_pipeline/blob/main/WhatsApp%20Image%202026-03-01%20at%2015.26.10%20(1).jpeg?raw=true" alt="Análise de Métricas Rolling">
                 </div>
-                <h4 class="text-white font-bold px-2 uppercase text-xs tracking-widest">Métricas Rolling</h4>
-                <p class="text-[10px] text-slate-500 px-2 mt-1 italic">Análise móvel de Sharpe e Alpha contra benchmark em tempo real.</p>
+                <h4 class="text-white font-bold px-2 uppercase text-[10px] tracking-widest">Métricas Rolling</h4>
+                <p class="text-[9px] text-slate-500 px-2 mt-1 italic">Análise móvel de Sharpe e Alpha contra benchmark.</p>
             </div>
 
             <!-- 3. Regimes -->
-            <div class="glass p-4 rounded-3xl border-white/5 img-card">
+            <div class="glass p-4 rounded-3xl border-white/5 img-card" onclick="openLightbox(this)">
                 <div class="rounded-2xl overflow-hidden mb-4 aspect-video bg-slate-900 img-container">
-                    <img src="https://github.com/goldenluke/qwan_zero_pipeline/blob/main/WhatsApp%20Image%202026-03-01%20at%2015.26.11.jpeg?raw=true" alt="Market Regimes">
+                    <img src="https://github.com/goldenluke/qwan_zero_pipeline/blob/main/WhatsApp%20Image%202026-03-01%20at%2015.26.11.jpeg?raw=true" alt="Deteção de Regimes de Mercado">
                 </div>
-                <h4 class="text-white font-bold px-2 uppercase text-xs tracking-widest">Estados Latentes (HMM)</h4>
-                <p class="text-[10px] text-slate-500 px-2 mt-1 italic">Deteção de regimes e atribuição de performance por estado Markoviano.</p>
+                <h4 class="text-white font-bold px-2 uppercase text-[10px] tracking-widest">Estados Latentes (HMM)</h4>
+                <p class="text-[9px] text-slate-500 px-2 mt-1 italic">Identificação de regimes e atribuição de performance.</p>
             </div>
 
             <!-- 4. Phi Surface -->
-            <div class="glass p-4 rounded-3xl border-white/5 img-card">
+            <div class="glass p-4 rounded-3xl border-white/5 img-card" onclick="openLightbox(this)">
                 <div class="rounded-2xl overflow-hidden mb-4 aspect-video bg-slate-900 img-container">
-                    <img src="https://github.com/goldenluke/qwan_zero_pipeline/blob/main/WhatsApp%20Image%202026-03-01%20at%2015.26.11%20(1).jpeg?raw=true" alt="Phi Surface">
+                    <img src="https://github.com/goldenluke/qwan_zero_pipeline/blob/main/WhatsApp%20Image%202026-03-01%20at%2015.26.11%20(1).jpeg?raw=true" alt="Visualização 3D da Superfície Phi">
                 </div>
-                <h4 class="text-white font-bold px-2 uppercase text-xs tracking-widest">Superfície \(\Phi\)</h4>
-                <p class="text-[10px] text-slate-500 px-2 mt-1 italic">Otimização estrutural 3D nos espaços de entropia (\(\alpha\)) e momentum (\(\gamma\)).</p>
+                <h4 class="text-white font-bold px-2 uppercase text-[10px] tracking-widest">Superfície \(\Phi\)</h4>
+                <p class="text-[9px] text-slate-500 px-2 mt-1 italic">Otimização estrutural nos espaços de entropia e momentum.</p>
             </div>
 
             <!-- 5. Stress Test -->
-            <div class="glass p-4 rounded-3xl border-white/5 img-card">
+            <div class="glass p-4 rounded-3xl border-white/5 img-card" onclick="openLightbox(this)">
                 <div class="rounded-2xl overflow-hidden mb-4 aspect-video bg-slate-900 img-container">
-                    <img src="https://github.com/goldenluke/qwan_zero_pipeline/blob/main/WhatsApp%20Image%202026-03-01%20at%2015.26.12.jpeg?raw=true" alt="Stress Testing">
+                    <img src="https://github.com/goldenluke/qwan_zero_pipeline/blob/main/WhatsApp%20Image%202026-03-01%20at%2015.26.12.jpeg?raw=true" alt="Simulação de Teste de Stress">
                 </div>
-                <h4 class="text-white font-bold px-2 uppercase text-xs tracking-widest">Teste de Stress</h4>
-                <p class="text-[10px] text-slate-500 px-2 mt-1 italic">Simulação de choques exógenos repentinos de -20% na carteira.</p>
+                <h4 class="text-white font-bold px-2 uppercase text-[10px] tracking-widest">Teste de Stress</h4>
+                <p class="text-[9px] text-slate-500 px-2 mt-1 italic">Simulação de choques exógenos repentinos de -20%.</p>
             </div>
 
             <!-- 6. Monte Carlo -->
-            <div class="glass p-4 rounded-3xl border-white/5 img-card">
+            <div class="glass p-4 rounded-3xl border-white/5 img-card" onclick="openLightbox(this)">
                 <div class="rounded-2xl overflow-hidden mb-4 aspect-video bg-slate-900 img-container">
-                    <img src="https://github.com/goldenluke/qwan_zero_pipeline/blob/main/WhatsApp%20Image%202026-03-01%20at%2015.26.12%20(1).jpeg?raw=true" alt="Monte Carlo Simulation">
+                    <img src="https://github.com/goldenluke/qwan_zero_pipeline/blob/main/WhatsApp%20Image%202026-03-01%20at%2015.26.12%20(1).jpeg?raw=true" alt="Projeção Monte Carlo de Regimes">
                 </div>
-                <h4 class="text-white font-bold px-2 uppercase text-xs tracking-widest">Monte Carlo HMM</h4>
-                <p class="text-[10px] text-slate-500 px-2 mt-1 italic">Projeções estocásticas baseadas na matriz de transição de regimes.</p>
+                <h4 class="text-white font-bold px-2 uppercase text-[10px] tracking-widest">Monte Carlo HMM</h4>
+                <p class="text-[9px] text-slate-500 px-2 mt-1 italic">Projeções estocásticas baseadas em transições de regime.</p>
             </div>
 
             <!-- 7. Systemic Risk -->
-            <div class="glass p-4 rounded-3xl border-white/5 img-card">
+            <div class="glass p-4 rounded-3xl border-white/5 img-card" onclick="openLightbox(this)">
                 <div class="rounded-2xl overflow-hidden mb-4 aspect-video bg-slate-900 img-container">
-                    <img src="https://github.com/goldenluke/qwan_zero_pipeline/blob/main/WhatsApp%20Image%202026-03-01%20at%2015.26.13.jpeg?raw=true" alt="Systemic Risk Monitor">
+                    <img src="https://github.com/goldenluke/qwan_zero_pipeline/blob/main/WhatsApp%20Image%202026-03-01%20at%2015.26.13.jpeg?raw=true" alt="Monitor de Risco Sistémico">
                 </div>
-                <h4 class="text-white font-bold px-2 uppercase text-xs tracking-widest">Risco Sistémico</h4>
-                <p class="text-[10px] text-slate-500 px-2 mt-1 italic">Heatmaps de correlação e monitor de Suscetibilidade de Mercado (\(\chi\)).</p>
+                <h4 class="text-white font-bold px-2 uppercase text-[10px] tracking-widest">Risco Sistémico</h4>
+                <p class="text-[9px] text-slate-500 px-2 mt-1 italic">Heatmaps de correlação e Suscetibilidade (\(\chi\)).</p>
             </div>
 
             <!-- 8. Neural Forecast -->
-            <div class="glass p-4 rounded-3xl border-white/5 img-card">
+            <div class="glass p-4 rounded-3xl border-white/5 img-card" onclick="openLightbox(this)">
                 <div class="rounded-2xl overflow-hidden mb-4 aspect-video bg-slate-900 img-container">
-                    <img src="https://github.com/goldenluke/qwan_zero_pipeline/blob/main/WhatsApp%20Image%202026-03-01%20at%2015.26.13%20(1).jpeg?raw=true" alt="Neural Forecast Results">
+                    <img src="https://github.com/goldenluke/qwan_zero_pipeline/blob/main/WhatsApp%20Image%202026-03-01%20at%2015.26.13%20(1).jpeg?raw=true" alt="Previsão Neural com NHITS">
                 </div>
-                <h4 class="text-white font-bold px-2 uppercase text-xs tracking-widest">Forecast Neural</h4>
-                <p class="text-[10px] text-slate-500 px-2 mt-1 italic">Resultados de inferência multi-passo utilizando a arquitetura NHITS.</p>
+                <h4 class="text-white font-bold px-2 uppercase text-[10px] tracking-widest">Forecast Neural</h4>
+                <p class="text-[9px] text-slate-500 px-2 mt-1 italic">Resultados de inferência multi-passo via rede NHITS.</p>
             </div>
 
             <!-- 9. Trainer UI -->
-            <div class="glass p-4 rounded-3xl border-white/5 img-card">
+            <div class="glass p-4 rounded-3xl border-white/5 img-card" onclick="openLightbox(this)">
                 <div class="rounded-2xl overflow-hidden mb-4 aspect-video bg-slate-900 img-container">
-                    <img src="https://github.com/goldenluke/qwan_zero_pipeline/blob/main/WhatsApp%20Image%202026-03-01%20at%2015.26.13%20(2).jpeg?raw=true" alt="Trainer Interface">
+                    <img src="https://github.com/goldenluke/qwan_zero_pipeline/blob/main/WhatsApp%20Image%202026-03-01%20at%2015.26.13%20(2).jpeg?raw=true" alt="Interface de Treino Neural">
                 </div>
-                <h4 class="text-white font-bold px-2 uppercase text-xs tracking-widest">Interface do Trainer</h4>
-                <p class="text-[10px] text-slate-500 px-2 mt-1 italic">Painel Flask para configuração e treino de novos modelos preditivos.</p>
+                <h4 class="text-white font-bold px-2 uppercase text-[10px] tracking-widest">Interface do Trainer</h4>
+                <p class="text-[9px] text-slate-500 px-2 mt-1 italic">Painel dedicado para treino de novos modelos preditivos.</p>
             </div>
         </div>
     </section>
@@ -337,7 +395,7 @@
         </div>
     </section>
 
-    <!-- API & Resumo -->
+    <!-- API & Footer -->
     <section id="api" class="py-32 max-w-7xl mx-auto px-6">
         <div class="grid md:grid-cols-2 gap-12 items-center">
             <div class="glass p-10 rounded-[2.5rem] space-y-6">
@@ -390,9 +448,24 @@
             </div>
         </div>
         <div class="mt-24 text-[10px] text-slate-700 uppercase tracking-[0.6em] font-bold">
-            Complex Systems Research • v5.6.0 Stable Build • Real UI Screenshots
+            Complex Systems Research • v5.7.2 Stable Build • <b>Tags Fixed</b>
         </div>
     </footer>
+
+    <!-- Estrutura do Modal Lightbox -->
+    <div id="image-lightbox" class="fixed inset-0 z-[100] flex flex-col items-center justify-center p-4 bg-black/90 hidden" onclick="closeLightbox()">
+        <!-- Botão de Fechar com onclick e listener garantido -->
+        <button id="close-btn" class="absolute top-8 right-8 text-white hover:text-indigo-400 transition-all z-[110]" onclick="closeLightbox(); event.stopPropagation();">
+            <i data-lucide="x" class="w-12 h-12"></i>
+        </button>
+        <div class="relative max-w-6xl w-full flex flex-col items-center gap-6" onclick="event.stopPropagation()">
+            <img id="lightbox-img" src="" alt="Ampliação da Screenshot" class="rounded-xl border border-white/10 w-full object-contain">
+            <div class="text-center space-y-2 bg-black/40 p-4 rounded-2xl backdrop-blur-md border border-white/5">
+                <h3 id="lightbox-title" class="text-2xl font-bold tracking-tight text-white uppercase italic"></h3>
+                <p id="lightbox-desc" class="text-sm text-slate-400 font-light"></p>
+            </div>
+        </div>
+    </div>
 
     <script>
         // Inicializar ícones
@@ -413,6 +486,37 @@
                     }
                 }
             });
+        });
+
+        // Lógica da Lightbox
+        const lightbox = document.getElementById('image-lightbox');
+        const lightboxImg = document.getElementById('lightbox-img');
+        const lightboxTitle = document.getElementById('lightbox-title');
+        const lightboxDesc = document.getElementById('lightbox-desc');
+
+        function openLightbox(card) {
+            const img = card.querySelector('img');
+            const title = card.querySelector('h4').innerText;
+            const desc = card.querySelector('p').innerText;
+
+            lightboxImg.src = img.src;
+            lightboxTitle.innerText = title;
+            lightboxDesc.innerText = desc;
+
+            lightbox.classList.remove('hidden');
+            lightbox.classList.add('flex');
+            document.body.style.overflow = 'hidden'; // Bloquear scroll da página
+        }
+
+        function closeLightbox() {
+            lightbox.classList.add('hidden');
+            lightbox.classList.remove('flex');
+            document.body.style.overflow = 'auto'; // Restaurar scroll
+        }
+
+        // Fechar com a tecla ESC
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') closeLightbox();
         });
     </script>
 </body>
