@@ -6,16 +6,16 @@
     <title>LabSUS | Manual de Referência Técnica</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/lucide@latest"></script>
-    <!-- MathJax para renderização de fórmulas epidemiológicas -->
+    <!-- MathJax para renderização de fórmulas epidemiológicas e fiscais -->
     <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=JetBrains+Mono:wght@400;500&display=swap');
         
         :root {
-            --primary: #06b6d4; /* Cyan */
-            --accent: #10b981;  /* Emerald */
-            --warning: #f59e0b; /* Amber */
+            --primary: #06b6d4; /* Ciano */
+            --accent: #10b981;  /* Esmeralda */
+            --warning: #f59e0b; /* Âmbar */
             --danger: #ef4444;
             --bg: #020617;
         }
@@ -93,8 +93,8 @@
             </div>
             <div class="hidden lg:flex gap-8 text-[10px] uppercase tracking-widest font-bold text-slate-500">
                 <a href="#architecture" class="hover:text-white transition">Arquitetura</a>
+                <a href="#generalization" class="hover:text-white transition text-amber-400">Generalização Ministerial</a>
                 <a href="#backend" class="hover:text-white transition">Algoritmos</a>
-                <a href="#environments" class="hover:text-white transition text-cyan-400">Ambientes</a>
                 <a href="#github" class="hover:text-white transition">Contribua</a>
             </div>
             <div class="flex gap-3">
@@ -106,58 +106,114 @@
     </nav>
 
     <!-- Secção Hero -->
-    <header class="relative pt-48 pb-32 px-6 overflow-hidden">
+    <header class="relative pt-48 pb-32 px-6 overflow-hidden text-center">
         <div class="absolute top-0 left-1/2 -translate-x-1/2 w-[1200px] h-[600px] bg-cyan-600/10 blur-[160px] rounded-full -z-10"></div>
-        <div class="max-w-6xl mx-auto text-center">
+        <div class="max-w-6xl mx-auto">
             <div class="inline-block px-4 py-1.5 rounded-full border border-cyan-500/30 bg-cyan-500/5 text-cyan-400 text-[10px] font-black mb-8 uppercase tracking-[0.4em]">
-                Protocolo de Segregação e Modelagem
+                Framework Transversal de Inteligência Estatal
             </div>
             <h1 class="text-6xl md:text-8xl font-black mb-10 tracking-tighter leading-[0.85]">
-                Engenharia Suscetível <br><span class="gradient-text">ao Rigor Científico.</span>
+                Padrão de Projeto de <br><span class="gradient-text">Inteligência Acionável Estatal.</span>
             </h1>
             <p class="text-xl md:text-2xl text-slate-400 max-w-4xl mx-auto mb-6 leading-relaxed font-light">
-                O <b>LabSUS</b> opera em dois domínios distintos: o pragmatismo da <b>Produção</b> e a inovação do <b>P&D</b>. Esta documentação formaliza a transição entre a hipótese e o dado público.
+                O <b>LabSUS</b> não é apenas uma aplicação de saúde; é um <b>Padrão de Projeto (Design Pattern)</b> para a administração pública moderna. Módulos de orquestração, predição e agrupamento que podem ser transpostos da Saúde para a <b>Fazenda</b> ou qualquer domínio de dados críticos.
             </p>
             <!-- Autor -->
-            <div class="flex items-center justify-center gap-2 text-cyan-500/80 font-mono text-sm tracking-widest uppercase mb-12">
+            <div class="flex items-center justify-center gap-2 text-cyan-500/80 font-mono text-sm tracking-widest uppercase mb-12 border-y border-white/5 py-2 inline-flex mx-auto">
                 <i data-lucide="user" class="w-4 h-4"></i>
                 Autor: <span class="font-bold text-cyan-400">Lucas Amaral Dourado</span>
             </div>
         </div>
     </header>
 
+    <div class="section-divider" id="generalization"></div>
+
+    <!-- GENERALIZAÇÃO: CASO MINISTÉRIO DA FAZENDA -->
+    <section class="py-32 max-w-7xl mx-auto px-6">
+        <div class="text-center mb-20">
+            <h2 class="text-4xl font-black uppercase mb-4 italic tracking-tighter">O LabSUS no <span class="text-amber-500">Ministério da Fazenda</span></h2>
+            <p class="text-slate-500 max-w-3xl mx-auto font-light italic text-sm leading-relaxed">
+                A mesma lógica modular aplicada à Saúde pode ser utilizada para governança fiscal e arrecadação estatal. Abaixo, o mapeamento funcional:
+            </p>
+        </div>
+
+        <div class="grid lg:grid-cols-4 gap-6">
+            <!-- Módulo ETL -> Fiscal -->
+            <div class="glass p-6 rounded-3xl border-cyan-500/10 hover:border-cyan-500/40 transition">
+                <div class="w-10 h-10 rounded-xl bg-cyan-500/10 flex items-center justify-center mb-4">
+                    <i data-lucide="refresh-cw" class="text-cyan-400 w-5 h-5"></i>
+                </div>
+                <h4 class="text-white font-bold text-xs uppercase mb-3 tracking-widest">Normalização Fiscal</h4>
+                <p class="text-[10px] text-slate-500 mb-4 italic">Troca-se o denominador populacional pelo PIB ou Base Tributável.</p>
+                <div class="bg-black/40 p-3 rounded-lg text-[10px]">
+                    $$ Yield = \frac{\text{Arrecadação}}{\text{Base\_Tributável}} $$
+                </div>
+            </div>
+
+            <!-- Módulo Clustering -> Perfil de Devedores -->
+            <div class="glass p-6 rounded-3xl border-emerald-500/10 hover:border-emerald-500/40 transition">
+                <div class="w-10 h-10 rounded-xl bg-emerald-500/10 flex items-center justify-center mb-4">
+                    <i data-lucide="users" class="text-emerald-400 w-5 h-5"></i>
+                </div>
+                <h4 class="text-white font-bold text-xs uppercase mb-3 tracking-widest">Perfis de Conformidade</h4>
+                <p class="text-[10px] text-slate-500 mb-4 italic">Arquétipos de municípios com saúde fiscal vs. dependência de repasses.</p>
+                <div class="bg-black/40 p-3 rounded-lg text-[10px]">
+                    $$ d(Mun_{i}, Arquetipo_{Fiscal}) $$
+                </div>
+            </div>
+
+            <!-- Módulo Predição -> Receita -->
+            <div class="glass p-6 rounded-3xl border-amber-500/10 hover:border-amber-500/40 transition">
+                <div class="w-10 h-10 rounded-xl bg-amber-500/10 flex items-center justify-center mb-4">
+                    <i data-lucide="line-chart" class="text-amber-400 w-5 h-5"></i>
+                </div>
+                <h4 class="text-white font-bold text-xs uppercase mb-3 tracking-widest">Previsão de Receita</h4>
+                <p class="text-[10px] text-slate-500 mb-4 italic">Substituição de internações por volume de ICMS/ISS futuro.</p>
+                <div class="bg-black/40 p-3 rounded-lg text-[10px]">
+                    $$ Revenue(t) = g(t) + s(t) $$
+                </div>
+            </div>
+
+            <!-- Módulo Risco -> Evasão -->
+            <div class="glass p-6 rounded-3xl border-rose-500/10 hover:border-rose-500/40 transition">
+                <div class="w-10 h-10 rounded-xl bg-rose-500/10 flex items-center justify-center mb-4">
+                    <i data-lucide="shield-alert" class="text-rose-400 w-5 h-5"></i>
+                </div>
+                <h4 class="text-white font-bold text-xs uppercase mb-3 tracking-widest">Risco de Evasão</h4>
+                <p class="text-[10px] text-slate-500 mb-4 italic">Probabilidade de inadimplência baseada em padrões históricos.</p>
+                <div class="bg-black/40 p-3 rounded-lg text-[10px]">
+                    $$ P(Inadimplência) = Logit(X) $$
+                </div>
+            </div>
+        </div>
+
+        <div class="mt-12 p-8 glass rounded-[2.5rem] border-white/5 text-center">
+            <p class="text-slate-400 text-sm font-light leading-relaxed">
+                <i data-lucide="info" class="inline-block w-4 h-4 mr-2 text-cyan-400"></i>
+                A arquitetura <b>React + Django + Celery</b> do LabSUS é agnóstica ao dado. O motor de processamento assíncrono permite que o <b>Padrão de Projeto Estatal</b> gerencie pipelines de auditoria fiscal tão eficientemente quanto pipelines de mortalidade infantil.
+            </p>
+        </div>
+    </section>
+
     <div class="section-divider" id="environments"></div>
 
     <!-- SEPARAÇÃO DE AMBIENTES -->
     <section class="py-32 max-w-7xl mx-auto px-6">
-        <div class="text-center mb-16">
-            <h2 class="text-4xl font-black uppercase mb-4 italic tracking-tighter">Separação de <span class="text-cyan-500">Ambientes</span></h2>
-            <p class="text-slate-500 max-w-2xl mx-auto font-light italic text-sm">
-                A integridade do SUS exige que a experimentação científica não interfira na disponibilidade das ferramentas de gestão.
-            </p>
-        </div>
-
         <div class="grid lg:grid-cols-2 gap-12">
             <!-- Ambiente de P&D -->
             <div class="env-card glass p-10 rounded-[3rem] border-amber-500/10 relative overflow-hidden">
                 <div class="absolute top-0 right-0 p-6 opacity-10">
                     <i data-lucide="flask-conical" class="w-24 h-24 text-amber-500"></i>
                 </div>
-                <div class="inline-block px-3 py-1 bg-amber-500/10 text-amber-500 text-[9px] font-black rounded-full mb-6 uppercase tracking-widest">Sandbox / Experimental</div>
-                <h3 class="text-2xl font-bold text-white mb-4 italic uppercase">Ambiente de Pesquisa (P&D)</h3>
+                <div class="inline-block px-3 py-1 bg-amber-500/10 text-amber-500 text-[9px] font-black rounded-full mb-6 uppercase tracking-widest">Laboratório / Investigação</div>
+                <h3 class="text-2xl font-bold text-white mb-4 italic uppercase tracking-tight">Ambiente de Pesquisa (P&D)</h3>
                 <p class="text-sm text-slate-400 mb-8 font-light leading-relaxed">
-                    Onde o autor <b>Lucas Amaral Dourado</b> e a equipa testam novas <i>features</i> populacionais e hiperparâmetros de modelos. O foco é o rigor estatístico e a redução do erro de generalização.
+                    Onde o autor e a equipa testam novos modelos preditivos. O foco reside no rigor estatístico e na redução do erro de generalização antes da implementação oficial.
                 </p>
                 <div class="bg-black/40 p-6 rounded-2xl">
-                    <h5 class="text-[10px] text-amber-500 font-bold uppercase mb-4 tracking-widest">Lógica de Ajuste (Tuning):</h5>
-                    <p class="text-xs text-slate-500 mb-4 italic">Minimização da função de custo para novos modelos:</p>
-                    $$ \min_{\theta} \mathcal{L}(\theta) = \frac{1}{n} \sum_{i=1}^{n} (y_i - f(x_i; \theta))^2 + \lambda ||\theta||^2 $$
+                    <h5 class="text-[10px] text-amber-500 font-bold uppercase mb-4 tracking-widest">Otimização (Tuning):</h5>
+                    $$ \min_{\theta} \mathcal{L}(\theta) = \frac{1}{n} \sum (y_i - f(x_i))^2 $$
                 </div>
-                <ul class="mt-8 space-y-3 text-[11px] text-slate-500 font-mono">
-                    <li class="flex items-center gap-2"><i data-lucide="check" class="w-3 h-3 text-amber-500"></i> Teste de Novas Fontes (ex: OpenDataSUS)</li>
-                    <li class="flex items-center gap-2"><i data-lucide="check" class="w-3 h-3 text-amber-500"></i> Validação Cruzada (K-Fold)</li>
-                    <li class="flex items-center gap-2"><i data-lucide="check" class="w-3 h-3 text-amber-500"></i> Sandbox de Visualização reativa</li>
-                </ul>
             </div>
 
             <!-- Ambiente de Produção -->
@@ -165,21 +221,16 @@
                 <div class="absolute top-0 right-0 p-6 opacity-10">
                     <i data-lucide="server" class="w-24 h-24 text-cyan-500"></i>
                 </div>
-                <div class="inline-block px-3 py-1 bg-cyan-500/10 text-cyan-500 text-[9px] font-black rounded-full mb-6 uppercase tracking-widest">Stable / Live</div>
-                <h3 class="text-2xl font-bold text-white mb-4 italic uppercase">Ambiente de Produção</h3>
+                <div class="inline-block px-3 py-1 bg-cyan-500/10 text-cyan-500 text-[9px] font-black rounded-full mb-6 uppercase tracking-widest">Disponibilidade / Público</div>
+                <h3 class="text-2xl font-bold text-white mb-4 italic uppercase tracking-tight">Ambiente de Produção</h3>
                 <p class="text-sm text-slate-400 mb-8 font-light leading-relaxed">
-                    O domínio da estabilidade. Dados processados, modelos validados e pipelines de alta disponibilidade (Django + Celery Worker) servindo os Dashboards oficiais.
+                    Domínio da estabilidade estatal. Pipelines de alta disponibilidade servindo Dashboards para tomada de decisão em tempo real.
                 </p>
-                <div class="bg-black/40 p-6 rounded-2xl">
-                    <h5 class="text-[10px] text-cyan-500 font-bold uppercase mb-4 tracking-widest">Métrica de Estabilidade:</h5>
-                    <p class="text-xs text-slate-500 mb-4 italic">SLA de processamento assíncrono:</p>
-                    $$ \text{Availability} = \lim_{T \to \infty} \frac{E[T_{up}]}{E[T_{up}] + E[T_{down}]} \geq 0.99 $$
+                <div class="bg-black/40 p-6 rounded-2xl text-center">
+                    <h5 class="text-[10px] text-cyan-500 font-bold uppercase mb-4 tracking-widest">Meta de Estabilidade:</h5>
+                    <span class="text-3xl font-black text-cyan-400">99.9% Uptime</span>
+                    <p class="text-[10px] text-slate-500 mt-2">Processamento Assíncrono Garantido</p>
                 </div>
-                <ul class="mt-8 space-y-3 text-[11px] text-slate-500 font-mono">
-                    <li class="flex items-center gap-2"><i data-lucide="shield" class="w-3 h-3 text-cyan-500"></i> Pipelines ETL Automáticas</li>
-                    <li class="flex items-center gap-2"><i data-lucide="shield" class="w-3 h-3 text-cyan-500"></i> Cache Geográfico (GeoJSON em memória)</li>
-                    <li class="flex items-center gap-2"><i data-lucide="shield" class="w-3 h-3 text-cyan-500"></i> Monitorização de Falhas via Sentry/Logging</li>
-                </ul>
             </div>
         </div>
     </section>
@@ -190,19 +241,18 @@
     <section class="py-32 max-w-7xl mx-auto px-6">
         <div class="text-center mb-20">
             <h2 class="text-5xl font-black uppercase mb-4 italic tracking-tight">Lógica dos <span class="text-cyan-500">Algoritmos</span></h2>
-            <p class="text-slate-400 max-w-2xl mx-auto font-light text-sm italic">Core matemático do Backend LabSUS.</p>
+            <p class="text-slate-400 max-w-2xl mx-auto font-light text-sm italic">O núcleo matemático da Inteligência Estatal LabSUS.</p>
         </div>
         
         <div class="grid md:grid-cols-2 gap-8">
             <!-- K-Means e Arquétipos -->
             <div class="glass p-10 rounded-[3rem] border-white/5">
                 <h4 class="font-bold text-white uppercase text-xs tracking-widest mb-6 text-cyan-400">Clusterização & Perfilagem</h4>
-                <p class="text-xs text-slate-400 mb-6 leading-relaxed italic">Normalizamos indicadores via <b>Z-Score</b> antes do agrupamento municipal.</p>
                 <div class="math-block">
                     $$ z = \frac{x - \mu}{\sigma} $$
                 </div>
                 <p class="text-xs text-slate-500 mt-6 text-justify">
-                    A nomeação automática usa a <b>Lógica de Arquétipos</b> baseada em <b>Distância Euclidiana</b> entre o cluster \(C\) e o perfil ideal \(A\):
+                    A nomeação automática utiliza a <b>Lógica de Arquétipos</b> baseada na <b>Distância Euclidiana</b> entre o cluster \(C\) e o perfil estatal ideal \(A\):
                 </p>
                 <div class="math-block">
                     $$ d(C, A) = \sqrt{\sum_{i=1}^{n} (C_i - A_i)^2} $$
@@ -211,13 +261,13 @@
 
             <!-- Predição (Prophet) -->
             <div class="glass p-10 rounded-[3rem] border-white/5">
-                <h4 class="font-bold text-white uppercase text-xs tracking-widest mb-6 text-emerald-400">Séries Temporais</h4>
-                <p class="text-xs text-slate-400 mb-6 leading-relaxed italic">Utilizamos decomposição aditiva para projetar internações futuras.</p>
+                <h4 class="font-bold text-white uppercase text-xs tracking-widest mb-6 text-emerald-400">Análise Preditiva Temporal</h4>
+                <p class="text-xs text-slate-400 mb-6 leading-relaxed italic">Utilizamos decomposição aditiva (Prophet) para projetar o fluxo futuro de eventos estatais.</p>
                 <div class="math-block">
                     $$ y(t) = g(t) + s(t) + h(t) + \epsilon_t $$
                 </div>
-                <div class="mt-4 p-4 bg-emerald-500/5 rounded-xl text-[10px] text-slate-500 italic">
-                    Essa lógica permite ao gestor visualizar se um aumento de casos é uma <b>Tendência</b> estrutural ou uma <b>Sazonalidade</b> cíclica.
+                <div class="mt-4 p-4 bg-emerald-500/5 rounded-xl text-[10px] text-slate-500 italic text-center leading-relaxed">
+                    Identificação de <b>Tendências</b> \(g(t)\) e <b>Sazonalidades</b> \(s(t)\) fiscais ou clínicas.
                 </div>
             </div>
         </div>
@@ -226,32 +276,31 @@
     <!-- GITHUB & COMUNIDADE Section -->
     <section id="github" class="py-32 bg-cyan-600/5 border-y border-white/5 text-center">
         <div class="max-w-7xl mx-auto px-6">
-            <h2 class="text-4xl font-black uppercase mb-4 italic">Código Aberto & <span class="text-cyan-500">Comunidade</span></h2>
+            <h2 class="text-4xl font-black uppercase mb-4 italic text-cyan-400">Código Aberto & Comunidade</h2>
             <p class="text-slate-400 max-w-2xl mx-auto font-light mb-16 italic leading-relaxed">
-                O LabSUS é um projeto comunitário. Acreditamos que a transparência algorítmica e a colaboração são as bases para uma saúde pública eficiente.
+                O LabSUS é um projeto comunitário focado no interesse público e na transparência estatal. Contribua para o fortalecimento da gestão baseada em dados.
             </p>
 
-            <!-- Card Simulado do GitHub -->
             <div class="max-w-4xl mx-auto glass rounded-3xl overflow-hidden border-white/10 text-left mb-12 shadow-2xl">
                 <div class="bg-white/5 p-6 border-b border-white/10 flex items-center justify-between">
                     <div class="flex items-center gap-4">
                         <i data-lucide="github" class="w-8 h-8 text-white"></i>
                         <div>
                             <h3 class="font-bold text-white tracking-tight">goldenluke / labsus</h3>
-                            <p class="text-[10px] text-slate-500 uppercase tracking-widest font-black">Public Repository</p>
+                            <p class="text-[10px] text-slate-500 uppercase tracking-widest font-black">Framework de Inteligência Estatal</p>
                         </div>
                     </div>
                 </div>
                 <div class="p-8">
-                    <h4 class="text-white font-bold mb-4 text-xl tracking-tight italic">Contribua para o LabSUS</h4>
+                    <h4 class="text-white font-bold mb-4 text-xl tracking-tight italic text-cyan-400 underline underline-offset-8">Convite à Contribuição</h4>
                     <p class="text-slate-400 text-sm leading-relaxed mb-8">
-                        Seja na otimização da pipeline Backend em Python, ou na criação de novos componentes React para o Frontend, o seu contributo ajuda a construir uma ferramenta de ponta para o SUS.
+                        Seja na otimização da arquitetura Django, no refinamento dos algoritmos de Machine Learning ou na expansão das interfaces React, o seu contributo técnico é fundamental.
                     </p>
                     <div class="flex flex-wrap gap-4">
                         <a href="https://github.com/goldenluke/labsus" target="_blank" class="bg-white text-black px-8 py-3 rounded-xl font-black text-xs hover:scale-105 transition-transform flex items-center gap-2">
                             <i data-lucide="github" class="w-4 h-4"></i> ACEDER AO REPOSITÓRIO
                         </a>
-                        <a href="https://github.com/goldenluke/labsus/issues" target="_blank" class="bg-slate-800 text-white px-8 py-3 rounded-xl font-black text-xs hover:bg-slate-700 transition flex items-center gap-2">
+                        <a href="https://github.com/goldenluke/labsus/issues" target="_blank" class="bg-slate-800 text-white px-8 py-3 rounded-xl font-black text-xs hover:bg-slate-700 transition flex items-center gap-2 border border-white/10">
                             <i data-lucide="info" class="w-4 h-4"></i> REPORTAR PROBLEMA
                         </a>
                     </div>
@@ -263,8 +312,8 @@
     <!-- Documentação Secção -->
     <section id="documentation" class="py-32 max-w-7xl mx-auto px-6 text-center">
         <div class="mb-16">
-            <h2 class="text-4xl font-black uppercase mb-4 italic">Referência <span class="text-cyan-500">Técnica PDF</span></h2>
-            <p class="text-slate-400 max-w-3xl mx-auto font-light mb-12 italic">Visualize o Manual de Projeto completo para compreensão profunda dos processos.</p>
+            <h2 class="text-4xl font-black uppercase mb-4 italic">Referência <span class="text-cyan-500">Técnica Integral</span></h2>
+            <p class="text-slate-400 max-w-3xl mx-auto font-light mb-12 italic">Visualize o Manual de Projeto completo para compreensão profunda dos fluxos full-stack.</p>
         </div>
 
         <div class="pdf-container glass relative group mb-12">
@@ -282,17 +331,17 @@
             <div class="space-y-4">
                 <div class="flex items-center gap-2">
                     <i data-lucide="activity" class="text-cyan-500"></i>
-                    <span class="font-black text-2xl tracking-tighter italic">LabSUS Project</span>
+                    <span class="font-black text-2xl tracking-tighter italic uppercase">LabSUS Project</span>
                 </div>
-                <div class="text-slate-400 font-mono text-xs uppercase tracking-tighter">
-                    Desenvolvido por: <span class="text-cyan-400 font-bold">Lucas Amaral Dourado</span>
+                <div class="text-slate-400 font-mono text-[10px] uppercase tracking-tighter">
+                    Liderança Técnica: <span class="text-cyan-400 font-bold">Lucas Amaral Dourado</span>
                 </div>
                 <p class="text-slate-500 text-sm max-w-sm leading-relaxed font-light italic">
-                    Engenharia de dados ao serviço da vida. Tecnologia brasileira para a eficiência do SUS.
+                    Engenharia de dados para a eficiência do Estado. Framework agnóstico aplicado à inteligência pública.
                 </p>
             </div>
             <div class="mt-2 text-[10px] text-slate-700 uppercase tracking-[0.4em] font-bold">
-                P&D • Produção • Machine Learning • Full-Stack
+                P&D • Produção • Inteligência Estatal • Full-Stack
             </div>
         </div>
     </footer>
