@@ -122,9 +122,9 @@
             </div>
             <div class="hidden lg:flex gap-8 text-[10px] uppercase tracking-widest font-bold text-slate-500">
                 <a href="#stack" class="hover:text-white transition">Arquitetura</a>
-                <a href="#math" class="hover:text-white transition text-cyan-400">Modelos Matemática</a>
-                <a href="#features" class="hover:text-white transition">Catálogo Features</a>
-                <a href="#fazenda" class="hover:text-white transition text-amber-400 font-black">Modelo Fazenda</a>
+                <a href="#math" class="hover:text-white transition text-cyan-400">Matemática</a>
+                <a href="#frontend" class="hover:text-white transition text-emerald-400 font-black">Frontend</a>
+                <a href="#fazenda" class="hover:text-white transition text-amber-400">Modelo Fazenda</a>
                 <a href="#governance" class="hover:text-white transition text-rose-500">Governança</a>
             </div>
             <div class="flex gap-3">
@@ -148,7 +148,7 @@
             <p class="text-xl md:text-2xl text-slate-400 max-w-4xl mx-auto mb-12 leading-relaxed font-light">
                 O <b>LabSUS</b> operacionaliza um <b>Padrão de Projeto Estatal</b> agnóstico. Uma infraestrutura full-stack que orquestra <b>aproximadamente 40 modelos matemáticos</b> para transformar o caos dos dados brutos em decisões acionáveis.
             </p>
-            <div class="flex items-center justify-center gap-2 text-cyan-500/80 font-mono text-sm tracking-widest uppercase mb-12 border-y border-white/5 py-2 inline-flex mx-auto text-center">
+            <div class="flex items-center justify-center gap-2 text-cyan-500/80 font-mono text-sm tracking-widest uppercase mb-12 border-y border-white/5 py-2 inline-flex mx-auto text-center font-bold">
                 <i data-lucide="user" class="w-4 h-4"></i>
                 Autor: <span class="font-bold text-cyan-400">Lucas Amaral Dourado</span>
             </div>
@@ -162,61 +162,121 @@
         <div class="text-center mb-24">
             <h2 class="text-5xl font-black uppercase mb-4 italic tracking-tight underline decoration-cyan-500/30 underline-offset-8 text-cyan-400">Fundamentação Matemática</h2>
             <p class="text-slate-500 max-w-3xl mx-auto font-light text-sm italic leading-relaxed">
-                Detalhes dos pilares algorítmicos que regem os <b>~40 modelos especializados</b> do motor analítico <code>src/</code>.
+                Detalhes analíticos dos <b>aproximadamente 40 modelos especializados</b> que compõem o motor analítico <code>src/</code>.
             </p>
         </div>
 
         <div class="grid lg:grid-cols-2 gap-12">
             <!-- Normalização Spline -->
             <div class="glass p-10 rounded-[3rem] border-white/5 math-box">
-                <h4 class="font-bold text-white uppercase text-xs tracking-widest mb-6 text-cyan-400">1. Normalização Dinâmica (ETL)</h4>
-                <p class="text-xs text-slate-400 mb-6 italic">Garante denominadores populacionais contínuos via Spline Cúbica:</p>
+                <h4 class="font-bold text-white uppercase text-xs tracking-widest mb-6 text-cyan-400">1. Projecção Populacional (Spline Cúbica)</h4>
+                <p class="text-xs text-slate-400 mb-6 italic">Garante denominadores populacionais contínuos entre anos de censo, essencial para taxas epidemiológicas estáveis:</p>
                 $$S_i(x) = a_i(x-x_i)^3 + b_i(x-x_i)^2 + c_i(x-x_i) + d_i$$
                 <p class="text-[10px] text-slate-500 mt-4 leading-relaxed">
-                    Taxa final normalizada: $$I_t = \frac{\sum \text{Eventos}_t}{\hat{P}_t} \times 10^k$$
+                    A interpolação satisfaz \(S_i(x_i) = y_i\) e mantém a continuidade da primeira e segunda derivada nos nós (anos).
                 </p>
             </div>
 
             <!-- K-Means Arquétipos -->
             <div class="glass p-10 rounded-[3rem] border-white/5 math-box">
-                <h4 class="font-bold text-white uppercase text-xs tracking-widest mb-6 text-emerald-400">2. Geometria de Agrupamento</h4>
-                <p class="text-xs text-slate-400 mb-6 italic">Minimização da inércia intra-cluster para perfis estatais:</p>
-                $$\min_{S} \sum_{i=1}^{k} \sum_{x \in S_i} ||x - \mu_i||^2$$
-                <p class="text-[10px] text-slate-500 mt-4">
-                    Distância Euclidiana para Arquétipos: $$Label(C_i) = \text{arg min}_{j} \sqrt{\sum (C_{id} - A_{jd})^2}$$
+                <h4 class="font-bold text-white uppercase text-xs tracking-widest mb-6 text-emerald-400">2. Geometria de Clusters (Lloyd)</h4>
+                <p class="text-xs text-slate-400 mb-6 italic">Minimização da variância intra-cluster com padronização Z-Score prévia:</p>
+                $$J(S) = \sum_{i=1}^{k} \sum_{x \in S_i} ||x - \mu_i||^2$$
+                <p class="text-xs text-slate-500 mt-4 leading-relaxed">
+                    A nomeação automática usa a <b>Distância Euclidiana Mínima</b> para arquétipos estatais ideais (\(A\)):
+                    $$Label(C_i) = \text{arg min}_{j} \sqrt{\sum_{k=1}^m (\mu_{ik} - A_{jk})^2}$$
                 </p>
             </div>
 
-            <!-- Prophet -->
+            <!-- 3. Time-Series Prophet -->
             <div class="glass p-10 rounded-[3rem] border-white/5 math-box">
-                <h4 class="font-bold text-white uppercase text-xs tracking-widest mb-6 text-amber-400">3. Decomposição de Séries (Prophet)</h4>
-                <p class="text-xs text-slate-400 mb-6 italic">Modelo aditivo generalizado para predição de demanda:</p>
+                <h4 class="font-bold text-white uppercase text-xs tracking-widest mb-6 text-amber-400">3. Decomposição de Séries Temporais</h4>
+                <p class="text-xs text-slate-400 mb-6 italic">Modelo aditivo para predição de demanda hospitalar ou arrecadação:</p>
                 $$y(t) = g(t) + s(t) + h(t) + \epsilon_t$$
-                <p class="text-[10px] text-slate-500 mt-4">Sazonalidade via Fourier: $$s(t) = \sum_{n=1}^N (a_n \cos(\frac{2\pi nt}{P}) + b_n \sin(\frac{2\pi nt}{P}))$$</p>
+                <p class="text-[10px] text-slate-500 mt-4">
+                    Sazonalidade (\(s(t)\)) modelada via Séries de Fourier truncadas:
+                    $$s(t) = \sum_{n=1}^N (a_n \cos(\frac{2\pi nt}{P}) + b_n \sin(\frac{2\pi nt}{P}))$$
+                </p>
             </div>
 
-            <!-- Logit/SHAP -->
+            <!-- 4. Risco e Regressão Logística -->
             <div class="glass p-10 rounded-[3rem] border-white/5 math-box">
-                <h4 class="font-bold text-white uppercase text-xs tracking-widest mb-6 text-rose-400">4. Probabilidade e Explicabilidade</h4>
-                <p class="text-xs text-slate-400 mb-6 italic">Mapeamento linear para o espaço sigmoide e valores SHAP:</p>
+                <h4 class="font-bold text-white uppercase text-xs tracking-widest mb-6 text-rose-400">4. Probabilidade de Risco (Logit)</h4>
+                <p class="text-xs text-slate-400 mb-6 italic">Classificação binária para risco de óbito ou inadimplência:</p>
                 $$P(y=1) = \frac{1}{1 + e^{-(\beta_0 + \sum \beta_i x_i)}}$$
-                <p class="text-[10px] text-slate-500 mt-4 italic">Fatores de risco via Odds Ratio: \(e^{\beta}\).</p>
+                <p class="text-xs text-slate-500 mt-4 leading-relaxed">
+                    A importância das variáveis é dada pelos <b>Valores SHAP</b> baseados na Teoria dos Jogos:
+                    $$\phi_i = \sum_{S \subseteq \{x_1, \dots, x_n\} \setminus \{x_i\}} \frac{|S|!(n-|S|-1)!}{n!} [f(S \cup \{x_i\}) - f(S)]$$
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <div class="section-divider" id="frontend"></div>
+
+    <!-- 2. ENGENHARIA DE FRONTEND E VISUALIZAÇÃO -->
+    <section class="py-32 max-w-7xl mx-auto px-6">
+        <div class="grid lg:grid-cols-2 gap-20 items-center">
+            <div class="order-2 lg:order-1 relative glass p-2 rounded-[2.5rem] health-glow">
+                <div class="bg-black/60 p-10 rounded-[2.4rem] mono text-[11px] text-emerald-300 leading-relaxed overflow-x-auto">
+                    <span class="text-slate-500 italic">// Engenharia de Polling Reativo (React)</span><br>
+                    const { status, progress, result } = useCeleryStatus(taskId);<br><br>
+                    <span class="text-slate-500 italic">// Ligação de Dados Geoespaciais</span><br>
+                    const mapData = useMemo(() => ({<br>
+                    &nbsp;&nbsp;type: 'choropleth',<br>
+                    &nbsp;&nbsp;geojson: loadedGeoJSON,<br>
+                    &nbsp;&nbsp;locations: data.map(d => d.ibge_id),<br>
+                    &nbsp;&nbsp;z: data.map(d => d[indicator])<br>
+                    }), [data, indicator]);
+                </div>
+            </div>
+            <div class="order-1 lg:order-2">
+                <h2 class="text-4xl font-black mb-8 uppercase italic tracking-tighter text-emerald-500">Engenharia de Frontend</h2>
+                <p class="text-slate-400 text-lg leading-relaxed mb-8 font-light">
+                    O Frontend do LabSUS materializa a ciência de dados em UX acionável. Construído com <b>React</b> e <b>Tailwind CSS</b>, a interface é um visualizador científico reativo.
+                </p>
+                <div class="space-y-6">
+                    <div class="p-6 glass rounded-2xl border-white/5">
+                        <h4 class="font-bold text-white mb-2 flex items-center gap-2 text-sm uppercase">
+                            <i data-lucide="refresh-cw" class="text-cyan-400 w-4 h-4"></i> Monitorização em Tempo Real
+                        </h4>
+                        <p class="text-xs text-slate-500 leading-relaxed italic">
+                            Utiliza <b>Polling Assíncrono</b> para consultar o estado das tarefas no Celery/Redis a cada 2 segundos, garantindo que o utilizador acompanhe o processamento massivo sem bloqueios de UI.
+                        </p>
+                    </div>
+                    <div class="p-6 glass rounded-2xl border-white/5">
+                        <h4 class="font-bold text-white mb-2 flex items-center gap-2 text-sm uppercase">
+                            <i data-lucide="map" class="text-emerald-400 w-4 h-4"></i> Injeção de Malha Geográfica
+                        </h4>
+                        <p class="text-xs text-slate-500 leading-relaxed italic">
+                            Carregamento leve de ficheiros <b>GeoJSON</b> por UF. A lógica mapeia chaves IBGE-7 entre os dados da API e as propriedades espaciais para renderização instantânea via WebGL (Plotly).
+                        </p>
+                    </div>
+                    <div class="p-6 glass rounded-2xl border-white/5">
+                        <h4 class="font-bold text-white mb-2 flex items-center gap-2 text-sm uppercase">
+                            <i data-lucide="git-pull-request" class="text-amber-400 w-4 h-4"></i> Visualização de Fluxos
+                        </h4>
+                        <p class="text-xs text-slate-500 leading-relaxed italic text-justify">
+                            Implementação de <b>Diagramas de Sankey</b> e Mapas de Fluxo para redes de saúde, onde a largura dos nós (\(W\)) é calculada dinamicamente com base no volume de internações intermunicipais.
+                        </p>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
 
     <div class="section-divider" id="features"></div>
 
-    <!-- NOVO: CATÁLOGO DE FEATURES COMPLETO -->
+    <!-- CATÁLOGO DE FEATURES -->
     <section class="py-32 max-w-7xl mx-auto px-6">
         <div class="text-center mb-16">
             <h2 class="text-4xl font-black uppercase mb-4 italic tracking-tighter text-cyan-500">Catálogo de Features</h2>
-            <p class="text-slate-500 max-w-2xl mx-auto font-light text-sm italic">
-                A listagem completa de indicadores, algoritmos e modelos integrados no Padrão de Projeto estatal.
+            <p class="text-slate-500 max-w-2xl mx-auto font-light text-sm italic leading-relaxed">
+                Listagem integral dos indicadores e modelos integrados nos aproximadamente 40 módulos do Padrão de Projeto estatal.
             </p>
         </div>
 
-        <div class="grid lg:grid-cols-3 gap-12">
+        <div class="grid lg:grid-cols-3 gap-12 text-center lg:text-left">
             <!-- Indicadores Epidemiológicos -->
             <div class="space-y-6">
                 <h3 class="text-white font-bold text-sm uppercase tracking-widest border-b border-cyan-500/20 pb-2 flex items-center gap-2">
@@ -227,10 +287,6 @@
                     <div class="feature-tag"><i data-lucide="activity"></i> Cobertura Pré-Natal (7+)</div>
                     <div class="feature-tag"><i data-lucide="stethoscope"></i> Médicos por 1.000 hab.</div>
                     <div class="feature-tag"><i data-lucide="home"></i> Cobertura Estratégia Saúde Família</div>
-                    <div class="feature-tag"><i data-lucide="alert-triangle"></i> Óbitos Causas Mal Definidas</div>
-                    <div class="feature-tag"><i data-lucide="hospital"></i> Internações Condições Sensíveis (ICSAP)</div>
-                    <div class="feature-tag"><i data-lucide="user-plus"></i> Nascimentos Mães Adolescentes</div>
-                    <div class="feature-tag"><i data-lucide="search"></i> Taxa Detecção Hanseníase</div>
                     <div class="feature-tag"><i data-lucide="bug"></i> Incidência Dengue / Zika / Chik</div>
                     <div class="feature-tag"><i data-lucide="lungs"></i> Indicadores TB (Cura/Abandono)</div>
                 </div>
@@ -243,15 +299,11 @@
                 </h3>
                 <div class="feature-grid grid-cols-1">
                     <div class="feature-tag"><i data-lucide="git-pull-request"></i> Fluxo de Pacientes (Origem-Destino)</div>
-                    <div class="feature-tag"><i data-lucide="network"></i> Centralidade de Rede Hospitalar</div>
                     <div class="feature-tag"><i data-lucide="shield-alert"></i> Predição Risco Óbito (LightGBM)</div>
                     <div class="feature-tag"><i data-lucide="type"></i> Requalificação de Causa via NLP</div>
                     <div class="feature-tag"><i data-lucide="clock"></i> Análise de Sobrevida (Cox PH)</div>
-                    <div class="feature-tag"><i data-lucide="target"></i> Escore de Propensão Causal (PSM)</div>
                     <div class="feature-tag"><i data-lucide="trending-up"></i> Forecast de Internações (Prophet)</div>
                     <div class="feature-tag"><i data-lucide="dollar-sign"></i> Análise Custo-Efetividade (RCEI)</div>
-                    <div class="feature-tag"><i data-lucide="map-pin"></i> Clusters de Vulnerabilidade Social</div>
-                    <div class="feature-tag"><i data-lucide="database"></i> Motor ETL Multi-fonte (PySUS)</div>
                 </div>
             </div>
 
@@ -266,11 +318,7 @@
                     <div class="feature-tag"><i data-lucide="trending-up"></i> Previsão Receita ICMS / ISS</div>
                     <div class="feature-tag"><i data-lucide="shield-x"></i> Risco de Inadimplência / Evasão</div>
                     <div class="feature-tag"><i data-lucide="users"></i> Perfis de Conformidade Fiscal</div>
-                    <div class="feature-tag"><i data-lucide="arrow-right-left"></i> Fluxos de Transferência de Crédito</div>
-                    <div class="feature-tag"><i data-lucide="file-check"></i> Auditoria Estatística de Notas</div>
-                    <div class="feature-tag"><i data-lucide="layers"></i> Agrupamento de Dependência Fiscal</div>
-                    <div class="feature-tag"><i data-lucide="cpu"></i> Orquestração Assíncrona de Auditoria</div>
-                    <div class="feature-tag"><i data-lucide="eye"></i> Explicabilidade de Malha Fina (SHAP)</div>
+                    <div class="feature-tag"><i data-lucide="eye"></i> Explicabilidade em Auditoria (SHAP)</div>
                 </div>
             </div>
         </div>
@@ -292,22 +340,22 @@
                 </div>
             </div>
             <div class="glass p-10 rounded-[3rem] border-white/5">
-                <h4 class="text-sm font-bold text-white uppercase mb-6 text-center">Equivalência Funcional (SUS ↔ Fazenda)</h4>
+                <h4 class="text-sm font-bold text-white uppercase mb-6 text-center italic">Equivalência Funcional (SUS ↔ Fazenda)</h4>
                 <div class="space-y-4">
                     <div class="flex justify-between items-center text-[10px] border-b border-white/5 pb-3">
-                        <span class="text-cyan-400 font-mono">Survival analysis</span>
+                        <span class="text-cyan-400 font-mono italic underline">Survival analysis</span>
                         <span class="text-slate-600">→</span>
-                        <span class="text-amber-400">Tempo até Inadimplência</span>
+                        <span class="text-amber-400 font-mono italic">Tempo até Inadimplência</span>
                     </div>
                     <div class="flex justify-between items-center text-[10px] border-b border-white/5 pb-3">
-                        <span class="text-cyan-400 font-mono">Epidemic Surges</span>
+                        <span class="text-cyan-400 font-mono italic underline">Epidemic Surges</span>
                         <span class="text-slate-600">→</span>
-                        <span class="text-amber-400">Surtos de Evasão Fiscal</span>
+                        <span class="text-amber-400 font-mono italic">Surtos de Evasão Fiscal</span>
                     </div>
                     <div class="flex justify-between items-center text-[10px] border-b border-white/5 pb-3">
-                        <span class="text-cyan-400 font-mono">Patient Journey</span>
+                        <span class="text-cyan-400 font-mono italic underline">Patient Journey</span>
                         <span class="text-slate-600">→</span>
-                        <span class="text-amber-400">Ciclo de Vida do Contribuinte</span>
+                        <span class="text-amber-400 font-mono italic">Ciclo de Vida do Contribuinte</span>
                     </div>
                 </div>
             </div>
@@ -336,8 +384,8 @@
                     O <b>Sandbox de Investigação</b> permite a experimentação científica. É aqui que novas hipóteses são validadas através de modelos candidatos, sem impacto na infraestrutura de decisão oficial.
                 </p>
                 <div class="flex flex-wrap gap-2">
-                    <span class="feature-tag border-amber-500/30 text-amber-400">Validação K-Fold</span>
-                    <span class="feature-tag border-amber-500/30 text-amber-400">Tuning de Modelos</span>
+                    <span class="feature-tag border-amber-500/30 text-amber-400 font-bold">Validação K-Fold</span>
+                    <span class="feature-tag border-amber-500/30 text-amber-400 font-bold">Tuning de Modelos</span>
                 </div>
             </div>
 
@@ -351,8 +399,8 @@
                     O <b>Domínio de Estabilidade Pública</b>. Apenas algoritmos validados e pipelines auditadas operam neste nível, garantindo 99.9% de disponibilidade e integridade nas métricas governamentais.
                 </p>
                 <div class="flex flex-wrap gap-2">
-                    <span class="feature-tag border-cyan-500/30 text-cyan-400">Alta Disponibilidade</span>
-                    <span class="feature-tag border-cyan-500/30 text-cyan-400">Dados Consolidados</span>
+                    <span class="feature-tag border-cyan-500/30 text-cyan-400 font-bold">Alta Disponibilidade</span>
+                    <span class="feature-tag border-cyan-500/30 text-cyan-400 font-bold">Dados Consolidados</span>
                 </div>
             </div>
         </div>
@@ -388,7 +436,7 @@
                     <i data-lucide="activity" class="text-cyan-500"></i>
                     <span class="font-black text-2xl tracking-tighter italic uppercase">LabSUS Project</span>
                 </div>
-                <div class="text-slate-300 font-semibold text-xs uppercase tracking-widest border-l-2 border-cyan-500 pl-4 py-1">
+                <div class="text-slate-300 font-semibold text-[11px] uppercase tracking-widest border-l-2 border-cyan-500 pl-4 py-1">
                     Liderança Técnica e Arquitetura: <span class="text-cyan-400 font-bold">Lucas Amaral Dourado</span>
                 </div>
                 <p class="text-slate-400 text-[11px] leading-relaxed font-medium italic">
