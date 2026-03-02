@@ -1,12 +1,12 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-pt">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Market-QWAN | Institutional Quantitative Platform</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/lucide@latest"></script>
-    <!-- MathJax para renderização de fórmulas -->
+    <!-- MathJax para renderização profissional de fórmulas LaTeX -->
     <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <style>
@@ -58,16 +58,34 @@
         ::-webkit-scrollbar-track { background: var(--bg); }
         ::-webkit-scrollbar-thumb { background: #1e293b; border-radius: 10px; }
         
-        /* Ajuste para fórmulas MathJax não quebrarem o layout mobile */
         .mjx-container {
             color: inherit !important;
             font-size: 1.1em !important;
+            margin: 10px 0 !important;
+        }
+
+        .img-card {
+            transition: transform 0.3s ease, border-color 0.3s ease;
+        }
+        .img-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--primary);
+        }
+        .img-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.85;
+            transition: opacity 0.3s ease;
+        }
+        .img-card:hover img {
+            opacity: 1;
         }
     </style>
 </head>
 <body class="grid-bg">
 
-    <!-- Navigation -->
+    <!-- Navegação -->
     <nav class="fixed top-0 w-full z-50 glass border-b border-white/5 px-6 py-4">
         <div class="max-w-7xl mx-auto flex justify-between items-center">
             <div class="flex items-center gap-2">
@@ -75,10 +93,10 @@
                 <span class="font-extrabold text-xl tracking-tighter uppercase">MARKET-<span class="text-indigo-400">QWAN</span></span>
             </div>
             <div class="hidden lg:flex gap-8 text-[10px] uppercase tracking-widest font-bold text-slate-500">
-                <a href="#overview" class="hover:text-white transition">Visão Geral</a>
+                <a href="#overview" class="hover:text-white transition">Panorama</a>
                 <a href="#architecture" class="hover:text-white transition">Arquitetura</a>
                 <a href="#formalism" class="hover:text-white transition">Formalismo</a>
-                <a href="#dashboard" class="hover:text-white transition">Dashboard</a>
+                <a href="#showcase" class="hover:text-white transition">Interface</a>
                 <a href="#api" class="hover:text-white transition">API</a>
             </div>
             <div class="flex gap-3">
@@ -100,10 +118,10 @@
                 Critical Meta-Stable Economic Engine
             </div>
             <h1 class="text-6xl md:text-8xl font-black mb-10 tracking-tighter leading-[0.85]">
-                Sistemas Econômicos <br><span class="gradient-text">Meta-Estáveis.</span>
+                Sistemas Económicos <br><span class="gradient-text">Metaestáveis.</span>
             </h1>
             <p class="text-xl md:text-2xl text-slate-400 max-w-4xl mx-auto mb-12 leading-relaxed font-light">
-                O Market-QWAN implementa um algoritmo expandido para detecção de anomalias e estabilidade estrutural via Expoente de Hurst, Matrizes de Difusão e Score de Diagnóstico Meta-Estável.
+                O Market-QWAN implementa um algoritmo de vanguarda para detecção de anomalias e estabilidade estrutural via **Expoente de Hurst**, **Matrizes de Difusão** e análise de **Criticidade Sistémica**.
             </p>
             <div class="flex flex-col sm:flex-row justify-center gap-4">
                 <a href="https://github.com/goldenluke/qwan_zero_pipeline" target="_blank" class="group relative px-8 py-5 bg-indigo-600 rounded-2xl font-black text-sm hover:shadow-[0_0_60px_rgba(99,102,241,0.4)] transition-all duration-300">
@@ -122,26 +140,26 @@
 
     <div class="section-divider" id="overview"></div>
 
-    <!-- Algorithm: Technical Core -->
+    <!-- Algoritmo: Core Técnico -->
     <section id="architecture" class="py-32 max-w-7xl mx-auto px-6">
         <div class="grid lg:grid-cols-2 gap-20 items-center">
             <div>
-                <h2 class="text-4xl font-black mb-8 uppercase italic">O Core <span class="text-indigo-500">Algorítmico</span></h2>
+                <h2 class="text-4xl font-black mb-8 uppercase italic">O Núcleo <span class="text-indigo-500">Algorítmico</span></h2>
                 <p class="text-slate-400 text-lg leading-relaxed mb-8 font-light">
-                    O sistema utiliza janelas rolantes de 200 períodos para calcular a variância, persistência e estabilidade meta-estável. Através da reconstrução de potenciais termodinâmicos, mapeamos a probabilidade de transições de regime.
+                    O sistema utiliza janelas rolantes de 200 períodos para calcular a variância, persistência e estabilidade metaestável. Através da reconstrução de potenciais termodinâmicos, mapeamos a probabilidade de transições de regime.
                 </p>
                 <div class="space-y-6">
                     <div class="p-6 glass rounded-2xl border-indigo-500/20">
                         <h4 class="font-bold text-white mb-2 flex items-center gap-2">
-                            <i data-lucide="activity" class="text-indigo-400 w-4 h-4"></i> Hurst Exponent
+                            <i data-lucide="activity" class="text-indigo-400 w-4 h-4"></i> Expoente de Hurst
                         </h4>
-                        <p class="text-sm text-slate-500 italic">Mapeia a auto-similaridade estatística \( H \in [0, 1] \).</p>
+                        <p class="text-sm text-slate-500 italic">Mapeia a autossimilaridade estatística \( H \in [0, 1] \) para identificar persistência estrutural.</p>
                     </div>
                     <div class="p-6 glass rounded-2xl border-emerald-500/20">
                         <h4 class="font-bold text-white mb-2 flex items-center gap-2">
-                            <i data-lucide="layers" class="text-emerald-400 w-4 h-4"></i> Diffusion Matrix
+                            <i data-lucide="layers" class="text-emerald-400 w-4 h-4"></i> Matriz de Difusão
                         </h4>
-                        <p class="text-sm text-slate-500 italic">Espalhamento via matriz \( \mathbf{D} = \begin{pmatrix} D_{xx} & D_{xy} \\ D_{yx} & D_{yy} \end{pmatrix} \).</p>
+                        <p class="text-sm text-slate-500 italic">Modela o espalhamento estocástico via matriz \( \mathbf{D} = \begin{pmatrix} D_{xx} & D_{xy} \\ D_{yx} & D_{yy} \end{pmatrix} \).</p>
                     </div>
                 </div>
             </div>
@@ -153,68 +171,159 @@
                     &nbsp;&nbsp;&nbsp;&nbsp;0.3 * np.nanmean(rolling_autocorr) +<br>
                     &nbsp;&nbsp;&nbsp;&nbsp;0.3 * (1 / (1 + np.nanmean(rolling_var)))<br>
                     <span class="text-white">)</span><br><br>
-                    <span class="text-slate-500 italic"># Formula: \( S_{meta} = 0.4 \bar{H} + 0.3 \bar{\rho} + 0.3 \frac{1}{1 + \bar{\sigma}^2} \)</span><br><br>
-                    <span class="text-slate-500 italic"># Adaptive control parameter</span><br>
+                    <span class="text-slate-500 italic"># Formulação: \( S_{meta} = 0.4 \bar{H} + 0.3 \bar{\rho} + 0.3 \frac{1}{1 + \bar{\sigma}^2} \)</span><br><br>
+                    <span class="text-slate-500 italic"># Parâmetro de controlo adaptativo</span><br>
                     def adaptive_xi(var_series, base=1.0):<br>
                     &nbsp;&nbsp;&nbsp;&nbsp;return base / (1 + var_series)<br><br>
-                    <span class="text-slate-500 italic"># Formula: \( \xi = \frac{\beta}{1 + \sigma^2} \)</span><br><br>
-                    <span class="text-slate-500">>>> Experiment Status: COMPLETE</span>
+                    <span class="text-slate-500 italic"># Formulação: \( \xi = \frac{\beta}{1 + \sigma^2} \)</span><br><br>
+                    <span class="text-slate-500">>>> Estado do Experimento: CONCLUÍDO</span>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Formalism: Mathematical Deep Dive -->
+    <!-- Formalismo Matemático -->
     <section id="formalism" class="py-32 bg-white/[0.01] border-y border-white/5">
         <div class="max-w-7xl mx-auto px-6">
             <div class="text-center mb-16">
                 <h2 class="text-4xl font-black uppercase mb-4 italic">Formalismo <span class="text-indigo-500">Quantitativo</span></h2>
-                <p class="text-slate-400 font-light italic text-sm">Integração de métricas globais e locais para análise de criticidade.</p>
+                <p class="text-slate-400 font-light italic text-sm">Integração de métricas de criticidade e risco de cauda.</p>
             </div>
             <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6 text-left">
                 <div class="glass p-8 rounded-3xl space-y-4">
                     <i data-lucide="bar-chart" class="text-indigo-400"></i>
                     <h4 class="font-bold text-white uppercase text-xs tracking-widest">Hill Tail Index</h4>
-                    <p class="text-[10px] mono text-indigo-300">
+                    <p class="text-[12px] mono text-indigo-300">
                         \[ \alpha_{Hill} = \frac{k}{\sum_{i=1}^k \ln \frac{x_i}{x_{min}}} \]
                     </p>
-                    <p class="text-xs text-slate-500">Quantifica o risco de cauda pesada, essencial para prever eventos extremos no sistema.</p>
+                    <p class="text-xs text-slate-500 leading-relaxed">Mede o risco de cauda pesada (\(k=100\)), crucial para eventos extremos.</p>
                 </div>
                 <div class="glass p-8 rounded-3xl space-y-4">
                     <i data-lucide="zap" class="text-emerald-400"></i>
-                    <h4 class="font-bold text-white uppercase text-xs tracking-widest">Jarque-Bera Stat</h4>
-                    <p class="text-[10px] mono text-emerald-300">
+                    <h4 class="font-bold text-white uppercase text-xs tracking-widest">Jarque-Bera</h4>
+                    <p class="text-[12px] mono text-emerald-300">
                         \[ JB = \frac{n}{6} (S^2 + \frac{1}{4}(K-3)^2) \]
                     </p>
-                    <p class="text-xs text-slate-500">Teste de normalidade rigoroso para identificar picos de assimetria (S) e curtose (K).</p>
+                    <p class="text-xs text-slate-500 leading-relaxed">Teste de normalidade para detectar picos de assimetria e curtose.</p>
                 </div>
                 <div class="glass p-8 rounded-3xl space-y-4">
                     <i data-lucide="git-merge" class="text-amber-400"></i>
-                    <h4 class="font-bold text-white uppercase text-xs tracking-widest">Lag-1 Autocorr</h4>
-                    <p class="text-[10px] mono text-amber-300">
+                    <h4 class="font-bold text-white uppercase text-xs tracking-widest">Autocorrelação Lag-1</h4>
+                    <p class="text-[12px] mono text-amber-300">
                         \[ \rho_1 = \frac{Cov(x_t, x_{t-1})}{\sigma^2} \]
                     </p>
-                    <p class="text-xs text-slate-500">Mede a dependência sequencial imediata, fator chave no cálculo do composite meta-score.</p>
+                    <p class="text-xs text-slate-500 leading-relaxed">Indica dependência sequencial imediata na série temporal.</p>
                 </div>
                 <div class="glass p-8 rounded-3xl space-y-4">
                     <i data-lucide="database" class="text-purple-400"></i>
-                    <h4 class="font-bold text-white uppercase text-xs tracking-widest">Potential U</h4>
-                    <p class="text-[10px] mono text-purple-300">
+                    <h4 class="font-bold text-white uppercase text-xs tracking-widest">Potencial U</h4>
+                    <p class="text-[12px] mono text-purple-300">
                         \[ U = - \frac{\sigma^2}{2} \ln(P) \]
                     </p>
-                    <p class="text-xs text-slate-500">Reconstrução do potencial termodinâmico, revelando os poços de estabilidade do ativo.</p>
+                    <p class="text-xs text-slate-500 leading-relaxed">Reconstrução do potencial termodinâmico para estados de estabilidade.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Funcional Phi Section -->
+    <!-- Interface Showcase -->
+    <section id="showcase" class="py-32 max-w-7xl mx-auto px-6">
+        <div class="text-center mb-20">
+            <h2 class="text-4xl font-black uppercase mb-4 italic">Interface do <span class="text-indigo-500">Ecossistema</span></h2>
+            <p class="text-slate-400 max-w-2xl mx-auto font-light">Documentação visual dos módulos de análise, otimização e inferência neural.</p>
+        </div>
+
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <!-- 1. Performance -->
+            <div class="glass p-4 rounded-3xl border-white/5 img-card">
+                <div class="rounded-2xl overflow-hidden mb-4 aspect-video bg-slate-900 img-container">
+                    <img src="https://github.com/goldenluke/qwan_zero_pipeline/blob/main/WhatsApp%20Image%202026-03-01%20at%2015.26.10.jpeg?raw=true" alt="Performance Dashboard">
+                </div>
+                <h4 class="text-white font-bold px-2 uppercase text-xs tracking-widest">Performance Global</h4>
+                <p class="text-[10px] text-slate-500 px-2 mt-1 italic">Equity Curve, Drawdown e métricas institucionais (CAGR, Sharpe).</p>
+            </div>
+
+            <!-- 2. Rolling Metrics -->
+            <div class="glass p-4 rounded-3xl border-white/5 img-card">
+                <div class="rounded-2xl overflow-hidden mb-4 aspect-video bg-slate-900 img-container">
+                    <img src="https://github.com/goldenluke/qwan_zero_pipeline/blob/main/WhatsApp%20Image%202026-03-01%20at%2015.26.10%20(1).jpeg?raw=true" alt="Rolling Metrics">
+                </div>
+                <h4 class="text-white font-bold px-2 uppercase text-xs tracking-widest">Métricas Rolling</h4>
+                <p class="text-[10px] text-slate-500 px-2 mt-1 italic">Análise móvel de Sharpe e Alpha contra benchmark em tempo real.</p>
+            </div>
+
+            <!-- 3. Regimes -->
+            <div class="glass p-4 rounded-3xl border-white/5 img-card">
+                <div class="rounded-2xl overflow-hidden mb-4 aspect-video bg-slate-900 img-container">
+                    <img src="https://github.com/goldenluke/qwan_zero_pipeline/blob/main/WhatsApp%20Image%202026-03-01%20at%2015.26.11.jpeg?raw=true" alt="Market Regimes">
+                </div>
+                <h4 class="text-white font-bold px-2 uppercase text-xs tracking-widest">Estados Latentes (HMM)</h4>
+                <p class="text-[10px] text-slate-500 px-2 mt-1 italic">Deteção de regimes e atribuição de performance por estado Markoviano.</p>
+            </div>
+
+            <!-- 4. Phi Surface -->
+            <div class="glass p-4 rounded-3xl border-white/5 img-card">
+                <div class="rounded-2xl overflow-hidden mb-4 aspect-video bg-slate-900 img-container">
+                    <img src="https://github.com/goldenluke/qwan_zero_pipeline/blob/main/WhatsApp%20Image%202026-03-01%20at%2015.26.11%20(1).jpeg?raw=true" alt="Phi Surface">
+                </div>
+                <h4 class="text-white font-bold px-2 uppercase text-xs tracking-widest">Superfície \(\Phi\)</h4>
+                <p class="text-[10px] text-slate-500 px-2 mt-1 italic">Otimização estrutural 3D nos espaços de entropia (\(\alpha\)) e momentum (\(\gamma\)).</p>
+            </div>
+
+            <!-- 5. Stress Test -->
+            <div class="glass p-4 rounded-3xl border-white/5 img-card">
+                <div class="rounded-2xl overflow-hidden mb-4 aspect-video bg-slate-900 img-container">
+                    <img src="https://github.com/goldenluke/qwan_zero_pipeline/blob/main/WhatsApp%20Image%202026-03-01%20at%2015.26.12.jpeg?raw=true" alt="Stress Testing">
+                </div>
+                <h4 class="text-white font-bold px-2 uppercase text-xs tracking-widest">Teste de Stress</h4>
+                <p class="text-[10px] text-slate-500 px-2 mt-1 italic">Simulação de choques exógenos repentinos de -20% na carteira.</p>
+            </div>
+
+            <!-- 6. Monte Carlo -->
+            <div class="glass p-4 rounded-3xl border-white/5 img-card">
+                <div class="rounded-2xl overflow-hidden mb-4 aspect-video bg-slate-900 img-container">
+                    <img src="https://github.com/goldenluke/qwan_zero_pipeline/blob/main/WhatsApp%20Image%202026-03-01%20at%2015.26.12%20(1).jpeg?raw=true" alt="Monte Carlo Simulation">
+                </div>
+                <h4 class="text-white font-bold px-2 uppercase text-xs tracking-widest">Monte Carlo HMM</h4>
+                <p class="text-[10px] text-slate-500 px-2 mt-1 italic">Projeções estocásticas baseadas na matriz de transição de regimes.</p>
+            </div>
+
+            <!-- 7. Systemic Risk -->
+            <div class="glass p-4 rounded-3xl border-white/5 img-card">
+                <div class="rounded-2xl overflow-hidden mb-4 aspect-video bg-slate-900 img-container">
+                    <img src="https://github.com/goldenluke/qwan_zero_pipeline/blob/main/WhatsApp%20Image%202026-03-01%20at%2015.26.13.jpeg?raw=true" alt="Systemic Risk Monitor">
+                </div>
+                <h4 class="text-white font-bold px-2 uppercase text-xs tracking-widest">Risco Sistémico</h4>
+                <p class="text-[10px] text-slate-500 px-2 mt-1 italic">Heatmaps de correlação e monitor de Suscetibilidade de Mercado (\(\chi\)).</p>
+            </div>
+
+            <!-- 8. Neural Forecast -->
+            <div class="glass p-4 rounded-3xl border-white/5 img-card">
+                <div class="rounded-2xl overflow-hidden mb-4 aspect-video bg-slate-900 img-container">
+                    <img src="https://github.com/goldenluke/qwan_zero_pipeline/blob/main/WhatsApp%20Image%202026-03-01%20at%2015.26.13%20(1).jpeg?raw=true" alt="Neural Forecast Results">
+                </div>
+                <h4 class="text-white font-bold px-2 uppercase text-xs tracking-widest">Forecast Neural</h4>
+                <p class="text-[10px] text-slate-500 px-2 mt-1 italic">Resultados de inferência multi-passo utilizando a arquitetura NHITS.</p>
+            </div>
+
+            <!-- 9. Trainer UI -->
+            <div class="glass p-4 rounded-3xl border-white/5 img-card">
+                <div class="rounded-2xl overflow-hidden mb-4 aspect-video bg-slate-900 img-container">
+                    <img src="https://github.com/goldenluke/qwan_zero_pipeline/blob/main/WhatsApp%20Image%202026-03-01%20at%2015.26.13%20(2).jpeg?raw=true" alt="Trainer Interface">
+                </div>
+                <h4 class="text-white font-bold px-2 uppercase text-xs tracking-widest">Interface do Trainer</h4>
+                <p class="text-[10px] text-slate-500 px-2 mt-1 italic">Painel Flask para configuração e treino de novos modelos preditivos.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- O Funcional Phi -->
     <section id="phi-section" class="py-32 max-w-7xl mx-auto px-6">
         <div class="glass p-12 rounded-[3rem] border-indigo-500/20 text-center relative overflow-hidden">
             <div class="absolute top-0 right-0 w-64 h-64 bg-indigo-600/5 blur-[100px] rounded-full"></div>
             <h2 class="text-3xl font-black uppercase mb-8 italic">O Funcional Estrutural \( \Phi \)</h2>
             <p class="text-slate-400 max-w-3xl mx-auto mb-10 font-light">
-                A otimização do Market-QWAN não busca apenas o retorno máximo, mas a maximização da informação estrutural e estabilidade sob regimes mutáveis.
+                A optimização do Market-QWAN procura a maximização da informação estrutural e estabilidade sob regimes mutáveis.
             </p>
             <div class="text-3xl md:text-5xl font-black gradient-text mb-8">
                 \[ \Phi(w, k) = G - \alpha H - \gamma \mu - \Omega \]
@@ -228,33 +337,31 @@
         </div>
     </section>
 
-    <!-- Dashboard & API Section (Inherited) -->
-    <section id="dashboard" class="py-32 max-w-7xl mx-auto px-6">
-        <div class="text-center mb-20">
-            <h2 class="text-4xl font-black uppercase mb-4 italic">Interface <span class="text-indigo-500">Institucional</span></h2>
-            <p class="text-slate-400">Visualização em tempo real das métricas de estabilidade e superfícies Φ.</p>
-        </div>
-
-        <div class="grid md:grid-cols-3 gap-8 text-left">
-            <div class="glass p-10 rounded-[2.5rem] space-y-6">
-                <i data-lucide="layout-dashboard" class="text-indigo-400 w-8 h-8"></i>
-                <h4 class="font-bold text-xl text-white">Dashboard Streamlit</h4>
-                <p class="text-sm text-slate-500 leading-relaxed">Gráficos de potencial reconstruído, janelas rolantes de Hurst e score de instabilidade composta.</p>
-            </div>
+    <!-- API & Resumo -->
+    <section id="api" class="py-32 max-w-7xl mx-auto px-6">
+        <div class="grid md:grid-cols-2 gap-12 items-center">
             <div class="glass p-10 rounded-[2.5rem] space-y-6">
                 <i data-lucide="server" class="text-emerald-400 w-8 h-8"></i>
-                <h4 class="font-bold text-xl text-white">API REST FastAPI</h4>
-                <p class="text-sm text-slate-500 leading-relaxed">Endpoints para acesso aos cálculos de Hill Tail Index e Matriz de Difusão via JSON robusto.</p>
+                <h4 class="font-bold text-xl text-white uppercase italic tracking-tighter">API REST FastAPI</h4>
+                <p class="text-sm text-slate-500 leading-relaxed font-light">
+                    Endpoints prontos para integração institucional, fornecendo cálculos de Hill Tail Index, Matriz de Difusão e pesos optimizados via JSON.
+                </p>
+                <div class="mono text-[10px] text-emerald-400 bg-emerald-400/5 p-4 rounded-xl border border-emerald-400/10">
+                    GET /weights<br>
+                    POST /optimize
+                </div>
             </div>
             <div class="glass p-10 rounded-[2.5rem] space-y-6">
                 <i data-lucide="brain-circuit" class="text-purple-400 w-8 h-8"></i>
-                <h4 class="font-bold text-xl text-white">Forecast Neural</h4>
-                <p class="text-sm text-slate-500 leading-relaxed">Arquitetura NHITS integrada para previsões de horizonte curto baseadas no estado meta-estável.</p>
+                <h4 class="font-bold text-xl text-white uppercase italic tracking-tighter">Forecast Neural</h4>
+                <p class="text-sm text-slate-500 leading-relaxed font-light">
+                    Arquitetura NHITS integrada para previsões de horizonte curto baseadas no estado metaestável do sistema económico.
+                </p>
             </div>
         </div>
     </section>
 
-    <!-- Footer -->
+    <!-- Rodapé -->
     <footer class="py-24 border-t border-white/5 text-center">
         <div class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-start gap-12">
             <div class="text-left">
@@ -262,20 +369,20 @@
                     <i data-lucide="trending-up" class="text-indigo-500"></i>
                     <span class="font-black text-2xl tracking-tighter italic">MARKET-QWAN</span>
                 </div>
-                <p class="text-slate-500 text-sm max-w-sm leading-relaxed font-light">
-                    Plataforma de Criticidade Econômica. Algoritmos de Meta-Estabilidade, Econofísica e Machine Learning Institucional.
+                <p class="text-slate-500 text-sm max-w-sm leading-relaxed font-light text-justify">
+                    Plataforma de Criticidade Económica. Algoritmos de Metaestabilidade, Econofísica e Machine Learning Institucional integrados para alocação robusta.
                 </p>
             </div>
             
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 w-full md:w-auto">
                 <div class="text-left">
-                    <h5 class="text-white font-bold text-[10px] uppercase mb-4 tracking-[0.2em] opacity-50">Pipeline & Modelo</h5>
+                    <h5 class="text-white font-bold text-[10px] uppercase mb-4 tracking-[0.2em] opacity-50 underline">Pipeline & Modelo</h5>
                     <a href="https://github.com/goldenluke/qwan_zero_pipeline" target="_blank" class="bg-white/5 border border-white/10 px-6 py-4 rounded-2xl font-bold flex items-center gap-3 hover:bg-white/10 transition">
                         <i data-lucide="cpu" class="text-indigo-400"></i> GITHUB MODELO
                     </a>
                 </div>
                 <div class="text-left">
-                    <h5 class="text-white font-bold text-[10px] uppercase mb-4 tracking-[0.2em] opacity-50">Dashboard & App</h5>
+                    <h5 class="text-white font-bold text-[10px] uppercase mb-4 tracking-[0.2em] opacity-50 underline">Dashboard & App</h5>
                     <a href="https://github.com/goldenluke/market-qwan" target="_blank" class="bg-white text-black px-6 py-4 rounded-2xl font-bold flex items-center gap-3 hover:bg-slate-200 transition">
                         <i data-lucide="layout" class="text-emerald-600"></i> GITHUB DASHBOARD
                     </a>
@@ -283,15 +390,15 @@
             </div>
         </div>
         <div class="mt-24 text-[10px] text-slate-700 uppercase tracking-[0.6em] font-bold">
-            Complex Systems Research • v5.4.0 Mathematical Build • LaTeX Enabled
+            Complex Systems Research • v5.6.0 Stable Build • Real UI Screenshots
         </div>
     </footer>
 
     <script>
-        // Initialize icons
+        // Inicializar ícones
         lucide.createIcons();
 
-        // Smooth scrolling logic
+        // Lógica de scroll suave
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 const targetId = this.getAttribute('href');
