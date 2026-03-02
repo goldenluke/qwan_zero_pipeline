@@ -46,6 +46,10 @@
             background-size: 32px 32px;
         }
 
+        .health-glow {
+            box-shadow: 0 0 50px rgba(6, 182, 212, 0.1);
+        }
+
         .section-divider {
             height: 1px;
             background: linear-gradient(to right, transparent, rgba(6, 182, 212, 0.1), transparent);
@@ -120,7 +124,7 @@
                 <a href="#stack" class="hover:text-white transition">Arquitetura</a>
                 <a href="#math" class="hover:text-white transition text-cyan-400">Modelos Matemática</a>
                 <a href="#features" class="hover:text-white transition">Catálogo Features</a>
-                <a href="#fazenda" class="hover:text-white transition text-amber-400">Modelo Fazenda</a>
+                <a href="#fazenda" class="hover:text-white transition text-amber-400 font-black">Modelo Fazenda</a>
                 <a href="#governance" class="hover:text-white transition text-rose-500">Governança</a>
             </div>
             <div class="flex gap-3">
@@ -144,8 +148,7 @@
             <p class="text-xl md:text-2xl text-slate-400 max-w-4xl mx-auto mb-12 leading-relaxed font-light">
                 O <b>LabSUS</b> operacionaliza um <b>Padrão de Projeto Estatal</b> agnóstico. Uma infraestrutura full-stack que orquestra <b>aproximadamente 40 modelos matemáticos</b> para transformar o caos dos dados brutos em decisões acionáveis.
             </p>
-            <!-- Autor -->
-            <div class="flex items-center justify-center gap-2 text-cyan-500/80 font-mono text-sm tracking-widest uppercase mb-12 border-y border-white/5 py-2 inline-flex mx-auto">
+            <div class="flex items-center justify-center gap-2 text-cyan-500/80 font-mono text-sm tracking-widest uppercase mb-12 border-y border-white/5 py-2 inline-flex mx-auto text-center">
                 <i data-lucide="user" class="w-4 h-4"></i>
                 Autor: <span class="font-bold text-cyan-400">Lucas Amaral Dourado</span>
             </div>
@@ -283,13 +286,13 @@
                 <p class="text-slate-400 leading-relaxed font-light mb-8 text-justify italic">
                     A transposição do motor analítico permite processar fluxos fiscais com o mesmo rigor. Substituímos variáveis epidemiológicas por métricas tributárias, mantendo a integridade matemática da arquitetura full-stack.
                 </p>
-                <div class="math-box bg-amber-500/5 border-amber-500/10">
-                    <h5 class="text-xs font-bold text-amber-400 uppercase mb-4 tracking-widest text-center">Exemplo: Yield Tributário Municipal</h5>
+                <div class="math-box bg-amber-500/5 border-amber-500/10 text-center">
+                    <h5 class="text-xs font-bold text-amber-400 uppercase mb-4 tracking-widest">Exemplo: Yield Tributário Municipal</h5>
                     $$\text{Tax\_Yield}_{mun} = \frac{\text{Arrecadação}_{real}}{\widehat{\text{Base\_Tributável}}_{spline}}$$
                 </div>
             </div>
             <div class="glass p-10 rounded-[3rem] border-white/5">
-                <h4 class="text-sm font-bold text-white uppercase mb-6">Equivalência Funcional (SUS ↔ Fazenda)</h4>
+                <h4 class="text-sm font-bold text-white uppercase mb-6 text-center">Equivalência Funcional (SUS ↔ Fazenda)</h4>
                 <div class="space-y-4">
                     <div class="flex justify-between items-center text-[10px] border-b border-white/5 pb-3">
                         <span class="text-cyan-400 font-mono">Survival analysis</span>
@@ -325,8 +328,8 @@
         <div class="grid lg:grid-cols-2 gap-12">
             <!-- Ambiente de P&D -->
             <div class="glass p-10 rounded-[3rem] border-amber-500/20 bg-amber-500/5 relative overflow-hidden">
-                <div class="absolute top-0 right-0 p-6 opacity-10 rotate-12">
-                    <i data-lucide="flask-conical" class="w-32 h-32 text-amber-500"></i>
+                <div class="absolute top-0 right-0 p-6 opacity-10 rotate-12 text-amber-500">
+                    <i data-lucide="flask-conical" class="w-32 h-32"></i>
                 </div>
                 <h3 class="text-2xl font-bold text-white mb-4 italic uppercase tracking-tight">1. Ambiente de Pesquisa (P&D)</h3>
                 <p class="text-sm text-slate-400 mb-8 leading-relaxed font-light">
@@ -340,8 +343,8 @@
 
             <!-- Ambiente de Produção -->
             <div class="glass p-10 rounded-[3rem] border-cyan-500/20 bg-cyan-500/5 relative overflow-hidden">
-                <div class="absolute top-0 right-0 p-6 opacity-10 -rotate-12">
-                    <i data-lucide="shield-check" class="w-32 h-32 text-cyan-500"></i>
+                <div class="absolute top-0 right-0 p-6 opacity-10 -rotate-12 text-cyan-500">
+                    <i data-lucide="shield-check" class="w-32 h-32"></i>
                 </div>
                 <h3 class="text-2xl font-bold text-white mb-4 italic uppercase tracking-tight">2. Ambiente de Produção</h3>
                 <p class="text-sm text-slate-400 mb-8 leading-relaxed font-light">
@@ -378,21 +381,24 @@
     </section>
 
     <!-- Rodapé -->
-    <footer class="py-24 border-t border-white/5 text-center">
+    <footer class="py-24 border-t border-white/5 text-center bg-slate-950/50">
         <div class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-12 text-left">
-            <div class="space-y-4">
+            <div class="space-y-4 max-w-2xl">
                 <div class="flex items-center gap-2">
                     <i data-lucide="activity" class="text-cyan-500"></i>
                     <span class="font-black text-2xl tracking-tighter italic uppercase">LabSUS Project</span>
                 </div>
-                <div class="text-slate-400 font-mono text-[10px] uppercase tracking-widest">
-                    Liderança Técnica: <span class="text-cyan-400 font-bold">Lucas Amaral Dourado</span>
+                <div class="text-slate-300 font-semibold text-xs uppercase tracking-widest border-l-2 border-cyan-500 pl-4 py-1">
+                    Liderança Técnica e Arquitetura: <span class="text-cyan-400 font-bold">Lucas Amaral Dourado</span>
                 </div>
-                <p class="text-slate-500 text-sm max-w-sm leading-relaxed font-light italic text-justify">
-                    Tecnologia e Matemática Aplicada para a soberania digital e eficiência da gestão pública brasileira. Aproximadamente 40 modelos especializados integrados.
+                <p class="text-slate-400 text-[11px] leading-relaxed font-medium italic">
+                    Pesquisador em Epidemiologia Computacional e Pesquisador Independente em Física Estatística Computacional | Desenvolvedor Python e Javascript | Engenharia de Dados em Saúde | Criador do LabSUS.
+                </p>
+                <p class="text-slate-500 text-[10px] leading-relaxed">
+                    Framework estatal agnóstico para inteligência baseada em dados. Soberania digital e eficiência na gestão pública brasileira. Aproximadamente 40 modelos especializados integrados.
                 </p>
             </div>
-            <div class="mt-2 text-[10px] text-slate-700 uppercase tracking-[0.4em] font-bold">
+            <div class="mt-2 text-[10px] text-slate-700 uppercase tracking-[0.4em] font-bold self-start md:self-center">
                 Python • React • Scikit-Learn • Stats • Open Source
             </div>
         </div>
