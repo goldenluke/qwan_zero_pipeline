@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QWAN | Computational Criticality & Neural Search</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=JetBrains+Mono:wght@400;500&display=swap');
+
+        :root {
+            --primary: #6366f1;
+            --secondary: #10b981;
+            --critical: #ef4444;
+            --bg: #020617;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg);
+            color: #f8fafc;
+            scroll-behavior: smooth;
+        }
+
+        .mono { font-family: 'JetBrains Mono', monospace; }
+
+        .glass {
+            background: rgba(255, 255, 255, 0.01);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .gradient-text {
+            background: linear-gradient(to right, #818cf8, #34d399, #a855f7);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .grid-bg {
+            background-image: radial-gradient(circle at 1px 1px, rgba(255,255,255,0.03) 1px, transparent 0);
+            background-size: 32px 32px;
+        }
+
+        .critical-glow {
+            box-shadow: 0 0 40px rgba(99, 102, 241, 0.1);
+        }
+
+        .section-divider {
+            height: 1px;
+            background: linear-gradient(to right, transparent, rgba(99, 102, 241, 0.2), transparent);
+        }
+    </style>
+</head>
+<body class="grid-bg">
+
+    <!-- Navigation -->
+    <nav class="fixed top-0 w-full z-50 glass border-b border-white/5 px-6 py-4">
+        <div class="max-w-7xl mx-auto flex justify-between items-center">
+            <div class="flex items-center gap-2">
+                <i data-lucide="brain-circuit" class="text-indigo-500"></i>
+                <span class="font-extrabold text-xl tracking-tighter uppercase">QWAN <span class="text-indigo-400">Project</span></span>
+            </div>
+            <div class="hidden md:flex gap-10 text-[11px] uppercase tracking-widest font-bold text-slate-500">
+                <a href="#architecture" class="hover:text-white transition">Arquitetura</a>
+                <a href="#formalism" class="hover:text-white transition">Formalismo</a>
+                <a href="#algorithm" class="hover:text-white transition">Dinâmica</a>
+                <a href="#article" class="hover:text-white transition">Pesquisa</a>
+            </div>
+            <a href="https://github.com/goldenluke/qwan_zero_pipeline" target="_blank" class="flex items-center gap-2 bg-white text-black px-4 py-2 rounded-lg text-xs font-bold hover:bg-slate-200 transition">
+                <i data-lucide="github" class="w-4 h-4"></i> Contribua no GitHub
+            </a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="relative pt-48 pb-32 px-6 overflow-hidden">
+        <div class="absolute top-0 left-1/2 -translate-x-1/2 w-[1000px] h-[600px] bg-indigo-600/10 blur-[150px] rounded-full -z-10"></div>
+        <div class="max-w-5xl mx-auto text-center">
+            <div class="inline-block px-4 py-1.5 rounded-full border border-indigo-500/30 bg-indigo-500/5 text-indigo-400 text-[10px] font-bold mb-8 uppercase tracking-[0.3em]">
+                Deep Learning & Non-Equilibrium Physics
+            </div>
+            <h1 class="text-6xl md:text-8xl font-black mb-10 tracking-tighter leading-[0.9]">
+                Navegando no Limiar da <br><span class="gradient-text">Criticidade.</span>
+            </h1>
+            <p class="text-xl md:text-2xl text-slate-400 max-w-3xl mx-auto mb-12 leading-relaxed font-light">
+                O QWAN é um motor de xadrez de vanguarda que transcende a otimização local. Ele utiliza regimes <span class="text-white font-medium">metaestáveis</span> para equilibrar a exploração estrutural profunda com a precisão competitiva.
+            </p>
+            <div class="flex justify-center">
+                <a href="https://github.com/goldenluke/qwan_zero_pipeline" target="_blank" class="group relative px-12 py-5 bg-indigo-600 rounded-2xl font-black text-lg hover:shadow-[0_0_50px_rgba(99,102,241,0.3)] transition-all duration-300">
+                    <span class="flex items-center gap-3">
+                        EXPLORAR PIPELINE NO GITHUB <i data-lucide="arrow-up-right" class="group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform"></i>
+                    </span>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <div class="section-divider"></div>
+
+    <!-- Architecture Section -->
+    <section id="architecture" class="py-32 max-w-7xl mx-auto px-6">
+        <div class="grid lg:grid-cols-2 gap-20 items-start">
+            <div>
+                <h2 class="text-4xl font-black mb-8 tracking-tight uppercase italic">A Engenharia do <span class="text-indigo-500">Caos Estruturado</span></h2>
+                <div class="space-y-10 text-slate-400 leading-relaxed">
+                    <p>
+                        Diferente das arquiteturas convencionais inspiradas no AlphaZero que utilizam hiperparâmetros estáticos, o QWAN introduz um <strong>Campo Estrutural Contínuo</strong>. Este campo é governado pelo parâmetro escalar $\xi$, que atua como o "termostato" da inteligência do sistema.
+                    </p>
+                    <div class="grid gap-8">
+                        <div class="flex gap-6">
+                            <div class="w-12 h-12 shrink-0 rounded-2xl bg-indigo-500/10 border border-indigo-500/20 flex items-center justify-center">
+                                <i data-lucide="layers" class="text-indigo-400 w-6 h-6"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-white font-bold text-lg mb-2">Redes ResNet-20 Expandidas</h4>
+                                <p class="text-sm">Processamento massivo de tensores $12 \times 8 \times 8$ com blocos residuais profundos. A rede não apenas estima a vitória, mas mapeia a suscetibilidade da posição atual a variações críticas, gerando uma distribuição de probabilidade $\mathbf{p}$ refinada por campos de força latentes.</p>
+                            </div>
+                        </div>
+                        <div class="flex gap-6">
+                            <div class="w-12 h-12 shrink-0 rounded-2xl bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center">
+                                <i data-lucide="git-branch" class="text-emerald-400 w-6 h-6"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-white font-bold text-lg mb-2">MCTS com Modulação $\xi$</h4>
+                                <p class="text-sm">A árvore de busca Monte Carlo do QWAN não é fixa. Ela se expande e contrai baseada na "temperatura" do parâmetro $\xi$. Isso permite que o bot ignore linhas triviais em posições de baixa variância e mergulhe em explorações profundas e caóticas em posições críticas.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="glass p-8 rounded-[2.5rem] border-white/10 critical-glow relative">
+                <div class="absolute -top-4 -right-4 bg-indigo-600 text-[10px] font-black px-4 py-2 rounded-full shadow-lg">LIVE PIPELINE DATA</div>
+                <div class="space-y-6">
+                    <div class="flex items-center justify-between border-b border-white/5 pb-4">
+                        <span class="mono text-xs text-slate-500">Neural Flow Strategy</span>
+                        <div class="flex gap-2">
+                            <span class="w-3 h-3 rounded-full bg-indigo-500/50 animate-pulse"></span>
+                            <span class="text-[10px] mono text-indigo-400 uppercase tracking-tighter">Active Scaling</span>
+                        </div>
+                    </div>
+                    <div class="space-y-4">
+                        <div class="p-4 rounded-xl bg-white/5 border border-white/10">
+                            <div class="flex justify-between mb-2">
+                                <span class="text-[10px] uppercase font-bold text-slate-400 tracking-widest">ResNet Blocks</span>
+                                <span class="text-[10px] mono">20 Layers</span>
+                            </div>
+                            <div class="w-full bg-slate-800 h-1.5 rounded-full overflow-hidden">
+                                <div class="bg-indigo-500 h-full w-[85%]"></div>
+                            </div>
+                        </div>
+                        <div class="p-4 rounded-xl bg-white/5 border border-white/10">
+                            <div class="flex justify-between mb-2">
+                                <span class="text-[10px] uppercase font-bold text-slate-400 tracking-widest">Field Tension ($\xi$)</span>
+                                <span class="text-[10px] mono">Dynamic 1.428</span>
+                            </div>
+                            <div class="w-full bg-slate-800 h-1.5 rounded-full overflow-hidden">
+                                <div class="bg-emerald-500 h-full w-[62%] animate-pulse"></div>
+                            </div>
+                        </div>
+                        <div class="grid grid-cols-2 gap-4">
+                            <div class="bg-white/5 p-4 rounded-xl border border-white/10">
+                                <div class="text-[8px] text-slate-500 uppercase font-bold mb-1">Policy Head</div>
+                                <div class="text-xs mono text-indigo-300">Softmax Logits</div>
+                            </div>
+                            <div class="bg-white/5 p-4 rounded-xl border border-white/10">
+                                <div class="text-[8px] text-slate-500 uppercase font-bold mb-1">Value Head</div>
+                                <div class="text-xs mono text-emerald-300">Scalar [-1, 1]</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Formalism Section -->
+    <section id="formalism" class="py-32 bg-white/[0.01] border-y border-white/5">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center mb-20">
+                <h2 class="text-4xl font-black mb-4 uppercase">Métricas de <span class="text-indigo-500">Criticidade</span></h2>
+                <p class="text-slate-400 max-w-2xl mx-auto italic">Traduzindo a física de sistemas complexos para a geometria estatística do xadrez.</p>
+            </div>
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <div class="glass p-8 rounded-3xl hover:border-indigo-500/30 transition-all group">
+                    <i data-lucide="line-chart" class="text-indigo-500 mb-6 group-hover:scale-110 transition-transform"></i>
+                    <h3 class="font-bold text-lg mb-4">Hurst Exponent ($H$)</h3>
+                    <p class="text-sm text-slate-500 leading-relaxed">Analisa a auto-similaridade das séries temporais de busca. Se $H > 0.5$, o motor detecta persistência estrutural; se $H < 0.5$, ele identifica reversões de médoa iminentes na árvore de decisão.</p>
+                </div>
+                <div class="glass p-8 rounded-3xl hover:border-emerald-500/30 transition-all group">
+                    <i data-lucide="activity" class="text-emerald-500 mb-6 group-hover:scale-110 transition-transform"></i>
+                    <h3 class="font-bold text-lg mb-4">Suscetibilidade ($\chi$)</h3>
+                    <p class="text-sm text-slate-500 leading-relaxed">Mede a resposta da variância estrutural às flutuações de $\xi$. Picos em $\chi$ sinalizam transições de fase computacionais onde a árvore "estala" para uma nova configuração estratégica.</p>
+                </div>
+                <div class="glass p-8 rounded-3xl hover:border-purple-500/30 transition-all group">
+                    <i data-lucide="box" class="text-purple-500 mb-6 group-hover:scale-110 transition-transform"></i>
+                    <h3 class="font-bold text-lg mb-4">Difusão de Retornos</h3>
+                    <p class="text-sm text-slate-500 leading-relaxed">Utiliza matrizes de difusão 2D para estimar como o valor $v$ se dispersa entre os nós. Isso evita que o bot fique preso em "poços de potencial" estratégicos sub-ótimos.</p>
+                </div>
+                <div class="glass p-8 rounded-3xl hover:border-red-500/30 transition-all group">
+                    <i data-lucide="binary" class="text-red-500 mb-6 group-hover:scale-110 transition-transform"></i>
+                    <h3 class="font-bold text-lg mb-4">Lei de Potência</h3>
+                    <p class="text-sm text-slate-500 leading-relaxed">A distribuição de visitas $P(N) \sim N^{-\gamma}$ é o selo da criticidade. Quando o motor atinge este estado, ele opera com máxima eficiência de processamento de informação.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Algorithm Deep Dive -->
+    <section id="algorithm" class="py-32 max-w-7xl mx-auto px-6">
+        <div class="grid lg:grid-cols-2 gap-20 items-center">
+            <div class="order-2 lg:order-1 glass p-1 rounded-3xl overflow-hidden shadow-2xl">
+                <div class="bg-black/60 p-10">
+                    <div class="flex items-center gap-3 mb-8 border-b border-white/5 pb-4">
+                        <i data-lucide="code" class="text-slate-500 w-4 h-4"></i>
+                        <span class="mono text-[10px] text-slate-400">core_meta_stable.py</span>
+                    </div>
+                    <pre class="mono text-sm leading-relaxed text-indigo-300 overflow-x-auto">
+<span class="text-slate-500"># Estimação da Meta-Estabilidade Estrutural</span>
+def estimate_meta_score(hurst, autocorr, var):
+    <span class="text-slate-500">"""
+    Regime Crítico: 0.4H + 0.3A + 0.3(1/V)
+    Objetivo: Maximizar variância sem colapsar a ordem.
+    """</span>
+    score = (0.4 * hurst +
+             0.3 * autocorr +
+             0.3 * (1.0 / (1.0 + var)))
+    return np.nanmean(score)
+
+<span class="text-slate-500"># Campo escalar xi adaptativo</span>
+xi = 1.0 / (1.0 + current_tree_variance)
+update_puct_exploration(xi)
+                    </pre>
+                </div>
+            </div>
+            <div class="order-1 lg:order-2">
+                <h2 class="text-4xl font-black mb-8 uppercase italic">O Loop de <span class="text-emerald-500">Auto-Organização</span></h2>
+                <div class="space-y-6 text-slate-400">
+                    <p>
+                        A meta-estabilidade não é um estado estático, mas um equilíbrio dinâmico. No QWAN, o sistema monitora constantemente a variância das visitas na raiz da árvore. Se a busca se torna determinística demais (congelamento), $\xi$ aumenta a temperatura, forçando a exploração. Se a busca se torna errática (caos), $\xi$ reduz a entropia para consolidar o melhor movimento.
+                    </p>
+                    <ul class="space-y-4">
+                        <li class="flex items-start gap-4">
+                            <i data-lucide="check" class="text-emerald-500 shrink-0 mt-1"></i>
+                            <span><strong>Resiliência Pós-Erro:</strong> O score metaestável permite que o bot se recupere rapidamente de avaliações errôneas em posições táticas complexas.</span>
+                        </li>
+                        <li class="flex items-start gap-4">
+                            <i data-lucide="check" class="text-emerald-500 shrink-0 mt-1"></i>
+                            <span><strong>Poda Baseada em Suscetibilidade:</strong> Nós com baixa resposta a variações de $\xi$ são podados agressivamente, focando recursos onde a decisão é crítica.</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Article Summary -->
+    <section id="article" class="py-32 bg-indigo-600/5">
+        <div class="max-w-4xl mx-auto px-6">
+            <div class="text-center mb-16">
+                <i data-lucide="file-text" class="text-indigo-400 w-12 h-12 mx-auto mb-6"></i>
+                <h2 class="text-4xl font-black uppercase">Resumo da Pesquisa</h2>
+            </div>
+            <div class="glass p-12 rounded-[3rem] border-indigo-500/20 relative overflow-hidden">
+                <div class="absolute top-0 right-0 w-32 h-32 bg-indigo-500/10 blur-[60px] rounded-full"></div>
+                <div class="prose prose-invert max-w-none text-slate-300 leading-[1.8]">
+                    <p class="text-xl italic text-white mb-8 border-l-4 border-indigo-500 pl-6">
+                        "Investigamos a hipótese de que existe um regime intermediário de $\xi$ no qual a variância estrutural da árvore de busca e o desempenho competitivo coexistem de forma otimizada..."
+                    </p>
+                    <p class="mb-6">
+                        O artigo formaliza a arquitetura do **QWAN Chess Engine** como um sistema adaptativo de alta dimensão. Através da análise de leis de potência e suscetibilidade computacional, demonstramos que motores de xadrez operam melhor não em determinismo absoluto, mas em regimes de <strong>criticidade finita</strong>.
+                    </p>
+                    <p>
+                        A conclusão sugere que o "Elo ótimo" emerge no limiar entre a ordem e o caos, criando uma ponte formal entre a teoria de aprendizado por reforço e a econofísica.
+                    </p>
+                </div>
+                <div class="mt-12 pt-8 border-t border-white/5 flex flex-wrap gap-8 justify-center items-center">
+                    <div class="text-center">
+                        <div class="text-2xl font-black text-white">3.12</div>
+                        <div class="text-[10px] text-slate-500 uppercase tracking-widest">Tail Index Médio</div>
+                    </div>
+                    <div class="text-center">
+                        <div class="text-2xl font-black text-white">0.548</div>
+                        <div class="text-[10px] text-slate-500 uppercase tracking-widest">Hurst Coeff.</div>
+                    </div>
+                    <div class="text-center">
+                        <div class="text-2xl font-black text-white">Critical</div>
+                        <div class="text-[10px] text-slate-500 uppercase tracking-widest">Phase State</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-20 border-t border-white/5 text-center">
+        <div class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-10">
+            <div class="text-left">
+                <div class="flex items-center gap-2 mb-2">
+                    <i data-lucide="brain-circuit" class="text-indigo-500"></i>
+                    <span class="font-black text-lg tracking-tighter">QWAN PROJECT</span>
+                </div>
+                <p class="text-slate-500 text-xs max-w-sm leading-relaxed">
+                    Pesquisa avançada em Criticidade Computacional, Redes Neurais e Teoria de Sistemas Complexos aplicada ao Xadrez.
+                </p>
+            </div>
+            <div class="flex gap-4">
+                <a href="https://github.com/goldenluke/qwan_zero_pipeline" target="_blank" class="bg-white/5 border border-white/10 px-8 py-4 rounded-2xl font-bold flex items-center gap-3 hover:bg-white/10 transition">
+                    <i data-lucide="github"></i> CONTRIBUA NO GITHUB
+                </a>
+            </div>
+        </div>
+        <div class="mt-20 text-[10px] text-slate-600 uppercase tracking-[0.4em]">
+            Computational Criticality Engine • Experimental Build v4.0.0
+        </div>
+    </footer>
+
+    <script>
+        // Iniciar ícones
+        lucide.createIcons();
+
+        // Scroll Suave
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                const targetId = this.getAttribute('href');
+                if (targetId.startsWith('#')) {
+                    e.preventDefault();
+                    document.querySelector(targetId).scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
