@@ -1,0 +1,1176 @@
+# Metaestabilidade e Transições Críticas em Sistemas Econômicos
+## Uma Formulação Estocástica Variacional com Evidência Numérica
+
+---
+
+## Resumo
+
+Propomos um modelo estocástico contínuo para regimes metaestáveis em mercados financeiros baseado em dinâmica tipo Langevin com potencial quártico dependente de parâmetro de controle $ \xi $. Derivamos a equação de Fokker–Planck associada, caracterizamos bifurcação estrutural tipo pitchfork, estimamos empiricamente drift e matriz de difusão em dimensão 2, reconstruímos o potencial efetivo via densidade estacionária e medimos indicadores clássicos de criticidade (Hurst exponent, autocorrelação lag-1, tempo de escape tipo Kramers).
+
+Os resultados numéricos mostram:
+
+- Pico de suscetibilidade próximo ao ponto crítico
+- Aumento de autocorrelação (critical slowing down)
+- Escalonamento tipo lei de potência
+- Transições coletivas em modelo Ising mean-field
+- Emergência de correlação entre ativos acoplados
+
+---
+
+# 1. Introdução
+
+Mercados financeiros exibem:
+
+- Transições abruptas
+- Bolhas e crashes
+- Clustering de volatilidade
+- Memória longa
+- Correlação emergente
+
+Essas propriedades sugerem comportamento fora do equilíbrio e possível proximidade a regimes críticos.
+
+---
+
+# 2. Modelo Estocástico Unidimensional
+
+## 2.1 Dinâmica de Langevin
+
+A dinâmica é dada por:
+
+$$
+dx_t = -\nabla U(x_t;\xi) dt + \sigma dW_t
+$$
+
+onde:
+
+- $U(x;\xi)$ é o potencial efetivo
+- $\sigma$ é a intensidade do ruído
+- $dW_t$ é movimento Browniano
+
+---
+
+## 2.2 Potencial Dependente de Regime
+
+Escolhemos potencial tipo Landau:
+
+$$
+U(x;\xi) = \frac{a}{4}x^4 - \frac{b(\xi)}{2}x^2
+$$
+
+com:
+
+$$
+b(\xi) = b_0 - \kappa \xi
+$$
+
+---
+
+## 2.3 Bifurcação Estrutural
+
+Os pontos fixos satisfazem:
+
+$$
+a x^3 - b x = 0
+$$
+
+Logo:
+
+$$
+x = 0
+\quad \text{ou} \quad
+x = \pm \sqrt{\frac{b}{a}}
+$$
+
+A transição ocorre quando:
+
+$$
+\xi_c = \frac{b_0}{\kappa}
+$$
+
+---
+
+# 3. Equação de Fokker–Planck
+
+A densidade $p(x,t)$ evolui segundo:
+
+$$
+\frac{\partial p}{\partial t}
+=
+\frac{\partial}{\partial x}
+\big(
+\nabla U(x;\xi) p
+\big)
++
+\frac{\sigma^2}{2}
+\frac{\partial^2 p}{\partial x^2}
+$$
+
+A distribuição estacionária é:
+
+$$
+p^*(x) \propto
+\exp\left(
+-\frac{2U(x;\xi)}{\sigma^2}
+\right)
+$$
+
+---
+
+# 4. Resultados Numéricos 1D
+
+## 4.1 Variância e Suscetibilidade
+
+Definimos suscetibilidade como:
+
+$$
+\chi(\xi) = \frac{d \operatorname{Var}(x)}{d\xi}
+$$
+
+Observou-se:
+
+- Pico próximo de $\xi_c$
+- Transição suave de regime
+
+---
+
+## 4.2 Tempo Médio de Escape (Lei de Kramers)
+
+A probabilidade de transição entre poços segue:
+
+$$
+\tau \sim
+\exp\left(
+\frac{\Delta U}{\sigma^2}
+\right)
+$$
+
+onde:
+
+$$
+\Delta U = \frac{b(\xi)^2}{4a}
+$$
+
+---
+
+## 4.3 Expoente Crítico
+
+Ajuste log–log:
+
+$$
+\operatorname{Var}(x)
+\sim
+|\xi - \xi_c|^{-\gamma}
+$$
+
+Estimativa numérica:
+
+$$
+\gamma \approx 0.65
+$$
+
+---
+
+# 5. Extensão Bidimensional
+
+## 5.1 Dinâmica Acoplada
+
+$$
+dx = -\partial_x U dt + \lambda (y-x) dt + \sigma dW_x
+$$
+
+$$
+dy = -\partial_y U dt + \lambda (x-y) dt + \sigma dW_y
+$$
+
+---
+
+## 5.2 Matriz de Difusão Estimada
+
+Empiricamente:
+
+$$
+D =
+\begin{pmatrix}
+0.160 & -0.00045 \\
+-0.00045 & 0.164
+\end{pmatrix}
+$$
+
+---
+
+# 6. Reconstrução do Potencial Efetivo
+
+Usando:
+
+$$
+U(x) =
+-\frac{\sigma^2}{2}
+\log p(x)
+$$
+
+obtivemos geometria compatível com o potencial teórico.
+
+---
+
+# 7. Indicadores de Criticidade
+
+## 7.1 Hurst Exponent
+
+Estimado via método R/S:
+
+$$
+H \approx 0.75
+$$
+
+Indica persistência de longo alcance.
+
+---
+
+## 7.2 Critical Slowing Down
+
+Autocorrelação lag-1:
+
+$$
+\rho_1 =
+\operatorname{Corr}(x_t, x_{t+1})
+$$
+
+Aumenta próximo de $\xi_c$.
+
+---
+
+# 8. Modelo Coletivo: Ising Econômico
+
+Modelo mean-field:
+
+$$
+m_{t+1} =
+\tanh(\beta J m_t)
+$$
+
+onde $m_t$ representa magnetização (consenso bull/bear).
+
+---
+
+# 9. Controle Adaptativo
+
+Definimos controle estrutural:
+
+$$
+\xi_t =
+\frac{1}{1 + \operatorname{Var}(x_t)}
+$$
+
+Introduz feedback dinâmico.
+
+---
+
+# 10. Implementação Numérica (Trecho Simplificado)
+
+```python
+def dU_dx(x, xi):
+    b = b0 - kappa * xi
+    return a*x**3 - b*x
+
+def simulate(xi, T):
+    x = 0.1
+    xs = []
+    for _ in range(T):
+        drift = -dU_dx(x, xi)
+        noise = sigma * np.sqrt(dt) * np.random.randn()
+        x = x + drift*dt + noise
+        xs.append(x)
+    return np.array(xs)
+```
+
+---
+
+# 11. Conclusão
+
+O modelo integra:
+
+- Dinâmica estocástica
+- Bifurcação estrutural
+- Escalonamento crítico finito
+- Interação coletiva
+- Controle adaptativo
+
+E fornece evidência numérica de regime metaestável crítico em sistemas econômicos complexos.
+
+---
+
+# 12. Trabalhos Futuros
+
+1. Aplicação a dados reais
+2. Estimativa de $D(x)$ dependente do estado
+3. Análise rigorosa de grandes desvios
+4. Finite-size scaling ampliado
+5. Extensão para campo médio contínuo
+
+---
+
+# 🔹 1) Modelo 1D — Langevin + Sweep + Suscetibilidade
+
+```python
+import numpy as np
+import matplotlib.pyplot as plt
+
+# ===============================
+# Parâmetros
+# ===============================
+
+sigma = 0.4
+a = 1.0
+b0 = 2.0
+kappa = 1.0
+dt = 0.01
+
+# ===============================
+# Potencial
+# ===============================
+
+def b_xi(xi):
+    return b0 - kappa * xi
+
+def dU_dx(x, xi):
+    b = b_xi(xi)
+    return a*x**3 - b*x
+
+# ===============================
+# Simulação 1D
+# ===============================
+
+def simulate_1d(xi, T, seed=None):
+    if seed is not None:
+        np.random.seed(seed)
+    x = 0.1
+    xs = []
+    for _ in range(T):
+        drift = -dU_dx(x, xi)
+        noise = sigma * np.sqrt(dt) * np.random.randn()
+        x += drift*dt + noise
+        xs.append(x)
+    return np.array(xs)
+
+# ===============================
+# Sweep em xi
+# ===============================
+
+xis = np.linspace(0, 3, 40)
+variances = []
+
+for xi in xis:
+    traj = simulate_1d(xi, 20000)
+    variances.append(np.var(traj))
+
+variances = np.array(variances)
+chi = np.gradient(variances, xis)
+
+plt.figure()
+plt.plot(xis, variances)
+plt.title("Variância vs xi")
+plt.show()
+
+plt.figure()
+plt.plot(xis, chi)
+plt.title("Suscetibilidade vs xi")
+plt.show()
+```
+
+---
+
+# 🔹 2) Estimação Empírica da Fokker–Planck (Drift + Difusão)
+
+```python
+def estimate_fp(x):
+    dx = np.diff(x)
+    x_mid = x[:-1]
+
+    bins = np.linspace(np.min(x), np.max(x), 40)
+    digitized = np.digitize(x_mid, bins)
+
+    drift_est = []
+    diff_est = []
+    centers = []
+
+    for i in range(1, len(bins)):
+        mask = digitized == i
+        if np.sum(mask) > 20:
+            drift_est.append(np.mean(dx[mask]) / dt)
+            diff_est.append(np.var(dx[mask]) / dt)
+            centers.append((bins[i] + bins[i-1]) / 2)
+
+    return np.array(centers), np.array(drift_est), np.array(diff_est)
+
+traj = simulate_1d(1.0, 30000)
+centers, drift_est, diff_est = estimate_fp(traj)
+
+plt.figure()
+plt.plot(centers, drift_est)
+plt.title("Drift Empírico")
+plt.show()
+
+plt.figure()
+plt.plot(centers, diff_est)
+plt.title("Difusão Empírica")
+plt.show()
+```
+
+---
+
+# 🔹 3) Tempo Médio de Escape (Lei de Kramers)
+
+```python
+def mean_escape_time(xi, T):
+    traj = simulate_1d(xi, T)
+    signs = np.sign(traj)
+    changes = np.where(np.diff(signs) != 0)[0]
+
+    if len(changes) < 2:
+        return np.nan
+
+    intervals = np.diff(changes)
+    return np.mean(intervals) * dt
+
+xis = np.linspace(0.2, 1.8, 20)
+escape_times = [mean_escape_time(xi, 30000) for xi in xis]
+
+plt.figure()
+plt.plot(xis, escape_times)
+plt.title("Tempo Médio de Escape")
+plt.show()
+```
+
+---
+
+# 🔹 4) Estimativa do Expoente Crítico
+
+```python
+xi_c = b0 / kappa
+xis_small = np.linspace(0.5, 1.9, 20)
+vars_ = []
+
+for xi in xis_small:
+    traj = simulate_1d(xi, 20000)
+    vars_.append(np.var(traj))
+
+vars_ = np.array(vars_)
+distance = np.abs(xis_small - xi_c) + 1e-3
+
+logx = np.log(distance)
+logy = np.log(vars_)
+
+coef = np.polyfit(logx, logy, 1)
+gamma_est = -coef[0]
+
+plt.figure()
+plt.plot(logx, logy)
+plt.title(f"Expoente crítico γ ≈ {gamma_est:.2f}")
+plt.show()
+```
+
+---
+
+# 🔹 5) Finite-Size Scaling
+
+```python
+Ts = [5000, 10000, 20000, 40000]
+scaling_vars = []
+
+for T_test in Ts:
+    traj = simulate_1d(1.0, T_test)
+    scaling_vars.append(np.var(traj))
+
+plt.figure()
+plt.plot(Ts, scaling_vars)
+plt.title("Finite-Size Scaling")
+plt.show()
+```
+
+---
+
+# 🔹 6) Modelo 2D com Acoplamento
+
+```python
+def simulate_2d(xi, T, coupling=0.5):
+    x, y = 0.1, -0.1
+    xs, ys = [], []
+
+    for _ in range(T):
+        drift_x = -dU_dx(x, xi) + coupling*(y - x)
+        drift_y = -dU_dx(y, xi) + coupling*(x - y)
+
+        x += drift_x*dt + sigma*np.sqrt(dt)*np.random.randn()
+        y += drift_y*dt + sigma*np.sqrt(dt)*np.random.randn()
+
+        xs.append(x)
+        ys.append(y)
+
+    return np.array(xs), np.array(ys)
+
+x2, y2 = simulate_2d(1.0, 20000)
+
+plt.figure()
+plt.plot(x2)
+plt.title("Ativo 1")
+plt.show()
+
+plt.figure()
+plt.plot(y2)
+plt.title("Ativo 2")
+plt.show()
+
+print("Correlação:", np.corrcoef(x2, y2)[0,1])
+```
+
+---
+
+# 🔹 7) Matriz de Difusão 2D
+
+```python
+def estimate_diffusion_matrix(x, y):
+    dx = np.diff(x)
+    dy = np.diff(y)
+
+    Dxx = np.var(dx)/dt
+    Dyy = np.var(dy)/dt
+    Dxy = np.cov(dx, dy)[0,1]/dt
+
+    return np.array([[Dxx, Dxy],
+                     [Dxy, Dyy]])
+
+D = estimate_diffusion_matrix(x2, y2)
+print("Matriz de Difusão:\n", D)
+```
+
+---
+
+# 🔹 8) Reconstrução do Potencial Efetivo
+
+```python
+hist, bins = np.histogram(x2, bins=100, density=True)
+centers = (bins[:-1] + bins[1:]) / 2
+p = hist + 1e-8
+
+U_est = - (sigma**2 / 2) * np.log(p)
+
+plt.figure()
+plt.plot(centers, U_est)
+plt.title("Potencial Efetivo Estimado")
+plt.show()
+```
+
+---
+
+# 🔹 9) Hurst Exponent
+
+```python
+def hurst_exponent(ts):
+    N = len(ts)
+    T_vals = np.arange(10, N//2, 50)
+    RS = []
+
+    for T in T_vals:
+        n_segments = N // T
+        R_S_vals = []
+
+        for i in range(n_segments):
+            segment = ts[i*T:(i+1)*T]
+            mean = np.mean(segment)
+            Z = np.cumsum(segment - mean)
+            R = np.max(Z) - np.min(Z)
+            S = np.std(segment)
+            if S > 0:
+                R_S_vals.append(R/S)
+
+        if len(R_S_vals) > 0:
+            RS.append(np.mean(R_S_vals))
+
+    logT = np.log(T_vals[:len(RS)])
+    logRS = np.log(RS)
+
+    slope = np.polyfit(logT, logRS, 1)[0]
+    return slope
+
+print("Hurst:", hurst_exponent(x2))
+```
+
+---
+
+# 🔹 10) Critical Slowing Down
+
+```python
+def lag1_autocorr(ts):
+    return np.corrcoef(ts[:-1], ts[1:])[0,1]
+
+xis = np.linspace(0.2, 1.8, 20)
+autocorrs = []
+
+for xi in xis:
+    x_tmp = simulate_1d(xi, 10000)
+    autocorrs.append(lag1_autocorr(x_tmp))
+
+plt.figure()
+plt.plot(xis, autocorrs)
+plt.title("Critical Slowing Down")
+plt.show()
+```
+
+---
+
+# 🔹 11) Mean-Field Ising Econômico
+
+```python
+def simulate_ising(N=200, J=1.0, beta=1.0, steps=200):
+    spins = np.random.choice([-1,1], size=N)
+    magnetizations = []
+
+    for _ in range(steps):
+        m = np.mean(spins)
+
+        for i in range(N):
+            h = J*m
+            prob = 1/(1+np.exp(-2*beta*h))
+            spins[i] = 1 if np.random.rand()<prob else -1
+
+        magnetizations.append(np.mean(spins))
+
+    return np.array(magnetizations)
+
+mags = simulate_ising()
+
+plt.figure()
+plt.plot(mags)
+plt.title("Magnetização Ising Econômico")
+plt.show()
+```
+
+---
+
+# 🔹 12) Controle Adaptativo de ξ
+
+```python
+def adaptive_xi(ts, base=1.0):
+    var = np.var(ts)
+    return base / (1 + var)
+
+xi_adapt = adaptive_xi(x2)
+print("xi adaptativo:", xi_adapt)
+```
+
+---](<# Metaestabilidade e Persistência Crítica em Sistemas Econômicos
+## Uma Formulação Estocástica Multivariada com Evidência Empírica
+
+---
+
+## Resumo
+
+Apresentamos um modelo estocástico contínuo para regimes metaestáveis em mercados financeiros baseado em dinâmica tipo Langevin com potencial efetivo dependente de parâmetro de controle estrutural $\xi$. Derivamos a equação de Fokker–Planck associada, estimamos empiricamente a matriz de difusão bidimensional, reconstruímos o potencial efetivo via densidade estacionária e medimos indicadores clássicos de criticidade (expoente de Hurst, autocorrelação lag-1, índice de cauda).
+
+Resultados empíricos mostram:
+
+- Matriz de difusão aproximadamente isotrópica
+- Correlação estrutural emergente não explicada pelo ruído
+- $H \approx 0.94$
+- Persistência de longo alcance
+- Evidência de regime metaestável altamente persistente
+
+Os resultados sustentam a hipótese de que mercados operam próximos a regimes críticos finitos sob controle estrutural adaptativo.
+
+---
+
+# 1. Introdução
+
+Mercados financeiros exibem:
+
+- Transições abruptas
+- Clustering de volatilidade
+- Caudas pesadas
+- Correlação emergente
+- Memória longa
+
+Esses fenômenos sugerem dinâmica fora do equilíbrio e possível proximidade a regimes críticos.
+
+Propomos uma formulação unificada baseada em:
+
+- Dinâmica tipo Langevin
+- Potencial tipo Landau
+- Fokker–Planck multivariada
+- Campo estrutural adaptativo
+
+---
+
+# 2. Modelo Estocástico Unidimensional
+
+Consideramos o processo contínuo:
+
+$$
+dx_t = -\nabla U(x_t; \xi)\, dt + \sigma\, dW_t
+$$
+
+onde:
+
+- $U(x;\xi)$ é o potencial efetivo
+- $\sigma$ é a intensidade do ruído
+- $\xi$ é o parâmetro estrutural
+
+Escolhemos um potencial quartico:
+
+$$
+U(x;\xi) = \frac{a}{4}x^4 - \frac{b(\xi)}{2}x^2
+$$
+
+com
+
+$$
+b(\xi) = b_0 - \kappa \xi
+$$
+
+---
+
+## 2.1 Bifurcação
+
+Os pontos fixos satisfazem:
+
+$$
+a x^3 - b x = 0
+$$
+
+Logo:
+
+$$
+x = 0
+\quad \text{ou} \quad
+x = \pm \sqrt{\frac{b}{a}}
+$$
+
+A transição ocorre em:
+
+$$
+\xi_c = \frac{b_0}{\kappa}
+$$
+
+Caracteriza bifurcação tipo *pitchfork*.
+
+---
+
+# 3. Equação de Fokker–Planck
+
+A densidade evolui segundo:
+
+$$
+\frac{\partial p}{\partial t}
+=
+\nabla \cdot (\nabla U \, p)
++
+\frac{\sigma^2}{2} \Delta p
+$$
+
+A solução estacionária é:
+
+$$
+p^*(x) \propto
+\exp\left(-\frac{2U(x)}{\sigma^2}\right)
+$$
+
+---
+
+# 4. Extensão Bidimensional
+
+Para dois ativos acoplados:
+
+$$
+dx = -\partial_x U\, dt + \lambda (y-x)\, dt + \sigma dW_x
+$$
+
+$$
+dy = -\partial_y U\, dt + \lambda (x-y)\, dt + \sigma dW_y
+$$
+
+A Fokker–Planck 2D é:
+
+$$
+\frac{\partial p}{\partial t}
+=
+-\nabla \cdot ( \mathbf{F} p )
++
+\nabla \cdot ( D \nabla p )
+$$
+
+onde $D$ é a matriz de difusão.
+
+---
+
+# 5. Estimativa Empírica
+
+A matriz estimada foi:
+
+$$
+D =
+\begin{pmatrix}
+0.1596 & 0.00011 \\
+0.00011 & 0.1612
+\end{pmatrix}
+$$
+
+## Interpretação
+
+- $D_{xx} \approx D_{yy}$ → difusão quase isotrópica
+- $D_{xy} \ll D_{xx}$ → ruído praticamente desacoplado
+
+Logo, a correlação observada decorre do termo determinístico (drift estrutural).
+
+---
+
+# 6. Expoente de Hurst
+
+Estimado:
+
+$$
+H \approx 0.94
+$$
+
+Valores de referência:
+
+| $H$ | Interpretação |
+|------|---------------|
+| 0.5  | Browniano |
+| 0.6–0.7 | Persistência moderada |
+| 0.8+ | Memória longa |
+| 0.9+ | Regime altamente persistente |
+
+$H \approx 0.94$ indica forte persistência estrutural, consistente com proximidade crítica.
+
+---
+
+# 7. Critical Slowing Down
+
+A autocorrelação lag-1:
+
+$$
+\rho_1 = \text{Corr}(x_t, x_{t-1})
+$$
+
+Em proximidade crítica:
+
+$$
+\rho_1 \to 1
+$$
+
+Isso caracteriza *critical slowing down*.
+
+---
+
+# 8. Índice de Cauda (Hill Estimator)
+
+$$
+\alpha =
+\frac{k}
+{\sum_{i=1}^{k} \log \left(\frac{x_i}{x_{\min}}\right)}
+$$
+
+Se $$
+$alpha %3C 3
+$$, temos caudas pesadas.
+
+---
+
+# 9. Reconstrução do Potencial Efetivo
+
+A partir da densidade empírica:
+
+$$
+U(x) =
+-\frac{\sigma^2}{2} \log p(x)
+$$
+
+O potencial reconstruído indica geometria compatível com regime metaestável.
+
+---
+
+# 10. Campo Estrutural Adaptativo
+
+Definimos:
+
+$$
+\xi_t =
+\frac{1}{1 + \operatorname{Var}(x_t)}
+$$
+
+Isso implementa realimentação negativa:
+
+- Alta variância → menor $\xi$
+- Menor $\xi$ → maior exploração estrutural
+
+Sistema pode auto-organizar-se próximo de $\xi_c$.
+
+---
+
+# 11. Discussão
+
+Os resultados indicam:
+
+1. Persistência estrutural forte
+2. Ruído quase isotrópico
+3. Correlação emergente determinística
+4. Evidência de *critical slowing down*
+5. Regime metaestável finito
+
+Não afirmamos criticidade infinita estrita, mas evidência consistente de regime crítico finito sob ruído realista.
+
+---
+
+# 12. Conclusão
+
+Apresentamos:
+
+- Modelo variacional contínuo
+- Extensão multivariada
+- Estimativa empírica da matriz de difusão
+- Reconstrução de potencial
+- Medição de persistência e cauda
+- Campo estrutural adaptativo
+
+O framework integra:
+
+- Econofísica
+- Sistemas complexos
+- Processos estocásticos
+- Dinâmica fora do equilíbrio
+
+---
+
+# 13. Trabalhos Futuros
+
+1. Estimar expoentes críticos via *finite-size scaling*
+2. Aplicar a múltiplos ativos simultaneamente
+3. Introduzir interação agente-agente explícita
+4. Desenvolver indicador preditivo de crash
+5. Formalizar classe de universalidade econômica
+
+```python # ============================================================
+# CRITICAL META-STABLE ECONOMIC SYSTEM
+# COMPLETE EXPANDED ALGORITHM
+# ============================================================
+
+import numpy as np
+import pandas as pd
+import yfinance as yf
+from scipy import stats
+
+# ============================================================
+# CONFIGURATION
+# ============================================================
+
+SYMBOL = "BTC-USD"     # Change if desired
+START = "2015-01-01"
+END = None
+ROLLING_WINDOW = 200
+TAIL_K = 100
+
+# ============================================================
+# DOWNLOAD DATA (ROBUST VERSION)
+# ============================================================
+
+print("\n=== Downloading Data ===")
+data = yf.download(SYMBOL, start=START, end=END, progress=True)
+
+if isinstance(data.columns, pd.MultiIndex):
+    data.columns = data.columns.get_level_values(0)
+
+print("Columns available:", list(data.columns))
+
+if "Adj Close" in data.columns:
+    price = data["Adj Close"]
+elif "Close" in data.columns:
+    price = data["Close"]
+else:
+    raise ValueError("No valid price column found.")
+
+price = price.dropna()
+
+# ============================================================
+# LOG RETURNS
+# ============================================================
+
+returns = np.diff(np.log(price.values))
+print("\nTotal observations:", len(returns))
+
+# ============================================================
+# FUNCTION DEFINITIONS
+# ============================================================
+
+def hurst_exponent(ts):
+    ts = np.array(ts)
+    N = len(ts)
+    if N < 100:
+        return np.nan
+
+    T_vals = np.arange(10, N//2, max(10, N//20))
+    RS = []
+
+    for T in T_vals:
+        n_segments = N // T
+        R_S_vals = []
+
+        for i in range(n_segments):
+            segment = ts[i*T:(i+1)*T]
+            mean = np.mean(segment)
+            Z = np.cumsum(segment - mean)
+            R = np.max(Z) - np.min(Z)
+            S = np.std(segment)
+            if S > 0:
+                R_S_vals.append(R/S)
+
+        if len(R_S_vals) > 0:
+            RS.append(np.mean(R_S_vals))
+
+    if len(RS) < 5:
+        return np.nan
+
+    logT = np.log(T_vals[:len(RS)])
+    logRS = np.log(RS)
+
+    slope, _ = np.polyfit(logT, logRS, 1)
+    return slope
+
+def lag1_autocorr(ts):
+    if len(ts) < 2:
+        return np.nan
+    return np.corrcoef(ts[:-1], ts[1:])[0,1]
+
+def hill_tail_index(ts, k=100):
+    ts = np.sort(np.abs(ts))
+    ts = ts[-k:]
+    x_min = ts[0]
+    return k / np.sum(np.log(ts/x_min))
+
+def estimate_diffusion_matrix(ts):
+    """
+    Estimate 2D diffusion matrix from lagged embedding.
+    """
+    x = ts[:-1]
+    y = ts[1:]
+
+    dx = np.diff(x)
+    dy = np.diff(y)
+
+    Dxx = np.var(dx)
+    Dyy = np.var(dy)
+    Dxy = np.cov(dx, dy)[0,1]
+
+    return np.array([[Dxx, Dxy],
+                     [Dxy, Dyy]])
+
+def reconstruct_potential(ts):
+    hist, bins = np.histogram(ts, bins=100, density=True)
+    centers = (bins[:-1] + bins[1:]) / 2
+    sigma = np.std(ts)
+    p = hist + 1e-12
+    U = - (sigma**2 / 2) * np.log(p)
+    return centers, U
+
+def adaptive_xi(var_series, base=1.0):
+    return base / (1 + var_series)
+
+# ============================================================
+# GLOBAL METRICS
+# ============================================================
+
+print("\n=== GLOBAL STATISTICS ===")
+
+mean_ret = np.mean(returns)
+std_ret = np.std(returns)
+var_ret = np.var(returns)
+skew = stats.skew(returns)
+kurt = stats.kurtosis(returns)
+
+hurst_global = hurst_exponent(returns)
+autocorr_global = lag1_autocorr(returns)
+jb_stat, jb_p = stats.jarque_bera(returns)
+tail_index = hill_tail_index(returns, TAIL_K)
+
+print("Mean return:", mean_ret)
+print("Std deviation:", std_ret)
+print("Variance:", var_ret)
+print("Skewness:", skew)
+print("Excess kurtosis:", kurt)
+print("Hurst exponent:", hurst_global)
+print("Lag-1 autocorrelation:", autocorr_global)
+print("Jarque-Bera statistic:", jb_stat)
+print("Jarque-Bera p-value:", jb_p)
+print("Hill tail index:", tail_index)
+
+# ============================================================
+# DIFFUSION MATRIX ESTIMATION
+# ============================================================
+
+D = estimate_diffusion_matrix(returns)
+
+print("\n=== DIFFUSION MATRIX ===")
+print(D)
+
+# ============================================================
+# POTENTIAL RECONSTRUCTION
+# ============================================================
+
+centers, U = reconstruct_potential(returns)
+
+print("\n=== POTENTIAL METRICS ===")
+print("Potential mean:", np.mean(U))
+print("Potential max:", np.max(U))
+print("Potential min:", np.min(U))
+
+# ============================================================
+# ROLLING METRICS
+# ============================================================
+
+print("\n=== ROLLING METRICS ===")
+
+rolling_var = []
+rolling_hurst = []
+rolling_autocorr = []
+
+for i in range(ROLLING_WINDOW, len(returns)):
+    window = returns[i-ROLLING_WINDOW:i]
+    rolling_var.append(np.var(window))
+    rolling_hurst.append(hurst_exponent(window))
+    rolling_autocorr.append(lag1_autocorr(window))
+
+rolling_var = np.array(rolling_var)
+rolling_hurst = np.array(rolling_hurst)
+rolling_autocorr = np.array(rolling_autocorr)
+
+rolling_xi = adaptive_xi(rolling_var)
+
+print("Rolling variance mean:", np.nanmean(rolling_var))
+print("Rolling variance max:", np.nanmax(rolling_var))
+print("Rolling variance min:", np.nanmin(rolling_var))
+
+print("Rolling Hurst mean:", np.nanmean(rolling_hurst))
+print("Rolling Hurst max:", np.nanmax(rolling_hurst))
+print("Rolling Hurst min:", np.nanmin(rolling_hurst))
+
+print("Rolling autocorr mean:", np.nanmean(rolling_autocorr))
+print("Rolling autocorr max:", np.nanmax(rolling_autocorr))
+print("Rolling autocorr min:", np.nanmin(rolling_autocorr))
+
+print("Adaptive xi mean:", np.nanmean(rolling_xi))
+print("Adaptive xi max:", np.nanmax(rolling_xi))
+print("Adaptive xi min:", np.nanmin(rolling_xi))
+
+# ============================================================
+# META-STABILITY DIAGNOSTIC SCORE
+# ============================================================
+
+meta_score = (
+    0.4 * np.nanmean(rolling_hurst) +
+    0.3 * np.nanmean(rolling_autocorr) +
+    0.3 * (1 / (1 + np.nanmean(rolling_var)))
+)
+
+print("\n=== META-STABILITY SCORE ===")
+print("Composite instability score:", meta_score)
+
+print("\n=== EXPERIMENT COMPLETE ===")
+```

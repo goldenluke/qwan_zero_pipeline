@@ -1,0 +1,225 @@
+# ============================================================
+# CRITICAL META-STABLE ECONOMIC SYSTEM
+# COMPLETE EXPANDED ALGORITHM
+# ============================================================
+
+import numpy as np
+import pandas as pd
+import yfinance as yf
+from scipy import stats
+
+# ============================================================
+# CONFIGURATION
+# ============================================================
+
+SYMBOL = "BTC-USD"     # Change if desired
+START = "2015-01-01"
+END = None
+ROLLING_WINDOW = 200
+TAIL_K = 100
+
+# ============================================================
+# DOWNLOAD DATA (ROBUST VERSION)
+# ============================================================
+
+print("\n=== Downloading Data ===")
+data = yf.download(SYMBOL, start=START, end=END, progress=True)
+
+if isinstance(data.columns, pd.MultiIndex):
+    data.columns = data.columns.get_level_values(0)
+
+print("Columns available:", list(data.columns))
+
+if "Adj Close" in data.columns:
+    price = data["Adj Close"]
+elif "Close" in data.columns:
+    price = data["Close"]
+else:
+    raise ValueError("No valid price column found.")
+
+price = price.dropna()
+
+# ============================================================
+# LOG RETURNS
+# ============================================================
+
+returns = np.diff(np.log(price.values))
+print("\nTotal observations:", len(returns))
+
+# ============================================================
+# FUNCTION DEFINITIONS
+# ============================================================
+
+def hurst_exponent(ts):
+    ts = np.array(ts)
+    N = len(ts)
+    if N < 100:
+        return np.nan
+
+    T_vals = np.arange(10, N//2, max(10, N//20))
+    RS = []
+
+    for T in T_vals:
+        n_segments = N // T
+        R_S_vals = []
+
+        for i in range(n_segments):
+            segment = ts[i*T:(i+1)*T]
+            mean = np.mean(segment)
+            Z = np.cumsum(segment - mean)
+            R = np.max(Z) - np.min(Z)
+            S = np.std(segment)
+            if S > 0:
+                R_S_vals.append(R/S)
+
+        if len(R_S_vals) > 0:
+            RS.append(np.mean(R_S_vals))
+
+    if len(RS) < 5:
+        return np.nan
+
+    logT = np.log(T_vals[:len(RS)])
+    logRS = np.log(RS)
+
+    slope, _ = np.polyfit(logT, logRS, 1)
+    return slope
+
+def lag1_autocorr(ts):
+    if len(ts) < 2:
+        return np.nan
+    return np.corrcoef(ts[:-1], ts[1:])[0,1]
+
+def hill_tail_index(ts, k=100):
+    ts = np.sort(np.abs(ts))
+    ts = ts[-k:]
+    x_min = ts[0]
+    return k / np.sum(np.log(ts/x_min))
+
+def estimate_diffusion_matrix(ts):
+    """
+    Estimate 2D diffusion matrix from lagged embedding.
+    """
+    x = ts[:-1]
+    y = ts[1:]
+
+    dx = np.diff(x)
+    dy = np.diff(y)
+
+    Dxx = np.var(dx)
+    Dyy = np.var(dy)
+    Dxy = np.cov(dx, dy)[0,1]
+
+    return np.array([[Dxx, Dxy],
+                     [Dxy, Dyy]])
+
+def reconstruct_potential(ts):
+    hist, bins = np.histogram(ts, bins=100, density=True)
+    centers = (bins[:-1] + bins[1:]) / 2
+    sigma = np.std(ts)
+    p = hist + 1e-12
+    U = - (sigma**2 / 2) * np.log(p)
+    return centers, U
+
+def adaptive_xi(var_series, base=1.0):
+    return base / (1 + var_series)
+
+# ============================================================
+# GLOBAL METRICS
+# ============================================================
+
+print("\n=== GLOBAL STATISTICS ===")
+
+mean_ret = np.mean(returns)
+std_ret = np.std(returns)
+var_ret = np.var(returns)
+skew = stats.skew(returns)
+kurt = stats.kurtosis(returns)
+
+hurst_global = hurst_exponent(returns)
+autocorr_global = lag1_autocorr(returns)
+jb_stat, jb_p = stats.jarque_bera(returns)
+tail_index = hill_tail_index(returns, TAIL_K)
+
+print("Mean return:", mean_ret)
+print("Std deviation:", std_ret)
+print("Variance:", var_ret)
+print("Skewness:", skew)
+print("Excess kurtosis:", kurt)
+print("Hurst exponent:", hurst_global)
+print("Lag-1 autocorrelation:", autocorr_global)
+print("Jarque-Bera statistic:", jb_stat)
+print("Jarque-Bera p-value:", jb_p)
+print("Hill tail index:", tail_index)
+
+# ============================================================
+# DIFFUSION MATRIX ESTIMATION
+# ============================================================
+
+D = estimate_diffusion_matrix(returns)
+
+print("\n=== DIFFUSION MATRIX ===")
+print(D)
+
+# ============================================================
+# POTENTIAL RECONSTRUCTION
+# ============================================================
+
+centers, U = reconstruct_potential(returns)
+
+print("\n=== POTENTIAL METRICS ===")
+print("Potential mean:", np.mean(U))
+print("Potential max:", np.max(U))
+print("Potential min:", np.min(U))
+
+# ============================================================
+# ROLLING METRICS
+# ============================================================
+
+print("\n=== ROLLING METRICS ===")
+
+rolling_var = []
+rolling_hurst = []
+rolling_autocorr = []
+
+for i in range(ROLLING_WINDOW, len(returns)):
+    window = returns[i-ROLLING_WINDOW:i]
+    rolling_var.append(np.var(window))
+    rolling_hurst.append(hurst_exponent(window))
+    rolling_autocorr.append(lag1_autocorr(window))
+
+rolling_var = np.array(rolling_var)
+rolling_hurst = np.array(rolling_hurst)
+rolling_autocorr = np.array(rolling_autocorr)
+
+rolling_xi = adaptive_xi(rolling_var)
+
+print("Rolling variance mean:", np.nanmean(rolling_var))
+print("Rolling variance max:", np.nanmax(rolling_var))
+print("Rolling variance min:", np.nanmin(rolling_var))
+
+print("Rolling Hurst mean:", np.nanmean(rolling_hurst))
+print("Rolling Hurst max:", np.nanmax(rolling_hurst))
+print("Rolling Hurst min:", np.nanmin(rolling_hurst))
+
+print("Rolling autocorr mean:", np.nanmean(rolling_autocorr))
+print("Rolling autocorr max:", np.nanmax(rolling_autocorr))
+print("Rolling autocorr min:", np.nanmin(rolling_autocorr))
+
+print("Adaptive xi mean:", np.nanmean(rolling_xi))
+print("Adaptive xi max:", np.nanmax(rolling_xi))
+print("Adaptive xi min:", np.nanmin(rolling_xi))
+
+# ============================================================
+# META-STABILITY DIAGNOSTIC SCORE
+# ============================================================
+
+meta_score = (
+    0.4 * np.nanmean(rolling_hurst) +
+    0.3 * np.nanmean(rolling_autocorr) +
+    0.3 * (1 / (1 + np.nanmean(rolling_var)))
+)
+
+print("\n=== META-STABILITY SCORE ===")
+print("Composite instability score:", meta_score)
+
+print("\n=== EXPERIMENT COMPLETE ===")
