@@ -3,19 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LabSUS |  Padrão de Projeto de Inteligência Estatal.</title>
+    <title>LabSUS | Padrão de Projeto de Inteligência Estatal</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/lucide@latest"></script>
-    <!-- MathJax para fórmulas epidemiológicas, estatísticas e fiscais -->
+    <!-- MathJax para renderização de fórmulas epidemiológicas, estatísticas e fiscais -->
     <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=JetBrains+Mono:wght@400;500&display=swap');
         
         :root {
-            --primary: #06b6d4; /* Ciano */
-            --accent: #10b981;  /* Esmeralda */
-            --warning: #f59e0b; /* Âmbar */
+            --primary: #06b6d4;
+            --accent: #10b981;
+            --warning: #f59e0b;
             --danger: #f43f5e;
             --bg: #020617;
         }
@@ -46,10 +46,6 @@
             background-size: 32px 32px;
         }
 
-        .health-glow {
-            box-shadow: 0 0 50px rgba(6, 182, 212, 0.1);
-        }
-
         .section-divider {
             height: 1px;
             background: linear-gradient(to right, transparent, rgba(6, 182, 212, 0.1), transparent);
@@ -76,10 +72,25 @@
             border: 1px solid rgba(255, 255, 255, 0.1);
         }
 
-        .feature-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-            gap: 1rem;
+        /* Flowchart Components */
+        .flow-node {
+            @apply p-4 rounded-xl border text-center font-bold text-[10px] uppercase tracking-tighter flex flex-col items-center justify-center gap-2;
+            min-width: 140px;
+            background: rgba(255,255,255,0.05);
+            border-color: rgba(255,255,255,0.1);
+        }
+        .flow-arrow { @apply flex items-center justify-center text-cyan-500; }
+        .node-active { border-color: var(--primary); color: var(--primary); box-shadow: 0 0 15px rgba(6, 182, 212, 0.15); }
+        .node-research { border-color: var(--warning); color: var(--warning); }
+        .node-prod { border-color: var(--accent); color: var(--accent); }
+
+        pre {
+            background: #000 !important;
+            border: 1px solid rgba(255,255,255,0.1);
+            padding: 1.5rem;
+            border-radius: 1rem;
+            font-size: 0.75rem;
+            overflow-x: auto;
         }
 
         .feature-tag {
@@ -93,7 +104,9 @@
             display: flex;
             align-items: center;
             gap: 6px;
+            transition: all 0.2s;
         }
+        .feature-tag:hover { background: rgba(6, 182, 212, 0.1); border-color: var(--primary); }
 
         .math-box {
             background: rgba(0, 0, 0, 0.4);
@@ -101,15 +114,6 @@
             padding: 1.5rem;
             border-radius: 1rem;
             margin-top: 1rem;
-        }
-
-        pre {
-            background: #000 !important;
-            border: 1px solid rgba(255,255,255,0.1);
-            padding: 1.5rem;
-            border-radius: 1rem;
-            font-size: 0.8rem;
-            overflow-x: auto;
         }
     </style>
 </head>
@@ -120,18 +124,18 @@
         <div class="max-w-7xl mx-auto flex justify-between items-center">
             <div class="flex items-center gap-2">
                 <i data-lucide="activity" class="text-cyan-500"></i>
-                <span class="font-extrabold text-xl tracking-tighter uppercase">Lab<span class="text-cyan-400">SUS</span></span>
+                <span class="font-extrabold text-xl tracking-tighter uppercase italic">Lab<span class="text-cyan-400">SUS</span></span>
             </div>
             <div class="hidden lg:flex gap-8 text-[10px] uppercase tracking-widest font-bold text-slate-500">
-                <a href="#overview" class="hover:text-white transition text-cyan-400">Enciclopédia</a>
-                <a href="#stack" class="hover:text-white transition">Arquitetura</a>
-                <a href="#math" class="hover:text-white transition text-cyan-400">Matemática</a>
+                <a href="#overview" class="hover:text-white transition">Enciclopédia</a>
+                <a href="#math" class="hover:text-white transition text-cyan-400 font-black">Fundamentação Matemática</a>
+                <a href="#features" class="hover:text-white transition">Catálogo</a>
                 <a href="#fazenda" class="hover:text-white transition text-amber-400">Modelo Fazenda</a>
                 <a href="#governance" class="hover:text-white transition">Governança</a>
             </div>
             <div class="flex gap-3">
                 <a href="https://github.com/goldenluke/labsus" target="_blank" class="flex items-center gap-2 bg-slate-800 text-white px-4 py-1.5 rounded-lg text-[10px] font-bold hover:bg-slate-700 transition border border-white/10">
-                    <i data-lucide="github" class="w-3 h-3"></i> GITHUB
+                    <i data-lucide="github" class="w-3 h-3"></i> REPOSITÓRIO
                 </a>
             </div>
         </div>
@@ -142,201 +146,170 @@
         <div class="absolute top-0 left-1/2 -translate-x-1/2 w-[1200px] h-[600px] bg-cyan-600/10 blur-[160px] rounded-full -z-10"></div>
         <div class="max-w-6xl mx-auto">
             <div class="inline-block px-4 py-1.5 rounded-full border border-cyan-500/30 bg-cyan-500/5 text-cyan-400 text-[10px] font-black mb-8 uppercase tracking-[0.4em]">
-                Framework de Inteligência Territorial & MLOps para o SUS
+                Framework de Inteligência Territorial & MLOps para o Estado
             </div>
             <h1 class="text-6xl md:text-8xl font-black mb-10 tracking-tighter leading-[0.85]">
-                Padrão de Projeto de Inteligência Estatal. <br><span class="gradient-text">LabSUS.</span>
+                Padrão de Projeto de <br><span class="gradient-text">Inteligência Estatal.</span>
             </h1>
             <p class="text-xl md:text-2xl text-slate-400 max-w-4xl mx-auto mb-12 leading-relaxed font-light">
-                O <b>LabSUS</b> é um sistema de suporte à decisão prescritiva de ciclo completo. Resolvemos a fragmentação de dados públicos brasileiros através de uma arquitetura de <b>Sistemas Vivos</b>, integrando engenharia de dados, IA explicável e gestão estatal.
+                O <b>LabSUS</b> operacionaliza um Design Pattern agnóstico. Uma infraestrutura full-stack que orquestra <b>aproximadamente 40 modelos matemáticos</b> especializados para transformar microdados governamentais em inteligência prescritiva.
             </p>
-            <div class="flex items-center justify-center gap-4 mb-12">
-                <a href="https://goldenluke.github.io/qwan_zero_pipeline/index3.html" target="_blank" class="px-6 py-2 bg-cyan-600 text-white rounded-xl text-[10px] font-black uppercase tracking-widest flex items-center gap-2">
-                    <i data-lucide="link"></i> Portal de Documentação
-                </a>
-                <div class="flex items-center gap-2 text-cyan-500/80 font-mono text-sm tracking-widest uppercase py-2">
-                    Autor: <span class="font-bold text-cyan-400">Lucas Amaral Dourado</span>
-                </div>
+            <div class="flex items-center justify-center gap-2 text-cyan-500/80 font-mono text-sm tracking-widest uppercase mb-12 border-y border-white/5 py-2 inline-flex mx-auto text-center font-bold">
+                <i data-lucide="user" class="w-4 h-4"></i>
+                Autor: <span class="text-cyan-400">Lucas Amaral Dourado</span>
             </div>
         </div>
     </header>
 
-    <div class="section-divider" id="stack"></div>
-
-    <!-- ARQUITETURA SISTÊMICA COMPLETA -->
-    <section class="py-32 max-w-7xl mx-auto px-6">
-        <div class="mb-20">
-            <h2 class="text-4xl font-black uppercase mb-4 italic tracking-tighter text-cyan-500">🏛️ Arquitetura Sistêmica Completa</h2>
-            <p class="text-slate-500 max-w-2xl font-light text-sm italic">Orquestração Global do LabSUS (Core Orchestrator).</p>
+    <!-- 1. VISUAL ENGINEERING FLOWS (ENGLISH) -->
+    <section class="py-32 max-w-7xl mx-auto px-6" id="flow">
+        <div class="text-center mb-16">
+            <h2 class="text-4xl font-black uppercase mb-4 italic tracking-tighter text-cyan-500">Visual Engineering Flows</h2>
+            <p class="text-slate-500 max-w-2xl mx-auto font-light text-sm italic">System architecture and data lifecycles.</p>
         </div>
 
-        <div class="grid lg:grid-cols-1 gap-8 mb-16">
-            <div class="glass p-8 rounded-[3rem] border-cyan-500/10">
-                <div class="flex items-center gap-4 mb-6">
-                    <i data-lucide="code" class="text-cyan-400"></i>
-                    <h4 class="text-white font-bold uppercase text-xs tracking-widest">Global System Orchestrator (Pseudocode)</h4>
+        <div class="grid lg:grid-cols-2 gap-8 mb-16">
+            <!-- System Orchestration -->
+            <div class="glass p-10 rounded-[3rem] border-white/5">
+                <h4 class="text-[10px] font-bold uppercase tracking-[0.3em] opacity-40 text-center mb-8">System Orchestration Flow</h4>
+                <div class="flex flex-col md:flex-row items-center justify-between gap-2">
+                    <div class="flow-node node-active"><i data-lucide="layout"></i>React UI</div>
+                    <div class="flow-arrow"><i data-lucide="arrow-right"></i></div>
+                    <div class="flow-node"><i data-lucide="server"></i>Django API</div>
+                    <div class="flow-arrow"><i data-lucide="arrow-right"></i></div>
+                    <div class="flex flex-col gap-2">
+                        <div class="flow-node node-prod"><i data-lucide="cpu"></i>Celery Worker</div>
+                        <div class="flow-node node-prod text-slate-500"><i data-lucide="database"></i>Redis Queue</div>
+                    </div>
                 </div>
-                <pre class="mono text-cyan-300">
-# LabSUS CORE: GLOBAL SYSTEM ORCHESTRATOR
-ALGORITHM LabSUS_Enterprise_Architecture:
-    SYSTEM_STACK:
-        Backend: Django 5.x + REST Framework (API Core)
-        Queue: Redis (Broker) + Celery (Worker Nodes)
-        Database_Prod: PostgreSQL (Transactional)
-        Database_Research: Local Parquet Files + SQLite
-        Frontend: React 18 + Plotly.js + Tailwind CSS
-        ML_Ops: MLflow (Tracking) + SHAP (Explainability)
-
-    # 1. SEGREGAÇÃO DE AMBIENTES (RESEARCH vs. PRODUCTION)
-    PROCEDURE Initialize_Environment(mode):
-        IF mode == "RESEARCH_AND_DEVELOPMENT":
-            ENABLE debug_logs()
-            MOUNT data_lake_local()  # Acesso direto a Parquets de 10GB+
-            ALLOW model_experimentation()
-            GOAL = "Validation of new epidemiological hypothesis"
-            
-        ELSE IF mode == "PRODUCTION_OPERATIONS":
-            DISABLE sensitive_logging()
-            MOUNT secure_cloud_volumes()
-            CONFIG persistence = Managed_PostgreSQL + Redis_Cache
-            GOAL = "Scalable prescriptive service delivery"
-
-    # 2. CICLO MLOps & PIPELINE DE DADOS (ETL + FEATURE ENGINEERING)
-    PROCEDURE Data_Science_Pipeline(task_params):
-        STEP A: Ingestion (pysus_orchestrator)
-            df_raw = fetch_datasus_ftp(SIM, SINASC, SIH, SINAN)
-            pop_hat = apply_cubic_spline_interpolation(denominators)
-            
-        STEP B: Model Selection & Execution (KMeans / Prophet / Logit)
-            ... [Mathematical Logic applied here] ...
-                </pre>
             </div>
-        </div>
-
-        <div class="grid lg:grid-cols-2 gap-8">
-            <div class="glass p-8 rounded-[3rem] border-emerald-500/20">
-                <h4 class="font-bold text-white mb-6 flex items-center gap-2 uppercase tracking-tighter text-sm text-emerald-400">
-                    <i data-lucide="layout"></i> Frontend Controller (React Logic)
-                </h4>
-                <pre class="mono text-emerald-300">
-ALGORITHM React_Frontend_Controller:
-    COMPONENT Dashboard:
-        STATE: selectedFile, mapData, isLoading, taskProgress
-
-        ON_USER_SUBMIT (Trigger_Pipeline):
-            task_id = API.post("/api/pipelines/trigger/", user_config)
-            START_POLLING(task_id)
-
-        POLLING_LOOP:
-            WHILE task.status IN [PENDING, PROGRESS]:
-                update_progress_ui(task.percent)
-            IF task.success:
-                results = API.get("/api/files/data/{id}")
-                RENDER_VISUALIZATIONS(results)
-                </pre>
-            </div>
-            <div class="p-8 flex flex-col justify-center">
-                <h3 class="text-2xl font-bold mb-4">Sistemas Vivos e Reativos</h3>
-                <p class="text-sm text-slate-400 leading-relaxed italic">
-                    A interface não apenas exibe dados, ela gerencia o ciclo de vida da computação pesada no backend. Através de um loop de polling, o frontend sincroniza o estado do Celery permitindo que o gestor monitore cada etapa da modelagem SHAP ou do agrupamento geográfico.
-                </p>
+            <!-- MLOps Cycle -->
+            <div class="glass p-10 rounded-[3rem] border-white/5">
+                <h4 class="text-[10px] font-bold uppercase tracking-[0.3em] opacity-40 text-center mb-8">MLOps Lifecycle</h4>
+                <div class="grid grid-cols-3 gap-4 items-center">
+                    <div class="flow-node">Data Ingest</div>
+                    <div class="flow-arrow flex justify-center"><i data-lucide="chevrons-right"></i></div>
+                    <div class="flow-node node-active">Normalize</div>
+                    <div class="flow-arrow flex justify-center col-start-3"><i data-lucide="chevrons-down"></i></div>
+                    <div class="flow-node node-prod col-start-3">Result Serve</div>
+                    <div class="flow-arrow flex justify-center col-start-2"><i data-lucide="chevrons-left"></i></div>
+                    <div class="flow-node node-active">AI Modeling</div>
+                </div>
             </div>
         </div>
     </section>
 
     <div class="section-divider" id="math"></div>
 
-    <!-- 🔬 FORMALIZAÇÃO MATEMÁTICA INTEGRAL -->
+    <!-- 2. FUNDAMENTAÇÃO MATEMÁTICA INTEGRAL -->
     <section class="py-32 max-w-7xl mx-auto px-6">
         <div class="text-center mb-24">
-            <h2 class="text-5xl font-black uppercase mb-4 italic tracking-tight underline decoration-cyan-500/30 underline-offset-8 text-cyan-400">🔬 Fundamentação Matemática Integral</h2>
+            <h2 class="text-5xl font-black uppercase mb-4 italic tracking-tight underline decoration-cyan-500/30 underline-offset-8 text-cyan-400">Fundamentação Matemática</h2>
             <p class="text-slate-500 max-w-3xl mx-auto font-light text-sm italic leading-relaxed">
-                As equações que sustentam a precisão estatística do LabSUS e seus ~40 modelos especializados.
+                Derivações formais dos aproximadamente 40 modelos especializados implementados no motor <code>src/</code>.
             </p>
         </div>
 
-        <div class="grid lg:grid-cols-2 gap-12">
-            
-            <!-- 1. Agrupamento Semântico -->
-            <div class="glass p-10 rounded-[3rem] border-white/5 math-box">
-                <h4 class="font-bold text-white uppercase text-xs tracking-widest mb-6 text-cyan-400 underline underline-offset-8">1. Motor de Agrupamento Semântico</h4>
-                <p class="text-xs text-slate-400 mb-6 italic">A segmentação territorial utiliza o Z-Score para neutralizar variâncias e a Inércia (J) para coesão:</p>
-                $$z = \frac{x - \mu}{\sigma} \quad ; \quad J = \sum_{i=1}^{k} \sum_{x \in C_i} \left\| x - \mu_i \right\|^2$$
-                <p class="text-xs text-slate-500 mt-6 leading-relaxed">
-                    A rotulagem interpretável é feita via <b>Distância Euclidiana n-dimensional</b> entre centroides (\(\mu\)) e arquétipos teóricos (\(A\)):
-                    $$d(\mu_i, A_j) = \sqrt{\sum_{p=1}^{n} (\mu_{i,p} - A_{j,p})^2}$$
-                </p>
+        <div class="grid lg:grid-cols-2 gap-8">
+            <!-- Normalização Spline -->
+            <div class="glass p-10 rounded-[3rem] border-white/5 math-box relative overflow-hidden">
+                <div class="absolute top-0 right-0 p-4 opacity-5"><i data-lucide="database" class="w-16 h-16 text-cyan-400"></i></div>
+                <h4 class="font-bold text-white uppercase text-[10px] tracking-widest mb-6 text-cyan-400 underline underline-offset-8">01. Denominadores Dinâmicos (Spline)</h4>
+                <p class="text-xs text-slate-400 mb-6 italic">Garante continuidade de 2ª ordem para denominadores intercensitários:</p>
+                $$S_i(x) = a_i(x-x_i)^3 + b_i(x-x_i)^2 + c_i(x-x_i) + d_i$$
+                <p class="text-[10px] text-slate-500 mt-4 leading-relaxed">Fundamental para o cálculo estável de taxas em <code>utils/populacao.py</code>.</p>
             </div>
 
-            <!-- 2. Séries Temporais -->
-            <div class="glass p-10 rounded-[3rem] border-white/5 math-box">
-                <h4 class="font-bold text-white uppercase text-xs tracking-widest mb-6 text-emerald-400 underline underline-offset-8">2. Motor de Predição (Prophet)</h4>
-                <p class="text-xs text-slate-400 mb-6 italic">Tendência (\(g(t)\)) seguindo um crescimento logístico saturado:</p>
-                $$y(t) = g(t) + s(t) + h(t) + \epsilon_t \quad ; \quad g(t) = \frac{C}{1 + \exp(-k(t - m))}$$
-                <p class="text-xs text-slate-500 mt-6 leading-relaxed">
-                    Sazonalidade (\(s(t)\)) aproximada por <b>Séries de Fourier</b>:
-                    $$s(t) = \sum_{n=1}^{N} \left( a_n \cos\left(\frac{2\pi nt}{P}\right) + b_n \sin\left(\frac{2\pi nt}{P}\right) \right)$$
-                </p>
+            <!-- K-Means Arquétipos -->
+            <div class="glass p-10 rounded-[3rem] border-white/5 math-box relative overflow-hidden">
+                <div class="absolute top-0 right-0 p-4 opacity-5"><i data-lucide="layers" class="w-16 h-16 text-emerald-400"></i></div>
+                <h4 class="font-bold text-white uppercase text-[10px] tracking-widest mb-6 text-emerald-400 underline underline-offset-8">02. Similaridade de Arquétipos</h4>
+                <p class="text-xs text-slate-400 mb-6 italic">Agrupamento via minimização da inércia intra-cluster:</p>
+                $$J = \sum_{i=1}^{k} \sum_{x \in C_i} ||x - \mu_i||^2 \quad \implies \quad Label = \text{arg min}_{j} d(\mu_i, A_j)$$
+                <p class="text-[10px] text-slate-500 mt-4 italic">Implementado em <code>modelagem/clusters.py</code> para rotulagem automática de perfis.</p>
             </div>
 
-            <!-- 3. Risco e Explicabilidade -->
-            <div class="glass p-10 rounded-[3rem] border-white/5 math-box">
-                <h4 class="font-bold text-white uppercase text-xs tracking-widest mb-6 text-rose-400 underline underline-offset-8">3. Risco e Explicabilidade (XAI)</h4>
-                <p class="text-xs text-slate-400 mb-6 italic">Probabilidade de óbito (\(P\)) via Função Logística e Odds Ratio:</p>
-                $$P(y=1|X) = \frac{1}{1 + e^{-(\beta_0 + \sum \beta_ix_i)}} \quad ; \quad OR_i = \exp(\beta_i)$$
-                <p class="text-xs text-slate-500 mt-6 leading-relaxed">
-                    Valores SHAP para auditoria de modelos de caixa-preta (LightGBM):
-                    $$\phi_i = \sum_{S \subseteq N \setminus \{i\}} \frac{|S|!(n-|S|-1)!}{n!} [v(S \cup \{i\}) - v(S)]$$
-                </p>
+            <!-- Time-Series Prophet -->
+            <div class="glass p-10 rounded-[3rem] border-white/5 math-box relative overflow-hidden">
+                <div class="absolute top-0 right-0 p-4 opacity-5"><i data-lucide="line-chart" class="w-16 h-16 text-amber-400"></i></div>
+                <h4 class="font-bold text-white uppercase text-[10px] tracking-widest mb-6 text-amber-400 underline underline-offset-8">03. Decomposição Estrutural (Prophet)</h4>
+                <p class="text-xs text-slate-400 mb-6 italic">Modelo aditivo generalizado para predição de demanda:</p>
+                $$y(t) = g(t) + s(t) + h(t) + \epsilon_t \quad ; \quad s(t) = \sum_{n=1}^N (a_n \cos(\frac{2\pi nt}{P}) + b_n \sin(\frac{2\pi nt}{P}))$$
+                <p class="text-[10px] text-slate-500 mt-4">Coração do <code>previsao.py</code> para tendências de internação e receita.</p>
             </div>
 
-            <!-- 4. Normalização Spline -->
-            <div class="glass p-10 rounded-[3rem] border-white/5 math-box">
-                <h4 class="font-bold text-white uppercase text-xs tracking-widest mb-6 text-amber-400 underline underline-offset-8">4. Normalização Populacional</h4>
-                <p class="text-xs text-slate-400 mb-6 italic">Interpolação de denominadores intercensitários:</p>
-                $$S(x) = \sum_{j=0}^3 a_j x^j$$
-                <p class="text-[10px] text-slate-500 mt-4 italic">
-                    Garante que a taxa epidemiológica \( Rate = \frac{Count}{\hat{P}} \) reflita a dinâmica demográfica real do município.
-                </p>
+            <!-- Logit/SHAP -->
+            <div class="glass p-10 rounded-[3rem] border-white/5 math-box relative overflow-hidden">
+                <div class="absolute top-0 right-0 p-4 opacity-5"><i data-lucide="shield-alert" class="w-16 h-16 text-rose-400"></i></div>
+                <h4 class="font-bold text-white uppercase text-[10px] tracking-widest mb-6 text-rose-400 underline underline-offset-8">04. Risco e Explicabilidade (XAI)</h4>
+                <p class="text-xs text-slate-400 mb-6 italic">Probabilidade de desfecho via Função Logística e valores SHAP:</p>
+                $$P = \sigma(\beta_0 + \sum \beta_i x_i) \quad ; \quad \phi_i = \text{marginal contribution over all subsets}$$
+                <p class="text-[10px] text-slate-500 mt-4 leading-relaxed italic">Auditado no <code>modelagem/regressao_risco_obito.py</code>.</p>
+            </div>
+
+            <!-- Record Linkage -->
+            <div class="glass p-10 rounded-[3rem] border-white/5 math-box relative overflow-hidden">
+                <div class="absolute top-0 right-0 p-4 opacity-5"><i data-lucide="link" class="w-16 h-16 text-blue-400"></i></div>
+                <h4 class="font-bold text-white uppercase text-[10px] tracking-widest mb-6 text-blue-400 underline underline-offset-8">05. Record Linkage Probabilístico</h4>
+                <p class="text-xs text-slate-400 mb-6 italic">Unificação de bases SIM/SINASC (Fellegi-Sunter):</p>
+                $$R = \frac{P(\gamma | \text{Matched})}{P(\gamma | \text{Unmatched})} \quad \implies \quad \ln(R) > Threshold$$
+                <p class="text-[10px] text-slate-500 mt-4">Utilizado em <code>modelagem/analise_sobrevida_infantil.py</code>.</p>
+            </div>
+
+            <!-- Centralidade de Rede -->
+            <div class="glass p-10 rounded-[3rem] border-white/5 math-box relative overflow-hidden">
+                <div class="absolute top-0 right-0 p-4 opacity-5"><i data-lucide="network" class="w-16 h-16 text-indigo-400"></i></div>
+                <h4 class="font-bold text-white uppercase text-[10px] tracking-widest mb-6 text-indigo-400 underline underline-offset-8">06. Centralidade de Fluxos (Grafos)</h4>
+                <p class="text-xs text-slate-400 mb-6 italic">Betweenness Centrality para identificação de polos regionais:</p>
+                $$C_B(v) = \sum_{s \neq v \neq t} \frac{\sigma_{st}(v)}{\sigma_{st}}$$
+                <p class="text-[10px] text-slate-500 mt-4">Base do módulo <code>modelagem/analise_rede_hospitalar.py</code>.</p>
             </div>
         </div>
     </section>
 
     <div class="section-divider" id="features"></div>
 
-    <!-- CATÁLOGO DE FEATURES -->
+    <!-- 3. CATÁLOGO DE FEATURES COMPLETO -->
     <section class="py-32 max-w-7xl mx-auto px-6">
         <div class="text-center mb-16">
             <h2 class="text-4xl font-black uppercase mb-4 italic tracking-tighter text-cyan-500">Catálogo de Features</h2>
-            <p class="text-slate-500 max-w-2xl mx-auto font-light text-sm italic">Indicadores e modelos ativos no ecossistema LabSUS.</p>
+            <p class="text-slate-500 max-w-2xl mx-auto font-light text-sm italic">Funcionalidades nativas do framework.</p>
         </div>
 
         <div class="grid lg:grid-cols-3 gap-12">
-            <div>
-                <h3 class="text-white font-bold text-sm uppercase tracking-widest border-b border-cyan-500/20 pb-2 mb-6 flex items-center gap-2"><i data-lucide="bar-chart-2" class="w-4 h-4"></i> Indicadores SUS</h3>
+            <!-- Indicadores SUS -->
+            <div class="space-y-6">
+                <h3 class="text-white font-bold text-sm uppercase tracking-widest border-b border-cyan-500/20 pb-2 flex items-center gap-2"><i data-lucide="bar-chart-2" class="text-cyan-400 w-4 h-4"></i> Indicadores SUS</h3>
                 <div class="feature-grid grid-cols-1">
                     <div class="feature-tag"><i data-lucide="baby"></i> Mortalidade Infantil (TMI)</div>
-                    <div class="feature-tag"><i data-lucide="stethoscope"></i> Médicos por 1.000 hab.</div>
-                    <div class="feature-tag"><i data-lucide="home"></i> Cobertura Estratégia Saúde Família</div>
                     <div class="feature-tag"><i data-lucide="activity"></i> Cobertura Pré-Natal (7+)</div>
-                    <div class="feature-tag"><i data-lucide="bug"></i> Incidência Dengue / Zika</div>
+                    <div class="feature-tag"><i data-lucide="stethoscope"></i> Médicos por 1.000 hab.</div>
+                    <div class="feature-tag"><i data-lucide="home"></i> Cobertura ESF (%)</div>
+                    <div class="feature-tag"><i data-lucide="bug"></i> Incidência Dengue/Zika/Chik</div>
+                    <div class="feature-tag"><i data-lucide="lungs"></i> Indicadores Tuberculose</div>
                 </div>
             </div>
-            <div>
-                <h3 class="text-white font-bold text-sm uppercase tracking-widest border-b border-emerald-500/20 pb-2 mb-6 flex items-center gap-2"><i data-lucide="brain-circuit" class="w-4 h-4"></i> Inteligência e IA</h3>
+
+            <!-- IA e Dados -->
+            <div class="space-y-6">
+                <h3 class="text-white font-bold text-sm uppercase tracking-widest border-b border-emerald-500/20 pb-2 flex items-center gap-2"><i data-lucide="brain-circuit" class="text-emerald-400 w-4 h-4"></i> Análises e IA</h3>
                 <div class="feature-grid grid-cols-1">
                     <div class="feature-tag"><i data-lucide="shield-alert"></i> Predição Risco Óbito (XAI)</div>
                     <div class="feature-tag"><i data-lucide="type"></i> Requalificação NLP de Causa</div>
                     <div class="feature-tag"><i data-lucide="clock"></i> Análise de Sobrevida (Cox)</div>
                     <div class="feature-tag"><i data-lucide="git-pull-request"></i> Fluxo Origem-Destino</div>
                     <div class="feature-tag"><i data-lucide="target"></i> Escore Causal (PSM)</div>
+                    <div class="feature-tag"><i data-lucide="map"></i> Clusters de Vulnerabilidade</div>
                 </div>
             </div>
-            <div>
-                <h3 class="text-white font-bold text-sm uppercase tracking-widest border-b border-amber-500/20 pb-2 mb-6 flex items-center gap-2"><i data-lucide="landmark" class="w-4 h-4"></i> Gestão Estatal</h3>
+
+            <!-- Fazenda -->
+            <div class="space-y-6">
+                <h3 class="text-white font-bold text-sm uppercase tracking-widest border-b border-amber-500/20 pb-2 flex items-center gap-2"><i data-lucide="landmark" class="text-amber-400 w-4 h-4"></i> Inteligência Fazendária</h3>
                 <div class="feature-grid grid-cols-1">
                     <div class="feature-tag"><i data-lucide="coins"></i> Yield Tributário Municipal</div>
-                    <div class="feature-tag"><i data-lucide="dollar-sign"></i> Previsão Receita ICMS / ISS</div>
+                    <div class="feature-tag"><i data-lucide="trending-up"></i> Previsão Receita ICMS/ISS</div>
+                    <div class="feature-tag"><i data-lucide="shield-x"></i> Risco de Inadimplência</div>
                     <div class="feature-tag"><i data-lucide="users"></i> Perfis de Conformidade</div>
                     <div class="feature-tag"><i data-lucide="pie-chart"></i> PIB Estimado (Spline)</div>
                     <div class="feature-tag"><i data-lucide="cpu"></i> MLOps Governance</div>
@@ -347,13 +320,13 @@ ALGORITHM React_Frontend_Controller:
 
     <div class="section-divider" id="fazenda"></div>
 
-    <!-- LABSUS NA FAZENDA -->
+    <!-- 4. APLICAÇÃO MINISTÉRIO DA FAZENDA -->
     <section class="py-32 max-w-7xl mx-auto px-6">
         <div class="grid lg:grid-cols-2 gap-16 items-center">
             <div>
                 <h2 class="text-4xl font-black uppercase mb-6 italic tracking-tighter text-amber-500">LabSUS na Gestão Fazendária</h2>
                 <p class="text-slate-400 leading-relaxed font-light mb-8 text-justify italic">
-                    O LabSUS não é apenas uma aplicação de saúde; é um Padrão de Projeto transponível. Na Fazenda, o motor processa fluxos fiscais substituindo variáveis epidemiológicas por métricas tributárias sob a mesma arquitetura agnóstica.
+                    O LabSUS operacionaliza a transposição do motor de predição e agrupamento para o domínio fiscal. Substituímos variáveis epidemiológicas por métricas tributárias sob a mesma arquitetura agnóstica.
                 </p>
                 <div class="math-box bg-amber-500/5 border-amber-500/10 text-center">
                     <h5 class="text-xs font-bold text-amber-400 uppercase mb-4 tracking-widest">Yield Tributário Municipal</h5>
@@ -366,12 +339,17 @@ ALGORITHM React_Frontend_Controller:
                     <div class="flex justify-between items-center text-[10px] border-b border-white/5 pb-3">
                         <span class="text-cyan-400 font-mono italic underline">Survival analysis</span>
                         <span class="text-slate-600">→</span>
-                        <span class="text-amber-400 font-mono italic">Tempo até Inadimplência</span>
+                        <span class="text-amber-400 font-mono">Tempo até Inadimplência</span>
                     </div>
                     <div class="flex justify-between items-center text-[10px] border-b border-white/5 pb-3">
                         <span class="text-cyan-400 font-mono italic underline">Epidemic Surges</span>
                         <span class="text-slate-600">→</span>
-                        <span class="text-amber-400 font-mono italic">Surtos de Evasão Fiscal</span>
+                        <span class="text-amber-400 font-mono">Surtos de Evasão Fiscal</span>
+                    </div>
+                    <div class="flex justify-between items-center text-[10px] border-b border-white/5 pb-3">
+                        <span class="text-cyan-400 font-mono italic underline">Patient Journey</span>
+                        <span class="text-slate-600">→</span>
+                        <span class="text-amber-400 font-mono">Ciclo de Vida do Contribuinte</span>
                     </div>
                 </div>
             </div>
@@ -380,36 +358,32 @@ ALGORITHM React_Frontend_Controller:
 
     <div class="section-divider" id="governance"></div>
 
-    <!-- GOVERNANÇA DE DADOS -->
+    <!-- 5. GOVERNANÇA E SEGREGAÇÃO -->
     <section class="py-32 max-w-7xl mx-auto px-6">
+        <div class="text-center mb-16">
+            <h2 class="text-4xl font-black uppercase mb-4 italic tracking-tighter text-rose-500">Governança e Operação</h2>
+            <p class="text-slate-500 max-w-2xl mx-auto font-light text-sm italic">Protocolo de segregação técnica.</p>
+        </div>
+
         <div class="grid lg:grid-cols-2 gap-12">
-            <!-- Ambiente de P&D -->
+            <!-- Research -->
             <div class="glass p-10 rounded-[3rem] border-amber-500/20 bg-amber-500/5 relative overflow-hidden">
-                <div class="absolute top-0 right-0 p-6 opacity-10 rotate-12 text-amber-500">
-                    <i data-lucide="flask-conical" class="w-32 h-32"></i>
-                </div>
+                <div class="absolute top-0 right-0 p-6 opacity-10 rotate-12 text-amber-500"><i data-lucide="flask-conical" class="w-32 h-32"></i></div>
                 <h3 class="text-2xl font-bold text-white mb-4 italic uppercase tracking-tight">1. Ambiente de Pesquisa (P&D)</h3>
-                <p class="text-sm text-slate-400 mb-8 leading-relaxed font-light">
-                    O <b>Sandbox de Investigação</b> permite a experimentação científica. Validação de novas hipóteses via modelos candidatos (Cross-Validation) antes da submissão à Produção.
-                </p>
+                <p class="text-sm text-slate-400 mb-8 leading-relaxed font-light">Sandbox de investigação científica para validação de hipóteses e novos hiperparâmetros sem impacto operacional.</p>
                 <div class="flex flex-wrap gap-2">
                     <span class="feature-tag border-amber-500/30 text-amber-400 font-bold underline">R&D Lab</span>
-                    <span class="feature-tag border-amber-500/30 text-amber-400 font-bold underline">Hypothesis Testing</span>
+                    <span class="feature-tag border-amber-500/30 text-amber-400 font-bold underline">Cross-Validation</span>
                 </div>
             </div>
-
-            <!-- Ambiente de Produção -->
+            <!-- Production -->
             <div class="glass p-10 rounded-[3rem] border-cyan-500/20 bg-cyan-500/5 relative overflow-hidden">
-                <div class="absolute top-0 right-0 p-6 opacity-10 -rotate-12 text-cyan-500">
-                    <i data-lucide="shield-check" class="w-32 h-32"></i>
-                </div>
+                <div class="absolute top-0 right-0 p-6 opacity-10 -rotate-12 text-cyan-500"><i data-lucide="shield-check" class="w-32 h-32"></i></div>
                 <h3 class="text-2xl font-bold text-white mb-4 italic uppercase tracking-tight">2. Ambiente de Produção</h3>
-                <p class="text-sm text-slate-400 mb-8 leading-relaxed font-light">
-                    O <b>Domínio de Estabilidade Pública</b>. Algoritmos validados e pipelines auditadas garantindo disponibilidade e integridade nas métricas governamentais em tempo real.
-                </p>
+                <p class="text-sm text-slate-400 mb-8 leading-relaxed font-light">Domínio de estabilidade pública. Algoritmos validados garantindo disponibilidade e integridade em tempo real.</p>
                 <div class="flex flex-wrap gap-2">
                     <span class="feature-tag border-cyan-500/30 text-cyan-400 font-bold underline">SLA 99.9%</span>
-                    <span class="feature-tag border-cyan-500/30 text-cyan-400 font-bold underline">Managed Operations</span>
+                    <span class="feature-tag border-cyan-500/30 text-cyan-400 font-bold underline">Managed Ops</span>
                 </div>
             </div>
         </div>
@@ -427,27 +401,10 @@ ALGORITHM React_Frontend_Controller:
         </div>
     </section>
 
-    <!-- 🚀 PROJETO E VISÃO (LINKEDIN POST) -->
-    <section class="py-32 bg-cyan-600/5 border-y border-white/5">
-        <div class="max-w-4xl mx-auto px-6">
-            <h2 class="text-3xl font-black mb-8 uppercase text-center text-cyan-400">Visão Estratégica</h2>
-            <div class="p-10 glass rounded-3xl border-white/10">
-                <p class="text-sm text-slate-300 leading-relaxed font-light italic mb-6">
-                    "Transformar o aparente caos dos microdados governamentais em decisões estratégicas é o maior desafio da Saúde Digital. O LabSUS é um Design Pattern projetado para elevar a análise ao nível prescritivo."
-                </p>
-                <p class="text-xs text-slate-500 leading-relaxed space-y-4">
-                    🛠️ <b>Data Engineering:</b> Abstração e harmonização de bases (SIM, SINAN, SIH, SIA).<br>
-                    📉 <b>MLOps:</b> Arquitetura modular que orquestra ~40 modelos via Celery/Redis.<br>
-                    ⚖️ <b>Transparência (XAI):</b> Auditável via SHAP Values, traduzindo estatística em confiança clínica.
-                </p>
-            </div>
-        </div>
-    </section>
-
     <!-- Rodapé -->
     <footer class="py-24 border-t border-white/5 text-center bg-slate-950/50">
         <div class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-12 text-left text-xs uppercase tracking-widest font-bold">
-            <div class="space-y-4 max-w-3xl">
+            <div class="space-y-4 max-w-4xl">
                 <div class="flex items-center gap-2">
                     <i data-lucide="activity" class="text-cyan-500"></i>
                     <span class="font-black text-2xl tracking-tighter italic uppercase text-white">LabSUS Project</span>
@@ -458,11 +415,11 @@ ALGORITHM React_Frontend_Controller:
                 <p class="text-slate-400 text-[10px] leading-relaxed font-medium italic lowercase">
                     Pesquisador em Epidemiologia Computacional e Pesquisador Independente em Física Estatística Computacional | Desenvolvedor Python e Javascript | Engenharia de Dados em Saúde | Criador do LabSUS.
                 </p>
-                <p class="text-slate-500 text-[10px] leading-relaxed lowercase">
-                    Framework estatal agnóstico para inteligência baseada em dados. Soberania digital e eficiência na gestão pública brasileira. Aproximadamente 40 modelos especializados integrados.
+                <p class="text-slate-500 text-[10px] leading-relaxed lowercase text-justify">
+                    Framework estatal agnóstico para inteligência baseada em dados. Soberania digital e eficiência na gestão pública brasileira. Aproximadamente 40 modelos especializados integrados no motor de cálculo.
                 </p>
             </div>
-            <div class="mt-2 text-slate-700 self-start md:self-center">
+            <div class="mt-2 text-slate-700 self-start md:self-center font-mono text-[10px] uppercase tracking-widest">
                 Python • React • Scikit-Learn • Stats • Open Source
             </div>
         </div>
