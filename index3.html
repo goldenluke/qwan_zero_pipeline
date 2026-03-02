@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LabSUS | Open-source: Padrão de Projeto de Inteligência Estatal</title>
+    <title>LabSUS | Padrão de Projeto de Inteligência Estatal</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/lucide@latest"></script>
     <!-- MathJax para renderização de fórmulas complexas -->
@@ -159,7 +159,7 @@
                 Design Pattern de Inteligência Estatal & MLOps
             </div>
             <h1 class="text-6xl md:text-8xl font-black mb-10 tracking-tighter leading-[0.85]">
-                Open-source: Padrão de Projeto de <br><span class="gradient-text">Inteligência Estatal.</span>
+                Padrão de Projeto de <br><span class="gradient-text">Inteligência Estatal.</span>
             </h1>
             <p class="text-xl md:text-2xl text-slate-400 max-w-4xl mx-auto mb-12 leading-relaxed font-light">
                 O <b>LabSUS</b> operacionaliza um ecossistema de <b>aproximadamente 40 modelos matemáticos</b> especializados. Uma infraestrutura de <b>Sistemas Vivos</b> que transforma o aparente caos dos dados públicos em inteligência prescritiva para o Estado.
@@ -173,12 +173,13 @@
 
     <!-- 1. ORQUESTRAÇÃO SISTÊMICA (Pseudocode) -->
     <section class="py-32 max-w-7xl mx-auto px-6" id="stack">
-        <div class="mb-20">
-            <h2 class="text-4xl font-black uppercase mb-4 italic tracking-tighter text-cyan-500 text-center">🏛️ Lógica de Orquestração</h2>
-            <p class="text-slate-500 max-w-2xl mx-auto font-light text-sm italic text-center">Soberania algorítmica e arquitetura reativa.</p>
+        <div class="mb-20 text-center">
+            <h2 class="text-4xl font-black uppercase mb-4 italic tracking-tighter text-cyan-500">🏛️ Lógica de Orquestração</h2>
+            <p class="text-slate-500 max-w-2xl mx-auto font-light text-sm italic">Soberania algorítmica e arquitetura reativa.</p>
         </div>
 
         <div class="grid lg:grid-cols-2 gap-8 mb-16">
+            <!-- Backend -->
             <div class="glass p-8 rounded-[3rem] border-cyan-500/10">
                 <div class="flex items-center gap-4 mb-6">
                     <i data-lucide="server" class="text-cyan-400"></i>
@@ -190,6 +191,8 @@ ALGORITHM LabSUS_Enterprise_Architecture:
     SYSTEM_STACK:
         Backend: Django 5.x + REST Framework
         Queue: Redis (Broker) + Celery (Worker Nodes)
+        Database_Prod: PostgreSQL (Transactional)
+        Database_Research: Local Parquet Files + SQLite
         Frontend: React 18 + Plotly.js + Tailwind
         ML_Ops: MLflow (Tracking) + SHAP (XAI)
 
@@ -206,6 +209,7 @@ ALGORITHM LabSUS_Enterprise_Architecture:
             ENFORCE permissions()</pre>
             </div>
 
+            <!-- Frontend -->
             <div class="glass p-8 rounded-[3rem] border-emerald-500/20">
                 <div class="flex items-center gap-4 mb-6">
                     <i data-lucide="layout" class="text-emerald-400"></i>
@@ -229,8 +233,8 @@ ALGORITHM React_Frontend_Controller:
                 RENDER_VISUALIZATIONS(results)</pre>
                 <div class="mt-6 p-6 bg-emerald-500/5 rounded-2xl border border-emerald-500/10">
                     <h5 class="text-xs font-bold text-emerald-400 uppercase mb-2">Sistemas Vivos e Reativos</h5>
-                    <p class="text-[11px] text-slate-400 leading-relaxed italic">
-                        A interface não apenas exibe dados, ela gerencia o ciclo de vida da computação pesada no backend via loop de polling, sincronizando o estado do Celery em tempo real.
+                    <p class="text-[11px] text-slate-400 leading-relaxed italic text-justify">
+                        A interface não apenas exibe dados, ela gerencia o ciclo de vida da computação pesada no backend via loop de polling, sincronizando o estado do Celery permitindo que o gestor monitore cada etapa da modelagem SHAP ou do agrupamento geográfico.
                     </p>
                 </div>
             </div>
@@ -244,7 +248,7 @@ ALGORITHM React_Frontend_Controller:
             <p class="text-slate-500 max-w-2xl mx-auto font-light text-sm italic">Mathematical and operational logic rendered via Mermaid.js.</p>
         </div>
 
-        <div class="grid lg:grid-cols-2 gap-12">
+        <div class="grid lg:grid-cols-2 gap-12 text-center">
             <div class="space-y-6">
                 <h4 class="text-center text-[10px] font-bold uppercase tracking-widest text-slate-500">1. Async System Orchestration</h4>
                 <div class="mermaid">
@@ -294,7 +298,7 @@ ALGORITHM React_Frontend_Controller:
                 <h4 class="font-bold text-white uppercase text-[10px] tracking-widest mb-6 text-cyan-400 underline underline-offset-8">01. Denominadores Dinâmicos (Spline)</h4>
                 <p class="text-xs text-slate-400 mb-6 italic">Garante continuidade de 2ª ordem para denominadores intercensitários:</p>
                 $$S_i(x) = a_i(x-x_i)^3 + b_i(x-x_i)^2 + c_i(x-x_i) + d_i$$
-                <p class="text-[10px] text-slate-500 mt-4 leading-relaxed">Fundamental para o cálculo de taxas epidemiológicas estáveis: \( Rate_t = \frac{Events_t}{\hat{P}_t} \)</p>
+                <p class="text-[10px] text-slate-500 mt-4 leading-relaxed italic">Fundamental para o cálculo de taxas epidemiológicas estáveis: \( Rate_t = \frac{Events_t}{\hat{P}_t} \)</p>
             </div>
 
             <!-- K-Means Arquétipos -->
@@ -329,7 +333,7 @@ ALGORITHM React_Frontend_Controller:
     <section class="py-32 max-w-7xl mx-auto px-6">
         <div class="text-center mb-16">
             <h2 class="text-4xl font-black uppercase mb-4 italic tracking-tighter text-cyan-500">Catálogo de Features</h2>
-            <p class="text-slate-500 max-w-3xl mx-auto font-light text-sm italic leading-relaxed">
+            <p class="text-slate-500 max-w-3xl mx-auto font-light text-sm italic leading-relaxed text-center">
                 Abaixo, a listagem integral dos <b>aproximadamente 40 modelos especializados</b> integrados no motor analítico do LabSUS.
             </p>
         </div>
@@ -345,7 +349,7 @@ ALGORITHM React_Frontend_Controller:
                     <div class="feature-tag">Cobertura ESF (%)</div>
                     <div class="feature-tag">Causas Mal Definidas (CMD)</div>
                     <div class="feature-tag">Internações Sensíveis (ICSAP)</div>
-                    <div class="feature-tag">Mães Adolescentes (<20a)</div>
+                    <div class="feature-tag">Mães Adolescentes (&lt;20a)</div>
                     <div class="feature-tag">Detecção de Hanseníase</div>
                     <div class="feature-tag">Incidência Dengue</div>
                     <div class="feature-tag">Incidência Zika</div>
@@ -456,7 +460,25 @@ ALGORITHM React_Frontend_Controller:
                 <div class="text-slate-300 border-l-2 border-cyan-500 pl-4 py-1">
                     Liderança Técnica e Arquitetura: <span class="text-cyan-400 font-bold">Lucas Amaral Dourado</span>
                 </div>
-                <p class="text-slate-400 text-[10px] leading-relaxed font-medium italic lowercase">
+                <!-- NOVA SEÇÃO: ORIENTAÇÃO ACADÊMICA -->
+                <div class="mt-8 pt-8 border-t border-white/5 grid md:grid-cols-2 gap-8">
+                    <div class="space-y-2">
+                        <h4 class="text-cyan-400 font-black tracking-widest italic underline underline-offset-4 mb-3">Orientadora Científica</h4>
+                        <p class="text-white text-[11px] leading-tight mb-1">Dra. Kelly Cristina Gomes Alves</p>
+                        <p class="text-slate-400 text-[9px] lowercase leading-normal normal-case italic font-medium">
+                            Enfermeira e Obstetra (UFES) | Mestre em Saúde Coletiva (UFES) | Doutora em Medicina Tropical e Saúde Pública (UFG). Professora Adjunta da UFT com expertise em Epidemiologia, Avaliação da Atenção Primária e Doenças Crônicas.
+                        </p>
+                    </div>
+                    <div class="space-y-2">
+                        <h4 class="text-cyan-400 font-black tracking-widest italic underline underline-offset-4 mb-3">Coorientadora de Saúde Digital</h4>
+                        <p class="text-white text-[11px] leading-tight mb-1">Ma. Michelle de Jesus Pantoja Filgueira</p>
+                        <p class="text-slate-400 text-[9px] lowercase leading-normal normal-case italic font-medium">
+                            Enfermeira (UEPA) | Mestre em Ensino em Ciências da Saúde (UNIFESP) | Doutoranda (UNIFESP). Especialista em Saúde Digital e Coordenadora do Telessaúde Tocantins. Professora da UFT com foco em Sistemas de Informação e Saúde da Família.
+                        </p>
+                    </div>
+                </div>
+                <!-- FIM DA SEÇÃO -->
+                <p class="text-slate-400 text-[10px] leading-relaxed font-medium italic lowercase pt-4">
                     Pesquisador em Epidemiologia Computacional e Pesquisador Independente em Física Estatística Computacional | Desenvolvedor Python e Javascript | Engenharia de Dados em Saúde | Criador do LabSUS.
                 </p>
                 <p class="text-slate-500 text-[10px] leading-relaxed lowercase text-justify">
