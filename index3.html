@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-pt">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -96,7 +96,7 @@
         </div>
     </nav>
 
-    <!-- Hero Section -->
+    <!-- Secção Hero -->
     <header class="relative pt-48 pb-32 px-6 overflow-hidden">
         <div class="absolute top-0 left-1/2 -translate-x-1/2 w-[1200px] h-[600px] bg-cyan-600/10 blur-[160px] rounded-full -z-10"></div>
         <div class="max-w-6xl mx-auto text-center">
@@ -106,9 +106,14 @@
             <h1 class="text-6xl md:text-8xl font-black mb-10 tracking-tighter leading-[0.85]">
                 Manual de Lógica <br><span class="gradient-text">Full-Stack LabSUS.</span>
             </h1>
-            <p class="text-xl md:text-2xl text-slate-400 max-w-4xl mx-auto mb-12 leading-relaxed font-light">
-                O <b>LabSUS</b> materializa a união entre a engenharia de dados e a epidemiologia digital. Esta seção detalha a fundamentação matemática do <b>Backend</b> e a reatividade do <b>Frontend</b>.
+            <p class="text-xl md:text-2xl text-slate-400 max-w-4xl mx-auto mb-6 leading-relaxed font-light">
+                O <b>LabSUS</b> materializa a união entre a engenharia de dados e a epidemiologia digital. Esta secção detalha a fundamentação matemática do <b>Backend</b> e a reatividade do <b>Frontend</b>.
             </p>
+            <!-- Autor -->
+            <div class="flex items-center justify-center gap-2 text-cyan-500/80 font-mono text-sm tracking-widest uppercase mb-12">
+                <i data-lucide="user" class="w-4 h-4"></i>
+                Autor: <span class="font-bold text-cyan-400">Lucas Amaral Dourado</span>
+            </div>
         </div>
     </header>
 
@@ -120,7 +125,7 @@
             <div>
                 <h2 class="text-4xl font-black mb-8 uppercase italic">Arquitetura de <span class="text-cyan-500">Orquestração</span></h2>
                 <p class="text-slate-400 text-lg leading-relaxed mb-8 font-light italic">
-                    Como processamos bilhões de registros sem comprometer a experiência do usuário.
+                    Como processamos mil milhões de registos sem comprometer a experiência do utilizador.
                 </p>
                 <div class="space-y-6">
                     <div class="p-6 glass rounded-2xl border-cyan-500/20">
@@ -128,7 +133,7 @@
                             Orquestração Assíncrona (Backend)
                         </h4>
                         <p class="text-xs text-slate-500 leading-relaxed italic text-justify">
-                            Utilizamos <b>Celery</b> e <b>Redis</b>. O servidor Django dispara a <i>task</i>, retornando imediatamente um <code class="text-cyan-400">task_id</code>. O processamento pesado ocorre em <i>workers</i> isolados, notificando o status via banco de dados ou mensageria.
+                            Utilizamos <b>Celery</b> e <b>Redis</b>. O servidor Django dispara a <i>task</i>, retornando imediatamente um <code class="text-cyan-400">task_id</code>. O processamento pesado ocorre em <i>workers</i> isolados, notificando o estado via base de dados ou mensageria.
                         </p>
                     </div>
                     <div class="p-6 glass rounded-2xl border-emerald-500/20">
@@ -136,7 +141,7 @@
                             Reatividade por Polling (Frontend)
                         </h4>
                         <p class="text-xs text-slate-500 leading-relaxed italic text-justify">
-                            O hook customizado <code class="text-emerald-400">useCeleryTaskStatus</code> monitora o endpoint de status a cada 2 segundos. Isso permite atualizar barras de progresso e botões dinâmicos em tempo real no React.
+                            O hook customizado <code class="text-emerald-400">useCeleryTaskStatus</code> monitoriza o endpoint de estado a cada 2 segundos. Isso permite atualizar barras de progresso e botões dinâmicos em tempo real no React.
                         </p>
                     </div>
                 </div>
@@ -154,7 +159,7 @@
         </div>
     </section>
 
-    <!-- BACKEND Section -->
+    <!-- Secção BACKEND -->
     <section id="backend" class="py-32 bg-white/[0.01] border-y border-white/5">
         <div class="max-w-7xl mx-auto px-6">
             <div class="text-center mb-20">
@@ -195,7 +200,7 @@
                 <!-- Risco Clínico -->
                 <div class="glass p-10 rounded-[3rem] border-white/5">
                     <h4 class="font-bold text-white uppercase text-xs tracking-widest mb-6 text-rose-400">Risco Clínico (Regressão Logística)</h4>
-                    <p class="text-xs text-slate-400 mb-6 leading-relaxed italic">Determinação da probabilidade de óbito \(P\) baseada em variáveis demográficas e comorbidades.</p>
+                    <p class="text-xs text-slate-400 mb-6 leading-relaxed italic">Determinação da probabilidade de óbito \(P\) baseada em variáveis demográficas e comorbilidades.</p>
                     <div class="math-block">
                         $$ P = \frac{1}{1 + e^{-(\beta_0 + \beta_1x_1 + ...)}} $$
                     </div>
@@ -215,7 +220,7 @@
         </div>
     </section>
 
-    <!-- FRONTEND Section -->
+    <!-- Secção FRONTEND -->
     <section id="frontend" class="py-32 max-w-7xl mx-auto px-6">
         <div class="grid lg:grid-cols-2 gap-20 items-center">
             <div class="order-1">
@@ -230,7 +235,7 @@
                         </div>
                         <div>
                             <h5 class="text-sm font-bold text-white uppercase mb-1">Injeção Dinâmica de GeoJSON</h5>
-                            <p class="text-xs text-slate-500 italic">Carregamento de malhas municipais sob demanda por UF, otimizando o consumo de memória do navegador.</p>
+                            <p class="text-xs text-slate-500 italic">Carregamento de malhas municipais sob procura por UF, otimizando o consumo de memória do navegador.</p>
                         </div>
                     </li>
                     <li class="flex gap-4">
@@ -245,7 +250,7 @@
                 </ul>
             </div>
             <div class="order-2 glass rounded-3xl p-6 border-white/5">
-                <img src="https://images.unsplash.com/photo-1551288049-bbbda536339a?auto=format&fit=crop&q=80&w=800" class="rounded-2xl opacity-50 grayscale hover:grayscale-0 transition duration-700 mb-6" alt="Data Visualization Example">
+                <img src="https://images.unsplash.com/photo-1551288049-bbbda536339a?auto=format&fit=crop&q=80&w=800" class="rounded-2xl opacity-50 grayscale hover:grayscale-0 transition duration-700 mb-6" alt="Exemplo de Visualização de Dados">
                 <div class="bg-black/40 rounded-2xl p-4">
                     <h5 class="text-[10px] uppercase font-bold text-slate-500 mb-4 tracking-widest text-center">Stack Tecnológica</h5>
                     <div class="flex flex-wrap justify-center gap-3">
@@ -258,15 +263,15 @@
         </div>
     </section>
 
-    <!-- GITHUB & COMMUNITY Section -->
-    <section id="github" class="py-32 bg-cyan-600/5 border-y border-white/5">
-        <div class="max-w-7xl mx-auto px-6 text-center">
+    <!-- GITHUB & COMUNIDADE Section -->
+    <section id="github" class="py-32 bg-cyan-600/5 border-y border-white/5 text-center">
+        <div class="max-w-7xl mx-auto px-6">
             <h2 class="text-4xl font-black uppercase mb-4 italic">Código Aberto & <span class="text-cyan-500">Comunidade</span></h2>
-            <p class="text-slate-400 max-w-2xl mx-auto font-light mb-16 italic">
-                O LabSUS é um projeto comunitário. Acreditamos que a transparência algorítmica e a colaboração são as bases para uma saúde pública eficiente.
+            <p class="text-slate-400 max-w-2xl mx-auto font-light mb-16 italic leading-relaxed">
+                O LabSUS é um projeto comunitário. Acreditamos que a transparência algorítmica e a colaboração são as bases para uma saúde pública eficiente. Junte-se a nós para fortalecer o ecossistema SUS.
             </p>
 
-            <!-- Simulated GitHub Card -->
+            <!-- Card Simulado do GitHub -->
             <div class="max-w-4xl mx-auto glass rounded-3xl overflow-hidden border-white/10 text-left mb-12 shadow-2xl">
                 <div class="bg-white/5 p-6 border-b border-white/10 flex items-center justify-between">
                     <div class="flex items-center gap-4">
@@ -286,13 +291,13 @@
                     </div>
                 </div>
                 <div class="p-8">
-                    <h4 class="text-white font-bold mb-4 text-xl tracking-tight">Junte-se ao desenvolvimento</h4>
+                    <h4 class="text-white font-bold mb-4 text-xl tracking-tight italic">Convite à Contribuição</h4>
                     <p class="text-slate-400 text-sm leading-relaxed mb-8">
-                        Você pode contribuir com a melhoria dos nossos modelos de predição, otimização de pipelines ETL ou no desenvolvimento de novos dashboards reativos. Toda contribuição é bem-vinda para fortalecer o ecossistema SUS.
+                        Ajude-nos a melhorar os nossos modelos de predição, otimizar pipelines de ETL ou desenvolver novos dashboards reativos. Toda a contribuição técnica, desde a correção de bugs até novas funcionalidades de Machine Learning, é fundamental para o sucesso do LabSUS.
                     </p>
                     <div class="flex flex-wrap gap-4">
                         <a href="https://github.com/goldenluke/labsus" target="_blank" class="bg-white text-black px-8 py-3 rounded-xl font-black text-xs hover:scale-105 transition-transform flex items-center gap-2">
-                            <i data-lucide="github" class="w-4 h-4"></i> ACESSAR REPOSITÓRIO
+                            <i data-lucide="github" class="w-4 h-4"></i> ACEDER AO REPOSITÓRIO
                         </a>
                         <a href="https://github.com/goldenluke/labsus/issues" target="_blank" class="bg-slate-800 text-white px-8 py-3 rounded-xl font-black text-xs hover:bg-slate-700 transition flex items-center gap-2">
                             <i data-lucide="info" class="w-4 h-4"></i> REPORTAR PROBLEMA
@@ -307,19 +312,19 @@
                 </h5>
                 <ol class="text-xs text-slate-500 space-y-3 font-light">
                     <li>1. Faça um <b>Fork</b> do repositório oficial.</li>
-                    <li>2. Implemente melhorias em uma <b>Feature Branch</b>.</li>
-                    <li>3. Abra um <b>Pull Request</b> detalhando as mudanças técnicas.</li>
-                    <li>4. Participe das discussões nas <b>Issues</b> abertas.</li>
+                    <li>2. Implemente melhorias numa <b>Feature Branch</b> específica.</li>
+                    <li>3. Abra um <b>Pull Request</b> detalhando as alterações técnicas realizadas.</li>
+                    <li>4. Participe nas discussões nas <b>Issues</b> abertas.</li>
                 </ol>
             </div>
         </div>
     </section>
 
-    <!-- Documentação Section -->
-    <section id="documentation" class="py-32 max-w-7xl mx-auto px-6">
-        <div class="text-center mb-16">
+    <!-- Documentação Secção -->
+    <section id="documentation" class="py-32 max-w-7xl mx-auto px-6 text-center">
+        <div class="mb-16">
             <h2 class="text-4xl font-black uppercase mb-4 italic">Referência <span class="text-cyan-500">Técnica PDF</span></h2>
-            <p class="text-slate-400 max-w-3xl mx-auto font-light mb-12 italic">Visualize o Manual de Projeto detalhado abaixo.</p>
+            <p class="text-slate-400 max-w-3xl mx-auto font-light mb-12 italic">Visualize o Manual de Projeto detalhado abaixo para compreensão profunda dos processos.</p>
         </div>
 
         <div class="pdf-container glass relative group mb-12">
@@ -331,7 +336,7 @@
         </div>
     </section>
 
-    <!-- Footer -->
+    <!-- Rodapé -->
     <footer class="py-24 border-t border-white/5 text-center">
         <div class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-12 text-left">
             <div class="space-y-4">
@@ -339,8 +344,11 @@
                     <i data-lucide="activity" class="text-cyan-500"></i>
                     <span class="font-black text-2xl tracking-tighter italic">LabSUS Project</span>
                 </div>
+                <div class="text-slate-400 font-mono text-xs uppercase tracking-tighter">
+                    Desenvolvido por: <span class="text-cyan-400 font-bold">Lucas Amaral Dourado</span>
+                </div>
                 <p class="text-slate-500 text-sm max-w-sm leading-relaxed font-light italic">
-                    Engenharia de dados a serviço da vida. Tecnologia brasileira para a eficiência do SUS.
+                    Engenharia de dados ao serviço da vida. Tecnologia brasileira para a eficiência do SUS.
                 </p>
             </div>
             <div class="mt-2 text-[10px] text-slate-700 uppercase tracking-[0.4em] font-bold">
