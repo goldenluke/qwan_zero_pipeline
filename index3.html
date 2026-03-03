@@ -83,7 +83,7 @@
             background: #000;
         }
 
-        /* Flowchart Components */
+        /* Componentes de Fluxograma */
         .flow-node {
             @apply p-4 rounded-xl border text-center font-bold text-[10px] uppercase tracking-tighter flex flex-col items-center justify-center gap-2;
             min-width: 140px;
@@ -92,8 +92,6 @@
         }
         .flow-arrow { @apply flex items-center justify-center text-cyan-500; }
         .node-active { border-color: var(--primary); color: var(--primary); box-shadow: 0 0 15px rgba(6, 182, 212, 0.15); }
-        .node-research { border-color: var(--warning); color: var(--warning); }
-        .node-prod { border-color: var(--accent); color: var(--accent); }
 
         pre {
             background: #000 !important;
@@ -105,19 +103,9 @@
         }
 
         .feature-tag {
-            background: rgba(6, 182, 212, 0.05);
-            border: 1px solid rgba(6, 182, 212, 0.15);
-            padding: 4px 10px;
-            border-radius: 6px;
-            font-size: 0.65rem;
-            color: #22d3ee;
-            font-family: 'JetBrains Mono', monospace;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            transition: all 0.2s;
+            @apply bg-cyan-500/5 border border-cyan-500/15 p-2 rounded-lg text-[10px] text-cyan-300 font-mono flex items-center gap-2 transition-all;
         }
-        .feature-tag:hover { background: rgba(6, 182, 212, 0.1); border-color: var(--primary); transform: translateX(2px); }
+        .feature-tag:hover { @apply bg-cyan-500/10 border-cyan-500/40 translate-x-1; }
 
         .math-box {
             background: rgba(0, 0, 0, 0.4);
@@ -137,13 +125,12 @@
         #lightbox {
             display: none;
             position: fixed;
-            z-index: 100;
+            z-index: 1000;
             padding-top: 50px;
             left: 0;
             top: 0;
             width: 100%;
             height: 100%;
-            overflow: auto;
             background-color: rgba(2, 6, 23, 0.95);
             backdrop-filter: blur(10px);
         }
@@ -160,23 +147,12 @@
             from {transform:scale(0.8)} 
             to {transform:scale(1)}
         }
-        .close-lightbox {
-            position: absolute;
-            top: 20px;
-            right: 35px;
-            color: #f1f1f1;
-            font-size: 40px;
-            font-weight: bold;
-            transition: 0.3s;
-            cursor: pointer;
-        }
     </style>
 </head>
 <body class="grid-bg text-slate-200">
 
     <!-- Modal para ampliação de imagens -->
     <div id="lightbox" onclick="this.style.display='none'">
-        <span class="close-lightbox">&times;</span>
         <img id="lightbox-content" src="" alt="Imagem ampliada">
     </div>
 
@@ -189,10 +165,10 @@
             </div>
             <div class="hidden lg:flex gap-8 text-[10px] uppercase tracking-widest font-bold text-slate-500">
                 <a href="#overview" class="hover:text-white transition">Enciclopédia</a>
-                <a href="#frontend-gallery" class="hover:text-white transition text-emerald-400 font-black">Interface</a>
-                <a href="#stack" class="hover:text-white transition">Orquestração</a>
-                <a href="#math" class="hover:text-white transition text-cyan-400">Matemática</a>
-                <a href="#fazenda" class="hover:text-white transition text-amber-400">Fazenda</a>
+                <a href="#frontend-gallery" class="hover:text-white transition">Interface</a>
+                <a href="#math" class="hover:text-white transition text-cyan-400 font-black">Matemática Pura</a>
+                <a href="#fazenda" class="hover:text-white transition text-amber-400 font-black">Fazenda</a>
+                <a href="#features" class="hover:text-white transition">40 Modelos</a>
             </div>
             <div class="flex gap-3">
                 <a href="https://github.com/goldenluke/labsus" target="_blank" class="flex items-center gap-2 bg-slate-800 text-white px-4 py-1.5 rounded-lg text-[10px] font-bold hover:bg-slate-700 transition border border-white/10">
@@ -236,185 +212,213 @@
         </div>
     </header>
 
-    <!-- INTERFACE GALLERY (CLICÁVEL) -->
+    <!-- 1. GALERIA DA INTERFACE (LIGHTBOX ATIVO) -->
     <section class="py-32 max-w-7xl mx-auto px-6" id="frontend-gallery">
         <div class="text-center mb-16">
             <h2 class="text-4xl font-black uppercase mb-4 italic tracking-tighter text-emerald-500">Interface de Decisão Estatal</h2>
-            <p class="text-slate-500 max-w-2xl mx-auto font-light text-sm italic">Evidências visuais da materialização dos modelos (Clique para ampliar).</p>
+            <p class="text-slate-500 max-w-2xl mx-auto font-light text-sm italic">Materialização visual dos modelos (Clique para ampliar).</p>
         </div>
 
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            <!-- Imagem 1 -->
-            <div class="group relative" onclick="openLightbox('https://github.com/goldenluke/qwan_zero_pipeline/blob/main/Untitled.jpeg?raw=true')">
-                <img src="https://github.com/goldenluke/qwan_zero_pipeline/blob/main/Untitled.jpeg?raw=true" alt="LabSUS Dashboard 1" class="frontend-img">
-                <div class="absolute inset-0 bg-cyan-900/20 opacity-0 group-hover:opacity-100 transition rounded-xl pointer-events-none"></div>
-                <div class="absolute bottom-4 left-4 text-[9px] font-mono text-cyan-400 opacity-0 group-hover:opacity-100 transition uppercase">UI_MODULE_CORE_01</div>
-            </div>
-            <!-- Imagem 2 -->
-            <div class="group relative" onclick="openLightbox('https://github.com/goldenluke/qwan_zero_pipeline/blob/main/Untitled2.jpeg?raw=true')">
-                <img src="https://github.com/goldenluke/qwan_zero_pipeline/blob/main/Untitled2.jpeg?raw=true" alt="LabSUS Dashboard 2" class="frontend-img">
-                <div class="absolute bottom-4 left-4 text-[9px] font-mono text-cyan-400 opacity-0 group-hover:opacity-100 transition uppercase">UI_MODULE_MAPS_02</div>
-            </div>
-            <!-- Imagem 3 -->
-            <div class="group relative" onclick="openLightbox('https://github.com/goldenluke/qwan_zero_pipeline/blob/main/Untitled3.jpeg?raw=true')">
-                <img src="https://github.com/goldenluke/qwan_zero_pipeline/blob/main/Untitled3.jpeg?raw=true" alt="LabSUS Dashboard 3" class="frontend-img">
-                <div class="absolute bottom-4 left-4 text-[9px] font-mono text-cyan-400 opacity-0 group-hover:opacity-100 transition uppercase">UI_MODULE_STATS_03</div>
-            </div>
-            <!-- Imagem 4 -->
-            <div class="group relative" onclick="openLightbox('https://github.com/goldenluke/qwan_zero_pipeline/blob/main/Untitled4.jpeg?raw=true')">
-                <img src="https://github.com/goldenluke/qwan_zero_pipeline/blob/main/Untitled4.jpeg?raw=true" alt="LabSUS Dashboard 4" class="frontend-img">
-                <div class="absolute bottom-4 left-4 text-[9px] font-mono text-cyan-400 opacity-0 group-hover:opacity-100 transition uppercase">UI_MODULE_ANALYTICS_04</div>
-            </div>
-            <!-- Imagem 5 -->
-            <div class="group relative" onclick="openLightbox('https://github.com/goldenluke/qwan_zero_pipeline/blob/main/Untitled5.jpeg?raw=true')">
-                <img src="https://github.com/goldenluke/qwan_zero_pipeline/blob/main/Untitled5.jpeg?raw=true" alt="LabSUS Dashboard 5" class="frontend-img">
-                <div class="absolute bottom-4 left-4 text-[9px] font-mono text-cyan-400 opacity-0 group-hover:opacity-100 transition uppercase">UI_MODULE_FORECAST_05</div>
-            </div>
-            <!-- Imagem 6 -->
-            <div class="group relative" onclick="openLightbox('https://github.com/goldenluke/qwan_zero_pipeline/blob/main/Untitled6.jpeg?raw=true')">
-                <img src="https://github.com/goldenluke/qwan_zero_pipeline/blob/main/Untitled6.jpeg?raw=true" alt="LabSUS Dashboard 6" class="frontend-img">
-                <div class="absolute bottom-4 left-4 text-[9px] font-mono text-cyan-400 opacity-0 group-hover:opacity-100 transition uppercase">UI_MODULE_MLOPS_06</div>
-            </div>
-            <!-- Imagem 7 -->
-            <div class="group relative" onclick="openLightbox('https://github.com/goldenluke/qwan_zero_pipeline/blob/main/Untitled7.jpeg?raw=true')">
-                <img src="https://github.com/goldenluke/qwan_zero_pipeline/blob/main/Untitled7.jpeg?raw=true" alt="LabSUS Dashboard 7" class="frontend-img">
-                <div class="absolute bottom-4 left-4 text-[9px] font-mono text-cyan-400 opacity-0 group-hover:opacity-100 transition uppercase">UI_SYST_INT_07</div>
-            </div>
+            <img src="https://github.com/goldenluke/qwan_zero_pipeline/blob/main/Untitled.jpeg?raw=true" onclick="openLightbox(this.src)" class="frontend-img" alt="UI 1">
+            <img src="https://github.com/goldenluke/qwan_zero_pipeline/blob/main/Untitled2.jpeg?raw=true" onclick="openLightbox(this.src)" class="frontend-img" alt="UI 2">
+            <img src="https://github.com/goldenluke/qwan_zero_pipeline/blob/main/Untitled3.jpeg?raw=true" onclick="openLightbox(this.src)" class="frontend-img" alt="UI 3">
+            <img src="https://github.com/goldenluke/qwan_zero_pipeline/blob/main/Untitled4.jpeg?raw=true" onclick="openLightbox(this.src)" class="frontend-img" alt="UI 4">
+            <img src="https://github.com/goldenluke/qwan_zero_pipeline/blob/main/Untitled5.jpeg?raw=true" onclick="openLightbox(this.src)" class="frontend-img" alt="UI 5">
+            <img src="https://github.com/goldenluke/qwan_zero_pipeline/blob/main/Untitled6.jpeg?raw=true" onclick="openLightbox(this.src)" class="frontend-img" alt="UI 6">
+            <img src="https://github.com/goldenluke/qwan_zero_pipeline/blob/main/Untitled7.jpeg?raw=true" onclick="openLightbox(this.src)" class="frontend-img" alt="UI 7">
+            <div class="glass flex items-center justify-center rounded-xl border border-white/5 h-64 text-[10px] font-mono text-slate-600 uppercase tracking-widest italic">Sistema Integrado LabSUS</div>
         </div>
     </section>
 
-    <div class="section-divider" id="stack"></div>
+    <div class="section-divider" id="math"></div>
 
-    <!-- ORQUESTRAÇÃO SISTÊMICA (Pseudocode) -->
-    <section class="py-32 max-w-7xl mx-auto px-6">
-        <div class="mb-20 text-center">
-            <h2 class="text-4xl font-black uppercase mb-4 italic tracking-tighter text-cyan-500">🏛️ Lógica de Orquestração</h2>
-        </div>
-
-        <div class="grid lg:grid-cols-2 gap-8 mb-16">
-            <div class="glass p-8 rounded-[3rem] border-cyan-500/10">
-                <div class="flex items-center gap-4 mb-6">
-                    <i data-lucide="server" class="text-cyan-400"></i>
-                    <h4 class="text-white font-bold uppercase text-xs tracking-widest text-center">Global System Orchestrator (Backend)</h4>
-                </div>
-                <pre class="mono text-cyan-300">
-# LabSUS CORE: GLOBAL SYSTEM ORCHESTRATOR
-ALGORITHM LabSUS_Enterprise_Architecture:
-    SYSTEM_STACK:
-        Backend: Django 5.x + REST Framework
-        Queue: Redis (Broker) + Celery (Worker Nodes)
-        Database_Prod: PostgreSQL (Transactional)
-        Database_Research: Local Parquet Files + SQLite
-        Frontend: React 18 + Plotly.js + Tailwind
-        ML_Ops: MLflow (Tracking) + SHAP (XAI)
-
-    PROCEDURE Initialize_Environment(mode):
-        IF mode == "RESEARCH_AND_DEVELOPMENT":
-            ENABLE debug_logs()
-            MOUNT data_lake_local()  
-            ALLOW model_experimentation()
-            
-        ELSE IF mode == "PRODUCTION_OPERATIONS":
-            DISABLE sensitive_logging()
-            MOUNT secure_cloud_volumes()
-            CONFIG persistence = Managed_PostgreSQL + Redis_Cache</pre>
-            </div>
-
-            <div class="glass p-8 rounded-[3rem] border-emerald-500/20">
-                <div class="flex items-center gap-4 mb-6">
-                    <i data-lucide="layout" class="text-emerald-400"></i>
-                    <h4 class="text-white font-bold uppercase text-xs tracking-widest text-center">Frontend Controller (React Logic)</h4>
-                </div>
-                <pre class="mono text-emerald-300">
-# LabSUS UI: CLIENT-SIDE CONTROLLER
-ALGORITHM React_Frontend_Controller:
-    COMPONENT Dashboard:
-        STATE: selectedFile, mapData, isLoading
-
-        ON_USER_SUBMIT (Trigger_Pipeline):
-            task_id = API.post("/trigger/", config)
-            START_POLLING(task_id)
-
-        POLLING_LOOP:
-            WHILE task.status IN [PENDING, PROGRESS]:
-                update_progress_ui(task.percent)
-            IF task.success:
-                results = API.get("/results/")
-                RENDER_VISUALIZATIONS(results)</pre>
-            </div>
-        </div>
-    </section>
-
-    <!-- VISUAL ENGINEERING FLOWS (ENGLISH) -->
-    <section class="py-32 max-w-7xl mx-auto px-6" id="flow">
-        <div class="text-center mb-16">
-            <h2 class="text-4xl font-black uppercase mb-4 italic tracking-tighter text-emerald-500">Visual Engineering Flows</h2>
-        </div>
-
-        <div class="grid lg:grid-cols-2 gap-12 text-center">
-            <div class="space-y-6">
-                <h4 class="text-center text-[10px] font-bold uppercase tracking-widest text-slate-500">1. Async System Orchestration</h4>
-                <div class="mermaid">
-                graph LR
-                    UI[React UI] -- "POST" --> API[Django API]
-                    API -- "Enqueue" --> Broker[Redis]
-                    Broker -- "Execute" --> Worker[Celery]
-                    Worker -- "Ingest" --> PySUS[PySUS Engine]
-                    PySUS -- "Fetch" --> Data[DATASUS Servers]
-                    Worker -- "Update" --> DB[(Redis Status)]
-                    DB -- "Polling" --> UI
-                </div>
-            </div>
-            <div class="space-y-6">
-                <h4 class="text-center text-[10px] font-bold uppercase tracking-widest text-slate-500">2. Normalization & MLOps Pipeline</h4>
-                <div class="mermaid">
-                graph TD
-                    Raw[Raw Events Data] --> Ingest[Ingestion]
-                    Census[IBGE Census] --> Spline[Cubic Spline]
-                    Ingest --> Join[Spatial Join]
-                    Spline --> Denom[Denominator]
-                    Join --> Norm[Rate Normalization]
-                    Norm --> Models{40+ Models}
-                    Models --> KMeans[Clustering]
-                    Models --> Prophet[Forecast]
-                    Models --> Logit[Risk Inference]
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- FUNDAMENTAÇÃO MATEMÁTICA INTEGRAL -->
+    <!-- 2. FUNDAMENTAÇÃO MATEMÁTICA E TEORIA QWAN -->
     <section class="py-32 max-w-7xl mx-auto px-6" id="math">
         <div class="text-center mb-24">
-            <h2 class="text-5xl font-black uppercase mb-4 italic tracking-tight underline decoration-cyan-500/30 underline-offset-8 text-cyan-400 text-center">Fundamentação Matemática</h2>
+            <h2 class="text-5xl font-black uppercase mb-4 italic tracking-tight underline decoration-cyan-500/30 underline-offset-8 text-cyan-400">Fundamentação Matemática</h2>
+            <p class="text-slate-500 max-w-3xl mx-auto font-light text-sm italic leading-relaxed">
+                Derivações de <b>Física Estatística</b> e <b>Sistemas Complexos</b> que sustentam o Regime QWAN.
+            </p>
         </div>
 
-        <div class="grid lg:grid-cols-2 gap-8">
-            <div class="glass p-10 rounded-[3rem] border-white/5 math-box relative overflow-hidden text-center">
-                <div class="absolute top-0 right-0 p-4 opacity-5"><i data-lucide="database" class="w-16 h-16 text-cyan-400"></i></div>
-                <h4 class="font-bold text-white uppercase text-[10px] tracking-widest mb-6 text-cyan-400 underline underline-offset-8">01. Denominadores Dinâmicos (Spline)</h4>
-                $$S_i(x) = a_i(x-x_i)^3 + b_i(x-x_i)^2 + c_i(x-x_i) + d_i$$
-                <p class="text-[10px] text-slate-500 mt-4 leading-relaxed italic">Normalização de taxas estáveis: \( Rate_t = \frac{Events_t}{\hat{P}_t} \)</p>
+        <div class="grid lg:grid-cols-2 gap-12">
+            <!-- 01. Teoria QWAN: Metaestabilidade -->
+            <div class="glass p-10 rounded-[3rem] border-indigo-500/20 bg-indigo-500/5 math-box relative overflow-hidden lg:col-span-2">
+                <div class="absolute top-0 right-0 p-8 opacity-10"><i data-lucide="zap" class="w-32 h-32 text-indigo-400"></i></div>
+                <h4 class="font-bold text-white uppercase text-[12px] tracking-widest mb-6 text-indigo-400 underline underline-offset-8">Teoria QWAN: Metaestabilidade Computacional</h4>
+                <p class="text-sm text-slate-300 mb-6 italic text-justify leading-relaxed">
+                    Formalizamos o <b>Regime QWAN (\(\mathcal{R}_{Q}\))</b> como o ponto de criticidade marginal onde sistemas maximizam sua eficiência informacional. Na saúde pública, isso representa o limiar onde a rede hospitalar opera com máxima resposta adaptativa antes do colapso.
+                </p>
+                <div class="grid md:grid-cols-2 gap-8 items-center">
+                    <div>
+                        <p class="text-[11px] text-slate-400 mb-2 uppercase font-bold">Condição de Lyapunov para Adaptabilidade:</p>
+                        <div class="bg-black/40 p-4 rounded-xl border border-indigo-500/30 text-center">
+                            $$\lambda_{max} \approx 0 \quad \text{e} \quad \mathcal{I}(\xi) = H(x) \cdot \mathcal{F}(x)$$
+                        </div>
+                    </div>
+                    <p class="text-[10px] text-slate-500 leading-relaxed italic">
+                        Onde \(H(x)\) é a Entropia de Shannon (diversidade) e \(\mathcal{F}(x)\) é a Informação de Fisher (ordem estatística). A inteligência estrutural é maximizada na "borda do caos".
+                    </p>
+                </div>
             </div>
 
-            <div class="glass p-10 rounded-[3rem] border-white/5 math-box relative overflow-hidden text-center">
-                <div class="absolute top-0 right-0 p-4 opacity-5"><i data-lucide="layers" class="w-16 h-16 text-emerald-400"></i></div>
-                <h4 class="font-bold text-white uppercase text-[10px] tracking-widest mb-6 text-emerald-400 underline underline-offset-8">02. Similaridade de Arquétipos</h4>
-                $$J = \sum_{i=1}^{k} \sum_{x \in S_i} ||x - \mu_i||^2 \quad \implies \quad Label = \text{arg min}_{j} d(\mu_i, A_j)$$
+            <!-- 02. Normalização Spline -->
+            <div class="glass p-10 rounded-[3rem] border-white/5 math-box relative overflow-hidden">
+                <div class="absolute top-0 right-0 p-4 opacity-5"><i data-lucide="database" class="w-16 h-16 text-cyan-400"></i></div>
+                <h4 class="font-bold text-white uppercase text-[11px] tracking-widest mb-6 text-cyan-400 underline underline-offset-8">Continuidade Populacional (Splines)</h4>
+                <p class="text-xs text-slate-400 mb-6 italic text-justify leading-relaxed">
+                    Para garantir que taxas epidemiológicas não sofram saltos artificiais entre anos de censo, utilizamos <b>Splines Cúbicas Naturais</b> para interpolar denominadores populacionais, minimizando a energia de curvatura da função de estimativa.
+                </p>
+                $$S_i(x) = a_i(x-x_i)^3 + b_i(x-x_i)^2 + c_i(x-x_i) + d_i$$
+            </div>
+
+            <!-- 03. Autocorrelação Espacial -->
+            <div class="glass p-10 rounded-[3rem] border-white/5 math-box relative overflow-hidden">
+                <div class="absolute top-0 right-0 p-4 opacity-5"><i data-lucide="map-pin" class="w-16 h-16 text-emerald-400"></i></div>
+                <h4 class="font-bold text-white uppercase text-[11px] tracking-widest mb-6 text-emerald-400 underline underline-offset-8">Dependência Territorial (I de Moran)</h4>
+                <p class="text-xs text-slate-400 mb-6 italic text-justify leading-relaxed">
+                    Utilizamos o I de Moran para detectar se a carga de doença (ou Yield tributário) em um município é influenciada pela sua vizinhança, separando efeitos estruturais regionais de anomalias locais.
+                </p>
+                $$I = \frac{n}{W} \frac{\sum_i \sum_j w_{ij} z_i z_j}{\sum_i z_i^2}$$
+            </div>
+
+             <!-- 04. Time-Series Interrompida -->
+             <div class="glass p-10 rounded-[3rem] border-white/5 math-box relative overflow-hidden">
+                <div class="absolute top-0 right-0 p-4 opacity-5"><i data-lucide="git-branch" class="w-16 h-16 text-amber-400"></i></div>
+                <h4 class="font-bold text-white uppercase text-[11px] tracking-widest mb-6 text-amber-400 underline underline-offset-8">Avaliação de Impacto (DiD)</h4>
+                <p class="text-xs text-slate-400 mb-6 italic text-justify leading-relaxed">
+                    A lógica de <b>Diferença em Diferenças (DiD)</b> isola o efeito causal de uma política pública (ex: nova unidade de saúde) comparando as trajetórias de grupos de controle e intervenção.
+                </p>
+                $$\delta = (Y_{T,post} - Y_{T,pre}) - (Y_{C,post} - Y_{C,pre})$$
+            </div>
+
+            <!-- 05. Explicabilidade SHAP -->
+            <div class="glass p-10 rounded-[3rem] border-white/5 math-box relative overflow-hidden">
+                <div class="absolute top-0 right-0 p-4 opacity-5"><i data-lucide="shield-check" class="w-16 h-16 text-rose-400"></i></div>
+                <h4 class="font-bold text-white uppercase text-[11px] tracking-widest mb-6 text-rose-400 underline underline-offset-8">Atribuição de Causalidade (XAI)</h4>
+                <p class="text-xs text-slate-400 mb-6 italic text-justify leading-relaxed">
+                    Aplicamos <b>Valores SHAP</b> baseados em Teoria dos Jogos para decompor o impacto de cada variável (idade, CEP, comorbidade) na predição final de risco, eliminando o conceito de "caixa-preta" na saúde.
+                </p>
+                $$\phi_i(v) = \sum_{S \subseteq N \setminus \{i\}} \frac{|S|!(n-|S|-1)!}{n!} [v(S \cup \{i\}) - v(S)]$$
             </div>
         </div>
     </section>
 
-    <!-- CATÁLOGO DE FEATURES -->
-    <section class="py-32 max-w-7xl mx-auto px-6" id="features">
+    <div class="section-divider" id="fazenda"></div>
+
+    <!-- 3. LABSUS NO MINISTÉRIO DA FAZENDA — VERSÃO EXPANDIDA -->
+    <section class="py-32 max-w-7xl mx-auto px-6">
+        <div class="grid lg:grid-cols-2 gap-16 items-start">
+            <div>
+                <h2 class="text-4xl font-black uppercase mb-6 italic tracking-tighter text-amber-500 text-center lg:text-left">
+                    LabSUS no Ministério da Fazenda
+                </h2>
+
+                <p class="text-slate-400 leading-relaxed font-light mb-8 text-justify italic">
+                    O mesmo motor matemático aplicado à epidemiologia é transposto para o domínio fiscal.
+                    Substituímos eventos de saúde por eventos tributários, indivíduos por contribuintes
+                    e surtos por dinâmicas de evasão.
+                    A arquitetura permanece agnóstica — o domínio muda, a matemática permanece.
+                </p>
+
+                <div class="math-box bg-amber-500/5 border-amber-500/10">
+                    <h5 class="text-xs font-bold text-amber-400 uppercase mb-4 tracking-widest font-mono text-center">
+                        1. Receita Tributária Esperada
+                    </h5>
+                    $$\mathbb{E}[R_t] = \sum_{i=1}^{N} \tau_i \cdot B_{i,t} \cdot p_{compliance,i,t}$$
+                    <p class="text-[11px] text-slate-400 mt-4 italic text-center leading-relaxed">
+                        Onde \( \tau_i \) é a alíquota efetiva, \( B_{i,t} \) a base tributável estimada via spline
+                        e \( p_{compliance} \) a probabilidade de conformidade estimada por modelo logístico.
+                    </p>
+                </div>
+
+                <div class="math-box bg-amber-500/5 border-amber-500/10 mt-8 text-center">
+                    <h5 class="text-xs font-bold text-amber-400 uppercase mb-4 tracking-widest font-mono">
+                        2. Dinâmica Estocástica de Arrecadação
+                    </h5>
+                    $$dR_t = \mu(R_t,t)dt + \sigma(R_t,t)dW_t$$
+                    <p class="text-[11px] text-slate-400 mt-4 italic text-center">
+                        Processo de difusão para modelar volatilidade arrecadatória sob choques macroeconômicos.
+                    </p>
+                </div>
+            </div>
+
+            <div class="space-y-8">
+                <div class="glass p-10 rounded-[3rem] border-white/5 math-box text-center">
+                    <h4 class="font-bold text-white uppercase text-[10px] tracking-widest mb-6 text-amber-400 underline underline-offset-8">
+                        3. Tempo até Inadimplência (Survival Model)
+                    </h4>
+                    $$h(t|X) = h_0(t)\exp(\beta^T X)$$
+                    <p class="text-[11px] text-slate-400 mt-4 italic">
+                        Modelagem do risco de inadimplência via Hazard Function (Cox Proportional Hazards).
+                    </p>
+                </div>
+
+                <div class="glass p-10 rounded-[3rem] border-white/5 math-box text-center">
+                    <h4 class="font-bold text-white uppercase text-[10px] tracking-widest mb-6 text-amber-400 underline underline-offset-8">
+                        4. Otimização da Fiscalização
+                    </h4>
+                    $$\max_{A \subseteq C} \sum_{i \in A} \left( \mathbb{E}[Rec_i] - Custo_i \right)$$
+                    <p class="text-[11px] text-slate-400 mt-4 italic">
+                        Problema de seleção ótima de auditorias sob restrição orçamentária.
+                    </p>
+                </div>
+
+                <div class="glass p-10 rounded-[3rem] border-white/5 math-box text-center">
+                    <h4 class="font-bold text-white uppercase text-[10px] tracking-widest mb-6 text-amber-400 underline underline-offset-8">
+                        5. Índice de Eficiência Fiscal
+                    </h4>
+                    $$EFI_{mun} = \frac{R_{real}}{\tau \cdot PIB_{estimado}}$$
+                    <p class="text-[11px] text-slate-400 mt-4 italic">
+                        Métrica estrutural de eficiência arrecadatória ajustada por PIB municipal interpolado.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Implementações Futuras Fazenda -->
+        <div class="mt-24">
+            <h3 class="text-center text-2xl font-black text-amber-400 uppercase tracking-widest mb-12">
+                Futuras Implementações — Inteligência Fazendária
+            </h3>
+            <div class="grid lg:grid-cols-3 gap-8">
+                <div class="glass p-8 rounded-3xl border-white/5 text-center">
+                    <h4 class="text-xs font-bold text-amber-300 uppercase mb-4 tracking-widest">Rede Bayesiana Tributária</h4>
+                    <p class="text-[11px] text-slate-400 leading-relaxed italic text-justify">
+                        Inferência probabilística da evasão utilizando dependência condicional entre
+                        setores econômicos, porte empresarial e histórico de autuação.
+                    </p>
+                </div>
+                <div class="glass p-8 rounded-3xl border-white/5 text-center">
+                    <h4 class="text-xs font-bold text-amber-300 uppercase mb-4 tracking-widest">Detecção de Anomalias em NF-e</h4>
+                    <p class="text-[11px] text-slate-400 leading-relaxed italic text-justify">
+                        Isolation Forest e Autoencoders para identificar padrões atípicos de faturamento e possíveis fraudes estruturais.
+                    </p>
+                </div>
+                <div class="glass p-8 rounded-3xl border-white/5 text-center">
+                    <h4 class="text-xs font-bold text-amber-300 uppercase mb-4 tracking-widest">Equilíbrio Fiscal Territorial</h4>
+                    <p class="text-[11px] text-slate-400 leading-relaxed italic text-justify">
+                        Sistema dinâmico acoplado entre crescimento econômico, capacidade arrecadatória e gasto público em saúde.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="section-divider" id="features"></div>
+
+    <!-- 4. CATÁLOGO INTEGRAL DE MODELOS -->
+    <section class="py-32 max-w-7xl mx-auto px-6">
         <div class="text-center mb-16">
-            <h2 class="text-4xl font-black uppercase mb-4 italic tracking-tighter text-cyan-500">Catálogo de Features</h2>
+            <h2 class="text-4xl font-black uppercase mb-4 italic tracking-tighter text-cyan-500">Catálogo Integral de Modelos</h2>
             <p class="text-slate-500 max-w-3xl mx-auto font-light text-sm italic leading-relaxed text-center">
-                Listagem integral dos <b>aproximadamente 40 modelos especializados</b>.
+                O motor analítico do LabSUS orquestra <b>aproximadamente 40 modelos especializados</b>.
             </p>
         </div>
 
         <div class="grid lg:grid-cols-3 gap-8 text-center">
+            <!-- Saúde Pública -->
             <div class="space-y-4">
                 <h3 class="text-white font-bold text-[10px] uppercase tracking-widest border-b border-cyan-500/20 pb-2 flex items-center justify-center gap-2"><i data-lucide="activity" class="text-cyan-400 w-3 h-3"></i> Epidemiologia (SUS)</h3>
                 <div class="grid grid-cols-1 gap-1">
@@ -424,71 +428,46 @@ ALGORITHM React_Frontend_Controller:
                     <div class="feature-tag">Cobertura ESF (%)</div>
                     <div class="feature-tag">Causas Mal Definidas (CMD)</div>
                     <div class="feature-tag">Internações Sensíveis (ICSAP)</div>
+                    <div class="feature-tag">Mães Adolescentes (&lt;20a)</div>
+                    <div class="feature-tag">Detecção de Hanseníase</div>
+                    <div class="feature-tag">Incidência Dengue / Zika / Chik</div>
+                    <div class="feature-tag">Tuberculose (Incidência/Cura)</div>
                 </div>
             </div>
+
+            <!-- IA e Complexidade -->
             <div class="space-y-4">
-                <h3 class="text-white font-bold text-[10px] uppercase tracking-widest border-b border-emerald-500/20 pb-2 flex items-center justify-center gap-2"><i data-lucide="brain-circuit" class="text-emerald-400 w-3 h-3"></i> Machine Learning & IA</h3>
+                <h3 class="text-white font-bold text-[10px] uppercase tracking-widest border-b border-emerald-500/20 pb-2 flex items-center justify-center gap-2"><i data-lucide="brain-circuit" class="text-emerald-400 w-3 h-3"></i> IA & Complexidade (QWAN)</h3>
                 <div class="grid grid-cols-1 gap-1">
-                    <div class="feature-tag">Risco de Óbito (LightGBM)</div>
+                    <div class="feature-tag">Regime de Metaestabilidade QWAN</div>
+                    <div class="feature-tag">Expoentes de Lyapunov em Saúde</div>
+                    <div class="feature-tag">Risco de Óbito (XAI SHAP)</div>
                     <div class="feature-tag">Requalificação NLP de Causa</div>
-                    <div class="feature-tag">Forecast Internações (Prophet)</div>
+                    <div class="feature-tag">Forecast de Demanda (Prophet)</div>
                     <div class="feature-tag">Análise Sobrevida (Cox PH)</div>
                     <div class="feature-tag">Escore de Propensão (PSM)</div>
-                    <div class="feature-tag">Simulação Eventos Discretos</div>
+                    <div class="feature-tag">Simulação de Eventos Discretos</div>
+                    <div class="feature-tag">Clustering Lloyd (K-Means)</div>
+                    <div class="feature-tag">Detecção de Outliers Temporais</div>
                 </div>
             </div>
+
+            <!-- Desfechos e Gestão -->
             <div class="space-y-4">
                 <h3 class="text-white font-bold text-[10px] uppercase tracking-widest border-b border-rose-500/20 pb-2 flex items-center justify-center gap-2"><i data-lucide="heart" class="text-rose-400 w-3 h-3"></i> Desfechos Críticos</h3>
                 <div class="grid grid-cols-1 gap-1">
                     <div class="feature-tag">Mortalidade Prematura DCNT</div>
+                    <div class="feature-tag">Mort. Doenças Circulatórias</div>
+                    <div class="feature-tag">Mort. Neoplasias (Câncer)</div>
+                    <div class="feature-tag">Mort. Doenças Respiratórias</div>
+                    <div class="feature-tag">Mort. Diabetes Mellitus</div>
                     <div class="feature-tag">Mortalidade COVID-19</div>
-                    <div class="feature-tag">Readmissão Hospitalar 30/90d</div>
+                    <div class="feature-tag">Readmissão Hospitalar 30d</div>
+                    <div class="feature-tag">Fluxo Pacientes Origem-Destino</div>
+                    <div class="feature-tag">Centralidade de Rede Hospitalar</div>
+                    <div class="feature-tag">Custo-Efetividade (RCEI)</div>
                 </div>
             </div>
-        </div>
-    </section>
-
-    <div class="section-divider" id="fazenda"></div>
-
-    <!-- LABSUS NA FAZENDA — VERSÃO EXPANDIDA -->
-    <section class="py-32 max-w-7xl mx-auto px-6">
-        <div class="grid lg:grid-cols-2 gap-16 items-start">
-            <div>
-                <h2 class="text-4xl font-black uppercase mb-6 italic tracking-tighter text-amber-500">LabSUS no Ministério da Fazenda</h2>
-                <div class="math-box bg-amber-500/5 border-amber-500/10 text-center">
-                    <h5 class="text-xs font-bold text-amber-400 uppercase mb-4 tracking-widest font-mono">Receita Tributária Esperada</h5>
-                    $$ \mathbb{E}[R_t] = \sum_{i=1}^{N} \tau_i \cdot B_{i,t} \cdot p_{compliance,i,t} $$
-                </div>
-                <div class="math-box bg-amber-500/5 border-amber-500/10 mt-8 text-center">
-                    <h5 class="text-xs font-bold text-amber-400 uppercase mb-4 tracking-widest font-mono">Dinâmica Estocástica de Arrecadação</h5>
-                    $$ dR_t = \mu(R_t,t)dt + \sigma(R_t,t)dW_t $$
-                </div>
-            </div>
-            <div class="space-y-8">
-                <div class="glass p-10 rounded-[3rem] border-white/5 math-box text-center">
-                    <h4 class="font-bold text-white uppercase text-[10px] tracking-widest mb-6 text-amber-400 underline underline-offset-8">Tempo até Inadimplência</h4>
-                    $$ h(t|X) = h_0(t)\exp(\beta^T X) $$
-                </div>
-                <div class="glass p-10 rounded-[3rem] border-white/5 math-box text-center">
-                    <h4 class="font-bold text-white uppercase text-[10px] tracking-widest mb-6 text-amber-400 underline underline-offset-8">Índice de Eficiência Fiscal</h4>
-                    $$ EFI_{mun} = \frac{R_{real}}{\tau \cdot PIB_{estimado}} $$
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- DOCUMENTAÇÃO PDF -->
-    <section id="documentation" class="py-32 max-w-7xl mx-auto px-6 text-center">
-        <h2 class="text-4xl font-black uppercase mb-8 italic tracking-tighter underline decoration-cyan-500/30">Manual Técnico <span class="text-cyan-500">PDF</span></h2>
-        <div class="mb-6">
-            <a href="https://github.com/goldenluke/qwan_zero_pipeline/raw/main/Padr%C3%A3o%20de%20Projeto%20LabSUS%20-%20Manual%20de%20Refer%C3%AAncia%20T%C3%A9cnica.pdf" 
-               target="_blank" class="inline-flex items-center gap-2 bg-cyan-600 hover:bg-cyan-700 text-white px-6 py-2 rounded-full text-xs font-black uppercase tracking-widest transition shadow-lg">
-                <i data-lucide="external-link"></i> Abrir Manual em Nova Aba
-            </a>
-        </div>
-        <div class="pdf-container glass relative group mb-12">
-            <iframe src="https://goldenluke.github.io/qwan_zero_pipeline/Padr%C3%A3o%20de%20Projeto%20LabSUS%20-%20Manual%20de%20Refer%C3%AAncia%20T%C3%A9cnica.pdf" 
-                class="w-full h-full grayscale hover:grayscale-0 transition-all duration-1000" frameborder="0"></iframe>
         </div>
     </section>
 
@@ -508,10 +487,16 @@ ALGORITHM React_Frontend_Controller:
                     <div class="space-y-2">
                         <h4 class="text-cyan-400 font-black tracking-widest italic underline underline-offset-4 mb-3 uppercase">Orientadora Científica</h4>
                         <p class="text-white text-[11px] leading-tight mb-1">Dra. Kelly Cristina Gomes Alves</p>
+                        <p class="text-slate-400 text-[9px] lowercase leading-normal normal-case italic font-medium">
+                            Enfermeira e Obstetra (UFES) | Mestre em Saúde Coletiva (UFES) | Doutora em Medicina Tropical e Saúde Pública (UFG). Professora Adjunta da UFT.
+                        </p>
                     </div>
                     <div class="space-y-2">
                         <h4 class="text-cyan-400 font-black tracking-widest italic underline underline-offset-4 mb-3 uppercase">Coorientadora de Saúde Digital</h4>
                         <p class="text-white text-[11px] leading-tight mb-1">Ma. Michelle de Jesus Pantoja Filgueira</p>
+                        <p class="text-slate-400 text-[9px] lowercase leading-normal normal-case italic font-medium">
+                            Enfermeira (UEPA) | Mestre em Ensino em Ciências da Saúde (UNIFESP) | Doutoranda (UNIFESP). Coordenadora do Telessaúde Tocantins.
+                        </p>
                     </div>
                 </div>
 
@@ -527,7 +512,6 @@ ALGORITHM React_Frontend_Controller:
 
     <script>
         lucide.createIcons();
-        
         function openLightbox(src) {
             const modal = document.getElementById('lightbox');
             const modalImg = document.getElementById('lightbox-content');
