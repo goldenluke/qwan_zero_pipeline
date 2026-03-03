@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tratado de Complexidade Ultra-Profunda: QWAN Health Engine</title>
+    <title>Tratado Técnico: Análise de Criticalidade em Sistemas de Saúde</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
@@ -14,7 +14,7 @@
         .mono { font-family: 'JetBrains Mono', monospace; }
         .math-block { overflow-x: auto; padding: 1.5rem 0; background: #f8fafc; border-radius: 0.5rem; margin: 1rem 0; text-align: center; }
         code { font-family: 'JetBrains Mono', monospace; font-size: 0.9em; }
-        .gradient-text { background: linear-gradient(90deg, #4f46e5, #9333ea); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .gradient-text { background: linear-gradient(90deg, #1e293b, #475569); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
         section { scroll-margin-top: 5rem; }
     </style>
 </head>
@@ -23,12 +23,12 @@
     <!-- Navigation Bar -->
     <nav class="sticky top-0 bg-white/90 backdrop-blur-md border-b border-slate-200 z-50">
         <div class="max-w-6xl mx-auto px-6 py-4 flex justify-between items-center">
-            <span class="font-bold text-indigo-600 text-2xl tracking-tighter">QWAN <span class="text-slate-400">Labs</span></span>
-            <div class="hidden md:flex space-x-8 text-sm font-semibold text-slate-600 uppercase tracking-widest">
-                <a href="#foundations" class="hover:text-indigo-600 transition">Fundamentação</a>
-                <a href="#mathematics" class="hover:text-indigo-600 transition">Matemática</a>
-                <a href="#discussion" class="hover:text-indigo-600 transition">Estudo: SP</a>
-                <a href="#code" class="hover:text-indigo-600 transition">Código</a>
+            <span class="font-bold text-slate-800 text-xl tracking-tight uppercase">Anais de <span class="text-indigo-600">Saúde Pública</span></span>
+            <div class="hidden md:flex space-x-8 text-xs font-semibold text-slate-500 uppercase tracking-widest">
+                <a href="#foundations" class="hover:text-indigo-600 transition">Metodologia</a>
+                <a href="#mathematics" class="hover:text-indigo-600 transition">Modelo</a>
+                <a href="#discussion" class="hover:text-indigo-600 transition">Estudo de Caso</a>
+                <a href="#code" class="hover:text-indigo-600 transition">Implementação</a>
             </div>
         </div>
     </nav>
@@ -38,116 +38,121 @@
         <!-- Header Section -->
         <header class="mb-20">
             <h1 class="text-5xl font-black text-slate-900 mb-6 leading-[1.1] tracking-tight serif">
-                Análise de Criticalidade e Dinâmica Não-Linear em Sistemas de Saúde Pública: <span class="gradient-text">O Framework QWAN</span>
+                Análise de Criticalidade e Dinâmica Não-Linear em Sistemas de Saúde Pública
             </h1>
             <p class="text-2xl text-slate-500 font-light mb-8 italic">
-                Decomposição termodinâmica e informacional dos fluxos hospitalares para a previsão de colapsos estruturais.
+                Aplicação de física estatística para a detecção de transições críticas e colapsos de infraestrutura hospitalar.
             </p>
             <div class="flex flex-wrap gap-6 text-sm font-medium border-y border-slate-200 py-6">
-                <span class="text-indigo-600">RESEARCH ARTICLE</span>
+                <span class="text-indigo-700">DOCUMENTAÇÃO TÉCNICA DE REFERÊNCIA</span>
                 <span class="text-slate-400">|</span>
-                <span>DATA DE PUBLICAÇÃO: 02 MARÇO 2026</span>
+                <span>MARÇO, 2026</span>
                 <span class="text-slate-400">|</span>
-                <span>CAMPOS: FÍSICA ESTATÍSTICA, EPIDEMIOLOGIA COMPUTACIONAL</span>
+                <span>ÁREA: CIÊNCIAS COMPUTACIONAIS E EPIDEMIOLOGIA</span>
             </div>
         </header>
 
         <!-- Abstract Card -->
-        <section id="abstract" class="mb-20 bg-white p-10 rounded-2xl shadow-xl border border-slate-100">
-            <h2 class="text-xl font-bold uppercase tracking-widest text-indigo-500 mb-6">Abstract</h2>
+        <section id="abstract" class="mb-20 bg-white p-10 rounded-2xl shadow-xl border border-slate-100 text-justify">
+            <h2 class="text-xs font-bold uppercase tracking-[0.2em] text-slate-400 mb-6">Abstract</h2>
             <p class="text-lg leading-relaxed serif text-slate-700">
-                A vigilância epidemiológica convencional falha em capturar as propriedades emergentes de sistemas complexos. Introduzimos aqui o modelo <strong>Quantum-Weighted Analytics Network (QWAN)</strong>, uma engine de análise ultra-profunda que trata a série temporal de internações hospitalares como um sistema dinâmico fora do equilíbrio térmico. Através da <em>Detrended Fluctuation Analysis</em> (DFA) e da Informação de Fisher, quantificamos a perda de resiliência e a proximidade de bifurcações de sela-nó (colapsos). O estudo de caso em São Paulo para o CID J revela que indicadores de <em>Lentidão Crítica</em> precedem em dias a saturação física dos leitos.
+                A gestão de fluxos em saúde coletiva exige modelos que transcendam a análise linear de demanda. Este trabalho descreve uma engine de análise profunda baseada em processos dinâmicos fora do equilíbrio. Utilizando a <em>Detrended Fluctuation Analysis</em> (DFA) e a Informação de Fisher, o modelo quantifica a perda de resiliência sistêmica em séries temporais hospitalares. O estudo de caso realizado no estado de São Paulo para internações respiratórias (CID J) demonstra que o fenômeno de "Lentidão Crítica" serve como indicador antecedente de saturação de leitos, permitindo intervenções precoces baseadas na termodinâmica de estados meta-estáveis.
             </p>
         </section>
 
         <!-- Section: Fundamental Philosophy -->
         <section id="foundations" class="mb-20">
-            <h2 class="text-3xl font-bold text-slate-900 mb-8 border-l-8 border-indigo-600 pl-6">1. A Ontologia da Complexidade em Saúde</h2>
+            <h2 class="text-3xl font-bold text-slate-900 mb-8 border-l-4 border-slate-800 pl-6 uppercase tracking-tight">1. Metodologia de Complexidade</h2>
             <div class="prose prose-slate max-w-none text-lg">
                 <p class="mb-6">
-                    Hospitais não são meras unidades de processamento de pacientes; eles são <strong>reservatórios dissipativos</strong> em um sistema aberto. O fluxo de entrada (admissões) e saída (altas/óbitos) cria uma tensão dinâmica. Na física estatística, quando um sistema é empurrado para longe do equilíbrio, ele começa a apresentar correlações de longo alcance e flutuações anômalas.
+                    O sistema hospitalar é aqui tratado como um <strong>atrator dissipativo</strong>. A dinâmica de internações é o resultado de uma tensão contínua entre a pressão biológica de entrada e a capacidade regulatória de saída. Através da modelagem não-linear, é possível identificar a "memória" do sistema e prever quando ele deixa de operar em regime de estabilidade operacional.
                 </p>
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-8 my-10">
-                    <div class="bg-indigo-50 p-6 rounded-xl border border-indigo-100">
-                        <h4 class="font-bold text-indigo-700 mb-2">Visão Matemática</h4>
-                        <p class="text-sm">Tratamos a epidemia como um processo estocástico não-estacionário onde a variância não é constante.</p>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8 my-10 text-center">
+                    <div class="bg-slate-50 p-6 rounded-xl border border-slate-200">
+                        <h4 class="font-bold text-slate-800 mb-2">Momento Matemático</h4>
+                        <p class="text-xs text-slate-600">Tratamento de processos estocásticos não-estacionários com variância flutuante.</p>
                     </div>
-                    <div class="bg-purple-50 p-6 rounded-xl border border-purple-100">
-                        <h4 class="font-bold text-purple-700 mb-2">Visão Física</h4>
-                        <p class="text-sm">Buscamos o 'Tipping Point' onde o sistema perde sua capacidade de restauração (resiliência).</p>
+                    <div class="bg-slate-50 p-6 rounded-xl border border-slate-200">
+                        <h4 class="font-bold text-slate-800 mb-2">Transição Física</h4>
+                        <p class="text-xs text-slate-600">Detecção de bifurcações onde o sistema perde sua resiliência estrutural.</p>
                     </div>
-                    <div class="bg-emerald-50 p-6 rounded-xl border border-emerald-100">
-                        <h4 class="font-bold text-emerald-700 mb-2">Visão Epidemiológica</h4>
-                        <p class="text-sm">Identificamos o contágio fractal que precede a explosão visual de casos na curva linear.</p>
+                    <div class="bg-slate-50 p-6 rounded-xl border border-slate-200">
+                        <h4 class="font-bold text-slate-800 mb-2">Dinâmica Biológica</h4>
+                        <p class="text-xs text-slate-600">Identificação de assinaturas fractais que caracterizam surtos epidemiológicos persistentes.</p>
                     </div>
                 </div>
             </div>
         </section>
 
         <!-- Section: Detailed Mathematics -->
-        <section id="mathematics" class="mb-20 bg-slate-900 text-white p-12 rounded-3xl overflow-hidden relative shadow-2xl">
-            <div class="absolute top-0 right-0 p-8 opacity-10">
-                <svg width="200" height="200" viewBox="0 0 200 200"><path fill="currentColor" d="M100 0L122.5 77.5H200L137.5 122.5L160 200L100 155L40 200L62.5 122.5L0 77.5H77.5L100 0Z"/></svg>
-            </div>
-            <h2 class="text-3xl font-bold mb-10 text-indigo-300">2. Fundamentação Matemática Rigorosa</h2>
+        <section id="mathematics" class="mb-20 bg-slate-800 text-white p-12 rounded-3xl relative shadow-2xl border-b-8 border-indigo-500">
+            <h2 class="text-3xl font-bold mb-10 text-indigo-300">2. Fundamentação do Modelo</h2>
 
-            <div class="space-y-12">
+            <div class="space-y-12 text-justify">
                 <div>
-                    <h3 class="text-xl font-medium text-slate-400 mb-4 uppercase tracking-wider">2.1. Memória Fractal via DFA</h3>
+                    <h3 class="text-xl font-medium text-slate-400 mb-4 uppercase tracking-wider">2.1. Cálculo de Memória via DFA</h3>
                     <p class="text-slate-300 mb-6">
-                        Para sinais biológicos ruidosos, a variância clássica falha. Aplicamos a <em>Detrended Fluctuation Analysis</em> para calcular o expoente \(\alpha\). O sinal \(x(t)\) é integrado para formar \(Y(k) = \sum_{i=1}^k [x(i) - \langle x \rangle]\). A flutuação \(F(n)\) é dada por:
+                        A <em>Detrended Fluctuation Analysis</em> é empregada para isolar flutuações intrínsecas de tendências externas. Ao integrar o sinal e aplicar ajustes polinomiais locais, extraímos o expoente \(\alpha\), que define o regime de persistência da série:
                     </p>
-                    <div class="math-block bg-slate-800 text-indigo-200">
-                        $$F(n) = \sqrt{\frac{1}{N} \sum_{k=1}^N [Y(k) - Y_n(k)]^2} \propto n^\alpha$$
+                    <div class="math-block bg-slate-900 text-indigo-300">
+                        $$F(n) = \sqrt{\frac{1}{N} \sum_{k=1}^N [Y(k) - Y_n(k)]^2} \sim n^\alpha$$
                     </div>
-                    <p class="text-sm text-slate-400">Onde \(Y_n(k)\) é o ajuste polinomial local. Se \(\alpha \to 1.0\), o sistema está em regime de contágio persistente.</p>
+                    <p class="text-sm text-slate-400">Interpretamos \(\alpha\) como a medida de contágio: valores acima de 0.5 indicam processos biológicos em expansão persistente.</p>
                 </div>
 
                 <div>
-                    <h3 class="text-xl font-medium text-slate-400 mb-4 uppercase tracking-wider">2.2. Geometria da Informação de Fisher</h3>
+                    <h3 class="text-xl font-medium text-slate-400 mb-4 uppercase tracking-wider">2.2. Organização e Informação de Fisher</h3>
                     <p class="text-slate-300 mb-6">
-                        A Informação de Fisher (\(I\)) mede a sensibilidade de uma distribuição de probabilidade a mudanças em seus parâmetros. Em nosso modelo, ela atua como um sensor de organização:
+                        A Informação de Fisher mensura a nitidez da distribuição de estados do sistema. Uma redução abrupta neste valor sinaliza a transição de um regime organizado para um estado de desordem ou crise logística:
                     </p>
-                    <div class="math-block bg-slate-800 text-indigo-200">
+                    <div class="math-block bg-slate-900 text-indigo-300">
                         $$I = \int \frac{1}{P(x)} \left( \frac{\partial P(x)}{\partial x} \right)^2 dx$$
                     </div>
-                    <p class="text-sm text-slate-400 italic">Quedas bruscas em \(I\) indicam o desmoronamento da ordem administrativa hospitalar.</p>
                 </div>
             </div>
         </section>
 
         <!-- Discussion: São Paulo Case Study -->
         <section id="discussion" class="mb-20">
-            <h2 class="text-3xl font-bold text-slate-900 mb-10 border-l-8 border-purple-600 pl-6">3. Discussão de Resultados: O Caso de São Paulo (SP)</h2>
+            <h2 class="text-3xl font-bold text-slate-900 mb-10 border-l-4 border-slate-800 pl-6 uppercase tracking-tight">3. Estudo de Caso: São Paulo (SP)</h2>
 
-            <div class="bg-white border border-slate-200 rounded-2xl overflow-hidden shadow-lg">
+            <div class="bg-white border border-slate-200 rounded-2xl overflow-hidden shadow-sm mb-12">
                 <div class="bg-slate-50 px-8 py-4 border-b border-slate-200 flex items-center justify-between">
-                    <span class="font-bold text-slate-500 uppercase text-xs tracking-widest">Dataset: SIH/SUS - CID J - Janela de 14 Dias</span>
-                    <span class="bg-emerald-100 text-emerald-700 px-3 py-1 rounded text-xs font-bold">Diagnóstico: Meta-estável</span>
+                    <span class="font-bold text-slate-500 uppercase text-xs tracking-widest">Referência: SIH/SUS - CID J - Janela Rolling: 14D</span>
+                    <span class="bg-slate-200 text-slate-700 px-3 py-1 rounded text-xs font-bold">Estado: Meta-estável</span>
                 </div>
                 <div class="p-8">
-                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 text-justify">
                         <div>
-                            <h4 class="text-xl font-bold text-slate-800 mb-4">O Paradoxo do Alpha 0.07</h4>
+                            <h4 class="text-xl font-bold text-slate-800 mb-4">Análise do Regime Anti-persistente</h4>
                             <p class="text-slate-600 mb-6 leading-relaxed">
-                                Em condições normais, São Paulo apresenta um \(\alpha \approx 0.07\). Na física, isto é um processo <strong>anti-persistente extremo</strong>.
+                                A observação de um expoente \(\alpha \approx 0.07\) em São Paulo revela um regime de reversão forçada. Este comportamento é característico de sistemas que operam em capacidade máxima, onde o fluxo de internações é limitado pela infraestrutura fixa.
                                 <br><br>
-                                <strong>Interpretação Epidemiológica:</strong> O sistema não segue uma dinâmica biológica livre; ele é ditado pela <em>capacidade fixa</em>. Se hoje o hospital interna 10 pacientes extra, amanhã ele <em>precisa</em> internar menos porque não há mais leitos físicos. O sistema "bate no teto" e reverte à média violentamente. É uma estabilidade mantida por restrição de recursos, não por ausência de doenças.
+                                A estabilidade observada não decorre da ausência de patógenos, mas da <strong>saturação administrativa</strong>. O sistema reverte à média violentamente devido à indisponibilidade de novos recursos, mantendo um equilíbrio precário conhecido como meta-estabilidade.
                             </p>
                         </div>
-                        <div class="bg-slate-50 p-6 rounded-xl border border-dashed border-slate-300">
-                            <h4 class="font-bold text-slate-700 mb-4">Deteção de Colapso (Sinais de SP)</h4>
-                            <ul class="space-y-4 text-sm">
+                        <div class="bg-slate-50 p-6 rounded-xl border border-slate-200">
+                            <h4 class="font-bold text-slate-700 mb-4">Indicadores Antecedentes</h4>
+                            <ul class="space-y-4 text-sm text-slate-600">
                                 <li class="flex items-start gap-3">
-                                    <span class="bg-red-500 text-white p-1 rounded-full text-[10px]">!</span>
-                                    <span><strong>AC1 em +0.4:</strong> A transição observada na subida da curva mostra a perda de 'agilidade'. O sistema demora mais para 'esvaziar' do que para 'encher'.</span>
+                                    <span class="font-bold text-indigo-600">●</span>
+                                    <span><strong>Autocorrelação Lag-1:</strong> A transição para valores positivos em AC1 antecede o colapso, indicando "Lentidão Crítica" na resposta hospitalar.</span>
                                 </li>
                                 <li class="flex items-start gap-3">
-                                    <span class="bg-orange-500 text-white p-1 rounded-full text-[10px]">!</span>
-                                    <span><strong>Flickering de Volatilidade:</strong> O aumento na amplitude das variações diárias precede o salto estrutural para o novo patamar de internações.</span>
+                                    <span class="font-bold text-indigo-600">●</span>
+                                    <span><strong>PDF de Risco:</strong> O alargamento das caudas na distribuição de variações revela o aumento da incerteza operacional antes da saturação.</span>
                                 </li>
                             </ul>
                         </div>
+                    </div>
+
+                    <!-- Visual Evidence Image -->
+                    <div class="mt-12">
+                        <h4 class="text-xs font-bold text-slate-400 mb-4 uppercase tracking-[0.2em]">Evidência Experimental: Mosaico de Complexidade</h4>
+                        <div class="rounded-xl overflow-hidden shadow-2xl border border-slate-300 bg-slate-900">
+                            <img src="https://github.com/goldenluke/qwan_zero_pipeline/blob/main/5b11a452-9113-4243-8944-e13cb9aa2f37.jpeg?raw=true" alt="Análise de Complexidade Computacional" class="w-full h-auto">
+                        </div>
+                        <p class="text-xs text-slate-400 mt-4 italic text-center">Figura 1: Dashboard multi-indicador demonstrando a evolução das métricas de resiliência e lentidão crítica.</p>
                     </div>
                 </div>
             </div>
@@ -155,13 +160,13 @@
 
         <!-- Embedded Code Section -->
         <section id="code" class="mb-20">
-            <h2 class="text-3xl font-bold text-slate-900 mb-8 border-l-8 border-emerald-500 pl-6">4. Implementação do Modelo (Streamlit)</h2>
-            <div class="bg-slate-900 rounded-2xl p-6 shadow-2xl">
+            <h2 class="text-3xl font-bold text-slate-900 mb-8 border-l-4 border-slate-800 pl-6 uppercase tracking-tight">4. Protocolo de Implementação</h2>
+            <div class="bg-slate-900 rounded-xl p-6 shadow-2xl">
                 <div class="flex items-center justify-between mb-4 border-b border-slate-800 pb-4">
-                    <span class="text-emerald-400 font-mono text-sm">streamlit_health_complexity.py</span>
-                    <button onclick="copyCode()" class="text-slate-500 hover:text-white transition text-xs uppercase font-bold">Copiar Código</button>
+                    <span class="text-slate-400 font-mono text-xs italic">algorithm_reference.py</span>
+                    <button onclick="copyCode()" class="text-slate-500 hover:text-white transition text-[10px] uppercase font-bold tracking-widest">Copy to Clipboard</button>
                 </div>
-                <div class="overflow-x-auto max-h-[500px] custom-scrollbar">
+                <div class="overflow-x-auto max-h-[400px] custom-scrollbar">
                     <pre id="code-block" class="text-slate-300 text-sm mono leading-relaxed p-4">
 import streamlit as st
 import numpy as np
@@ -483,37 +488,37 @@ if st.sidebar.button("🚀 Executar Diagnóstico de 16 Pontos"):
 
 else:
     st.info("👋 Configure os parâmetros na barra lateral e clique em 'Executar'.")
-                    </pre>
+        </pre>
                 </div>
             </div>
         </section>
 
-        <!-- Conclusion Table -->
+        <!-- Synthesis Table -->
         <section class="mb-20">
-            <h2 class="text-2xl font-bold mb-6">Síntese dos Indicadores Epidemiológicos</h2>
+            <h2 class="text-2xl font-bold mb-6 text-slate-800 serif">Síntese de Diagnósticos em Saúde</h2>
             <table class="w-full text-left border-collapse bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden">
-                <thead class="bg-slate-50 border-b border-slate-200">
+                <thead class="bg-slate-100 border-b border-slate-200">
                     <tr>
-                        <th class="p-4 font-bold text-sm">INDICADOR</th>
-                        <th class="p-4 font-bold text-sm">COMPORTAMENTO CRÍTICO</th>
-                        <th class="p-4 font-bold text-sm">TRADUÇÃO PARA GESTÃO</th>
+                        <th class="p-4 font-bold text-xs uppercase text-slate-500">Métrica</th>
+                        <th class="p-4 font-bold text-xs uppercase text-slate-500">Sinal de Alerta</th>
+                        <th class="p-4 font-bold text-xs uppercase text-slate-500">Implicação Logística</th>
                     </tr>
                 </thead>
-                <tbody class="divide-y divide-slate-100">
+                <tbody class="divide-y divide-slate-100 text-sm">
                     <tr>
-                        <td class="p-4 font-semibold text-indigo-600">DFA Alpha</td>
-                        <td class="p-4 italic">Salto para > 0.65</td>
-                        <td class="p-4">O surto ganhou 'vida própria' e o contágio é autossustentado.</td>
+                        <td class="p-4 font-semibold text-slate-900">Alpha DFA</td>
+                        <td class="p-4 italic">Expansão acima de 0.65</td>
+                        <td class="p-4">Assinatura de contágio persistente; necessidade de ampliação de leitos imediata.</td>
                     </tr>
                     <tr>
-                        <td class="p-4 font-semibold text-indigo-600">AC(1)</td>
-                        <td class="p-4 italic">Saída de Negativo para Positivo</td>
-                        <td class="p-4 text-red-600 font-medium">Lentidão Crítica. O hospital não consegue mais dar altas no ritmo de entrada.</td>
+                        <td class="p-4 font-semibold text-slate-900">AC(1)</td>
+                        <td class="p-4 italic">Transição para valores positivos</td>
+                        <td class="p-4">Lentidão Crítica; incapacidade de processar altas hospitalares no ritmo de entrada.</td>
                     </tr>
                     <tr>
-                        <td class="p-4 font-semibold text-indigo-600">Potencial U(x)</td>
-                        <td class="p-4 italic">Achatamento do Vale</td>
-                        <td class="p-4">Meta-estabilidade. Qualquer choque (feriado/frio) causará colapso.</td>
+                        <td class="p-4 font-semibold text-slate-900">Potencial U(x)</td>
+                        <td class="p-4 italic">Achatamento da paisagem</td>
+                        <td class="p-4">Meta-estabilidade crítica; vulnerabilidade extrema a choques externos mínimos.</td>
                     </tr>
                 </tbody>
             </table>
@@ -521,8 +526,8 @@ else:
 
         <!-- Footer -->
         <footer class="border-t border-slate-200 pt-10 text-center">
-            <p class="text-slate-400 text-sm font-medium tracking-wide">© 2026 LABORATORIO DE COMPLEXIDADE COMPUTACIONAL APLICADA À SAUDE</p>
-            <p class="text-slate-300 text-xs mt-2 uppercase">Licença MIT - Uso Acadêmico e Governamental</p>
+            <p class="text-slate-400 text-[10px] font-bold tracking-[0.3em] uppercase">Documentação Técnica para Gestão de Políticas de Saúde</p>
+            <p class="text-slate-300 text-[10px] mt-2 italic tracking-tight">Referência de Pesquisa em Modelagem Preditiva de Alta Resolução</p>
         </footer>
 
     </main>
@@ -531,7 +536,7 @@ else:
         function copyCode() {
             const code = document.getElementById('code-block').innerText;
             navigator.clipboard.writeText(code).then(() => {
-                alert('Código copiado para a área de transferência!');
+                alert('Código copiado para a área de transferência.');
             });
         }
     </script>
