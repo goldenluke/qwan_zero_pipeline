@@ -52,6 +52,14 @@
         .card-inner {
             background: linear-gradient(180deg, rgba(255,255,255,0.03) 0%, rgba(255,255,255,0) 100%);
         }
+        .chat-dot {
+            height: 8px;
+            width: 8px;
+            background-color: #10b981;
+            border-radius: 50%;
+            display: inline-block;
+            margin-right: 6px;
+        }
     </style>
 </head>
 <body class="antialiased custom-scrollbar">
@@ -66,6 +74,7 @@
             <div class="hidden lg:flex space-x-8 text-[11px] font-bold uppercase tracking-[0.2em] text-slate-400">
                 <a href="#filosofia" class="hover:text-indigo-400 transition-colors">Filosofia</a>
                 <a href="#cronograma" class="hover:text-indigo-400 transition-colors">Cronograma</a>
+                <a href="#chat" class="hover:text-indigo-400 transition-colors">Chat Oficial</a>
                 <a href="#radar" class="hover:text-indigo-400 transition-colors">Radar</a>
                 <a href="#amas" class="hover:text-indigo-400 transition-colors">AMAs</a>
                 <a href="#roadmap" class="hover:text-indigo-400 transition-colors">500K</a>
@@ -89,7 +98,7 @@
         
         <div class="relative z-10 max-w-6xl mx-auto">
             <div class="inline-flex items-center space-x-2 bg-white/5 border border-white/10 px-4 py-1.5 rounded-full mb-8">
-                <span class="text-indigo-400 text-xs font-bold uppercase tracking-widest">Documento de Expansão V3.0</span>
+                <span class="text-indigo-400 text-xs font-bold uppercase tracking-widest">Documento de Expansão V3.5</span>
                 <span class="w-1 h-1 bg-slate-600 rounded-full"></span>
                 <span class="text-slate-400 text-xs font-medium">Março 2026</span>
             </div>
@@ -264,6 +273,132 @@
                         </div>
                         <div class="flex items-center space-x-3 p-3 bg-rose-500/5 rounded-xl border border-rose-500/10">
                             <span class="text-rose-400">🗳️</span> <span class="text-sm font-medium italic">"Copa dos Guitarristas: Lanny Gordin vs Pepeu Gomes"</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Seção NOVA: Chat Oficial da Comunidade -->
+        <section id="chat" class="scroll-mt-32 space-y-16">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                <div class="lg:col-span-7 space-y-8">
+                    <div class="inline-flex items-center space-x-2 bg-emerald-500/10 border border-emerald-500/20 px-4 py-1.5 rounded-full">
+                        <span class="text-emerald-400 text-xs font-bold uppercase tracking-widest">Real-Time Interaction</span>
+                    </div>
+                    <h2 class="text-5xl font-bold tracking-tight">Chat Oficial <span class="text-emerald-400">r/MusicaBR</span></h2>
+                    <p class="text-slate-400 text-lg leading-relaxed">
+                        O chat oficial será um espaço de comunicação em tempo real para complementar as discussões assíncronas do subreddit. Enquanto o Reddit funciona melhor para posts estruturados e discussões arquiváveis, o chat permite <strong>conversas rápidas, descoberta musical instantânea e eventos ao vivo.</strong>
+                    </p>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div class="glass p-6 rounded-2xl border-white/5">
+                            <h4 class="font-bold text-white mb-3">Plataforma: Rocket.Chat</h4>
+                            <p class="text-xs text-slate-400 leading-relaxed mb-4">Escolha baseada em soberania de dados e flexibilidade open-source.</p>
+                            <ul class="text-[10px] text-slate-500 space-y-1 font-mono uppercase tracking-wider">
+                                <li>• Controle total do servidor</li>
+                                <li>• Suporte a canais temáticos</li>
+                                <li>• Threads de discussão</li>
+                                <li>• Moderação avançada</li>
+                            </ul>
+                        </div>
+                        <div class="glass p-6 rounded-2xl border-white/5">
+                            <h4 class="font-bold text-white mb-3">Sinergia Reddit + Chat</h4>
+                            <p class="text-xs text-slate-400 leading-relaxed mb-4">O Reddit é o arquivo principal; o Chat é o espaço de convivência espontânea.</p>
+                            <div class="space-y-2">
+                                <div class="flex items-center justify-between text-[10px] bg-white/5 p-2 rounded-lg">
+                                    <span>Reddit: Assíncrono / Profundo</span>
+                                </div>
+                                <div class="flex items-center justify-between text-[10px] bg-emerald-500/10 p-2 rounded-lg text-emerald-400">
+                                    <span>Chat: Instantâneo / Social</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="lg:col-span-5 relative">
+                    <div class="glass p-8 rounded-[3rem] border-emerald-500/20 relative z-10 overflow-hidden">
+                        <div class="absolute top-0 right-0 p-4 opacity-10">
+                            <svg class="w-24 h-24" fill="currentColor" viewBox="0 0 24 24"><path d="M20 2H4c-1.1 0-1.99.9-1.99 2L2 22l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2z"/></svg>
+                        </div>
+                        <h3 class="text-xl font-bold mb-6 flex items-center"><span class="chat-dot"></span> Mapa de Canais</h3>
+                        <div class="space-y-3">
+                            <div class="p-3 bg-white/5 rounded-xl border border-white/5 flex items-center space-x-3 group hover:bg-white/10 transition-all">
+                                <span class="text-xs font-mono text-slate-500">#</span>
+                                <div class="flex-grow">
+                                    <span class="text-sm font-bold block">geral</span>
+                                    <span class="text-[10px] text-slate-500 uppercase">Conversas informais e recepção</span>
+                                </div>
+                            </div>
+                            <div class="p-3 bg-white/5 rounded-xl border border-white/5 flex items-center space-x-3 group hover:bg-white/10 transition-all">
+                                <span class="text-xs font-mono text-slate-500">#</span>
+                                <div class="flex-grow">
+                                    <span class="text-sm font-bold block">descobertas</span>
+                                    <span class="text-[10px] text-slate-500 uppercase">Artistas novos e underground</span>
+                                </div>
+                            </div>
+                            <div class="p-3 bg-white/5 rounded-xl border border-white/5 flex items-center space-x-3 group hover:bg-white/10 transition-all">
+                                <span class="text-xs font-mono text-slate-500">#</span>
+                                <div class="flex-grow">
+                                    <span class="text-sm font-bold block">ouvindo-now</span>
+                                    <span class="text-[10px] text-slate-500 uppercase">Compartilhamento em tempo real</span>
+                                </div>
+                            </div>
+                            <div class="p-3 bg-emerald-500/10 rounded-xl border border-emerald-500/20 flex items-center space-x-3 group hover:bg-emerald-500/20 transition-all">
+                                <span class="text-xs font-mono text-emerald-400">#</span>
+                                <div class="flex-grow">
+                                    <span class="text-sm font-bold block text-emerald-300">mostre-sua-musica</span>
+                                    <span class="text-[10px] text-emerald-500 uppercase font-bold tracking-tighter">Espaço Autoral</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mt-6 pt-4 border-t border-white/10 flex justify-between items-center text-[10px] font-bold text-slate-500">
+                            <span>+7 Canais de Gênero (MPB, Rap, Rock, Indie...)</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Eventos do Chat -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="glass p-8 rounded-3xl border-white/5 space-y-4 hover:border-emerald-500/30 transition-all">
+                    <div class="text-2xl">🎧</div>
+                    <h4 class="font-bold text-lg">Listening Parties</h4>
+                    <p class="text-sm text-slate-400">Audições coletivas de álbuns clássicos ou lançamentos. Os usuários comentam faixa a faixa em tempo real (ex: Hoje às 21h - Clube da Esquina).</p>
+                </div>
+                <div class="glass p-8 rounded-3xl border-white/5 space-y-4 hover:border-emerald-500/30 transition-all">
+                    <div class="text-2xl">🎤</div>
+                    <h4 class="font-bold text-lg">Live AMAs</h4>
+                    <p class="text-sm text-slate-400">Sessões de perguntas rápidas onde artistas entram no chat para uma conversa aberta por tempo limitado com a comunidade.</p>
+                </div>
+                <div class="glass p-8 rounded-3xl border-white/5 space-y-4 hover:border-emerald-500/30 transition-all">
+                    <div class="text-2xl">⚡</div>
+                    <h4 class="font-bold text-lg">Evolução & Bots</h4>
+                    <p class="text-sm text-slate-400">Integração futura com APIs do Spotify para recomendações automáticas, playlists geradas pela conversa e notificações de novos álbuns.</p>
+                </div>
+            </div>
+
+            <!-- Moderação do Chat -->
+            <div class="glass p-10 rounded-[3rem] border-white/5 bg-slate-950/40">
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-12">
+                    <div class="lg:col-span-1">
+                        <h4 class="text-2xl font-bold mb-4">Governança do Chat</h4>
+                        <p class="text-sm text-slate-500 leading-relaxed">A moderação seguirá princípios semelhantes aos do subreddit para garantir um ambiente saudável.</p>
+                    </div>
+                    <div class="lg:col-span-2 grid grid-cols-1 md:grid-cols-2 gap-8">
+                        <div class="space-y-3">
+                            <h5 class="font-bold text-sm text-emerald-400 uppercase tracking-widest">Regras Básicas</h5>
+                            <ul class="text-xs text-slate-400 space-y-2">
+                                <li>• Respeito mútuo absoluto</li>
+                                <li>• Proibição de Spam/Flood</li>
+                                <li>• Foco estrito em Música Brasileira</li>
+                                <li>• Material autoral apenas no canal #mostre-sua-musica</li>
+                            </ul>
+                        </div>
+                        <div class="space-y-3">
+                            <h5 class="font-bold text-sm text-emerald-400 uppercase tracking-widest">Integração Sidebar</h5>
+                            <p class="text-xs text-slate-400 leading-relaxed">O link permanente será destacado na barra lateral do subreddit, aproximando os membros e criando um ponto de encontro digital contínuo.</p>
                         </div>
                     </div>
                 </div>
@@ -448,7 +583,7 @@
                         <ul class="space-y-4 text-sm text-slate-300 leading-relaxed">
                             <li class="flex gap-4"><span class="text-indigo-400">●</span> <span>Implementação rigorosa do calendário semanal (7 dias de posts fixos).</span></li>
                             <li class="flex gap-4"><span class="text-indigo-400">●</span> <span>Criação de parcerias de crosspost com o r/brasil (dia fixo de música no r/brasil).</span></li>
-                            <li class="flex gap-4"><span class="text-indigo-400">●</span> <span>Lançamento da Playlist Oficial no Spotify atualizada via votação no sub.</span></li>
+                            <li class="flex gap-4"><span class="text-indigo-400">●</span> <span>Lançamento do Chat Oficial (Rocket.Chat) para engajamento em tempo real.</span></li>
                         </ul>
                     </div>
                 </div>
@@ -497,23 +632,23 @@
                     </p>
                     <div class="grid grid-cols-2 gap-4">
                         <div class="p-4 rounded-2xl bg-white/5 border border-white/10">
-                            <h5 class="font-bold text-xs uppercase tracking-widest mb-2 text-indigo-300">AutoModerator</h5>
-                            <p class="text-[10px] text-slate-500">Regras de formatação obrigatória para lançamentos e AMA threads.</p>
+                            <h5 class="font-bold text-xs uppercase tracking-widest mb-2 text-indigo-300">Rocket.Chat Server</h5>
+                            <p class="text-[10px] text-slate-500">Servidor próprio open-source para garantir a soberania da comunidade e eventos ao vivo.</p>
                         </div>
                         <div class="p-4 rounded-2xl bg-white/5 border border-white/10">
-                            <h5 class="font-bold text-xs uppercase tracking-widest mb-2 text-rose-300">Custom Bots</h5>
-                            <p class="text-[10px] text-slate-500">Integração com API do Spotify para gerar posts de charts semanais do sub.</p>
+                            <h5 class="font-bold text-xs uppercase tracking-widest mb-2 text-emerald-300">Custom Bots</h5>
+                            <p class="text-[10px] text-slate-500">Integração com API do Spotify para gerar posts de charts semanais e playlists automáticas.</p>
                         </div>
                     </div>
                 </div>
                 <div class="space-y-4">
                     <div class="bg-indigo-600 p-8 rounded-3xl shadow-xl shadow-indigo-600/20">
                         <h4 class="text-xl font-bold text-white mb-2">Pilar de Crescimento</h4>
-                        <p class="text-indigo-100 text-sm italic">"O tráfego de 55 mil semanais já é maior que a maioria das comunidades nacionais. O desafio agora é a identidade."</p>
+                        <p class="text-indigo-100 text-sm italic">"O tráfego de 55 mil semanais já é maior que a maioria das comunidades nacionais. O desafio agora é a identidade social."</p>
                     </div>
                     <div class="glass p-8 rounded-3xl border-white/10">
                         <h4 class="text-xl font-bold text-white mb-2">Dica de Viralização</h4>
-                        <p class="text-slate-400 text-sm">Posts com perguntas subjetivas e regionais ("Qual a melhor banda do seu estado?") geram 300% mais comentários que posts informativos.</p>
+                        <p class="text-slate-400 text-sm">Eventos síncronos (Listening Parties) geram picos de 400% no engajamento diário comparado a dias normais.</p>
                     </div>
                 </div>
             </div>
@@ -523,10 +658,11 @@
 
     <footer class="relative py-24 px-6 overflow-hidden border-t border-slate-800">
         <div class="max-w-4xl mx-auto text-center space-y-12">
-            <div class="flex justify-center space-x-6 grayscale opacity-50">
-                <span class="font-bold text-2xl tracking-tighter">REDDIT</span>
-                <span class="font-bold text-2xl tracking-tighter">SPOTIFY</span>
-                <span class="font-bold text-2xl tracking-tighter">MUSICA.BR</span>
+            <div class="flex justify-center space-x-6 grayscale opacity-50 text-[10px] font-bold tracking-widest">
+                <span>REDDIT</span>
+                <span>ROCKET.CHAT</span>
+                <span>SPOTIFY</span>
+                <span>MUSICA.BR</span>
             </div>
             <p class="text-slate-500 text-sm max-w-xl mx-auto leading-relaxed">
                 Este plano estratégico é um documento vivo e deve ser adaptado conforme o feedback da comunidade. A música brasileira é vasta demais para ser contida em um fórum, mas o r/MusicaBR é o lugar onde ela é discutida com maior profundidade.
