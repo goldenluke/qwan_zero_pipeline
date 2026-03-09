@@ -1,535 +1,597 @@
 <!DOCTYPE html>
-<html lang="pt-pt">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LabSUS | Padrão de Projeto de Inteligência Estatal</title>
+    <title>Masterplan r/MusicaBR - Autoridade & Curadoria</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://unpkg.com/lucide@latest"></script>
-    <!-- MathJax para renderização de fórmulas complexas -->
-    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    <!-- Mermaid.js para Fluxogramas Técnicos -->
-    <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
-    <script>
-        mermaid.initialize({ 
-            startOnLoad: true, 
-            theme: 'dark',
-            securityLevel: 'loose',
-            flowchart: { useMaxWidth: true, htmlLabels: true, curve: 'basis' }
-        });
-    </script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=JetBrains+Mono:wght@400;500&family=Lora:ital,wght@1,400;1,700&display=swap');
-        
         :root {
-            --primary: #06b6d4;
-            --accent: #10b981;
-            --warning: #f59e0b;
-            --danger: #f43f5e;
-            --bg: #020617;
+            --bg-dark: #020617;
+            --accent-primary: #6366f1;
+            --accent-secondary: #f43f5e;
+            --accent-tertiary: #10b981;
         }
-
         body {
-            font-family: 'Inter', sans-serif;
-            background-color: var(--bg);
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: var(--bg-dark);
             color: #f8fafc;
-            scroll-behavior: smooth;
         }
-
-        .mono { font-family: 'JetBrains Mono', monospace; }
-        .serif-italic { font-family: 'Lora', serif; font-style: italic; }
-
+        h1, h2, h3, .heading-font {
+            font-family: 'Space Grotesk', sans-serif;
+        }
         .glass {
-            background: rgba(255, 255, 255, 0.01);
-            backdrop-filter: blur(16px);
+            background: rgba(15, 23, 42, 0.6);
+            backdrop-filter: blur(12px);
             border: 1px solid rgba(255, 255, 255, 0.05);
         }
-
         .gradient-text {
-            background: linear-gradient(to right, #22d3ee, #34d399, #fbbf24);
+            background: linear-gradient(135deg, #818cf8 0%, #f43f5e 50%, #fbbf24 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
-
-        .grid-bg {
-            background-image: radial-gradient(circle at 1px 1px, rgba(255,255,255,0.03) 1px, transparent 0);
-            background-size: 32px 32px;
-        }
-
-        .section-divider {
-            height: 1px;
-            background: linear-gradient(to right, transparent, rgba(6, 182, 212, 0.1), transparent);
-        }
-
-        ::-webkit-scrollbar { width: 6px; }
-        ::-webkit-scrollbar-track { background: var(--bg); }
-        ::-webkit-scrollbar-thumb { background: #164e63; border-radius: 10px; }
-        
-        .mjx-container {
-            color: #22d3ee !important;
-            font-size: 1.05em !important;
-            margin: 10px 0 !important;
-            background: rgba(0, 0, 0, 0.2);
-            padding: 1.5rem;
-            border-radius: 1rem;
-        }
-
-        .pdf-container {
-            width: 100%;
-            height: 800px;
-            border-radius: 1.5rem;
-            overflow: hidden;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            background: #000;
-        }
-
-        pre {
-            background: #000 !important;
-            border: 1px solid rgba(255,255,255,0.1);
-            padding: 1.5rem;
-            border-radius: 1rem;
-            font-size: 0.75rem;
-            overflow-x: auto;
-        }
-
-        .feature-tag {
-            @apply bg-cyan-500/5 border border-cyan-500/15 p-2.5 rounded-lg text-[9px] text-cyan-300 font-mono flex items-center gap-2 transition-all;
-        }
-        .feature-tag:hover { @apply bg-cyan-500/10 border-cyan-500/40 translate-x-1 shadow-lg shadow-cyan-500/5; }
-
-        .math-box {
-            @apply glass p-10 rounded-[3rem] border border-white/5 mt-8;
-            background: rgba(0, 0, 0, 0.4);
-            transition: all 0.3s;
-        }
-        .math-box:hover { border-color: rgba(6, 182, 212, 0.3); transform: translateY(-3px); }
-
-        .evidence-card {
-            @apply glass rounded-2xl overflow-hidden border border-white/5 hover:border-cyan-500/30 transition-all duration-500 flex flex-col h-full;
-        }
-        .evidence-img {
-            @apply w-full h-40 object-cover cursor-zoom-in transition-transform duration-700 hover:scale-110;
-            background: #111;
-        }
-        .evidence-label { @apply p-3 bg-black/40 border-t border-white/5; }
-
-        #lightbox {
-            display: none;
-            position: fixed;
-            z-index: 999999;
-            left: 0;
+        .timeline-line::before {
+            content: '';
+            position: absolute;
+            left: 20px;
             top: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(2, 6, 23, 0.98);
-            backdrop-filter: blur(25px);
-            overflow-y: auto; 
-            padding: 60px 0;
+            bottom: 0;
+            width: 2px;
+            background: linear-gradient(to bottom, #6366f1, #f43f5e, transparent);
         }
-        #lightbox-content {
-            margin: auto;
-            display: block;
-            width: 85%;
-            max-width: 1400px;
-            border-radius: 1rem;
-            border: 1px solid rgba(255,255,255,0.1);
-            height: auto; 
-            animation: zoom 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-            box-shadow: 0 0 120px rgba(6, 182, 212, 0.25);
+        .glow-hover:hover {
+            box-shadow: 0 0 30px rgba(99, 102, 241, 0.15);
+            border-color: rgba(99, 102, 241, 0.4);
+            transform: translateY(-4px);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
-        .close-button {
-            position: fixed;
-            top: 20px;
-            right: 40px;
-            z-index: 1000000;
-            @apply bg-red-600 hover:bg-red-700 text-white p-3 rounded-full shadow-2xl transition-all cursor-pointer;
+        .custom-scrollbar::-webkit-scrollbar { width: 8px; }
+        .custom-scrollbar::-webkit-scrollbar-track { background: transparent; }
+        .custom-scrollbar::-webkit-scrollbar-thumb { background: #1e293b; border-radius: 10px; }
+        .card-inner {
+            background: linear-gradient(180deg, rgba(255,255,255,0.03) 0%, rgba(255,255,255,0) 100%);
+        }
+        .chat-dot {
+            height: 8px;
+            width: 8px;
+            background-color: #10b981;
+            border-radius: 50%;
+            display: inline-block;
+            margin-right: 6px;
         }
     </style>
 </head>
-<body class="grid-bg text-slate-200">
+<body class="antialiased custom-scrollbar">
 
-    <div id="lightbox" onclick="closeLightbox()">
-        <div class="close-button" onclick="closeLightbox()">
-            <i data-lucide="x" class="w-8 h-8"></i>
-        </div>
-        <img id="lightbox-content" src="" alt="Visão Ampliada LabSUS">
-    </div>
-
-    <nav class="fixed top-0 w-full z-50 glass border-b border-white/5 px-6 py-4">
-        <div class="max-w-7xl mx-auto flex justify-between items-center">
-            <div class="flex items-center gap-2">
-                <i data-lucide="activity" class="text-cyan-500"></i>
-                <span class="font-extrabold text-xl tracking-tighter uppercase italic">Lab<span class="text-cyan-400 font-black">SUS</span></span>
+    <!-- Navegação Flutuante -->
+    <nav class="fixed top-6 left-1/2 -translate-x-1/2 z-50 w-[90%] max-w-6xl">
+        <div class="glass px-8 py-4 rounded-full flex items-center justify-between border-white/10 shadow-2xl">
+            <div class="flex items-center space-x-3">
+                <div class="w-10 h-10 bg-gradient-to-br from-indigo-500 via-rose-500 to-amber-500 rounded-xl flex items-center justify-center font-bold text-white shadow-lg">BR</div>
+                <span class="font-bold tracking-tighter text-lg">r/MusicaBR</span>
             </div>
-            <div class="hidden lg:flex gap-8 text-[10px] uppercase tracking-widest font-bold text-slate-500">
-                <a href="#overview" class="hover:text-white transition">Enciclopédia</a>
-                <a href="#frontend-gallery" class="hover:text-white transition">Interface</a>
-                <a href="#evidence-gallery" class="hover:text-white transition">Evidências</a>
-                <a href="#math" class="hover:text-white transition text-cyan-400 font-black">Matemática</a>
-                <a href="#fazenda" class="hover:text-white transition text-amber-400 font-black">Fazenda</a>
-                <a href="#features" class="hover:text-white transition">Catálogo 40+</a>
+            <div class="hidden lg:flex space-x-6 text-[10px] font-bold uppercase tracking-[0.2em] text-slate-400">
+                <a href="#filosofia" class="hover:text-indigo-400 transition-colors">Filosofia</a>
+                <a href="#cronograma" class="hover:text-indigo-400 transition-colors">Cronograma</a>
+                <a href="#chat" class="hover:text-indigo-400 transition-colors">Chat</a>
+                <a href="#radar" class="hover:text-indigo-400 transition-colors">Radar</a>
+                <a href="#musicpage" class="hover:text-amber-400 transition-colors border-b border-amber-500/50 pb-1">Music Page</a>
+                <a href="#amas" class="hover:text-indigo-400 transition-colors">AMAs</a>
+                <a href="#roadmap" class="hover:text-indigo-400 transition-colors">500K</a>
             </div>
-            <div class="flex gap-3">
-                <a href="https://github.com/goldenluke/labsus" target="_blank" class="flex items-center gap-2 bg-slate-800 text-white px-4 py-1.5 rounded-lg text-[10px] font-bold hover:bg-slate-700 transition border border-white/10">
-                    <i data-lucide="github" class="w-3 h-3"></i> REPOSITÓRIO
-                </a>
+            <div class="flex items-center space-x-2">
+                <span class="relative flex h-2 w-2">
+                  <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                  <span class="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+                </span>
+                <span class="text-[10px] font-mono text-emerald-400 font-bold uppercase">Live: 55K Visitantes</span>
             </div>
         </div>
     </nav>
 
-    <header class="relative pt-48 pb-32 px-6 text-center" id="overview">
-        <div class="absolute top-0 left-1/2 -translate-x-1/2 w-[1200px] h-[600px] bg-cyan-600/10 blur-[160px] rounded-full -z-10"></div>
-        <div class="max-w-6xl mx-auto">
-            <div class="inline-block px-4 py-1.5 rounded-full border border-cyan-500/30 bg-cyan-500/5 text-cyan-400 text-[10px] font-black mb-8 uppercase tracking-[0.4em]">
-                Design Pattern de Inteligência Estatal & MLOps
+    <!-- Hero Section -->
+    <header class="relative pt-48 pb-32 px-6 overflow-hidden">
+        <div class="absolute inset-0 z-0">
+            <div class="absolute top-0 -left-20 w-[600px] h-[600px] bg-indigo-600/10 rounded-full mix-blend-screen filter blur-[120px] opacity-50"></div>
+            <div class="absolute bottom-0 -right-20 w-[600px] h-[600px] bg-rose-600/10 rounded-full mix-blend-screen filter blur-[120px] opacity-50"></div>
+        </div>
+        
+        <div class="relative z-10 max-w-6xl mx-auto">
+            <div class="inline-flex items-center space-x-2 bg-white/5 border border-white/10 px-4 py-1.5 rounded-full mb-8">
+                <span class="text-indigo-400 text-xs font-bold uppercase tracking-widest">Documento de Expansão V4.0</span>
+                <span class="w-1 h-1 bg-slate-600 rounded-full"></span>
+                <span class="text-slate-400 text-xs font-medium">Março 2026</span>
             </div>
-            <h1 class="text-6xl md:text-8xl font-black mb-10 tracking-tighter leading-[0.85]">
-                Padrão de Projeto de <br><span class="gradient-text">Inteligência Estatal.</span>
+            <h1 class="text-7xl md:text-[100px] font-extrabold mb-8 tracking-tighter leading-[0.9] lg:max-w-4xl">
+                A Institucionalização da <span class="gradient-text">Cena Digital</span>
             </h1>
+            <p class="text-xl md:text-3xl text-slate-400 max-w-3xl mb-12 font-light leading-snug">
+                O r/MusicaBR superou o estágio de fórum comum. Agora, operamos como um portal de curadoria, preservação histórica e lançamento de tendências para a música brasileira.
+            </p>
             
-            <div class="flex flex-col items-center gap-6 mb-12">
-                <div class="flex items-center gap-2 text-cyan-500/80 font-mono text-sm tracking-widest uppercase border-y border-white/5 py-2 px-6 font-bold text-center">
-                    <i data-lucide="user" class="w-4 h-4"></i>
-                    Autor: <span class="text-cyan-400 uppercase">Lucas Amaral Dourado</span>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl">
+                <div class="glass p-6 rounded-3xl border-white/10">
+                    <span class="block text-slate-500 text-[10px] font-bold uppercase mb-2 tracking-widest">Tráfego Mensal Estimado</span>
+                    <span class="text-3xl font-bold">220.000+</span>
                 </div>
-                
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 opacity-80">
-                    <div class="flex items-center gap-2 font-mono text-[9px] tracking-widest uppercase text-slate-400 text-center">
-                        <i data-lucide="graduation-cap" class="w-3 h-3 text-cyan-500"></i>
-                        Orientação: <span class="text-slate-200">Profa. Dra. Kelly Cristina Gomes</span>
-                    </div>
-                    <div class="flex items-center gap-2 font-mono text-[9px] tracking-widest uppercase text-slate-400 text-center">
-                        <i data-lucide="graduation-cap" class="w-3 h-3 text-cyan-500"></i>
-                        Orientação: <span class="text-slate-200">Profa. Ma. Michelle de Jesus Pantoja Filgueira</span>
-                    </div>
-                    <div class="flex items-center gap-2 font-mono text-[9px] tracking-widest uppercase text-slate-400 text-center">
-                        <i data-lucide="code" class="w-3 h-3 text-cyan-500"></i>
-                        Colaboração: <span class="text-slate-200">Prof. Dr. Thiago M. B. Rodrigues</span>
-                    </div>
-                    <div class="flex items-center gap-2 font-mono text-[9px] tracking-widest uppercase text-slate-400 text-center">
-                        <i data-lucide="terminal" class="w-3 h-3 text-cyan-500"></i>
-                        Colaboração: <span class="text-slate-200">Prof. Dr. Ary Henrique</span>
-                    </div>
+                <div class="glass p-6 rounded-3xl border-white/10">
+                    <span class="block text-slate-500 text-[10px] font-bold uppercase mb-2 tracking-widest">Status da Comunidade</span>
+                    <span class="text-3xl font-bold text-indigo-400 uppercase">Gigante</span>
+                </div>
+                <div class="glass p-6 rounded-3xl border-indigo-500/30">
+                    <span class="block text-slate-500 text-[10px] font-bold uppercase mb-2 tracking-widest">Meta de Retenção</span>
+                    <span class="text-3xl font-bold text-rose-500">85%</span>
                 </div>
             </div>
         </div>
     </header>
 
-    <!-- 1. GALERIA DA INTERFACE (FRONTEND) -->
-    <section class="py-32 max-w-7xl mx-auto px-6 border-t border-white/5" id="frontend-gallery">
-        <div class="text-center mb-16">
-            <h2 class="text-4xl font-black uppercase mb-4 italic tracking-tighter text-emerald-500">I. Exemplos da Interface de Decisão Estatal</h2>
-            <p class="text-slate-500 max-w-2xl mx-auto font-light text-sm italic text-center leading-relaxed">Visualização do motor de orquestração em UI reativa (Clique para ampliar).</p>
-        </div>
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            <img src="https://github.com/goldenluke/qwan_zero_pipeline/blob/main/Untitled.jpeg?raw=true" onclick="openLightbox(this.src)" class="frontend-img" alt="UI Dashboard">
-            <img src="https://github.com/goldenluke/qwan_zero_pipeline/blob/main/Untitled2.jpeg?raw=true" onclick="openLightbox(this.src)" class="frontend-img" alt="UI Espacial">
-            <img src="https://github.com/goldenluke/qwan_zero_pipeline/blob/main/Untitled3.jpeg?raw=true" onclick="openLightbox(this.src)" class="frontend-img" alt="UI Indicadores">
-            <img src="https://github.com/goldenluke/qwan_zero_pipeline/blob/main/Untitled4.jpeg?raw=true" onclick="openLightbox(this.src)" class="frontend-img" alt="UI IA">
-            <img src="https://github.com/goldenluke/qwan_zero_pipeline/blob/main/Untitled5.jpeg?raw=true" onclick="openLightbox(this.src)" class="frontend-img" alt="UI Fluxos">
-            <img src="https://github.com/goldenluke/qwan_zero_pipeline/blob/main/Untitled6.jpeg?raw=true" onclick="openLightbox(this.src)" class="frontend-img" alt="UI Auditoria">
-            <img src="https://github.com/goldenluke/qwan_zero_pipeline/blob/main/Untitled7.jpeg?raw=true" onclick="openLightbox(this.src)" class="frontend-img lg:col-span-2" alt="UI Completa">
-        </div>
-    </section>
+    <main class="max-w-6xl mx-auto px-6 space-y-40 pb-40">
 
-    <!-- 2. GALERIA TOTAL DE EVIDÊNCIAS ANALÍTICAS -->
-    <section class="py-32 max-w-7xl mx-auto px-6 border-t border-white/5" id="evidence-gallery">
-        <div class="text-center mb-16 text-center">
-            <h2 class="text-4xl font-black uppercase mb-4 italic tracking-tighter text-cyan-500">II. Exemplos de Evidências Analíticas</h2>
-            <p class="text-slate-500 max-w-3xl mx-auto font-light text-sm italic text-center leading-relaxed">Produção algorítmica real do diretório <code>outputs/</code> (Clique para ampliar).</p>
-        </div>
-
-        <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4">
-            <!-- Causalidade -->
-            <div class="evidence-card" onclick="openLightbox('https://github.com/goldenluke/labsus/blob/main/outputs/analise_causal/propensity_score_overlap.png?raw=true')">
-                <img src="https://github.com/goldenluke/labsus/blob/main/outputs/analise_causal/propensity_score_overlap.png?raw=true" class="evidence-img">
-                <div class="evidence-label"><span class="text-[8px] font-bold text-white uppercase">PSM Overlap</span></div>
-            </div>
-            <div class="evidence-card" onclick="openLightbox('https://github.com/goldenluke/labsus/blob/main/outputs/analise_impacto_politicas/its_impacto_taxa_cura.png?raw=true')">
-                <img src="https://github.com/goldenluke/labsus/blob/main/outputs/analise_impacto_politicas/its_impacto_taxa_cura.png?raw=true" class="evidence-img">
-                <div class="evidence-label"><span class="text-[8px] font-bold text-white uppercase">ITS Impacto</span></div>
-            </div>
-            <!-- Espacial -->
-            <div class="evidence-card" onclick="openLightbox('https://github.com/goldenluke/labsus/blob/main/outputs/analise_espacial/mapa_lisa_DOENCAS_CRONICAS.png?raw=true')">
-                <img src="https://github.com/goldenluke/labsus/blob/main/outputs/analise_espacial/mapa_lisa_DOENCAS_CRONICAS.png?raw=true" class="evidence-img">
-                <div class="evidence-label"><span class="text-[8px] font-bold text-white uppercase">LISA Moran</span></div>
-            </div>
-            <div class="evidence-card" onclick="openLightbox('https://github.com/goldenluke/labsus/blob/main/outputs/analise_psicotropicos/mapa_opioides.png?raw=true')">
-                <img src="https://github.com/goldenluke/labsus/blob/main/outputs/analise_psicotropicos/mapa_opioides.png?raw=true" class="evidence-img">
-                <div class="evidence-label"><span class="text-[8px] font-bold text-white uppercase">Mapa Opióides</span></div>
-            </div>
-            <!-- XAI -->
-            <div class="evidence-card" onclick="openLightbox('https://github.com/goldenluke/labsus/blob/main/outputs/risco_perinatal/shap_summary_beeswarm.png?raw=true')">
-                <img src="https://github.com/goldenluke/labsus/blob/main/outputs/risco_perinatal/shap_summary_beeswarm.png?raw=true" class="evidence-img">
-                <div class="evidence-label"><span class="text-[8px] font-bold text-white uppercase">SHAP Perinatal</span></div>
-            </div>
-            <div class="evidence-card" onclick="openLightbox('https://github.com/goldenluke/labsus/blob/main/outputs/previsoes_individuais/explicacao_risco_obito_individual.png?raw=true')">
-                <img src="https://github.com/goldenluke/labsus/blob/main/outputs/previsoes_individuais/explicacao_risco_obito_individual.png?raw=true" class="evidence-img">
-                <div class="evidence-label"><span class="text-[8px] font-bold text-white uppercase">XAI Individual</span></div>
-            </div>
-            <!-- Fluxo -->
-            <div class="evidence-card" onclick="openLightbox('https://github.com/goldenluke/labsus/blob/main/outputs/analise_rede/mapa_rede_fluxo_pacientes_neoplasias.png?raw=true')">
-                <img src="https://github.com/goldenluke/labsus/blob/main/outputs/analise_rede/mapa_rede_fluxo_pacientes_neoplasias.png?raw=true" class="evidence-img">
-                <div class="evidence-label"><span class="text-[8px] font-bold text-white uppercase">Network Graph</span></div>
-            </div>
-            <div class="evidence-card" onclick="openLightbox('https://github.com/goldenluke/labsus/blob/main/outputs/simulacao_capacidade/tradeoff_capacidade_geral.png?raw=true')">
-                <img src="https://github.com/goldenluke/labsus/blob/main/outputs/simulacao_capacidade/tradeoff_capacidade_geral.png?raw=true" class="evidence-img">
-                <div class="evidence-label"><span class="text-[8px] font-bold text-white uppercase">DES Simulação</span></div>
-            </div>
-        </div>
-    </section>
-
-    <div class="section-divider" id="math"></div>
-
-    <!-- 3. FUNDAMENTAÇÃO MATEMÁTICA INTEGRAL (ULTRA-DENSE) -->
-    <section class="py-32 max-w-7xl mx-auto px-6 border-t border-white/5" id="math">
-        <div class="text-center mb-24">
-            <h2 class="text-5xl font-black uppercase mb-4 italic tracking-tight underline decoration-cyan-500/30 underline-offset-8 text-cyan-400 text-center font-serif italic text-center">Fundamentação Matemática</h2>
-            <p class="text-slate-500 max-w-3xl mx-auto font-light text-sm italic leading-relaxed text-center italic leading-relaxed">Formalismos de Física Estatística, Teoria Ergódica e Cálculo Estocástico.</p>
-        </div>
-
-        <div class="grid lg:grid-cols-2 gap-8">
-            <!-- Teoria QWAN -->
-            <div class="math-box lg:col-span-2 text-center">
-                <h4 class="font-bold text-white uppercase text-[12px] tracking-widest mb-6 text-indigo-400 underline underline-offset-8 uppercase tracking-[0.3em] text-center">Teoria QWAN: Metaestabilidade e Ergodicidade</h4>
-                <div class="grid md:grid-cols-2 gap-10 items-center">
-                    <div class="bg-black/40 p-6 rounded-xl border border-indigo-500/30 text-center">
-                        $$\lim_{T \to \infty} \frac{1}{T} \int_0^T f(T_t x) dt = \int_X f d\mu \quad ; \quad \lambda_{max} \approx 0$$
+        <!-- Seção 1: Filosofia e Identidade -->
+        <section id="filosofia" class="scroll-mt-32">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
+                <div class="lg:col-span-5 space-y-8">
+                    <h2 class="text-5xl font-bold tracking-tight">O Subreddit como <br><span class="text-indigo-400">Portal de Mídia</span></h2>
+                    <p class="text-slate-400 text-lg leading-relaxed">
+                        A transição de um subreddit gigante para um hub cultural exige uma mudança de mentalidade: saímos da <strong>postagem aleatória</strong> para a <strong>programação curada</strong>.
+                    </p>
+                    <div class="space-y-4">
+                        <div class="flex items-center space-x-4 p-4 rounded-2xl bg-white/5 border border-white/10">
+                            <div class="w-10 h-10 rounded-full bg-indigo-500/20 flex items-center justify-center text-indigo-400">01</div>
+                            <p class="text-sm font-medium">Curadoria sobre Agregação: Qualidade > Quantidade.</p>
+                        </div>
+                        <div class="flex items-center space-x-4 p-4 rounded-2xl bg-white/5 border border-white/10">
+                            <div class="w-10 h-10 rounded-full bg-rose-500/20 flex items-center justify-center text-rose-400">02</div>
+                            <p class="text-sm font-medium">Preservação Histórica: O sub como enciclopédia.</p>
+                        </div>
+                        <div class="flex items-center space-x-4 p-4 rounded-2xl bg-white/5 border border-white/10">
+                            <div class="w-10 h-10 rounded-full bg-emerald-500/20 flex items-center justify-center text-emerald-400">03</div>
+                            <p class="text-sm font-medium">Descoberta em Escala: Lançar o próximo grande nome indie.</p>
+                        </div>
                     </div>
-                    <p class="text-[10px] text-slate-500 leading-relaxed italic text-justify leading-relaxed">A estabilidade da orquestração estatal é validada pelo <b>Teorema Ergódico de Birkhoff</b>. O Regime QWAN (\(\mathcal{R}_{Q}\)) garante que a média temporal das internações hospitalares convirja para a média espacial do território sob criticidade marginal.</p>
+                </div>
+                <div class="lg:col-span-7 grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="glass p-8 rounded-[2.5rem] card-inner border-white/5">
+                        <h4 class="text-xl font-bold mb-4">Autoridade Cultural</h4>
+                        <p class="text-sm text-slate-400 leading-relaxed">
+                            O r/MusicaBR deve ser o lugar onde críticos, músicos e entusiastas se encontram. Ao institucionalizar colunas semanais, criamos autoridade que atrai parcerias com selos e blogs de música.
+                        </p>
+                    </div>
+                    <div class="glass p-8 rounded-[2.5rem] card-inner border-white/5">
+                        <h4 class="text-xl font-bold mb-4">Engajamento de Lurkers</h4>
+                        <p class="text-sm text-slate-400 leading-relaxed">
+                            Muitos visitantes apenas leem. Conteúdos educativos (História da Tropicália, Manguebeat) transformam esses "observadores" em membros ativos ao fornecer valor imediato.
+                        </p>
+                    </div>
+                    <div class="glass p-8 rounded-[2.5rem] col-span-1 md:col-span-2 border-indigo-500/20">
+                        <h4 class="text-xl font-bold mb-4 text-indigo-300">A "Revista Digital" Colaborativa</h4>
+                        <p class="text-sm text-slate-400 leading-relaxed italic">
+                            Imagine o r/MusicaBR não como um site estático, mas como uma revista que se atualiza em tempo real através dos comentários, onde a redação são os moderadores e os leitores são os editores assistentes.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Seção 2: Cronograma Editorial Profundo -->
+        <section id="cronograma" class="scroll-mt-32 space-y-16">
+            <div class="max-w-3xl">
+                <h2 class="text-5xl font-bold mb-6">A Grade de Programação <span class="text-rose-400">Master</span></h2>
+                <p class="text-slate-400 text-lg">
+                    Cada dia da semana é desenhado para capturar uma demografia diferente da audiência musical brasileira, garantindo tráfego sustentado de domingo a domingo.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+                <!-- SEG -->
+                <div class="group relative glass p-8 rounded-[2rem] border-white/5 glow-hover">
+                    <div class="absolute top-4 right-4 text-white/10 group-hover:text-indigo-500/30 transition-colors">
+                        <svg class="w-12 h-12" fill="currentColor" viewBox="0 0 24 24"><path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z"/></svg>
+                    </div>
+                    <span class="text-xs font-bold text-indigo-400 uppercase tracking-widest block mb-4">Segunda-Feira</span>
+                    <h3 class="text-2xl font-bold mb-4">Álbum da Semana</h3>
+                    <div class="space-y-4 text-sm text-slate-400 leading-relaxed">
+                        <p><strong>Foco:</strong> Discussão técnica e histórica de um álbum fundamental.</p>
+                        <ul class="space-y-2 text-xs">
+                            <li>• Contexto de época</li>
+                            <li>• Análise de produção/mixagem</li>
+                            <li>• Legado para as gerações atuais</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- TER -->
+                <div class="group relative glass p-8 rounded-[2rem] border-white/5 glow-hover">
+                    <div class="absolute top-4 right-4 text-white/10 group-hover:text-emerald-500/30 transition-colors">
+                        <svg class="w-12 h-12" fill="currentColor" viewBox="0 0 24 24"><path d="M21 16.5c0 .38-.21.71-.53.88l-7.9 4.44c-.16.08-.33.12-.51.12-.18 0-.35-.04-.51-.12l-7.9-4.44c-.31-.17-.52-.5-.52-.88v-9c0-.38.21-.71.53-.88l7.9-4.44c.16-.08.33-.12.51-.12.18 0 .35.04.51.12l7.9 4.44c.31.17.52.5.52.88v9z"/></svg>
+                    </div>
+                    <span class="text-xs font-bold text-emerald-400 uppercase tracking-widest block mb-4">Terça-Feira</span>
+                    <h3 class="text-2xl font-bold mb-4">Garimpo Musical</h3>
+                    <div class="space-y-4 text-sm text-slate-400 leading-relaxed">
+                        <p><strong>Foco:</strong> Descoberta de artistas com menos de 100k ouvintes.</p>
+                        <p class="text-xs italic bg-white/5 p-3 rounded-lg">Ideal para fortalecer a cena independente e atrair novos músicos para o sub.</p>
+                    </div>
+                </div>
+
+                <!-- QUA -->
+                <div class="group relative glass p-8 rounded-[2rem] border-white/5 glow-hover">
+                    <span class="text-xs font-bold text-sky-400 uppercase tracking-widest block mb-4">Quarta-Feira</span>
+                    <h3 class="text-2xl font-bold mb-4">História da Música</h3>
+                    <div class="space-y-4 text-sm text-slate-400 leading-relaxed">
+                        <p><strong>Foco:</strong> Educação e Memória Cultural.</p>
+                        <p class="text-xs">Posts densos sobre movimentos: Tropicália, Luso-brasileiros, A explosão do Funk-Soul nos anos 70.</p>
+                    </div>
+                </div>
+
+                <!-- QUI -->
+                <div class="group relative glass p-8 rounded-[2rem] border-white/5 glow-hover">
+                    <span class="text-xs font-bold text-amber-400 uppercase tracking-widest block mb-4">Quinta-Feira</span>
+                    <h3 class="text-2xl font-bold mb-4">Quinta Autoral</h3>
+                    <div class="space-y-4 text-sm text-slate-400 leading-relaxed">
+                        <p><strong>Foco:</strong> "Mostre seu som". Dia de feedback aberto.</p>
+                        <p class="text-xs">Exposição para membros que são produtores e compositores. Gera comunidade ativa.</p>
+                    </div>
                 </div>
             </div>
 
-            <!-- Fokker-Planck -->
-            <div class="math-box text-center">
-                <h4 class="font-bold text-white uppercase text-[11px] tracking-widest mb-6 text-cyan-400 underline underline-offset-8">01. Evolução de Densidade (Fokker-Planck)</h4>
-                <p class="text-[10px] text-slate-400 mb-4 italic">Modelagem da evolução temporal da probabilidade de surto \(p(x,t)\):</p>
-                $$\frac{\partial p(x,t)}{\partial t} = -\frac{\partial}{\partial x} [\mu(x,t)p(x,t)] + \frac{\partial^2}{\partial x^2} [D(x,t)p(x,t)]$$
-            </div>
-
-            <!-- Jensen-Shannon -->
-            <div class="math-box text-center">
-                <h4 class="font-bold text-white uppercase text-[11px] tracking-widest mb-6 text-emerald-400 underline underline-offset-8">02. Jensen-Shannon (Teoria Informação)</h4>
-                <p class="text-[10px] text-slate-400 mb-4 italic">Comparação simétrica entre perfis epidemiológicos municipais:</p>
-                $$JSD(P || Q) = \frac{1}{2} D_{KL}(P || M) + \frac{1}{2} D_{KL}(Q || M)$$
-            </div>
-
-            <!-- Bellman -->
-            <div class="math-box text-center">
-                <h4 class="font-bold text-white uppercase text-[11px] tracking-widest mb-6 text-amber-400 underline underline-offset-8">03. Otimização Estocástica de Bellman</h4>
-                <p class="text-[10px] text-slate-400 mb-4 italic">Decisão ótima de alocação de leitos sob incerteza de demanda:</p>
-                $$V(s) = \max_{a} \{ R(s,a) + \gamma \sum_{s'} P(s'|s,a) V(s') \}$$
-            </div>
-
-            <!-- Sensibilidade Sobol -->
-            <div class="math-box text-center">
-                <h4 class="font-bold text-white uppercase text-[11px] tracking-widest mb-6 text-purple-400 underline underline-offset-8">04. Sensibilidade de Sobol (Incerteza)</h4>
-                <p class="text-[10px] text-slate-400 mb-4 italic">Decomposição da variância do risco para identificar fatores críticos:</p>
-                $$S_i = \frac{Var_{X_i}(E_{X_{\sim i}}[Y|X_i])}{Var(Y)}$$
-            </div>
-        </div>
-    </section>
-
-    <div class="section-divider" id="fazenda"></div>
-
-    <!-- 4. LABSUS NO MINISTÉRIO DA FAZENDA — VERSÃO MÁXIMA -->
-    <section class="py-32 max-w-7xl mx-auto px-6 border-t border-white/5">
-        <div class="text-center mb-20 text-center">
-            <h2 class="text-4xl font-black uppercase mb-4 italic tracking-tighter text-amber-500 text-center font-black">LabSUS no Ministério da Fazenda</h2>
-            <p class="text-slate-500 max-w-2xl mx-auto font-light text-sm italic leading-relaxed text-center italic">Transposição econométrica e atuarial para a soberania fiscal.</p>
-        </div>
-
-        <div class="grid lg:grid-cols-2 gap-12 items-start">
-            <div class="space-y-8">
-                <!-- SFA -->
-                <div class="math-box bg-amber-500/5 border-amber-500/10 text-center">
-                    <h5 class="text-xs font-bold text-amber-400 uppercase mb-4 tracking-widest font-mono text-center">1. Fronteira Estocástica de Eficiência (SFA)</h5>
-                    <p class="text-[10px] text-slate-400 mb-4 italic">Estimativa da ineficiência fiscal municipal separada do ruído aleatório:</p>
-                    $$\ln(R_i) = \beta^T X_i + v_i - u_i \quad ; \quad u_i \geq 0$$
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <!-- SEX -->
+                <div class="glass p-10 rounded-[3rem] border-rose-500/20 relative overflow-hidden">
+                    <div class="absolute top-0 right-0 w-32 h-32 bg-rose-500/10 rounded-full blur-3xl -mr-16 -mt-16"></div>
+                    <div class="flex items-center space-x-4 mb-6">
+                        <div class="px-3 py-1 bg-rose-500/20 text-rose-400 rounded-lg font-bold text-xs tracking-tighter uppercase">Flash Day</div>
+                        <h3 class="text-3xl font-bold">Lançamentos da Semana</h3>
+                    </div>
+                    <p class="text-slate-400 mb-8 leading-relaxed">
+                        O post fixado da sexta-feira é a "capa" da nossa revista semanal. Consolidamos álbuns, EPs e singles brasileiros lançados no dia. Este é o post com maior potencial de compartilhamento externo.
+                    </p>
+                    <div class="grid grid-cols-2 gap-4">
+                        <div class="p-4 bg-white/5 rounded-2xl border border-white/5">
+                            <span class="block font-bold mb-1">Impacto</span>
+                            <span class="text-xs text-slate-500">Principal driver de novos seguidores orgânicos.</span>
+                        </div>
+                        <div class="p-4 bg-white/5 rounded-2xl border border-white/5">
+                            <span class="block font-bold mb-1">Curadoria</span>
+                            <span class="text-xs text-slate-500">Seleção rigorosa dos 10 lançamentos "imperdíveis".</span>
+                        </div>
+                    </div>
                 </div>
 
-                <!-- Ramsey -->
-                <div class="math-box bg-amber-500/5 border-amber-500/10 mt-8 text-center text-center">
-                    <h5 class="text-xs font-bold text-amber-400 uppercase mb-4 tracking-widest font-mono">2. Elasticidade Inversa de Ramsey</h5>
-                    $$\frac{\tau_k}{p_k} = \frac{1}{\varepsilon_k} \frac{1 - \lambda}{\lambda}$$
-                </div>
-
-                <!-- Nash -->
-                <div class="math-box bg-amber-500/5 border-amber-500/10 mt-8 text-center text-center">
-                    <h5 class="text-xs font-bold text-amber-400 uppercase mb-4 tracking-widest font-mono">3. Equilíbrio de Nash na Fiscalização</h5>
-                    $$p^* = \frac{f}{f + \tau B} \quad ; \quad q^* = \frac{C'(p)}{\tau B}$$
-                </div>
-            </div>
-
-            <div class="space-y-8 text-center">
-                <!-- Itô -->
-                <div class="math-box text-center">
-                    <h4 class="font-bold text-white uppercase text-[10px] tracking-widest mb-6 text-amber-400 underline underline-offset-8">4. Volatilidade Arrecadatória (Cálculo de Itô)</h4>
-                    $$dX_t = \theta(\mu - X_t) dt + \sigma dW_t$$
-                </div>
-
-                <!-- Tax Gap -->
-                <div class="math-box text-center">
-                    <h4 class="font-bold text-white uppercase text-[10px] tracking-widest mb-6 text-amber-400 underline underline-offset-8 text-center font-black">5. Hiato Tributário Estrutural (Tax Gap)</h4>
-                    $$Gap = \sum \tau \cdot B(PIB_{interp}) - \sum R_{real}$$
-                </div>
-
-                <!-- Multiplicador -->
-                <div class="math-box text-center">
-                    <h4 class="font-bold text-white uppercase text-[10px] tracking-widest mb-6 text-amber-400 underline underline-offset-8">6. Multiplicador Fiscal Analítico</h4>
-                    $$m = \frac{1}{1 - c(1-t) + m}$$
+                <!-- FIM DE SEMANA -->
+                <div class="glass p-10 rounded-[3rem] border-indigo-500/20">
+                    <div class="flex items-center space-x-4 mb-6">
+                        <div class="px-3 py-1 bg-indigo-500/20 text-indigo-400 rounded-lg font-bold text-xs tracking-tighter uppercase">Crowd Control</div>
+                        <h3 class="text-3xl font-bold">Debates & Rankings</h3>
+                    </div>
+                    <p class="text-slate-400 mb-8 leading-relaxed">
+                        O final de semana é voltado para a participação em massa. Enquetes sobre gêneros, batalhas de álbuns e o "Grande Ranking r/MusicaBR" dos melhores discos de cada década.
+                    </p>
+                    <div class="space-y-3">
+                        <div class="flex items-center space-x-3 p-3 bg-indigo-500/5 rounded-xl border border-indigo-500/10">
+                            <span class="text-indigo-400">🗳️</span> <span class="text-sm font-medium italic">"Qual o melhor disco de Rap Nacional de 2024?"</span>
+                        </div>
+                        <div class="flex items-center space-x-3 p-3 bg-rose-500/5 rounded-xl border border-rose-500/10">
+                            <span class="text-rose-400">🗳️</span> <span class="text-sm font-medium italic">"Copa dos Guitarristas: Lanny Gordin vs Pepeu Gomes"</span>
+                        </div>
+                    </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- 5. CATÁLOGO INTEGRAL (OS 40 MODELOS) -->
-    <section class="py-32 max-w-7xl mx-auto px-6 border-t border-white/5" id="features">
-        <div class="text-center mb-16 text-center text-center">
-            <h2 class="text-4xl font-black uppercase mb-4 italic tracking-tighter text-cyan-500 text-center font-black">Catálogo Integral de Modelos</h2>
-            <p class="text-slate-500 max-w-3xl mx-auto font-light text-sm italic leading-relaxed text-center italic leading-relaxed">Arquitetura de competência estatal orquestrada em 4 eixos principais.</p>
-        </div>
-
-        <div class="grid lg:grid-cols-4 gap-4 text-center">
-            <div class="space-y-2">
-                <h3 class="text-white font-bold text-[9px] uppercase tracking-widest border-b border-cyan-500/20 pb-1 mb-4">Epidemiologia (12)</h3>
-                <div class="feature-tag">Mortalidade Infantil (TMI)</div>
-                <div class="feature-tag">Cobertura Pré-Natal (7+)</div>
-                <div class="feature-tag">Vigilância Psicotrópicos</div>
-                <div class="feature-tag">Internações Sensíveis (ICSAP)</div>
-                <div class="feature-tag">Mães Adolescentes (&lt;20a)</div>
-                <div class="feature-tag">Causas Mal Definidas (CMD)</div>
-                <div class="feature-tag">Incidência Arboviroses</div>
-                <div class="feature-tag">Tuberculose (Cura/Abandono)</div>
-                <div class="feature-tag">Hanseníase (Detecção)</div>
-                <div class="feature-tag">Médicos por 1.000 hab.</div>
-                <div class="feature-tag">Cobertura ESF (%)</div>
-                <div class="feature-tag">Óbitos Maternos</div>
-            </div>
-            <div class="space-y-2">
-                <h3 class="text-white font-bold text-[9px] uppercase tracking-widest border-b border-emerald-500/20 pb-1 mb-4">IA & Complexidade (10)</h3>
-                <div class="feature-tag">Regime QWAN (Metastability)</div>
-                <div class="feature-tag">Expoentes de Lyapunov</div>
-                <div class="feature-tag">Risco de Óbito (XAI SHAP)</div>
-                <div class="feature-tag">Requalificação NLP (TF-IDF)</div>
-                <div class="feature-tag">Forecast Demanda (Prophet)</div>
-                <div class="feature-tag">Sobrevida (Cox PH)</div>
-                <div class="feature-tag">Inferência Causal (PSM)</div>
-                <div class="feature-tag">Clustering Lloyd (K-Means)</div>
-                <div class="feature-tag">Autocorrelação Moran (I)</div>
-                <div class="feature-tag">Fokker-Planck Evolution</div>
-            </div>
-            <div class="space-y-2">
-                <h3 class="text-white font-bold text-[9px] uppercase tracking-widest border-b border-rose-500/20 pb-1 mb-4">Desfechos & Gestão (9)</h3>
-                <div class="feature-tag">Mort. Doenças Circulatórias</div>
-                <div class="feature-tag">Mort. Neoplasias (Câncer)</div>
-                <div class="feature-tag">Mortalidade COVID-19</div>
-                <div class="feature-tag">Readmissão Hospitalar 30d</div>
-                <div class="feature-tag">Fluxo Pacientes (Network)</div>
-                <div class="feature-tag">Centralidade Betweenness</div>
-                <div class="feature-tag">Custo-Efetividade (RCEI)</div>
-                <div class="feature-tag">Bellman Optimality (Policy)</div>
-                <div class="feature-tag">Lotka-Volterra (Leitos)</div>
-            </div>
-            <div class="space-y-2">
-                <h3 class="text-white font-bold text-[9px] uppercase tracking-widest border-b border-amber-500/20 pb-1 mb-4">Fazenda (Futuras implementações)</h3>
-                <div class="feature-tag">Tax Gap (Hiato Tributário)</div>
-                <div class="feature-tag">Previsão Receita (OU Process)</div>
-                <div class="feature-tag">Elasticidade de Ramsey</div>
-                <div class="feature-tag">Nash Audit Strategy</div>
-                <div class="feature-tag">SFA Efficiency Frontier</div>
-                <div class="feature-tag">EFI: Eficiência Fiscal</div>
-                <div class="feature-tag">Gini Fiscal Territorial</div>
-                <div class="feature-tag">PIB Municipal (Spline)</div>
-                <div class="feature-tag">Evasão Fiscal (Anomalias)</div>
-            </div>
-        </div>
-    </section>
-
-    <!-- 6. PITCH DE APRESENTAÇÃO -->
-    <section id="pitch" class="py-32 max-w-7xl mx-auto px-6 text-center border-t border-white/5">
-        <h2 class="text-4xl font-black uppercase mb-12 italic tracking-tighter underline decoration-emerald-500/30 text-center font-black">Pitch de Apresentação</h2>
-        <div class="pdf-container glass mb-12">
-            <iframe src="https://goldenluke.github.io/qwan_zero_pipeline/LabSUS%20(2)%20(2)%20(1)-1.pdf" 
-                class="w-full h-full grayscale hover:grayscale-0 transition-all duration-1000" frameborder="0"></iframe>
-        </div>
-    </section>
-
-    <!-- 7. MANUAL TÉCNICO -->
-    <section id="documentation" class="py-32 max-w-7xl mx-auto px-6 text-center border-t border-white/5">
-        <h2 class="text-4xl font-black uppercase mb-12 italic tracking-tighter underline decoration-cyan-500/30 text-center font-black">Manual Técnico</h2>
-        <div class="pdf-container glass mb-12 text-center text-center">
-            <iframe src="https://goldenluke.github.io/qwan_zero_pipeline/Padr%C3%A3o%20de%20Projeto%20LabSUS%20-%20Manual%20de%20Refer%C3%AAncia%20T%C3%A9cnica.pdf" 
-                class="w-full h-full grayscale hover:grayscale-0 transition-all duration-1000" frameborder="0"></iframe>
-        </div>
-    </section>
-
-    <!-- Rodapé -->
-    <footer class="py-24 border-t border-white/5 text-center bg-slate-950/50">
-        <div class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-12 text-left text-xs uppercase tracking-widest font-bold">
-            <div class="space-y-4 max-w-4xl text-center md:text-left">
-                <div class="flex items-center gap-2 justify-center md:justify-start">
-                    <i data-lucide="activity" class="text-cyan-500"></i>
-                    <span class="font-black text-2xl tracking-tighter italic uppercase text-white">LabSUS</span>
-                </div>
-                <div class="text-slate-300 border-l-2 border-cyan-500 pl-4 py-1">
-                    Liderança Técnica e Arquitetura: <span class="text-cyan-400 font-bold uppercase text-center font-black">Lucas Amaral Dourado</span>
+        <!-- Seção: Chat Oficial da Comunidade -->
+        <section id="chat" class="scroll-mt-32 space-y-16">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                <div class="lg:col-span-7 space-y-8">
+                    <div class="inline-flex items-center space-x-2 bg-emerald-500/10 border border-emerald-500/20 px-4 py-1.5 rounded-full">
+                        <span class="text-emerald-400 text-xs font-bold uppercase tracking-widest">Real-Time Interaction</span>
+                    </div>
+                    <h2 class="text-5xl font-bold tracking-tight text-emerald-400">Chat Oficial r/MusicaBR</h2>
+                    <p class="text-slate-400 text-lg leading-relaxed">
+                        O chat oficial será um espaço de comunicação em tempo real para complementar as discussões assíncronas do subreddit. O objetivo é criar um ambiente de convivência musical, onde usuários possam conversar sobre música brasileira de forma espontânea e contínua.
+                    </p>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div class="glass p-6 rounded-2xl border-white/5">
+                            <h4 class="font-bold text-white mb-3 underline decoration-emerald-500">Plataforma: Rocket.Chat</h4>
+                            <p class="text-xs text-slate-400 leading-relaxed mb-4">Código aberto com controle total do servidor da comunidade.</p>
+                            <ul class="text-[10px] text-slate-500 space-y-1 font-mono uppercase tracking-wider">
+                                <li>• Suporte a canais temáticos</li>
+                                <li>• Threads de discussão</li>
+                                <li>• Upload de arquivos e links</li>
+                                <li>• Moderação avançada</li>
+                            </ul>
+                        </div>
+                        <div class="glass p-6 rounded-2xl border-white/5">
+                            <h4 class="font-bold text-white mb-3 underline decoration-emerald-500">Canais Estruturados</h4>
+                            <div class="space-y-2">
+                                <div class="flex items-center justify-between text-[10px] bg-white/5 p-2 rounded-lg">
+                                    <span>#geral: Conversas e recepção</span>
+                                </div>
+                                <div class="flex items-center justify-between text-[10px] bg-white/5 p-2 rounded-lg">
+                                    <span>#descobertas: Indie e Regional</span>
+                                </div>
+                                <div class="flex items-center justify-between text-[10px] bg-emerald-500/10 p-2 rounded-lg text-emerald-400">
+                                    <span>#mostre-sua-musica: Espaço Autoral</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 
-                <div class="mt-8 pt-8 border-t border-white/5 grid md:grid-cols-2 lg:grid-cols-4 gap-8 text-center md:text-left text-center">
-                    <div class="space-y-2">
-                        <h4 class="text-cyan-400 font-black tracking-widest italic underline underline-offset-4 mb-3 uppercase">Orientação</h4>
-                        <p class="text-white text-[11px] leading-tight mb-1 font-bold italic">Profa. Dra. Kelly Cristina Gomes</p>
-                    </div>
-                    <div class="space-y-2">
-                        <h4 class="text-cyan-400 font-black tracking-widest italic underline underline-offset-4 mb-3 uppercase">Orientação</h4>
-                        <p class="text-white text-[11px] leading-tight mb-1 font-bold italic">Profa. Ma. Michelle de Jesus Pantoja Filgueira</p>
-                    </div>
-                    <div class="space-y-2">
-                        <h4 class="text-cyan-400 font-black tracking-widest italic underline underline-offset-4 mb-3 uppercase text-center font-black">Colaboração</h4>
-                        <p class="text-white text-[11px] leading-tight mb-1 font-bold italic">Prof. Dr. Thiago M. B. Rodrigues</p>
-                    </div>
-                    <div class="space-y-2 text-center">
-                        <h4 class="text-cyan-400 font-black tracking-widest italic underline underline-offset-4 mb-3 uppercase font-black">Colaboração</h4>
-                        <p class="text-white text-[11px] leading-tight mb-1 font-bold italic">Prof. Dr. Ary Henrique</p>
+                <div class="lg:col-span-5 relative">
+                    <div class="glass p-8 rounded-[3rem] border-emerald-500/20 relative z-10 overflow-hidden">
+                        <h3 class="text-xl font-bold mb-6 flex items-center"><span class="chat-dot"></span> Dinâmicas ao Vivo</h3>
+                        <div class="space-y-4">
+                            <div class="p-4 bg-white/5 rounded-xl border border-white/5">
+                                <span class="text-xs font-bold text-emerald-400 block mb-1">LISTENING PARTIES</span>
+                                <p class="text-[11px] text-slate-400 leading-relaxed">Audições coletivas de álbuns. Usuários comentam faixa a faixa em tempo real.</p>
+                            </div>
+                            <div class="p-4 bg-white/5 rounded-xl border border-white/5">
+                                <span class="text-xs font-bold text-emerald-400 block mb-1">LIVE AMAs</span>
+                                <p class="text-[11px] text-slate-400 leading-relaxed">Sessões de perguntas com artistas que entram no chat para interação direta.</p>
+                            </div>
+                        </div>
                     </div>
                 </div>
+            </div>
+        </section>
 
-                <!-- LICENÇA ÉTICA -->
-                <div class="mt-12 pt-12 border-t border-white/10 text-center md:text-left text-center">
-                    <h4 class="text-cyan-400 font-black tracking-[0.2em] text-[10px] uppercase mb-6 flex items-center gap-2 justify-center md:justify-start">
-                        <i data-lucide="shield-check" class="w-4 h-4"></i> Licença Ética LabSUS (Base MIT)
-                    </h4>
-                    <div class="text-[9px] leading-relaxed text-slate-400 space-y-4 font-mono uppercase italic text-justify italic">
-                        <p class="text-white font-bold">Edição Institucional – Universidade Federal do Tocantins</p>
-                        <p>Copyright (c) 2026 Universidade Federal do Tocantins (UFT) / Autor: Lucas Amaral Dourado</p>
-                        <p>Fica concedida, gratuitamente, a permissão para utilizar o Software para fins de pesquisa, educação e análise em saúde pública não comercial, sob condições de uso ético estritas: proibição de uso para fins bélicos, discriminação ou vigilância em massa. Licenciamento completo no respectivo repositório GitHub.</p>
-                        <p class="border-t border-white/10 pt-4">O SOFTWARE É FORNECIDO "NO ESTADO EM QUE SE ENCONTRA", SEM GARANTIA DE QUALQUER TIPO. OS RESULTADOS SÃO MODELOS ESTATÍSTICOS E NÃO SUBSTITUEM AVALIAÇÃO PROFISSIONAL ESPECIALIZADA.</p>
+        <!-- Seção: MUSIC PAGE (O FUTURO) -->
+        <section id="musicpage" class="scroll-mt-32 space-y-20">
+            <div class="relative glass rounded-[4rem] p-12 border-amber-500/30 overflow-hidden">
+                <div class="absolute top-0 right-0 w-[500px] h-[500px] bg-amber-500/10 blur-[150px] -mr-64 -mt-64"></div>
+                
+                <div class="relative z-10 space-y-12">
+                    <div class="text-center space-y-4">
+                        <div class="inline-flex items-center space-x-2 bg-amber-500/10 border border-amber-500/20 px-4 py-1.5 rounded-full">
+                            <span class="text-amber-400 text-xs font-bold uppercase tracking-widest">Next Evolution: Music Page</span>
+                        </div>
+                        <h2 class="text-6xl font-extrabold tracking-tighter leading-none">MUSIC <span class="text-amber-400">PAGE</span></h2>
+                        <p class="text-2xl text-slate-400 font-light italic">Plataforma Open Source de Descoberta Musical Baseada em Comunidade</p>
+                    </div>
+
+                    <!-- Introdução & Screenshot -->
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+                        <div class="space-y-6">
+                            <h3 class="text-3xl font-bold">Introdução</h3>
+                            <p class="text-slate-400 leading-relaxed">
+                                A forma como descobrimos música na internet mudou radicalmente nos últimos anos. Hoje, a maior parte das recomendações musicais depende de algoritmos de plataformas de streaming. Embora esses sistemas sejam eficientes, eles também criam bolhas de recomendação e reduzem a diversidade de descobertas, muitas vezes priorizando aquilo que já é popular ou comercialmente relevante.
+                            </p>
+                            <p class="text-slate-400 leading-relaxed">
+                                Ao mesmo tempo, uma enorme quantidade de música independente, experimental ou pertencente a cenas culturais específicas permanece invisível para grande parte do público. O projeto Music Page nasce como uma tentativa de repensar a descoberta musical na internet, combinando tecnologia, colaboração aberta e curadoria comunitária.
+                            </p>
+                        </div>
+                        <div class="relative group">
+                            <div class="absolute -inset-4 bg-amber-500/20 rounded-[2rem] blur-2xl opacity-0 group-hover:opacity-100 transition-all duration-700"></div>
+                            <img src="https://github.com/goldenluke/qwan_zero_pipeline/blob/main/1773014265715.jpg?raw=true" alt="Music Page Screenshot" class="relative rounded-[2rem] border border-white/10 shadow-2xl transition-transform duration-700 group-hover:scale-[1.02]">
+                        </div>
+                    </div>
+
+                    <!-- Objetivos & Conceito -->
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 pt-12 border-t border-white/5">
+                        <div class="space-y-6">
+                            <h3 class="text-3xl font-bold">Objetivo do Projeto</h3>
+                            <p class="text-slate-400 leading-relaxed">
+                                O objetivo do Music Page é criar uma plataforma colaborativa de descoberta musical inspirada em sistemas de comunidades como o Reddit, mas totalmente focada em música. Em vez de depender exclusivamente de algoritmos de recomendação, a plataforma busca permitir que a própria comunidade organize, compartilhe e destaque conteúdos musicais relevantes.
+                            </p>
+                            <div class="bg-amber-500/5 p-6 rounded-2xl border border-amber-500/20 italic text-amber-200">
+                                "Pessoas compartilham músicas → A comunidade discute → Os melhores conteúdos emergem coletivamente."
+                            </div>
+                        </div>
+                        <div class="space-y-6">
+                            <h3 class="text-3xl font-bold">Conceito da Plataforma</h3>
+                            <p class="text-slate-400 leading-relaxed">
+                                O Music Page funciona como um agregador social de música organizado em comunidades temáticas (s/ communities). Usuários podem compartilhar músicas, links, vídeos e discussões. Outros usuários podem votar, comentar, salvar e discutir os conteúdos.
+                            </p>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="px-4 py-2 glass rounded-full text-xs font-bold text-amber-400">s/techno</span>
+                                <span class="px-4 py-2 glass rounded-full text-xs font-bold text-amber-400">s/jazz</span>
+                                <span class="px-4 py-2 glass rounded-full text-xs font-bold text-amber-400">s/indierock</span>
+                                <span class="px-4 py-2 glass rounded-full text-xs font-bold text-amber-400">s/musicproduction</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Funcionalidades Grid -->
+                    <div class="pt-12 border-t border-white/5 space-y-12">
+                        <h3 class="text-3xl font-bold text-center">Principais Funcionalidades</h3>
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                            <div class="p-6 bg-white/5 rounded-3xl border border-white/5 hover:border-amber-500/30 transition-all">
+                                <h4 class="font-bold mb-2">Comunidades musicais</h4>
+                                <p class="text-xs text-slate-500 leading-relaxed">Criação de espaços organizados por gênero, estilo ou cena musical.</p>
+                            </div>
+                            <div class="p-6 bg-white/5 rounded-3xl border border-white/5 hover:border-amber-500/30 transition-all">
+                                <h4 class="font-bold mb-2">Posts & Votação</h4>
+                                <p class="text-xs text-slate-500 leading-relaxed">Compartilhamento de links com sistema de votos positivos para destacar os melhores.</p>
+                            </div>
+                            <div class="p-6 bg-white/5 rounded-3xl border border-white/5 hover:border-amber-500/30 transition-all">
+                                <h4 class="font-bold mb-2">Biblioteca & Perfil</h4>
+                                <p class="text-xs text-slate-500 leading-relaxed">Salvar músicas para ouvir depois e perfis com histórico de contribuições.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Tecnologia & Arquitetura -->
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 pt-12 border-t border-white/5">
+                        <div class="space-y-6">
+                            <h3 class="text-3xl font-bold">Tecnologia Utilizada</h3>
+                            <div class="space-y-4">
+                                <div class="glass p-5 rounded-2xl flex items-center justify-between">
+                                    <span class="font-bold text-amber-400">Backend</span>
+                                    <span class="text-sm font-mono text-slate-400">Python / Django / Django Ninja</span>
+                                </div>
+                                <div class="glass p-5 rounded-2xl flex items-center justify-between">
+                                    <span class="font-bold text-amber-400">Frontend</span>
+                                    <span class="text-sm font-mono text-slate-400">React / Vite / Javascript</span>
+                                </div>
+                                <div class="glass p-5 rounded-2xl flex items-center justify-between">
+                                    <span class="font-bold text-amber-400">Database</span>
+                                    <span class="text-sm font-mono text-slate-400">SQLite (Dev) / PostgreSQL (Prod)</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="space-y-6">
+                            <h3 class="text-3xl font-bold">Visão de Futuro</h3>
+                            <ul class="grid grid-cols-2 gap-3 text-[11px] text-slate-400 font-medium uppercase tracking-wider">
+                                <li class="p-3 bg-white/5 rounded-xl border border-white/5">● Integração Streaming</li>
+                                <li class="p-3 bg-white/5 rounded-xl border border-white/5">● Playlists Colaborativas</li>
+                                <li class="p-3 bg-white/5 rounded-xl border border-white/5">● Mapeamento de Cenas</li>
+                                <li class="p-3 bg-white/5 rounded-xl border border-white/5">● Ranking de Tendências</li>
+                            </ul>
+                            <div class="p-6 bg-indigo-500/10 rounded-3xl border border-indigo-500/20">
+                                <h4 class="font-bold text-sm mb-2">Open Source e Colaboração</h4>
+                                <p class="text-xs text-slate-400 leading-relaxed mb-4">O Music Page foi concebido desde o início como um projeto open source. Qualquer pessoa pode estudar o código, propor melhorias e participar da evolução da plataforma.</p>
+                                <a href="https://github.com/goldenluke/music-page" target="_blank" class="inline-flex items-center space-x-2 text-xs font-bold text-indigo-400 hover:text-indigo-300">
+                                    <span>GITHUB REPOSITORY</span>
+                                    <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Conclusão Music Page -->
+                    <div class="text-center max-w-2xl mx-auto pt-12 space-y-6">
+                        <h3 class="text-3xl font-bold italic">"A revolução será curada"</h3>
+                        <p class="text-slate-500 text-sm leading-relaxed">
+                            A música sempre foi uma das formas mais poderosas de expressão cultural e conexão entre pessoas. O Music Page é um convite para imaginar como poderia ser uma internet musical mais aberta, mais comunitária e mais criativa.
+                        </p>
                     </div>
                 </div>
+            </div>
+        </section>
+
+        <!-- Seção 3: Radar Estratégico (Conteúdo Original Mantido) -->
+        <section id="radar" class="scroll-mt-32">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+                <div class="order-2 lg:order-1 glass p-12 rounded-[3.5rem] relative">
+                    <div class="absolute top-8 right-8 text-xs font-mono text-slate-500">EXEMPLO DE LAYOUT</div>
+                    <h3 class="text-3xl font-bold mb-8 flex items-center gap-3">
+                        <span class="p-2 bg-indigo-500 rounded-xl"><svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg></span>
+                        Radar r/MusicaBR
+                    </h3>
+                    <div class="space-y-6">
+                        <div class="border-l-4 border-indigo-500 pl-6 py-2">
+                            <h5 class="text-indigo-400 font-bold uppercase text-xs tracking-widest mb-1">Lançamentos</h5>
+                            <p class="text-sm text-slate-200">5 álbuns imperdíveis da semana comentados.</p>
+                        </div>
+                        <div class="border-l-4 border-emerald-500 pl-6 py-2">
+                            <h5 class="text-emerald-400 font-bold uppercase text-xs tracking-widest mb-1">Novas Vozes</h5>
+                            <p class="text-sm text-slate-200">3 artistas independentes que você precisa conhecer.</p>
+                        </div>
+                        <div class="border-l-4 border-rose-500 pl-6 py-2">
+                            <h5 class="text-rose-400 font-bold uppercase text-xs tracking-widest mb-1">Clássico do Garimpo</h5>
+                            <p class="text-sm text-slate-200">Aquele álbum de 1974 que ninguém mais ouve, mas é genial.</p>
+                        </div>
+                        <div class="border-l-4 border-amber-500 pl-6 py-2">
+                            <h5 class="text-amber-400 font-bold uppercase text-xs tracking-widest mb-1">Debate Quente</h5>
+                            <p class="text-sm text-slate-200">Link para a discussão mais polêmica da semana no sub.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="order-1 lg:order-2 space-y-8">
+                    <h2 class="text-5xl font-bold leading-tight italic tracking-tighter">O "Radar" como Marca Comercial</h2>
+                    <p class="text-lg text-slate-400 leading-relaxed">
+                        O post de curadoria não deve ser apenas mais um tópico. Ele deve ter uma identidade visual própria (Banners, Títulos Padronizados). Com o tempo, o "Selo Radar r/MusicaBR" pode tornar-se um símbolo de qualidade para artistas independentes.
+                    </p>
+                    <div class="flex flex-wrap gap-4">
+                        <div class="bg-white/5 border border-white/10 px-6 py-4 rounded-3xl">
+                            <span class="block text-2xl font-bold text-white mb-1">70%</span>
+                            <span class="text-xs text-slate-500 uppercase font-bold tracking-widest">Aumento no CTR</span>
+                        </div>
+                        <div class="bg-white/5 border border-white/10 px-6 py-4 rounded-3xl">
+                            <span class="block text-2xl font-bold text-white mb-1">2.4x</span>
+                            <span class="text-xs text-slate-500 uppercase font-bold tracking-widest">Compartilhamentos</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Seção 4: AMAs e Entrevistas Detalhadas (Conteúdo Original Mantido) -->
+        <section id="amas" class="scroll-mt-32 space-y-16">
+            <div class="text-center space-y-4">
+                <h2 class="text-5xl font-bold tracking-tighter leading-none">Estratégia de <span class="gradient-text">AMAs & Convidados</span></h2>
+                <p class="text-slate-400 max-w-2xl mx-auto text-lg">
+                    Trazer personalidades para dentro do Reddit é o que separa um sub "grande" de um sub "influente".
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="glass p-10 rounded-[3rem] border-white/5 space-y-6 flex flex-col items-center text-center">
+                    <div class="w-16 h-16 bg-indigo-500/20 rounded-2xl flex items-center justify-center text-3xl">🎸</div>
+                    <h4 class="text-xl font-bold">Artistas Indie</h4>
+                    <p class="text-sm text-slate-500">Músicos com 50k-200k ouvintes no Spotify que buscam engajamento real e "fandom" dedicado.</p>
+                </div>
+                <div class="glass p-10 rounded-[3rem] border-white/5 space-y-6 flex flex-col items-center text-center">
+                    <div class="w-16 h-16 bg-rose-500/20 rounded-2xl flex items-center justify-center text-3xl">🎧</div>
+                    <h4 class="text-xl font-bold">Bastidores</h4>
+                    <p class="text-sm text-slate-500">Produtores musicais, engenheiros de som de álbuns clássicos, fotógrafos de capas históricas.</p>
+                </div>
+                <div class="glass p-10 rounded-[3rem] border-white/5 space-y-6 flex flex-col items-center text-center">
+                    <div class="w-16 h-16 bg-amber-500/20 rounded-2xl flex items-center justify-center text-3xl">📝</div>
+                    <h4 class="text-xl font-bold">Jornalistas & Críticos</h4>
+                    <p class="text-sm text-slate-500">Críticos de portais tradicionais ou donos de blogs influentes para debater o estado da música.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Seção 6: O Roadmap dos 500k (Conteúdo Original Mantido) -->
+        <section id="roadmap" class="scroll-mt-32">
+            <div class="text-center mb-20">
+                <h2 class="text-6xl font-extrabold mb-6 tracking-tighter">O Caminho para <span class="gradient-text">Meio Milhão</span></h2>
+            </div>
+
+            <div class="space-y-24 max-w-4xl mx-auto">
+                <div class="flex flex-col md:flex-row gap-12 items-start relative">
+                    <div class="md:w-1/3">
+                        <div class="text-6xl font-black text-white/5 leading-none mb-4">01</div>
+                        <h4 class="text-2xl font-bold text-indigo-400">Consolidação Editorial</h4>
+                        <p class="text-xs font-mono text-slate-500 uppercase tracking-widest mt-2">Nível Atual -> 100k</p>
+                    </div>
+                    <div class="md:w-2/3 glass p-8 rounded-3xl border-indigo-500/20">
+                        <ul class="space-y-4 text-sm text-slate-300 leading-relaxed">
+                            <li>● Implementação do calendário semanal.</li>
+                            <li>● Lançamento do Chat Oficial e projeto Music Page (Alpha).</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="flex flex-col md:flex-row gap-12 items-start relative">
+                    <div class="md:w-1/3">
+                        <div class="text-6xl font-black text-white/5 leading-none mb-4">02</div>
+                        <h4 class="text-2xl font-bold text-rose-400">Autoridade de Nicho</h4>
+                        <p class="text-xs font-mono text-slate-500 uppercase tracking-widest mt-2">100k -> 250k</p>
+                    </div>
+                    <div class="md:w-2/3 glass p-8 rounded-3xl border-rose-500/20">
+                        <ul class="space-y-4 text-sm text-slate-300 leading-relaxed">
+                            <li>● AMAs mensais e internacionalização (Brazilian Music for Foreigners).</li>
+                            <li>● Integração Music Page + Streaming APIs.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="relative py-24 px-6 overflow-hidden border-t border-slate-800">
+        <div class="max-w-4xl mx-auto text-center space-y-12">
+            <div class="flex justify-center space-x-6 grayscale opacity-50 text-[10px] font-bold tracking-widest">
+                <span>REDDIT</span>
+                <span>MUSIC PAGE</span>
+                <span>ROCKET.CHAT</span>
+                <span>MUSICA.BR</span>
+            </div>
+            <p class="text-slate-500 text-sm max-w-xl mx-auto leading-relaxed">
+                Este plano estratégico é um documento vivo. A transição para o Music Page marca o início de uma nova fase tecnológica para o r/MusicaBR.
+            </p>
+            <div class="flex flex-col items-center">
+                <div class="w-16 h-px bg-gradient-to-r from-transparent via-slate-600 to-transparent mb-8"></div>
+                <span class="text-[10px] font-mono tracking-[0.6em] uppercase text-slate-600 animate-pulse">A revolução será aberta</span>
             </div>
         </div>
     </footer>
 
-    <script>
-        lucide.createIcons();
-        function openLightbox(src) {
-            const modal = document.getElementById('lightbox');
-            const modalImg = document.getElementById('lightbox-content');
-            modal.style.display = "block";
-            modalImg.src = src;
-            document.body.style.overflow = 'hidden';
-        }
-
-        function closeLightbox() {
-            document.getElementById('lightbox').style.display = 'none';
-            document.body.style.overflow = 'auto';
-        }
-        
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape') closeLightbox();
-        });
-    </script>
 </body>
 </html>
