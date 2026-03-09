@@ -65,17 +65,18 @@
 <body class="antialiased custom-scrollbar">
 
     <!-- Navegação Flutuante -->
-    <nav class="fixed top-6 left-1/2 -translate-x-1/2 z-50 w-[90%] max-w-5xl">
+    <nav class="fixed top-6 left-1/2 -translate-x-1/2 z-50 w-[90%] max-w-6xl">
         <div class="glass px-8 py-4 rounded-full flex items-center justify-between border-white/10 shadow-2xl">
             <div class="flex items-center space-x-3">
                 <div class="w-10 h-10 bg-gradient-to-br from-indigo-500 via-rose-500 to-amber-500 rounded-xl flex items-center justify-center font-bold text-white shadow-lg">BR</div>
                 <span class="font-bold tracking-tighter text-lg">r/MusicaBR</span>
             </div>
-            <div class="hidden lg:flex space-x-8 text-[11px] font-bold uppercase tracking-[0.2em] text-slate-400">
+            <div class="hidden lg:flex space-x-6 text-[10px] font-bold uppercase tracking-[0.2em] text-slate-400">
                 <a href="#filosofia" class="hover:text-indigo-400 transition-colors">Filosofia</a>
                 <a href="#cronograma" class="hover:text-indigo-400 transition-colors">Cronograma</a>
-                <a href="#chat" class="hover:text-indigo-400 transition-colors">Chat Oficial</a>
+                <a href="#chat" class="hover:text-indigo-400 transition-colors">Chat</a>
                 <a href="#radar" class="hover:text-indigo-400 transition-colors">Radar</a>
+                <a href="#musicpage" class="hover:text-amber-400 transition-colors border-b border-amber-500/50 pb-1">Music Page</a>
                 <a href="#amas" class="hover:text-indigo-400 transition-colors">AMAs</a>
                 <a href="#roadmap" class="hover:text-indigo-400 transition-colors">500K</a>
             </div>
@@ -84,7 +85,7 @@
                   <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
                   <span class="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
                 </span>
-                <span class="text-[10px] font-mono text-emerald-400 font-bold">LIVE: 55K VISITANTES</span>
+                <span class="text-[10px] font-mono text-emerald-400 font-bold uppercase">Live: 55K Visitantes</span>
             </div>
         </div>
     </nav>
@@ -98,7 +99,7 @@
         
         <div class="relative z-10 max-w-6xl mx-auto">
             <div class="inline-flex items-center space-x-2 bg-white/5 border border-white/10 px-4 py-1.5 rounded-full mb-8">
-                <span class="text-indigo-400 text-xs font-bold uppercase tracking-widest">Documento de Expansão V3.5</span>
+                <span class="text-indigo-400 text-xs font-bold uppercase tracking-widest">Documento de Expansão V4.0</span>
                 <span class="w-1 h-1 bg-slate-600 rounded-full"></span>
                 <span class="text-slate-400 text-xs font-medium">Março 2026</span>
             </div>
@@ -279,38 +280,40 @@
             </div>
         </section>
 
-        <!-- Seção NOVA: Chat Oficial da Comunidade -->
+        <!-- Seção: Chat Oficial da Comunidade -->
         <section id="chat" class="scroll-mt-32 space-y-16">
             <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
                 <div class="lg:col-span-7 space-y-8">
                     <div class="inline-flex items-center space-x-2 bg-emerald-500/10 border border-emerald-500/20 px-4 py-1.5 rounded-full">
                         <span class="text-emerald-400 text-xs font-bold uppercase tracking-widest">Real-Time Interaction</span>
                     </div>
-                    <h2 class="text-5xl font-bold tracking-tight">Chat Oficial <span class="text-emerald-400">r/MusicaBR</span></h2>
+                    <h2 class="text-5xl font-bold tracking-tight text-emerald-400">Chat Oficial r/MusicaBR</h2>
                     <p class="text-slate-400 text-lg leading-relaxed">
-                        O chat oficial será um espaço de comunicação em tempo real para complementar as discussões assíncronas do subreddit. Enquanto o Reddit funciona melhor para posts estruturados e discussões arquiváveis, o chat permite <strong>conversas rápidas, descoberta musical instantânea e eventos ao vivo.</strong>
+                        O chat oficial será um espaço de comunicação em tempo real para complementar as discussões assíncronas do subreddit. O objetivo é criar um ambiente de convivência musical, onde usuários possam conversar sobre música brasileira de forma espontânea e contínua.
                     </p>
                     
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <div class="glass p-6 rounded-2xl border-white/5">
-                            <h4 class="font-bold text-white mb-3">Plataforma: Rocket.Chat</h4>
-                            <p class="text-xs text-slate-400 leading-relaxed mb-4">Escolha baseada em soberania de dados e flexibilidade open-source.</p>
+                            <h4 class="font-bold text-white mb-3 underline decoration-emerald-500">Plataforma: Rocket.Chat</h4>
+                            <p class="text-xs text-slate-400 leading-relaxed mb-4">Código aberto com controle total do servidor da comunidade.</p>
                             <ul class="text-[10px] text-slate-500 space-y-1 font-mono uppercase tracking-wider">
-                                <li>• Controle total do servidor</li>
                                 <li>• Suporte a canais temáticos</li>
                                 <li>• Threads de discussão</li>
+                                <li>• Upload de arquivos e links</li>
                                 <li>• Moderação avançada</li>
                             </ul>
                         </div>
                         <div class="glass p-6 rounded-2xl border-white/5">
-                            <h4 class="font-bold text-white mb-3">Sinergia Reddit + Chat</h4>
-                            <p class="text-xs text-slate-400 leading-relaxed mb-4">O Reddit é o arquivo principal; o Chat é o espaço de convivência espontânea.</p>
+                            <h4 class="font-bold text-white mb-3 underline decoration-emerald-500">Canais Estruturados</h4>
                             <div class="space-y-2">
                                 <div class="flex items-center justify-between text-[10px] bg-white/5 p-2 rounded-lg">
-                                    <span>Reddit: Assíncrono / Profundo</span>
+                                    <span>#geral: Conversas e recepção</span>
+                                </div>
+                                <div class="flex items-center justify-between text-[10px] bg-white/5 p-2 rounded-lg">
+                                    <span>#descobertas: Indie e Regional</span>
                                 </div>
                                 <div class="flex items-center justify-between text-[10px] bg-emerald-500/10 p-2 rounded-lg text-emerald-400">
-                                    <span>Chat: Instantâneo / Social</span>
+                                    <span>#mostre-sua-musica: Espaço Autoral</span>
                                 </div>
                             </div>
                         </div>
@@ -319,93 +322,147 @@
                 
                 <div class="lg:col-span-5 relative">
                     <div class="glass p-8 rounded-[3rem] border-emerald-500/20 relative z-10 overflow-hidden">
-                        <div class="absolute top-0 right-0 p-4 opacity-10">
-                            <svg class="w-24 h-24" fill="currentColor" viewBox="0 0 24 24"><path d="M20 2H4c-1.1 0-1.99.9-1.99 2L2 22l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2z"/></svg>
-                        </div>
-                        <h3 class="text-xl font-bold mb-6 flex items-center"><span class="chat-dot"></span> Mapa de Canais</h3>
-                        <div class="space-y-3">
-                            <div class="p-3 bg-white/5 rounded-xl border border-white/5 flex items-center space-x-3 group hover:bg-white/10 transition-all">
-                                <span class="text-xs font-mono text-slate-500">#</span>
-                                <div class="flex-grow">
-                                    <span class="text-sm font-bold block">geral</span>
-                                    <span class="text-[10px] text-slate-500 uppercase">Conversas informais e recepção</span>
-                                </div>
+                        <h3 class="text-xl font-bold mb-6 flex items-center"><span class="chat-dot"></span> Dinâmicas ao Vivo</h3>
+                        <div class="space-y-4">
+                            <div class="p-4 bg-white/5 rounded-xl border border-white/5">
+                                <span class="text-xs font-bold text-emerald-400 block mb-1">LISTENING PARTIES</span>
+                                <p class="text-[11px] text-slate-400 leading-relaxed">Audições coletivas de álbuns. Usuários comentam faixa a faixa em tempo real.</p>
                             </div>
-                            <div class="p-3 bg-white/5 rounded-xl border border-white/5 flex items-center space-x-3 group hover:bg-white/10 transition-all">
-                                <span class="text-xs font-mono text-slate-500">#</span>
-                                <div class="flex-grow">
-                                    <span class="text-sm font-bold block">descobertas</span>
-                                    <span class="text-[10px] text-slate-500 uppercase">Artistas novos e underground</span>
-                                </div>
+                            <div class="p-4 bg-white/5 rounded-xl border border-white/5">
+                                <span class="text-xs font-bold text-emerald-400 block mb-1">LIVE AMAs</span>
+                                <p class="text-[11px] text-slate-400 leading-relaxed">Sessões de perguntas com artistas que entram no chat para interação direta.</p>
                             </div>
-                            <div class="p-3 bg-white/5 rounded-xl border border-white/5 flex items-center space-x-3 group hover:bg-white/10 transition-all">
-                                <span class="text-xs font-mono text-slate-500">#</span>
-                                <div class="flex-grow">
-                                    <span class="text-sm font-bold block">ouvindo-now</span>
-                                    <span class="text-[10px] text-slate-500 uppercase">Compartilhamento em tempo real</span>
-                                </div>
-                            </div>
-                            <div class="p-3 bg-emerald-500/10 rounded-xl border border-emerald-500/20 flex items-center space-x-3 group hover:bg-emerald-500/20 transition-all">
-                                <span class="text-xs font-mono text-emerald-400">#</span>
-                                <div class="flex-grow">
-                                    <span class="text-sm font-bold block text-emerald-300">mostre-sua-musica</span>
-                                    <span class="text-[10px] text-emerald-500 uppercase font-bold tracking-tighter">Espaço Autoral</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="mt-6 pt-4 border-t border-white/10 flex justify-between items-center text-[10px] font-bold text-slate-500">
-                            <span>+7 Canais de Gênero (MPB, Rap, Rock, Indie...)</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Eventos do Chat -->
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <div class="glass p-8 rounded-3xl border-white/5 space-y-4 hover:border-emerald-500/30 transition-all">
-                    <div class="text-2xl">🎧</div>
-                    <h4 class="font-bold text-lg">Listening Parties</h4>
-                    <p class="text-sm text-slate-400">Audições coletivas de álbuns clássicos ou lançamentos. Os usuários comentam faixa a faixa em tempo real (ex: Hoje às 21h - Clube da Esquina).</p>
-                </div>
-                <div class="glass p-8 rounded-3xl border-white/5 space-y-4 hover:border-emerald-500/30 transition-all">
-                    <div class="text-2xl">🎤</div>
-                    <h4 class="font-bold text-lg">Live AMAs</h4>
-                    <p class="text-sm text-slate-400">Sessões de perguntas rápidas onde artistas entram no chat para uma conversa aberta por tempo limitado com a comunidade.</p>
-                </div>
-                <div class="glass p-8 rounded-3xl border-white/5 space-y-4 hover:border-emerald-500/30 transition-all">
-                    <div class="text-2xl">⚡</div>
-                    <h4 class="font-bold text-lg">Evolução & Bots</h4>
-                    <p class="text-sm text-slate-400">Integração futura com APIs do Spotify para recomendações automáticas, playlists geradas pela conversa e notificações de novos álbuns.</p>
-                </div>
-            </div>
-
-            <!-- Moderação do Chat -->
-            <div class="glass p-10 rounded-[3rem] border-white/5 bg-slate-950/40">
-                <div class="grid grid-cols-1 lg:grid-cols-3 gap-12">
-                    <div class="lg:col-span-1">
-                        <h4 class="text-2xl font-bold mb-4">Governança do Chat</h4>
-                        <p class="text-sm text-slate-500 leading-relaxed">A moderação seguirá princípios semelhantes aos do subreddit para garantir um ambiente saudável.</p>
-                    </div>
-                    <div class="lg:col-span-2 grid grid-cols-1 md:grid-cols-2 gap-8">
-                        <div class="space-y-3">
-                            <h5 class="font-bold text-sm text-emerald-400 uppercase tracking-widest">Regras Básicas</h5>
-                            <ul class="text-xs text-slate-400 space-y-2">
-                                <li>• Respeito mútuo absoluto</li>
-                                <li>• Proibição de Spam/Flood</li>
-                                <li>• Foco estrito em Música Brasileira</li>
-                                <li>• Material autoral apenas no canal #mostre-sua-musica</li>
-                            </ul>
-                        </div>
-                        <div class="space-y-3">
-                            <h5 class="font-bold text-sm text-emerald-400 uppercase tracking-widest">Integração Sidebar</h5>
-                            <p class="text-xs text-slate-400 leading-relaxed">O link permanente será destacado na barra lateral do subreddit, aproximando os membros e criando um ponto de encontro digital contínuo.</p>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- Seção 3: Radar Estratégico -->
+        <!-- Seção: MUSIC PAGE (O FUTURO) -->
+        <section id="musicpage" class="scroll-mt-32 space-y-20">
+            <div class="relative glass rounded-[4rem] p-12 border-amber-500/30 overflow-hidden">
+                <div class="absolute top-0 right-0 w-[500px] h-[500px] bg-amber-500/10 blur-[150px] -mr-64 -mt-64"></div>
+                
+                <div class="relative z-10 space-y-12">
+                    <div class="text-center space-y-4">
+                        <div class="inline-flex items-center space-x-2 bg-amber-500/10 border border-amber-500/20 px-4 py-1.5 rounded-full">
+                            <span class="text-amber-400 text-xs font-bold uppercase tracking-widest">Next Evolution: Music Page</span>
+                        </div>
+                        <h2 class="text-6xl font-extrabold tracking-tighter leading-none">MUSIC <span class="text-amber-400">PAGE</span></h2>
+                        <p class="text-2xl text-slate-400 font-light italic">Plataforma Open Source de Descoberta Musical Baseada em Comunidade</p>
+                    </div>
+
+                    <!-- Introdução & Screenshot -->
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+                        <div class="space-y-6">
+                            <h3 class="text-3xl font-bold">Introdução</h3>
+                            <p class="text-slate-400 leading-relaxed">
+                                A forma como descobrimos música na internet mudou radicalmente nos últimos anos. Hoje, a maior parte das recomendações musicais depende de algoritmos de plataformas de streaming. Embora esses sistemas sejam eficientes, eles também criam bolhas de recomendação e reduzem a diversidade de descobertas, muitas vezes priorizando aquilo que já é popular ou comercialmente relevante.
+                            </p>
+                            <p class="text-slate-400 leading-relaxed">
+                                Ao mesmo tempo, uma enorme quantidade de música independente, experimental ou pertencente a cenas culturais específicas permanece invisível para grande parte do público. O projeto Music Page nasce como uma tentativa de repensar a descoberta musical na internet, combinando tecnologia, colaboração aberta e curadoria comunitária.
+                            </p>
+                        </div>
+                        <div class="relative group">
+                            <div class="absolute -inset-4 bg-amber-500/20 rounded-[2rem] blur-2xl opacity-0 group-hover:opacity-100 transition-all duration-700"></div>
+                            <img src="https://github.com/goldenluke/qwan_zero_pipeline/blob/main/1773014265715.jpg?raw=true" alt="Music Page Screenshot" class="relative rounded-[2rem] border border-white/10 shadow-2xl transition-transform duration-700 group-hover:scale-[1.02]">
+                        </div>
+                    </div>
+
+                    <!-- Objetivos & Conceito -->
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 pt-12 border-t border-white/5">
+                        <div class="space-y-6">
+                            <h3 class="text-3xl font-bold">Objetivo do Projeto</h3>
+                            <p class="text-slate-400 leading-relaxed">
+                                O objetivo do Music Page é criar uma plataforma colaborativa de descoberta musical inspirada em sistemas de comunidades como o Reddit, mas totalmente focada em música. Em vez de depender exclusivamente de algoritmos de recomendação, a plataforma busca permitir que a própria comunidade organize, compartilhe e destaque conteúdos musicais relevantes.
+                            </p>
+                            <div class="bg-amber-500/5 p-6 rounded-2xl border border-amber-500/20 italic text-amber-200">
+                                "Pessoas compartilham músicas → A comunidade discute → Os melhores conteúdos emergem coletivamente."
+                            </div>
+                        </div>
+                        <div class="space-y-6">
+                            <h3 class="text-3xl font-bold">Conceito da Plataforma</h3>
+                            <p class="text-slate-400 leading-relaxed">
+                                O Music Page funciona como um agregador social de música organizado em comunidades temáticas (s/ communities). Usuários podem compartilhar músicas, links, vídeos e discussões. Outros usuários podem votar, comentar, salvar e discutir os conteúdos.
+                            </p>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="px-4 py-2 glass rounded-full text-xs font-bold text-amber-400">s/techno</span>
+                                <span class="px-4 py-2 glass rounded-full text-xs font-bold text-amber-400">s/jazz</span>
+                                <span class="px-4 py-2 glass rounded-full text-xs font-bold text-amber-400">s/indierock</span>
+                                <span class="px-4 py-2 glass rounded-full text-xs font-bold text-amber-400">s/musicproduction</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Funcionalidades Grid -->
+                    <div class="pt-12 border-t border-white/5 space-y-12">
+                        <h3 class="text-3xl font-bold text-center">Principais Funcionalidades</h3>
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                            <div class="p-6 bg-white/5 rounded-3xl border border-white/5 hover:border-amber-500/30 transition-all">
+                                <h4 class="font-bold mb-2">Comunidades musicais</h4>
+                                <p class="text-xs text-slate-500 leading-relaxed">Criação de espaços organizados por gênero, estilo ou cena musical.</p>
+                            </div>
+                            <div class="p-6 bg-white/5 rounded-3xl border border-white/5 hover:border-amber-500/30 transition-all">
+                                <h4 class="font-bold mb-2">Posts & Votação</h4>
+                                <p class="text-xs text-slate-500 leading-relaxed">Compartilhamento de links com sistema de votos positivos para destacar os melhores.</p>
+                            </div>
+                            <div class="p-6 bg-white/5 rounded-3xl border border-white/5 hover:border-amber-500/30 transition-all">
+                                <h4 class="font-bold mb-2">Biblioteca & Perfil</h4>
+                                <p class="text-xs text-slate-500 leading-relaxed">Salvar músicas para ouvir depois e perfis com histórico de contribuições.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Tecnologia & Arquitetura -->
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 pt-12 border-t border-white/5">
+                        <div class="space-y-6">
+                            <h3 class="text-3xl font-bold">Tecnologia Utilizada</h3>
+                            <div class="space-y-4">
+                                <div class="glass p-5 rounded-2xl flex items-center justify-between">
+                                    <span class="font-bold text-amber-400">Backend</span>
+                                    <span class="text-sm font-mono text-slate-400">Python / Django / Django Ninja</span>
+                                </div>
+                                <div class="glass p-5 rounded-2xl flex items-center justify-between">
+                                    <span class="font-bold text-amber-400">Frontend</span>
+                                    <span class="text-sm font-mono text-slate-400">React / Vite / Javascript</span>
+                                </div>
+                                <div class="glass p-5 rounded-2xl flex items-center justify-between">
+                                    <span class="font-bold text-amber-400">Database</span>
+                                    <span class="text-sm font-mono text-slate-400">SQLite (Dev) / PostgreSQL (Prod)</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="space-y-6">
+                            <h3 class="text-3xl font-bold">Visão de Futuro</h3>
+                            <ul class="grid grid-cols-2 gap-3 text-[11px] text-slate-400 font-medium uppercase tracking-wider">
+                                <li class="p-3 bg-white/5 rounded-xl border border-white/5">● Integração Streaming</li>
+                                <li class="p-3 bg-white/5 rounded-xl border border-white/5">● Playlists Colaborativas</li>
+                                <li class="p-3 bg-white/5 rounded-xl border border-white/5">● Mapeamento de Cenas</li>
+                                <li class="p-3 bg-white/5 rounded-xl border border-white/5">● Ranking de Tendências</li>
+                            </ul>
+                            <div class="p-6 bg-indigo-500/10 rounded-3xl border border-indigo-500/20">
+                                <h4 class="font-bold text-sm mb-2">Open Source e Colaboração</h4>
+                                <p class="text-xs text-slate-400 leading-relaxed mb-4">O Music Page foi concebido desde o início como um projeto open source. Qualquer pessoa pode estudar o código, propor melhorias e participar da evolução da plataforma.</p>
+                                <a href="https://github.com/goldenluke/music-page" target="_blank" class="inline-flex items-center space-x-2 text-xs font-bold text-indigo-400 hover:text-indigo-300">
+                                    <span>GITHUB REPOSITORY</span>
+                                    <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Conclusão Music Page -->
+                    <div class="text-center max-w-2xl mx-auto pt-12 space-y-6">
+                        <h3 class="text-3xl font-bold italic">"A revolução será curada"</h3>
+                        <p class="text-slate-500 text-sm leading-relaxed">
+                            A música sempre foi uma das formas mais poderosas de expressão cultural e conexão entre pessoas. O Music Page é um convite para imaginar como poderia ser uma internet musical mais aberta, mais comunitária e mais criativa.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Seção 3: Radar Estratégico (Conteúdo Original Mantido) -->
         <section id="radar" class="scroll-mt-32">
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
                 <div class="order-2 lg:order-1 glass p-12 rounded-[3.5rem] relative">
@@ -452,7 +509,7 @@
             </div>
         </section>
 
-        <!-- Seção 4: AMAs e Entrevistas Detalhadas -->
+        <!-- Seção 4: AMAs e Entrevistas Detalhadas (Conteúdo Original Mantido) -->
         <section id="amas" class="scroll-mt-32 space-y-16">
             <div class="text-center space-y-4">
                 <h2 class="text-5xl font-bold tracking-tighter leading-none">Estratégia de <span class="gradient-text">AMAs & Convidados</span></h2>
@@ -466,113 +523,27 @@
                     <div class="w-16 h-16 bg-indigo-500/20 rounded-2xl flex items-center justify-center text-3xl">🎸</div>
                     <h4 class="text-xl font-bold">Artistas Indie</h4>
                     <p class="text-sm text-slate-500">Músicos com 50k-200k ouvintes no Spotify que buscam engajamento real e "fandom" dedicado.</p>
-                    <div class="pt-4 border-t border-white/10 w-full text-xs font-bold text-indigo-400">ALVO: CENA ATUAL</div>
                 </div>
                 <div class="glass p-10 rounded-[3rem] border-white/5 space-y-6 flex flex-col items-center text-center">
                     <div class="w-16 h-16 bg-rose-500/20 rounded-2xl flex items-center justify-center text-3xl">🎧</div>
-                    <h4 class="text-xl font-bold">Profissionais de Bastidores</h4>
+                    <h4 class="text-xl font-bold">Bastidores</h4>
                     <p class="text-sm text-slate-500">Produtores musicais, engenheiros de som de álbuns clássicos, fotógrafos de capas históricas.</p>
-                    <div class="pt-4 border-t border-white/10 w-full text-xs font-bold text-rose-400">ALVO: CURIOSIDADE TÉCNICA</div>
                 </div>
                 <div class="glass p-10 rounded-[3rem] border-white/5 space-y-6 flex flex-col items-center text-center">
                     <div class="w-16 h-16 bg-amber-500/20 rounded-2xl flex items-center justify-center text-3xl">📝</div>
                     <h4 class="text-xl font-bold">Jornalistas & Críticos</h4>
                     <p class="text-sm text-slate-500">Críticos de portais tradicionais ou donos de blogs influentes para debater o estado da música.</p>
-                    <div class="pt-4 border-t border-white/10 w-full text-xs font-bold text-amber-400">ALVO: AUTORIDADE</div>
-                </div>
-            </div>
-
-            <div class="glass p-12 rounded-[4rem] border-emerald-500/20 bg-emerald-500/5">
-                <h4 class="text-2xl font-bold mb-8 text-center">Como conseguir um AMA de impacto?</h4>
-                <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
-                    <div class="space-y-3">
-                        <span class="text-2xl font-bold text-emerald-400">01</span>
-                        <h5 class="font-bold">Mídia Kit</h5>
-                        <p class="text-xs text-slate-400 leading-relaxed">Mostre os números: 55 mil visitantes semanais é maior que muitas revistas impressas.</p>
-                    </div>
-                    <div class="space-y-3">
-                        <span class="text-2xl font-bold text-emerald-400">02</span>
-                        <h5 class="font-bold">Abordagem</h5>
-                        <p class="text-xs text-slate-400 leading-relaxed">Contate o selo ou o DM do Instagram focando no "valor da comunidade ativa" vs "curtidas vazias".</p>
-                    </div>
-                    <div class="space-y-3">
-                        <span class="text-2xl font-bold text-emerald-400">03</span>
-                        <h5 class="font-bold">Agendamento</h5>
-                        <p class="text-xs text-slate-400 leading-relaxed">Marque com 1 semana de antecedência. Crie o post "teaser" 48h antes para coletar perguntas.</p>
-                    </div>
-                    <div class="space-y-3">
-                        <span class="text-2xl font-bold text-emerald-400">04</span>
-                        <h5 class="font-bold">Execução</h5>
-                        <p class="text-xs text-slate-400 leading-relaxed">O moderador deve atuar como "âncora", filtrando perguntas e mantendo o artista engajado.</p>
-                    </div>
                 </div>
             </div>
         </section>
 
-        <!-- Seção 5: Projetos Especiais & Premiação -->
-        <section class="space-y-16">
-            <div class="flex flex-col md:flex-row justify-between items-end gap-8">
-                <div class="max-w-xl space-y-6">
-                    <h2 class="text-5xl font-bold tracking-tight">Projetos de <span class="text-sky-400">Longa Duração</span></h2>
-                    <p class="text-slate-400 text-lg">Ações que criam legado e tráfego recorrente através de busca orgânica e citações em outras mídias.</p>
-                </div>
-                <div class="bg-sky-500/10 border border-sky-500/30 px-6 py-3 rounded-2xl text-sky-400 font-bold text-sm">PRÓXIMA EDIÇÃO: DEZ/2026</div>
-            </div>
-
-            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
-                <!-- Prêmio r/MusicaBR -->
-                <div class="glass p-10 rounded-[3rem] border-white/5 relative overflow-hidden flex flex-col">
-                    <div class="absolute -top-10 -right-10 w-32 h-32 bg-sky-500/20 blur-3xl rounded-full"></div>
-                    <h3 class="text-2xl font-bold mb-4">🏆 Prêmio r/MusicaBR</h3>
-                    <p class="text-sm text-slate-400 mb-6 flex-grow leading-relaxed">
-                        Evento anual votado 100% pela comunidade. Categorias: Melhor Álbum, Artista Revelação, Melhor Letra, Melhor Capa e "Guerreiro da Independência".
-                    </p>
-                    <div class="space-y-2 pt-6 border-t border-white/10">
-                        <div class="flex justify-between text-[10px] font-bold uppercase tracking-widest text-slate-500">
-                            <span>Fases:</span> <span>Indicação / Votação / Gala</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Mapa da Música BR -->
-                <div class="glass p-10 rounded-[3rem] border-white/5 relative overflow-hidden flex flex-col">
-                    <h3 class="text-2xl font-bold mb-4">🗺️ Mapas de Cena</h3>
-                    <p class="text-sm text-slate-400 mb-6 flex-grow leading-relaxed">
-                        Criação de guias geográficos da música brasileira: "O guia do r/MusicaBR para a cena do Pará", "O que ouvir em Minas Gerais?". Atrai público regional fortíssimo.
-                    </p>
-                    <div class="space-y-2 pt-6 border-t border-white/10">
-                        <div class="flex justify-between text-[10px] font-bold uppercase tracking-widest text-slate-500">
-                            <span>Status:</span> <span class="text-emerald-400">Em Desenvolvimento</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Wiki Enciclopédica -->
-                <div class="glass p-10 rounded-[3rem] border-white/5 relative overflow-hidden flex flex-col">
-                    <h3 class="text-2xl font-bold mb-4">📖 Wiki r/MusicaBR</h3>
-                    <p class="text-sm text-slate-400 mb-6 flex-grow leading-relaxed">
-                        Transformar os melhores posts históricos em páginas da Wiki do sub. Serve como o "Manual do Iniciante na Música BR" para estrangeiros e novos ouvintes.
-                    </p>
-                    <div class="space-y-2 pt-6 border-t border-white/10">
-                        <div class="flex justify-between text-[10px] font-bold uppercase tracking-widest text-slate-500">
-                            <span>Foco:</span> <span class="text-sky-400">SEO / Google Traffic</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Seção 6: O Roadmap dos 500k -->
+        <!-- Seção 6: O Roadmap dos 500k (Conteúdo Original Mantido) -->
         <section id="roadmap" class="scroll-mt-32">
             <div class="text-center mb-20">
                 <h2 class="text-6xl font-extrabold mb-6 tracking-tighter">O Caminho para <span class="gradient-text">Meio Milhão</span></h2>
-                <p class="text-slate-400 max-w-2xl mx-auto text-lg leading-relaxed">
-                    Não é apenas sobre postar, é sobre ocupar espaços fora do Reddit e criar um ecossistema multiplataforma.
-                </p>
             </div>
 
             <div class="space-y-24 max-w-4xl mx-auto">
-                <!-- Fase 1 -->
                 <div class="flex flex-col md:flex-row gap-12 items-start relative">
                     <div class="md:w-1/3">
                         <div class="text-6xl font-black text-white/5 leading-none mb-4">01</div>
@@ -581,14 +552,11 @@
                     </div>
                     <div class="md:w-2/3 glass p-8 rounded-3xl border-indigo-500/20">
                         <ul class="space-y-4 text-sm text-slate-300 leading-relaxed">
-                            <li class="flex gap-4"><span class="text-indigo-400">●</span> <span>Implementação rigorosa do calendário semanal (7 dias de posts fixos).</span></li>
-                            <li class="flex gap-4"><span class="text-indigo-400">●</span> <span>Criação de parcerias de crosspost com o r/brasil (dia fixo de música no r/brasil).</span></li>
-                            <li class="flex gap-4"><span class="text-indigo-400">●</span> <span>Lançamento do Chat Oficial (Rocket.Chat) para engajamento em tempo real.</span></li>
+                            <li>● Implementação do calendário semanal.</li>
+                            <li>● Lançamento do Chat Oficial e projeto Music Page (Alpha).</li>
                         </ul>
                     </div>
                 </div>
-
-                <!-- Fase 2 -->
                 <div class="flex flex-col md:flex-row gap-12 items-start relative">
                     <div class="md:w-1/3">
                         <div class="text-6xl font-black text-white/5 leading-none mb-4">02</div>
@@ -597,58 +565,9 @@
                     </div>
                     <div class="md:w-2/3 glass p-8 rounded-3xl border-rose-500/20">
                         <ul class="space-y-4 text-sm text-slate-300 leading-relaxed">
-                            <li class="flex gap-4"><span class="text-rose-400">●</span> <span>AMAs mensais com artistas de médio porte (ex: Tulipa Ruiz, Boogarins, Djonga).</span></li>
-                            <li class="flex gap-4"><span class="text-rose-400">●</span> <span>Internacionalização: posts em inglês apresentando a MPB em subs como r/music e r/listentothis.</span></li>
-                            <li class="flex gap-4"><span class="text-rose-400">●</span> <span>Criação do bot agregador de lançamentos nacionais automatizado.</span></li>
+                            <li>● AMAs mensais e internacionalização (Brazilian Music for Foreigners).</li>
+                            <li>● Integração Music Page + Streaming APIs.</li>
                         </ul>
-                    </div>
-                </div>
-
-                <!-- Fase 3 -->
-                <div class="flex flex-col md:flex-row gap-12 items-start relative">
-                    <div class="md:w-1/3">
-                        <div class="text-6xl font-black text-white/5 leading-none mb-4">03</div>
-                        <h4 class="text-2xl font-bold text-amber-400">Ecossistema Dominante</h4>
-                        <p class="text-xs font-mono text-slate-500 uppercase tracking-widest mt-2">250k -> 500k</p>
-                    </div>
-                    <div class="md:w-2/3 glass p-8 rounded-3xl border-amber-500/20">
-                        <ul class="space-y-4 text-sm text-slate-300 leading-relaxed">
-                            <li class="flex gap-4"><span class="text-amber-400">●</span> <span>O r/MusicaBR torna-se fonte citada por veículos como G1, Rolling Stone Brasil e Popload.</span></li>
-                            <li class="flex gap-4"><span class="text-amber-400">●</span> <span>Expansão para redes visuais (Instagram/TikTok) focada em "Melhores Momentos do Sub".</span></li>
-                            <li class="flex gap-4"><span class="text-amber-400">●</span> <span>Soberania do Prêmio r/MusicaBR como o maior prêmio de voto popular indie do país.</span></li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Seção Final: Automação & Moderação -->
-        <section id="tech" class="scroll-mt-32 glass p-16 rounded-[4rem] border-white/5 relative overflow-hidden">
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-                <div class="space-y-8">
-                    <h2 class="text-4xl font-bold">Base Tecnológica & <br><span class="text-indigo-400">Gestão de Escala</span></h2>
-                    <p class="text-slate-400 leading-relaxed">
-                        Gerenciar 500 mil pessoas exige automação inteligente para que os moderadores possam focar na curadoria, não na limpeza de lixo.
-                    </p>
-                    <div class="grid grid-cols-2 gap-4">
-                        <div class="p-4 rounded-2xl bg-white/5 border border-white/10">
-                            <h5 class="font-bold text-xs uppercase tracking-widest mb-2 text-indigo-300">Rocket.Chat Server</h5>
-                            <p class="text-[10px] text-slate-500">Servidor próprio open-source para garantir a soberania da comunidade e eventos ao vivo.</p>
-                        </div>
-                        <div class="p-4 rounded-2xl bg-white/5 border border-white/10">
-                            <h5 class="font-bold text-xs uppercase tracking-widest mb-2 text-emerald-300">Custom Bots</h5>
-                            <p class="text-[10px] text-slate-500">Integração com API do Spotify para gerar posts de charts semanais e playlists automáticas.</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="space-y-4">
-                    <div class="bg-indigo-600 p-8 rounded-3xl shadow-xl shadow-indigo-600/20">
-                        <h4 class="text-xl font-bold text-white mb-2">Pilar de Crescimento</h4>
-                        <p class="text-indigo-100 text-sm italic">"O tráfego de 55 mil semanais já é maior que a maioria das comunidades nacionais. O desafio agora é a identidade social."</p>
-                    </div>
-                    <div class="glass p-8 rounded-3xl border-white/10">
-                        <h4 class="text-xl font-bold text-white mb-2">Dica de Viralização</h4>
-                        <p class="text-slate-400 text-sm">Eventos síncronos (Listening Parties) geram picos de 400% no engajamento diário comparado a dias normais.</p>
                     </div>
                 </div>
             </div>
@@ -660,16 +579,16 @@
         <div class="max-w-4xl mx-auto text-center space-y-12">
             <div class="flex justify-center space-x-6 grayscale opacity-50 text-[10px] font-bold tracking-widest">
                 <span>REDDIT</span>
+                <span>MUSIC PAGE</span>
                 <span>ROCKET.CHAT</span>
-                <span>SPOTIFY</span>
                 <span>MUSICA.BR</span>
             </div>
             <p class="text-slate-500 text-sm max-w-xl mx-auto leading-relaxed">
-                Este plano estratégico é um documento vivo e deve ser adaptado conforme o feedback da comunidade. A música brasileira é vasta demais para ser contida em um fórum, mas o r/MusicaBR é o lugar onde ela é discutida com maior profundidade.
+                Este plano estratégico é um documento vivo. A transição para o Music Page marca o início de uma nova fase tecnológica para o r/MusicaBR.
             </p>
             <div class="flex flex-col items-center">
                 <div class="w-16 h-px bg-gradient-to-r from-transparent via-slate-600 to-transparent mb-8"></div>
-                <span class="text-[10px] font-mono tracking-[0.6em] uppercase text-slate-600 animate-pulse">A revolução será curada</span>
+                <span class="text-[10px] font-mono tracking-[0.6em] uppercase text-slate-600 animate-pulse">A revolução será aberta</span>
             </div>
         </div>
     </footer>
