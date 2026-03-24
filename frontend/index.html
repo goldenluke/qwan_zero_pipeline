@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<meta charset="UTF-8">
+<title>QWAN Chess</title>
+
+<link rel="stylesheet" href="css/chessboard-0.3.0.min.css">
+
+<script src="js/jquery.min.js"></script>
+<script src="js/chess.min.js"></script>
+<script src="js/chessboard-0.3.0.min.js"></script>
+
+</head>
+
+<body>
+
+<h2>QWAN Chess</h2>
+
+<div id="board" style="width:500px"></div>
+
+<script>
+
+var game = new Chess()
+
+var board = Chessboard('board', {
+    draggable: true,
+    position: 'start',
+    onDrop: onDrop
+})
+
+function onDrop(source, target) {
+
+    var move = game.move({
+        from: source,
+        to: target,
+        promotion: 'q'
+    })
+
+    if (move === null) return 'snapback'
+
+    botMove()
+}
+
+function botMove(){
+
+    var fen = game.fen()
+
+    fetch("http://127.0.0.1:8002/move?fen=" + encodeURIComponent(fen))
+    .then(r => r.json())
+    .then(data => {
+
+        game.move(data.move)
+        board.position(game.fen())
+
+    })
+
+}
+
+</script>
+
+</body>
+</html>
