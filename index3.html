@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html lang="pt-pt">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LabSUS — UFT | Padrão de Projeto de Inteligência Estatal</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://unpkg.com/lucide@latest"></script>
+<!-- MathJax para renderização de fórmulas complexas -->
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<!-- Mermaid.js para Fluxogramas Técnicos -->
+<script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+<script>
+mermaid.initialize({
+startOnLoad: true,
+theme: 'dark',
+securityLevel: 'loose',
+flowchart: { useMaxWidth: true, htmlLabels: true, curve: 'basis' }
+});
+</script>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=JetBrains+Mono:wght@400;500&family=Lora:ital,wght@1,400;1,700&display=swap');
+
+:root {
+--primary: #06b6d4;
+--accent: #10b981;
+--warning: #f59e0b;
+--danger: #f43f5e;
+--bg: #020617;
+}
+
+body {
+font-family: 'Inter', sans-serif;
+background-color: var(--bg);
+color: #f8fafc;
+scroll-behavior: smooth;
+}
+
+.mono { font-family: 'JetBrains Mono', monospace; }
+.serif-italic { font-family: 'Lora', serif; font-style: italic; }
+
+.glass {
+background: rgba(255, 255, 255, 0.01);
+backdrop-filter: blur(16px);
+border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.gradient-text {
+background: linear-gradient(to right, #22d3ee, #34d399, #fbbf24);
+-webkit-background-clip: text;
+-webkit-text-fill-color: transparent;
+}
+
+.grid-bg {
+background-image: radial-gradient(circle at 1px 1px, rgba(255,255,255,0.03) 1px, transparent 0);
+background-size: 32px 32px;
+}
+
+.section-divider {
+height: 1px;
+background: linear-gradient(to right, transparent, rgba(6, 182, 212, 0.1), transparent);
+}
+
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--bg); }
+::-webkit-scrollbar-thumb { background: #164e63; border-radius: 10px; }
+
+.mjx-container {
+color: #22d3ee !important;
+font-size: 1.05em !important;
+margin: 10px 0 !important;
+background: rgba(0, 0, 0, 0.2);
+padding: 1.5rem;
+border-radius: 1rem;
+}
+
+.pdf-container {
+width: 100%;
+height: 800px;
+border-radius: 1.5rem;
+overflow: hidden;
+border: 1px solid rgba(255, 255, 255, 0.1);
+background: #000;
+}
+
+pre {
+background: #000 !important;
+border: 1px solid rgba(255,255,255,0.1);
+padding: 1.5rem;
+border-radius: 1rem;
+font-size: 0.75rem;
+overflow-x: auto;
+}
+
+.feature-tag {
+@apply bg-cyan-500/5 border border-cyan-500/15 p-2.5 rounded-lg text-[9px] text-cyan-300 font-mono flex items-center gap-2 transition-all;
+}
+.feature-tag:hover { @apply bg-cyan-500/10 border-cyan-500/40 translate-x-1 shadow-lg shadow-cyan-500/5; }
+
+.math-box {
+@apply glass p-10 rounded-[3rem] border border-white/5 mt-8;
+background: rgba(0, 0, 0, 0.4);
+transition: all 0.3s;
+}
+.math-box:hover { border-color: rgba(6, 182, 212, 0.3); transform: translateY(-3px); }
+
+.evidence-card {
+@apply glass rounded-2xl overflow-hidden border border-white/5 hover:border-cyan-500/30 transition-all duration-500 flex flex-col h-full;
+}
+.evidence-img {
+@apply w-full h-40 object-cover cursor-zoom-in transition-transform duration-700 hover:scale-110;
+background: #111;
+}
+.evidence-label { @apply p-3 bg-black/40 border-t border-white/5; }
+
+#lightbox {
+display: none;
+position: fixed;
+z-index: 999999;
+left: 0;
+top: 0;
+width: 100%;
+height: 100%;
+background-color: rgba(2, 6, 23, 0.98);
+backdrop-filter: blur(25px);
+overflow-y: auto;
+padding: 60px 0;
+}
+#lightbox-content {
+margin: auto;
+display: block;
+width: 85%;
+max-width: 1400px;
+border-radius: 1rem;
+border: 1px solid rgba(255,255,255,0.1);
+height: auto;
+animation: zoom 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+box-shadow: 0 0 120px rgba(6, 182, 212, 0.25);
+}
+.close-button {
+position: fixed;
+top: 20px;
+right: 40px;
+z-index: 1000000;
+@apply bg-red-600 hover:bg-red-700 text-white p-3 rounded-full shadow-2xl transition-all cursor-pointer;
+}
+</style>
+</head>
+<body class="grid-bg text-slate-200">
+
+<div id="lightbox" onclick="closeLightbox()">
+<div class="close-button" onclick="closeLightbox()">
+<i data-lucide="x" class="w-8 h-8"></i>
+</div>
+<img id="lightbox-content" src="" alt="Visão Ampliada LabSUS — UFT">
+</div>
+
+<nav class="fixed top-0 w-full z-50 glass border-b border-white/5 px-6 py-4">
+<div class="max-w-7xl mx-auto flex justify-between items-center">
+<div class="flex items-center gap-2">
+<i data-lucide="activity" class="text-cyan-500"></i>
+<span class="font-extrabold text-xl tracking-tighter uppercase italic">Lab<span class="text-cyan-400 font-black">SUS</span> — UFT</span>
+</div>
+<div class="hidden lg:flex gap-8 text-[10px] uppercase tracking-widest font-bold text-slate-500">
+<a href="#overview" class="hover:text-white transition">Enciclopédia</a>
+<a href="#frontend-gallery" class="hover:text-white transition">Interface</a>
+<a href="#evidence-gallery" class="hover:text-white transition">Evidências</a>
+<a href="#math" class="hover:text-white transition text-cyan-400 font-black">Matemática</a>
+<a href="#fazenda" class="hover:text-white transition text-amber-400 font-black">Fazenda</a>
+<a href="#features" class="hover:text-white transition">Catálogo 40+</a>
+</div>
+<div class="flex gap-3">
+<a href="https://github.com/goldenluke/labsus" target="_blank" class="flex items-center gap-2 bg-slate-800 text-white px-4 py-1.5 rounded-lg text-[10px] font-bold hover:bg-slate-700 transition border border-white/10">
+<i data-lucide="github" class="w-3 h-3"></i> REPOSITÓRIO
+</a>
+</div>
+</div>
+</nav>
+
+<header class="relative pt-48 pb-32 px-6 text-center" id="overview">
+<div class="absolute top-0 left-1/2 -translate-x-1/2 w-[1200px] h-[600px] bg-cyan-600/10 blur-[160px] rounded-full -z-10"></div>
+<div class="max-w-6xl mx-auto">
+<div class="inline-block px-4 py-1.5 rounded-full border border-cyan-500/30 bg-cyan-500/5 text-cyan-400 text-[10px] font-black mb-8 uppercase tracking-[0.4em]">
+Design Pattern de Inteligência Estatal & MLOps
+</div>
+<h1 class="text-6xl md:text-8xl font-black mb-10 tracking-tighter leading-[0.85]">
+Padrão de Projeto de <br><span class="gradient-text">Inteligência Estatal.</span>
+</h1>
+
+<div class="flex flex-col items-center gap-6 mb-12">
+<div class="flex items-center gap-2 text-cyan-500/80 font-mono text-sm tracking-widest uppercase border-y border-white/5 py-2 px-6 font-bold text-center">
+</div>
+
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 opacity-80">
+<div class="flex items-center gap-2 font-mono text-[9px] tracking-widest uppercase text-slate-400 text-center">
+<i data-lucide="graduation-cap" class="w-3 h-3 text-cyan-500"></i>
+Orientação: <span class="text-slate-200">Profa. Dra. Kelly Cristina Gomes</span>
+</div>
+<div class="flex items-center gap-2 font-mono text-[9px] tracking-widest uppercase text-slate-400 text-center">
+<i data-lucide="graduation-cap" class="w-3 h-3 text-cyan-500"></i>
+Orientação: <span class="text-slate-200">Profa. Ma. Michelle de Jesus Pantoja Filgueira</span>
+</div>
+<div class="flex items-center gap-2 font-mono text-[9px] tracking-widest uppercase text-slate-400 text-center">
+<i data-lucide="code" class="w-3 h-3 text-cyan-500"></i>
+Colaboração: <span class="text-slate-200">Prof. Dr. Thiago M. B. Rodrigues</span>
+</div>
+<div class="flex items-center gap-2 font-mono text-[9px] tracking-widest uppercase text-slate-400 text-center">
+<i data-lucide="terminal" class="w-3 h-3 text-cyan-500"></i>
+Colaboração: <span class="text-slate-200">Prof. Dr. Ary Henrique</span>
+</div>
+</div>
+</div>
+</div>
+</header>
+
+<!-- 1. GALERIA DA INTERFACE (FRONTEND) -->
+<section class="py-32 max-w-7xl mx-auto px-6 border-t border-white/5" id="frontend-gallery">
+<div class="text-center mb-16">
+<h2 class="text-4xl font-black uppercase mb-4 italic tracking-tighter text-emerald-500">I. Exemplos da Interface de Decisão Estatal</h2>
+<p class="text-slate-500 max-w-2xl mx-auto font-light text-sm italic text-center leading-relaxed">Visualização do motor de orquestração em UI reativa (Clique para ampliar).</p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+<img src="https://github.com/goldenluke/qwan_zero_pipeline/blob/main/Untitled.jpeg?raw=true" onclick="openLightbox(this.src)" class="frontend-img" alt="UI Dashboard">
+<img src="https://github.com/goldenluke/qwan_zero_pipeline/blob/main/Untitled2.jpeg?raw=true" onclick="openLightbox(this.src)" class="frontend-img" alt="UI Espacial">
+<img src="https://github.com/goldenluke/qwan_zero_pipeline/blob/main/Untitled3.jpeg?raw=true" onclick="openLightbox(this.src)" class="frontend-img" alt="UI Indicadores">
+<img src="https://github.com/goldenluke/qwan_zero_pipeline/blob/main/Untitled4.jpeg?raw=true" onclick="openLightbox(this.src)" class="frontend-img" alt="UI IA">
+<img src="https://github.com/goldenluke/qwan_zero_pipeline/blob/main/Untitled5.jpeg?raw=true" onclick="openLightbox(this.src)" class="frontend-img" alt="UI Fluxos">
+<img src="https://github.com/goldenluke/qwan_zero_pipeline/blob/main/Untitled6.jpeg?raw=true" onclick="openLightbox(this.src)" class="frontend-img" alt="UI Auditoria">
+<img src="https://github.com/goldenluke/qwan_zero_pipeline/blob/main/Untitled7.jpeg?raw=true" onclick="openLightbox(this.src)" class="frontend-img lg:col-span-2" alt="UI Completa">
+</div>
+</section>
+
+<!-- 2. GALERIA TOTAL DE EVIDÊNCIAS ANALÍTICAS -->
+<section class="py-32 max-w-7xl mx-auto px-6 border-t border-white/5" id="evidence-gallery">
+<div class="text-center mb-16 text-center">
+<h2 class="text-4xl font-black uppercase mb-4 italic tracking-tighter text-cyan-500">II. Exemplos de Evidências Analíticas</h2>
+<p class="text-slate-500 max-w-3xl mx-auto font-light text-sm italic text-center leading-relaxed">Produção algorítmica real do diretório <code>outputs/</code> (Clique para ampliar).</p>
+</div>
+
+<div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4">
+<!-- Causalidade -->
+<div class="evidence-card" onclick="openLightbox('https://github.com/goldenluke/labsus/blob/main/outputs/analise_causal/propensity_score_overlap.png?raw=true')">
+<img src="https://github.com/goldenluke/labsus/blob/main/outputs/analise_causal/propensity_score_overlap.png?raw=true" class="evidence-img">
+<div class="evidence-label"><span class="text-[8px] font-bold text-white uppercase">PSM Overlap</span></div>
+</div>
+<div class="evidence-card" onclick="openLightbox('https://github.com/goldenluke/labsus/blob/main/outputs/analise_impacto_politicas/its_impacto_taxa_cura.png?raw=true')">
+<img src="https://github.com/goldenluke/labsus/blob/main/outputs/analise_impacto_politicas/its_impacto_taxa_cura.png?raw=true" class="evidence-img">
+<div class="evidence-label"><span class="text-[8px] font-bold text-white uppercase">ITS Impacto</span></div>
+</div>
+<!-- Espacial -->
+<div class="evidence-card" onclick="openLightbox('https://github.com/goldenluke/labsus/blob/main/outputs/analise_espacial/mapa_lisa_DOENCAS_CRONICAS.png?raw=true')">
+<img src="https://github.com/goldenluke/labsus/blob/main/outputs/analise_espacial/mapa_lisa_DOENCAS_CRONICAS.png?raw=true" class="evidence-img">
+<div class="evidence-label"><span class="text-[8px] font-bold text-white uppercase">LISA Moran</span></div>
+</div>
+<div class="evidence-card" onclick="openLightbox('https://github.com/goldenluke/labsus/blob/main/outputs/analise_psicotropicos/mapa_opioides.png?raw=true')">
+<img src="https://github.com/goldenluke/labsus/blob/main/outputs/analise_psicotropicos/mapa_opioides.png?raw=true" class="evidence-img">
+<div class="evidence-label"><span class="text-[8px] font-bold text-white uppercase">Mapa Opióides</span></div>
+</div>
+<!-- XAI -->
+<div class="evidence-card" onclick="openLightbox('https://github.com/goldenluke/labsus/blob/main/outputs/risco_perinatal/shap_summary_beeswarm.png?raw=true')">
+<img src="https://github.com/goldenluke/labsus/blob/main/outputs/risco_perinatal/shap_summary_beeswarm.png?raw=true" class="evidence-img">
+<div class="evidence-label"><span class="text-[8px] font-bold text-white uppercase">SHAP Perinatal</span></div>
+</div>
+<div class="evidence-card" onclick="openLightbox('https://github.com/goldenluke/labsus/blob/main/outputs/previsoes_individuais/explicacao_risco_obito_individual.png?raw=true')">
+<img src="https://github.com/goldenluke/labsus/blob/main/outputs/previsoes_individuais/explicacao_risco_obito_individual.png?raw=true" class="evidence-img">
+<div class="evidence-label"><span class="text-[8px] font-bold text-white uppercase">XAI Individual</span></div>
+</div>
+<!-- Fluxo -->
+<div class="evidence-card" onclick="openLightbox('https://github.com/goldenluke/labsus/blob/main/outputs/analise_rede/mapa_rede_fluxo_pacientes_neoplasias.png?raw=true')">
+<img src="https://github.com/goldenluke/labsus/blob/main/outputs/analise_rede/mapa_rede_fluxo_pacientes_neoplasias.png?raw=true" class="evidence-img">
+<div class="evidence-label"><span class="text-[8px] font-bold text-white uppercase">Network Graph</span></div>
+</div>
+<div class="evidence-card" onclick="openLightbox('https://github.com/goldenluke/labsus/blob/main/outputs/simulacao_capacidade/tradeoff_capacidade_geral.png?raw=true')">
+<img src="https://github.com/goldenluke/labsus/blob/main/outputs/simulacao_capacidade/tradeoff_capacidade_geral.png?raw=true" class="evidence-img">
+<div class="evidence-label"><span class="text-[8px] font-bold text-white uppercase">DES Simulação</span></div>
+</div>
+</div>
+</section>
+
+<div class="section-divider" id="math"></div>
+
+<!-- 3. FUNDAMENTAÇÃO MATEMÁTICA INTEGRAL (ULTRA-DENSE) -->
+<section class="py-32 max-w-7xl mx-auto px-6 border-t border-white/5" id="math">
+<div class="text-center mb-24">
+<h2 class="text-5xl font-black uppercase mb-4 italic tracking-tight underline decoration-cyan-500/30 underline-offset-8 text-cyan-400 text-center italic text-center">Exemplos da Fundamentação Matemática da framework MetastableX</h2>
+<p class="text-slate-500 max-w-3xl mx-auto font-light text-sm italic leading-relaxed text-center italic leading-relaxed">Formalismos de Física Estatística, Teoria Ergódica e Cálculo Estocástico.</p>
+</div>
+<p class="text-[12px] text-slate-500 italic mb-6 text-center max-w-xl mx-auto">
+A formalização completa do regime metaestável e da teoria QWAN está documentada na framework MetastableX.
+</p>
+<!-- CTA MetastableX -->
+<div class="flex flex-col md:flex-row gap-4 justify-center items-center mb-16">
+
+  <a href="https://goldenluke.github.io/metastablex/" target="_blank"
+     class="flex items-center gap-3 bg-cyan-500/10 hover:bg-cyan-500/20 text-cyan-300 px-6 py-3 rounded-xl border border-cyan-500/30 transition-all font-mono text-[11px] uppercase tracking-widest shadow-lg shadow-cyan-500/5">
+     
+     <i data-lucide="file-text" class="w-4 h-4"></i>
+     White Paper MetastableX
+  </a>
+
+  <a href="https://github.com/goldenluke/metastablex/" target="_blank"
+     class="flex items-center gap-3 bg-slate-800 hover:bg-slate-700 text-white px-6 py-3 rounded-xl border border-white/10 transition-all font-mono text-[11px] uppercase tracking-widest shadow-lg">
+     
+     <i data-lucide="github" class="w-4 h-4"></i>
+     Repositório GitHub
+  </a>
+
+</div>
+  
+<div class="grid lg:grid-cols-2 gap-8">
+<!-- Teoria QWAN -->
+<div class="math-box lg:col-span-2 text-center">
+<h4 class="font-bold text-white uppercase text-[12px] tracking-widest mb-6 text-indigo-400 underline underline-offset-8 uppercase tracking-[0.3em] text-center">Teoria QWAN: Metaestabilidade e Ergodicidade</h4>
+<div class="grid md:grid-cols-2 gap-10 items-center">
+<div class="bg-black/40 p-6 rounded-xl border border-indigo-500/30 text-center">
+$$\lim_{T \to \infty} \frac{1}{T} \int_0^T f(T_t x) dt = \int_X f d\mu \quad ; \quad \lambda_{max} \approx 0$$
+</div>
+<p class="text-[10px] text-slate-500 leading-relaxed italic text-justify leading-relaxed">A estabilidade da orquestração estatal é validada pelo <b>Teorema Ergódico de Birkhoff</b>. O Regime QWAN (\(\mathcal{R}_{Q}\)) garante que a média temporal das internações hospitalares convirja para a média espacial do território sob criticidade marginal.</p>
+</div>
+</div>
+
+<!-- Fokker-Planck -->
+<div class="math-box text-center">
+<h4 class="font-bold text-white uppercase text-[11px] tracking-widest mb-6 text-cyan-400 underline underline-offset-8">01. Evolução de Densidade (Fokker-Planck)</h4>
+<p class="text-[10px] text-slate-400 mb-4 italic">Modelagem da evolução temporal da probabilidade de surto \(p(x,t)\):</p>
+$$\frac{\partial p(x,t)}{\partial t} = -\frac{\partial}{\partial x} [\mu(x,t)p(x,t)] + \frac{\partial^2}{\partial x^2} [D(x,t)p(x,t)]$$
+</div>
+
+<!-- Jensen-Shannon -->
+<div class="math-box text-center">
+<h4 class="font-bold text-white uppercase text-[11px] tracking-widest mb-6 text-emerald-400 underline underline-offset-8">02. Jensen-Shannon (Teoria Informação)</h4>
+<p class="text-[10px] text-slate-400 mb-4 italic">Comparação simétrica entre perfis epidemiológicos municipais:</p>
+$$JSD(P || Q) = \frac{1}{2} D_{KL}(P || M) + \frac{1}{2} D_{KL}(Q || M)$$
+</div>
+
+<!-- Bellman -->
+<div class="math-box text-center">
+<h4 class="font-bold text-white uppercase text-[11px] tracking-widest mb-6 text-amber-400 underline underline-offset-8">03. Otimização Estocástica de Bellman</h4>
+<p class="text-[10px] text-slate-400 mb-4 italic">Decisão ótima de alocação de leitos sob incerteza de demanda:</p>
+$$V(s) = \max_{a} \{ R(s,a) + \gamma \sum_{s'} P(s'|s,a) V(s') \}$$
+</div>
+
+<!-- Sensibilidade Sobol -->
+<div class="math-box text-center">
+<h4 class="font-bold text-white uppercase text-[11px] tracking-widest mb-6 text-purple-400 underline underline-offset-8">04. Sensibilidade de Sobol (Incerteza)</h4>
+<p class="text-[10px] text-slate-400 mb-4 italic">Decomposição da variância do risco para identificar fatores críticos:</p>
+$$S_i = \frac{Var_{X_i}(E_{X_{\sim i}}[Y|X_i])}{Var(Y)}$$
+</div>
+</div>
+</section>
+
+<div class="section-divider" id="fazenda"></div>
+
+<!-- 4. LABSUS NO MINISTÉRIO DA FAZENDA — VERSÃO MÁXIMA -->
+<section class="py-32 max-w-7xl mx-auto px-6 border-t border-white/5">
+<div class="text-center mb-20 text-center">
+<h2 class="text-4xl font-black uppercase mb-4 italic tracking-tighter text-amber-500 text-center font-black">LabSUS — UFT no Ministério da Fazenda</h2>
+<p class="text-slate-500 max-w-2xl mx-auto font-light text-sm italic leading-relaxed text-center italic">Transposição econométrica e atuarial para a soberania fiscal.</p>
+</div>
+
+<div class="grid lg:grid-cols-2 gap-12 items-start">
+<div class="space-y-8">
+<!-- SFA -->
+<div class="math-box bg-amber-500/5 border-amber-500/10 text-center">
+<h5 class="text-xs font-bold text-amber-400 uppercase mb-4 tracking-widest font-mono text-center">1. Fronteira Estocástica de Eficiência (SFA)</h5>
+<p class="text-[10px] text-slate-400 mb-4 italic">Estimativa da ineficiência fiscal municipal separada do ruído aleatório:</p>
+$$\ln(R_i) = \beta^T X_i + v_i - u_i \quad ; \quad u_i \geq 0$$
+</div>
+
+<!-- Ramsey -->
+<div class="math-box bg-amber-500/5 border-amber-500/10 mt-8 text-center text-center">
+<h5 class="text-xs font-bold text-amber-400 uppercase mb-4 tracking-widest font-mono">2. Elasticidade Inversa de Ramsey</h5>
+$$\frac{\tau_k}{p_k} = \frac{1}{\varepsilon_k} \frac{1 - \lambda}{\lambda}$$
+</div>
+
+<!-- Nash -->
+<div class="math-box bg-amber-500/5 border-amber-500/10 mt-8 text-center text-center">
+<h5 class="text-xs font-bold text-amber-400 uppercase mb-4 tracking-widest font-mono">3. Equilíbrio de Nash na Fiscalização</h5>
+$$p^* = \frac{f}{f + \tau B} \quad ; \quad q^* = \frac{C'(p)}{\tau B}$$
+</div>
+</div>
+
+<div class="space-y-8 text-center">
+<!-- Itô -->
+<div class="math-box text-center">
+<h4 class="font-bold text-white uppercase text-[10px] tracking-widest mb-6 text-amber-400 underline underline-offset-8">4. Volatilidade Arrecadatória (Cálculo de Itô)</h4>
+$$dX_t = \theta(\mu - X_t) dt + \sigma dW_t$$
+</div>
+
+<!-- Tax Gap -->
+<div class="math-box text-center">
+<h4 class="font-bold text-white uppercase text-[10px] tracking-widest mb-6 text-amber-400 underline underline-offset-8 text-center font-black">5. Hiato Tributário Estrutural (Tax Gap)</h4>
+$$Gap = \sum \tau \cdot B(PIB_{interp}) - \sum R_{real}$$
+</div>
+
+<!-- Multiplicador -->
+<div class="math-box text-center">
+<h4 class="font-bold text-white uppercase text-[10px] tracking-widest mb-6 text-amber-400 underline underline-offset-8">6. Multiplicador Fiscal Analítico</h4>
+$$m = \frac{1}{1 - c(1-t) + m}$$
+</div>
+</div>
+</div>
+</section>
+
+<!-- 5. CATÁLOGO INTEGRAL (OS 40 MODELOS) -->
+<section class="py-32 max-w-7xl mx-auto px-6 border-t border-white/5" id="features">
+<div class="text-center mb-16 text-center text-center">
+<h2 class="text-4xl font-black uppercase mb-4 italic tracking-tighter text-cyan-500 text-center font-black">Catálogo Integral de Modelos</h2>
+<p class="text-slate-500 max-w-3xl mx-auto font-light text-sm italic leading-relaxed text-center italic leading-relaxed">Arquitetura de competência estatal orquestrada em 4 eixos principais.</p>
+</div>
+
+<div class="grid lg:grid-cols-4 gap-4 text-center">
+<div class="space-y-2">
+<h3 class="text-white font-bold text-[9px] uppercase tracking-widest border-b border-cyan-500/20 pb-1 mb-4">Epidemiologia (12)</h3>
+<div class="feature-tag">Mortalidade Infantil (TMI)</div>
+<div class="feature-tag">Cobertura Pré-Natal (7+)</div>
+<div class="feature-tag">Vigilância Psicotrópicos</div>
+<div class="feature-tag">Internações Sensíveis (ICSAP)</div>
+<div class="feature-tag">Mães Adolescentes (&lt;20a)</div>
+<div class="feature-tag">Causas Mal Definidas (CMD)</div>
+<div class="feature-tag">Incidência Arboviroses</div>
+<div class="feature-tag">Tuberculose (Cura/Abandono)</div>
+<div class="feature-tag">Hanseníase (Detecção)</div>
+<div class="feature-tag">Médicos por 1.000 hab.</div>
+<div class="feature-tag">Cobertura ESF (%)</div>
+<div class="feature-tag">Óbitos Maternos</div>
+</div>
+<div class="space-y-2">
+<h3 class="text-white font-bold text-[9px] uppercase tracking-widest border-b border-emerald-500/20 pb-1 mb-4">IA & Complexidade (10)</h3>
+<div class="feature-tag">Regime QWAN (Metastability)</div>
+<div class="feature-tag">Expoentes de Lyapunov</div>
+<div class="feature-tag">Risco de Óbito (XAI SHAP)</div>
+<div class="feature-tag">Requalificação NLP (TF-IDF)</div>
+<div class="feature-tag">Forecast Demanda (Prophet)</div>
+<div class="feature-tag">Sobrevida (Cox PH)</div>
+<div class="feature-tag">Inferência Causal (PSM)</div>
+<div class="feature-tag">Clustering Lloyd (K-Means)</div>
+<div class="feature-tag">Autocorrelação Moran (I)</div>
+<div class="feature-tag">Fokker-Planck Evolution</div>
+</div>
+<div class="space-y-2">
+<h3 class="text-white font-bold text-[9px] uppercase tracking-widest border-b border-rose-500/20 pb-1 mb-4">Desfechos & Gestão (9)</h3>
+<div class="feature-tag">Mort. Doenças Circulatórias</div>
+<div class="feature-tag">Mort. Neoplasias (Câncer)</div>
+<div class="feature-tag">Mortalidade COVID-19</div>
+<div class="feature-tag">Readmissão Hospitalar 30d</div>
+<div class="feature-tag">Fluxo Pacientes (Network)</div>
+<div class="feature-tag">Centralidade Betweenness</div>
+<div class="feature-tag">Custo-Efetividade (RCEI)</div>
+<div class="feature-tag">Bellman Optimality (Policy)</div>
+<div class="feature-tag">Lotka-Volterra (Leitos)</div>
+</div>
+<div class="space-y-2">
+<h3 class="text-white font-bold text-[9px] uppercase tracking-widest border-b border-amber-500/20 pb-1 mb-4">Fazenda (Futuras implementações)</h3>
+<div class="feature-tag">Tax Gap (Hiato Tributário)</div>
+<div class="feature-tag">Previsão Receita (OU Process)</div>
+<div class="feature-tag">Elasticidade de Ramsey</div>
+<div class="feature-tag">Nash Audit Strategy</div>
+<div class="feature-tag">SFA Efficiency Frontier</div>
+<div class="feature-tag">EFI: Eficiência Fiscal</div>
+<div class="feature-tag">Gini Fiscal Territorial</div>
+<div class="feature-tag">PIB Municipal (Spline)</div>
+<div class="feature-tag">Evasão Fiscal (Anomalias)</div>
+</div>
+</div>
+</section>
+
+<!-- 6. PITCH DE APRESENTAÇÃO -->
+<section id="pitch" class="py-32 max-w-7xl mx-auto px-6 text-center border-t border-white/5">
+<h2 class="text-4xl font-black uppercase mb-12 italic tracking-tighter underline decoration-emerald-500/30 text-center font-black">Pitch de Apresentação</h2>
+<div class="pdf-container glass mb-12">
+<iframe src="https://goldenluke.github.io/qwan_zero_pipeline/LabSUS%20(2)%20(2)%20(1)-1.pdf"
+class="w-full h-full grayscale hover:grayscale-0 transition-all duration-1000" frameborder="0"></iframe>
+</div>
+</section>
+
+<!-- 7. MANUAL TÉCNICO -->
+<section id="documentation" class="py-32 max-w-7xl mx-auto px-6 text-center border-t border-white/5">
+<h2 class="text-4xl font-black uppercase mb-12 italic tracking-tighter underline decoration-cyan-500/30 text-center font-black">Manual Técnico</h2>
+<div class="pdf-container glass mb-12 text-center text-center">
+<iframe src="https://goldenluke.github.io/qwan_zero_pipeline/Padr%C3%A3o%20de%20Projeto%20LabSUS%20-%20Manual%20de%20Refer%C3%AAncia%20T%C3%A9cnica.pdf"
+class="w-full h-full grayscale hover:grayscale-0 transition-all duration-1000" frameborder="0"></iframe>
+</div>
+</section>
+
+<!-- Rodapé -->
+<footer class="py-24 border-t border-white/5 text-center bg-slate-950/50">
+<div class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-12 text-left text-xs uppercase tracking-widest font-bold">
+<div class="space-y-4 max-w-4xl text-center md:text-left">
+<div class="flex items-center gap-2 justify-center md:justify-start">
+<i data-lucide="activity" class="text-cyan-500"></i>
+<span class="font-black text-2xl tracking-tighter italic uppercase text-white">LabSUS — UFT</span>
+</div>
+<div class="text-slate-300 border-l-2 border-cyan-500 pl-4 py-1">
+Arquitetura: <span class="text-cyan-400 font-bold uppercase text-center font-black">Lucas Amaral Dourado</span>
+</div>
+
+<div class="mt-8 pt-8 border-t border-white/5 grid md:grid-cols-2 lg:grid-cols-4 gap-8 text-center md:text-left text-center">
+<div class="space-y-2">
+<h4 class="text-cyan-400 font-black tracking-widest italic underline underline-offset-4 mb-3 uppercase">Orientação</h4>
+<p class="text-white text-[11px] leading-tight mb-1 font-bold italic">Profa. Dra. Kelly Cristina Gomes</p>
+</div>
+<div class="space-y-2">
+<h4 class="text-cyan-400 font-black tracking-widest italic underline underline-offset-4 mb-3 uppercase">Orientação</h4>
+<p class="text-white text-[11px] leading-tight mb-1 font-bold italic">Profa. Ma. Michelle de Jesus Pantoja Filgueira</p>
+</div>
+<div class="space-y-2">
+<h4 class="text-cyan-400 font-black tracking-widest italic underline underline-offset-4 mb-3 uppercase text-center font-black">Colaboração</h4>
+<p class="text-white text-[11px] leading-tight mb-1 font-bold italic">Prof. Dr. Thiago M. B. Rodrigues</p>
+</div>
+<div class="space-y-2 text-center">
+<h4 class="text-cyan-400 font-black tracking-widest italic underline underline-offset-4 mb-3 uppercase font-black">Colaboração</h4>
+<p class="text-white text-[11px] leading-tight mb-1 font-bold italic">Prof. Dr. Ary Henrique</p>
+</div>
+</div>
+
+<!-- LICENÇA ÉTICA -->
+<div class="mt-12 pt-12 border-t border-white/10 text-center md:text-left text-center">
+<h4 class="text-cyan-400 font-black tracking-[0.2em] text-[10px] uppercase mb-6 flex items-center gap-2 justify-center md:justify-start">
+<i data-lucide="shield-check" class="w-4 h-4"></i> Licença Ética LabSUS — UFT (Base MIT)
+</h4>
+<div class="text-[9px] leading-relaxed text-slate-400 space-y-4 font-mono uppercase italic text-justify italic">
+<p class="text-white font-bold">Edição Institucional – Universidade Federal do Tocantins</p>
+<p>Copyright (c) 2026 Universidade Federal do Tocantins (UFT) / Autor: Lucas Amaral Dourado</p>
+<p>Fica concedida, gratuitamente, a permissão para utilizar o Software para fins de pesquisa, educação e análise em saúde pública não comercial, sob condições de uso ético estritas: proibição de uso para fins bélicos, discriminação ou vigilância em massa. Licenciamento completo no respectivo repositório GitHub.</p>
+<p class="border-t border-white/10 pt-4">O SOFTWARE É FORNECIDO "NO ESTADO EM QUE SE ENCONTRA", SEM GARANTIA DE QUALQUER TIPO. OS RESULTADOS SÃO MODELOS ESTATÍSTICOS E NÃO SUBSTITUEM AVALIAÇÃO PROFISSIONAL ESPECIALIZADA.</p>
+</div>
+</div>
+</div>
+</div>
+</footer>
+
+<script>
+lucide.createIcons();
+function openLightbox(src) {
+const modal = document.getElementById('lightbox');
+const modalImg = document.getElementById('lightbox-content');
+modal.style.display = "block";
+modalImg.src = src;
+document.body.style.overflow = 'hidden';
+}
+
+function closeLightbox() {
+document.getElementById('lightbox').style.display = 'none';
+document.body.style.overflow = 'auto';
+}
+
+document.addEventListener('keydown', (e) => {
+if (e.key === 'Escape') closeLightbox();
+});
+</script>
+</body>
+</html>
