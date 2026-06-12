@@ -1,336 +1,539 @@
+
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-pt">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>QWAN | Computational Criticality & Neural Search</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://unpkg.com/lucide@latest"></script>
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=JetBrains+Mono:wght@400;500&display=swap');
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LabSUS — UFT | Padrão de Projeto de Inteligência Estatal</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://unpkg.com/lucide@latest"></script>
+<!-- MathJax para renderização de fórmulas complexas -->
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<!-- Mermaid.js para Fluxogramas Técnicos -->
+<script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+<script>
+mermaid.initialize({
+startOnLoad: true,
+theme: 'dark',
+securityLevel: 'loose',
+flowchart: { useMaxWidth: true, htmlLabels: true, curve: 'basis' }
+});
+</script>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=JetBrains+Mono:wght@400;500&family=Lora:ital,wght@1,400;1,700&display=swap');
 
-        :root {
-            --primary: #6366f1;
-            --secondary: #10b981;
-            --critical: #ef4444;
-            --bg: #020617;
-        }
+:root {
+--primary: #06b6d4;
+--accent: #10b981;
+--warning: #f59e0b;
+--danger: #f43f5e;
+--bg: #020617;
+}
 
-        body {
-            font-family: 'Inter', sans-serif;
-            background-color: var(--bg);
-            color: #f8fafc;
-            scroll-behavior: smooth;
-        }
+body {
+font-family: 'Inter', sans-serif;
+background-color: var(--bg);
+color: #f8fafc;
+scroll-behavior: smooth;
+}
 
-        .mono { font-family: 'JetBrains Mono', monospace; }
+.mono { font-family: 'JetBrains Mono', monospace; }
+.serif-italic { font-family: 'Lora', serif; font-style: italic; }
 
-        .glass {
-            background: rgba(255, 255, 255, 0.01);
-            backdrop-filter: blur(12px);
-            border: 1px solid rgba(255, 255, 255, 0.05);
-        }
+.glass {
+background: rgba(255, 255, 255, 0.01);
+backdrop-filter: blur(16px);
+border: 1px solid rgba(255, 255, 255, 0.05);
+}
 
-        .gradient-text {
-            background: linear-gradient(to right, #818cf8, #34d399, #a855f7);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
+.gradient-text {
+background: linear-gradient(to right, #22d3ee, #34d399, #fbbf24);
+-webkit-background-clip: text;
+-webkit-text-fill-color: transparent;
+}
 
-        .grid-bg {
-            background-image: radial-gradient(circle at 1px 1px, rgba(255,255,255,0.03) 1px, transparent 0);
-            background-size: 32px 32px;
-        }
+.grid-bg {
+background-image: radial-gradient(circle at 1px 1px, rgba(255,255,255,0.03) 1px, transparent 0);
+background-size: 32px 32px;
+}
 
-        .critical-glow {
-            box-shadow: 0 0 40px rgba(99, 102, 241, 0.1);
-        }
+.section-divider {
+height: 1px;
+background: linear-gradient(to right, transparent, rgba(6, 182, 212, 0.1), transparent);
+}
 
-        .section-divider {
-            height: 1px;
-            background: linear-gradient(to right, transparent, rgba(99, 102, 241, 0.2), transparent);
-        }
-    </style>
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--bg); }
+::-webkit-scrollbar-thumb { background: #164e63; border-radius: 10px; }
+
+.mjx-container {
+color: #22d3ee !important;
+font-size: 1.05em !important;
+margin: 10px 0 !important;
+background: rgba(0, 0, 0, 0.2);
+padding: 1.5rem;
+border-radius: 1rem;
+}
+
+.pdf-container {
+width: 100%;
+height: 800px;
+border-radius: 1.5rem;
+overflow: hidden;
+border: 1px solid rgba(255, 255, 255, 0.1);
+background: #000;
+}
+
+pre {
+background: #000 !important;
+border: 1px solid rgba(255,255,255,0.1);
+padding: 1.5rem;
+border-radius: 1rem;
+font-size: 0.75rem;
+overflow-x: auto;
+}
+
+.feature-tag {
+@apply bg-cyan-500/5 border border-cyan-500/15 p-2.5 rounded-lg text-[9px] text-cyan-300 font-mono flex items-center gap-2 transition-all;
+}
+.feature-tag:hover { @apply bg-cyan-500/10 border-cyan-500/40 translate-x-1 shadow-lg shadow-cyan-500/5; }
+
+.math-box {
+@apply glass p-10 rounded-[3rem] border border-white/5 mt-8;
+background: rgba(0, 0, 0, 0.4);
+transition: all 0.3s;
+}
+.math-box:hover { border-color: rgba(6, 182, 212, 0.3); transform: translateY(-3px); }
+
+.evidence-card {
+@apply glass rounded-2xl overflow-hidden border border-white/5 hover:border-cyan-500/30 transition-all duration-500 flex flex-col h-full;
+}
+.evidence-img {
+@apply w-full h-40 object-cover cursor-zoom-in transition-transform duration-700 hover:scale-110;
+background: #111;
+}
+.evidence-label { @apply p-3 bg-black/40 border-t border-white/5; }
+
+#lightbox {
+display: none;
+position: fixed;
+z-index: 999999;
+left: 0;
+top: 0;
+width: 100%;
+height: 100%;
+background-color: rgba(2, 6, 23, 0.98);
+backdrop-filter: blur(25px);
+overflow-y: auto;
+padding: 60px 0;
+}
+#lightbox-content {
+margin: auto;
+display: block;
+width: 85%;
+max-width: 1400px;
+border-radius: 1rem;
+border: 1px solid rgba(255,255,255,0.1);
+height: auto;
+animation: zoom 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+box-shadow: 0 0 120px rgba(6, 182, 212, 0.25);
+}
+.close-button {
+position: fixed;
+top: 20px;
+right: 40px;
+z-index: 1000000;
+@apply bg-red-600 hover:bg-red-700 text-white p-3 rounded-full shadow-2xl transition-all cursor-pointer;
+}
+</style>
 </head>
-<body class="grid-bg">
+<body class="grid-bg text-slate-200">
 
-    <!-- Navigation -->
-    <nav class="fixed top-0 w-full z-50 glass border-b border-white/5 px-6 py-4">
-        <div class="max-w-7xl mx-auto flex justify-between items-center">
-            <div class="flex items-center gap-2">
-                <i data-lucide="brain-circuit" class="text-indigo-500"></i>
-                <span class="font-extrabold text-xl tracking-tighter uppercase">QWAN <span class="text-indigo-400">Project</span></span>
-            </div>
-            <div class="hidden md:flex gap-10 text-[11px] uppercase tracking-widest font-bold text-slate-500">
-                <a href="#architecture" class="hover:text-white transition">Arquitetura</a>
-                <a href="#formalism" class="hover:text-white transition">Formalismo</a>
-                <a href="#algorithm" class="hover:text-white transition">Dinâmica</a>
-                <a href="#article" class="hover:text-white transition">Pesquisa</a>
-            </div>
-            <a href="https://github.com/goldenluke/qwan_zero_pipeline" target="_blank" class="flex items-center gap-2 bg-white text-black px-4 py-2 rounded-lg text-xs font-bold hover:bg-slate-200 transition">
-                <i data-lucide="github" class="w-4 h-4"></i> Contribua no GitHub
-            </a>
+<div id="lightbox" onclick="closeLightbox()">
+<div class="close-button" onclick="closeLightbox()">
+<i data-lucide="x" class="w-8 h-8"></i>
+</div>
+<img id="lightbox-content" src="" alt="Visão Ampliada LabSUS — UFT">
+</div>
+
+<nav class="fixed top-0 w-full z-50 glass border-b border-white/5 px-6 py-4">
+<div class="max-w-7xl mx-auto flex justify-between items-center">
+<div class="flex items-center gap-2">
+<i data-lucide="activity" class="text-cyan-500"></i>
+<span class="font-extrabold text-xl tracking-tighter uppercase italic">Lab<span class="text-cyan-400 font-black">SUS</span> — UFT</span>
+</div>
+<div class="hidden lg:flex items-center gap-10 text-[10px] uppercase tracking-[0.25em] font-bold text-slate-400">
+
+    <a href="#epidemiological-documentation"
+       class="hover:text-cyan-400 transition duration-300">
+        Visão Epidemiológica
+    </a>
+
+    <a href="#documentation"
+       class="hover:text-cyan-400 transition duration-300">
+        Documentação Técnica
+    </a>
+
+    <a href="#frontend-gallery"
+       class="hover:text-cyan-400 transition duration-300">
+        Interface
+    </a>
+
+    <a href="#features"
+       class="hover:text-cyan-400 transition duration-300">
+        Catálogo de Modelos
+    </a>
+
+</div>
+</div>
+</nav>
+
+<header class="relative pt-48 pb-32 px-6 text-center" id="overview">
+<div class="absolute top-0 left-1/2 -translate-x-1/2 w-[1200px] h-[600px] bg-cyan-600/10 blur-[160px] rounded-full -z-10"></div>
+<div class="max-w-6xl mx-auto">
+<div class="inline-block px-4 py-1.5 rounded-full border border-cyan-500/30 bg-cyan-500/5 text-cyan-400 text-[10px] font-black mb-8 uppercase tracking-[0.4em]">
+Design Pattern de Inteligência Estatal & MLOps
+</div>
+<h1 class="text-6xl md:text-8xl font-black mb-10 tracking-tighter leading-[0.85]">
+Padrão de Projeto de <br><span class="gradient-text">Inteligência Estatal.</span>
+</h1>
+<div class="mt-12 flex justify-center">
+    <a
+        href="https://labsus.com.br"
+        target="_blank"
+        class="group relative overflow-hidden
+               px-12 py-6 rounded-2xl
+               glass border border-cyan-500/20
+               hover:border-cyan-400/50
+               hover:scale-105
+               transition-all duration-300
+               shadow-[0_0_60px_rgba(6,182,212,0.15)]"
+    >
+
+        <div class="absolute inset-0 bg-gradient-to-r from-cyan-500/10 via-emerald-500/10 to-amber-500/10 opacity-0 group-hover:opacity-100 transition-all"></div>
+
+        <div class="relative flex items-center gap-4">
+            <i data-lucide="rocket" class="w-7 h-7 text-cyan-400"></i>
+
+            <span class="text-2xl font-black uppercase tracking-[0.25em] gradient-text">
+                ACESSAR LABSUS
+            </span>
+
+            <i data-lucide="arrow-right"
+               class="w-7 h-7 text-emerald-400 group-hover:translate-x-2 transition-transform">
+            </i>
         </div>
-    </nav>
 
-    <!-- Hero Section -->
-    <header class="relative pt-48 pb-32 px-6 overflow-hidden">
-        <div class="absolute top-0 left-1/2 -translate-x-1/2 w-[1000px] h-[600px] bg-indigo-600/10 blur-[150px] rounded-full -z-10"></div>
-        <div class="max-w-5xl mx-auto text-center">
-            <div class="inline-block px-4 py-1.5 rounded-full border border-indigo-500/30 bg-indigo-500/5 text-indigo-400 text-[10px] font-bold mb-8 uppercase tracking-[0.3em]">
-                Deep Learning & Non-Equilibrium Physics
-            </div>
-            <h1 class="text-6xl md:text-8xl font-black mb-10 tracking-tighter leading-[0.9]">
-                Navegando no Limiar da <br><span class="gradient-text">Criticidade.</span>
-            </h1>
-            <p class="text-xl md:text-2xl text-slate-400 max-w-3xl mx-auto mb-12 leading-relaxed font-light">
-                O QWAN é um motor de xadrez de vanguarda que transcende a otimização local. Ele utiliza regimes <span class="text-white font-medium">metaestáveis</span> para equilibrar a exploração estrutural profunda com a precisão competitiva.
-            </p>
-            <div class="flex justify-center">
-                <a href="https://github.com/goldenluke/qwan_zero_pipeline" target="_blank" class="group relative px-12 py-5 bg-indigo-600 rounded-2xl font-black text-lg hover:shadow-[0_0_50px_rgba(99,102,241,0.3)] transition-all duration-300">
-                    <span class="flex items-center gap-3">
-                        EXPLORAR PIPELINE NO GITHUB <i data-lucide="arrow-up-right" class="group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform"></i>
-                    </span>
-                </a>
-            </div>
+    </a>
+</div>
+<div class="flex flex-col items-center gap-6 mb-12">
+<div class="flex items-center gap-2 text-cyan-500/80 font-mono text-sm tracking-widest uppercase border-y border-white/5 py-2 px-6 font-bold text-center">
+</div>
+
+<div class="flex flex-wrap justify-center gap-4 mt-10">
+
+    <div class="flex items-center gap-3 px-6 py-3 rounded-xl glass border border-cyan-500/20">
+        <i data-lucide="graduation-cap" class="w-4 h-4 text-cyan-400"></i>
+        <span class="text-[10px] uppercase tracking-[0.3em] text-slate-400 font-bold">
+            Orientação
+        </span>
+        <span class="text-cyan-300 font-black uppercase tracking-wider">
+            Profa. Dra. Kelly Cristina Gomes
+        </span>
+    </div>
+
+    <div class="flex items-center gap-3 px-6 py-3 rounded-xl glass border border-cyan-500/20">
+        <i data-lucide="graduation-cap" class="w-4 h-4 text-cyan-400"></i>
+        <span class="text-[10px] uppercase tracking-[0.3em] text-slate-400 font-bold">
+            Colaboração
+        </span>
+        <span class="text-cyan-300 font-black uppercase tracking-wider">
+            Profa. Ma. Michelle de Jesus Pantoja Filgueira
+        </span>
+    </div>
+
+    <div class="flex items-center gap-3 px-6 py-3 rounded-xl glass border border-cyan-500/20">
+        <i data-lucide="users" class="w-4 h-4 text-cyan-400"></i>
+        <span class="text-[10px] uppercase tracking-[0.3em] text-slate-400 font-bold">
+            Colaboração
+        </span>
+        <span class="text-cyan-300 font-black uppercase tracking-wider">
+            Prof. Dr. Thiago M. B. Rodrigues
+        </span>
+    </div>
+
+    <div class="flex items-center gap-3 px-6 py-3 rounded-xl glass border border-cyan-500/20">
+        <i data-lucide="users" class="w-4 h-4 text-cyan-400"></i>
+        <span class="text-[10px] uppercase tracking-[0.3em] text-slate-400 font-bold">
+            Colaboração
+        </span>
+        <span class="text-cyan-300 font-black uppercase tracking-wider">
+            Prof. Dr. Ary Henrique
+        </span>
+    </div>
+
+    <div class="flex items-center gap-3 px-6 py-3 rounded-xl glass border border-cyan-500/20">
+        <i data-lucide="cpu" class="w-4 h-4 text-cyan-400"></i>
+        <span class="text-[10px] uppercase tracking-[0.3em] text-slate-400 font-bold">
+            Arquitetura
+        </span>
+        <span class="text-cyan-300 font-black uppercase tracking-wider">
+            Lucas Amaral Dourado
+        </span>
+    </div>
+
+</div>
+
+<div class="mt-6 flex justify-center">
+    <a
+        href="https://github.com/goldenluke/labsus"
+        target="_blank"
+        class="group relative overflow-hidden
+               px-10 py-5 rounded-2xl
+               glass border border-cyan-500/20
+               hover:border-cyan-400/50
+               hover:scale-105
+               transition-all duration-300
+               shadow-[0_0_40px_rgba(6,182,212,0.10)]"
+    >
+
+        <div class="absolute inset-0 bg-gradient-to-r from-cyan-500/5 via-emerald-500/5 to-amber-500/5 opacity-0 group-hover:opacity-100 transition-all"></div>
+
+        <div class="relative flex items-center gap-4">
+
+            <i data-lucide="code-2"
+               class="w-6 h-6 text-cyan-400"></i>
+
+            <span class="text-xl font-black uppercase tracking-[0.25em] gradient-text">
+                CÓDIGO ABERTO
+            </span>
+
+            <i data-lucide="external-link"
+               class="w-5 h-5 text-cyan-400 group-hover:translate-x-1 transition-transform">
+            </i>
+
         </div>
-    </header>
 
-    <div class="section-divider"></div>
+    </a>
+</div>
 
-    <!-- Architecture Section -->
-    <section id="architecture" class="py-32 max-w-7xl mx-auto px-6">
-        <div class="grid lg:grid-cols-2 gap-20 items-start">
-            <div>
-                <h2 class="text-4xl font-black mb-8 tracking-tight uppercase italic">A Engenharia do <span class="text-indigo-500">Caos Estruturado</span></h2>
-                <div class="space-y-10 text-slate-400 leading-relaxed">
-                    <p>
-                        Diferente das arquiteturas convencionais inspiradas no AlphaZero que utilizam hiperparâmetros estáticos, o QWAN introduz um <strong>Campo Estrutural Contínuo</strong>. Este campo é governado pelo parâmetro escalar $\xi$, que atua como o "termostato" da inteligência do sistema.
-                    </p>
-                    <div class="grid gap-8">
-                        <div class="flex gap-6">
-                            <div class="w-12 h-12 shrink-0 rounded-2xl bg-indigo-500/10 border border-indigo-500/20 flex items-center justify-center">
-                                <i data-lucide="layers" class="text-indigo-400 w-6 h-6"></i>
-                            </div>
-                            <div>
-                                <h4 class="text-white font-bold text-lg mb-2">Redes ResNet-20 Expandidas</h4>
-                                <p class="text-sm">Processamento massivo de tensores $12 \times 8 \times 8$ com blocos residuais profundos. A rede não apenas estima a vitória, mas mapeia a suscetibilidade da posição atual a variações críticas, gerando uma distribuição de probabilidade $\mathbf{p}$ refinada por campos de força latentes.</p>
-                            </div>
-                        </div>
-                        <div class="flex gap-6">
-                            <div class="w-12 h-12 shrink-0 rounded-2xl bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center">
-                                <i data-lucide="git-branch" class="text-emerald-400 w-6 h-6"></i>
-                            </div>
-                            <div>
-                                <h4 class="text-white font-bold text-lg mb-2">MCTS com Modulação $\xi$</h4>
-                                <p class="text-sm">A árvore de busca Monte Carlo do QWAN não é fixa. Ela se expande e contrai baseada na "temperatura" do parâmetro $\xi$. Isso permite que o bot ignore linhas triviais em posições de baixa variância e mergulhe em explorações profundas e caóticas em posições críticas.</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="glass p-8 rounded-[2.5rem] border-white/10 critical-glow relative">
-                <div class="absolute -top-4 -right-4 bg-indigo-600 text-[10px] font-black px-4 py-2 rounded-full shadow-lg">LIVE PIPELINE DATA</div>
-                <div class="space-y-6">
-                    <div class="flex items-center justify-between border-b border-white/5 pb-4">
-                        <span class="mono text-xs text-slate-500">Neural Flow Strategy</span>
-                        <div class="flex gap-2">
-                            <span class="w-3 h-3 rounded-full bg-indigo-500/50 animate-pulse"></span>
-                            <span class="text-[10px] mono text-indigo-400 uppercase tracking-tighter">Active Scaling</span>
-                        </div>
-                    </div>
-                    <div class="space-y-4">
-                        <div class="p-4 rounded-xl bg-white/5 border border-white/10">
-                            <div class="flex justify-between mb-2">
-                                <span class="text-[10px] uppercase font-bold text-slate-400 tracking-widest">ResNet Blocks</span>
-                                <span class="text-[10px] mono">20 Layers</span>
-                            </div>
-                            <div class="w-full bg-slate-800 h-1.5 rounded-full overflow-hidden">
-                                <div class="bg-indigo-500 h-full w-[85%]"></div>
-                            </div>
-                        </div>
-                        <div class="p-4 rounded-xl bg-white/5 border border-white/10">
-                            <div class="flex justify-between mb-2">
-                                <span class="text-[10px] uppercase font-bold text-slate-400 tracking-widest">Field Tension ($\xi$)</span>
-                                <span class="text-[10px] mono">Dynamic 1.428</span>
-                            </div>
-                            <div class="w-full bg-slate-800 h-1.5 rounded-full overflow-hidden">
-                                <div class="bg-emerald-500 h-full w-[62%] animate-pulse"></div>
-                            </div>
-                        </div>
-                        <div class="grid grid-cols-2 gap-4">
-                            <div class="bg-white/5 p-4 rounded-xl border border-white/10">
-                                <div class="text-[8px] text-slate-500 uppercase font-bold mb-1">Policy Head</div>
-                                <div class="text-xs mono text-indigo-300">Softmax Logits</div>
-                            </div>
-                            <div class="bg-white/5 p-4 rounded-xl border border-white/10">
-                                <div class="text-[8px] text-slate-500 uppercase font-bold mb-1">Value Head</div>
-                                <div class="text-xs mono text-emerald-300">Scalar [-1, 1]</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+</header>
+
+<!-- 8. DOCUMENTAÇÃO DA VISÃO EPIDEMIOLÓGICA -->
+<!-- 8. DOCUMENTAÇÃO DA VISÃO EPIDEMIOLÓGICA -->
+<section id="epidemiological-documentation" class="py-32 max-w-7xl mx-auto px-6 text-center border-t border-white/5">
+<h2 class="text-4xl font-black uppercase mb-12 italic tracking-tighter underline decoration-emerald-500/30 text-center font-black">
+Documentação da Visão Epidemiológica
+</h2>
+
+<div class="pdf-container glass mb-12 text-center">
+<iframe src="https://goldenluke.github.io/qwan_zero_pipeline/Construindo%20Intelig%C3%AAncia%20em%20Sistemas%20de%20Sa%C3%BAde%20-%20Modelagem%20Integrada%20para%20Epidemiologia%20(1).pdf"
+class="w-full h-full grayscale hover:grayscale-0 transition-all duration-1000"
+frameborder="0">
+</iframe>
+</div>
+</section>
+
+<!-- 1. GALERIA DA INTERFACE (FRONTEND) -->
+<section class="py-32 max-w-7xl mx-auto px-6 border-t border-white/5" id="frontend-gallery">
+<div class="text-center mb-16">
+<h2 class="text-4xl font-black uppercase mb-4 italic tracking-tighter text-emerald-500">Exemplos da Interface</h2>
+<p class="text-slate-500 max-w-2xl mx-auto font-light text-sm italic text-center leading-relaxed">Visualização do motor de orquestração em UI reativa (Clique para ampliar).</p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+<img src="https://github.com/goldenluke/qwan_zero_pipeline/blob/main/Untitled.jpeg?raw=true" onclick="openLightbox(this.src)" class="frontend-img" alt="UI Dashboard">
+<img src="https://github.com/goldenluke/qwan_zero_pipeline/blob/main/Untitled2.jpeg?raw=true" onclick="openLightbox(this.src)" class="frontend-img" alt="UI Espacial">
+<img src="https://github.com/goldenluke/qwan_zero_pipeline/blob/main/Untitled3.jpeg?raw=true" onclick="openLightbox(this.src)" class="frontend-img" alt="UI Indicadores">
+<img src="https://github.com/goldenluke/qwan_zero_pipeline/blob/main/Untitled4.jpeg?raw=true" onclick="openLightbox(this.src)" class="frontend-img" alt="UI IA">
+<img src="https://github.com/goldenluke/qwan_zero_pipeline/blob/main/Untitled5.jpeg?raw=true" onclick="openLightbox(this.src)" class="frontend-img" alt="UI Fluxos">
+<img src="https://github.com/goldenluke/qwan_zero_pipeline/blob/main/Untitled6.jpeg?raw=true" onclick="openLightbox(this.src)" class="frontend-img" alt="UI Auditoria">
+<img src="https://github.com/goldenluke/qwan_zero_pipeline/blob/main/Untitled7.jpeg?raw=true" onclick="openLightbox(this.src)" class="frontend-img lg:col-span-2" alt="UI Completa">
+</div>
+</section>
+
+
+<!-- CATÁLOGO INTEGRAL DE MODELOS LABSUS -->
+<section class="py-32 max-w-7xl mx-auto px-6 border-t border-white/5" id="features">
+
+    <div class="text-center mb-16">
+        <h2 class="text-4xl font-black uppercase mb-4 italic tracking-tighter text-cyan-500">
+            Catálogo Integral de Modelos
+        </h2>
+        <p class="text-slate-500 max-w-3xl mx-auto font-light text-sm italic leading-relaxed">
+            Arquitetura de inteligência em saúde pública construída sobre as bases nacionais do DATASUS.
+        </p>
+    </div>
+
+    <div class="grid lg:grid-cols-5 gap-4 text-center">
+
+        <!-- EPIDEMIOLOGIA -->
+        <div class="space-y-2">
+            <h3 class="text-white font-bold text-[9px] uppercase tracking-widest border-b border-cyan-500/20 pb-1 mb-4">
+                Epidemiologia & Vigilância
+            </h3>
+
+            <div class="feature-tag">Orquestrador de Indicadores</div>
+            <div class="feature-tag">Análise Exploratória de Risco</div>
+            <div class="feature-tag">Detecção de Surtos</div>
+            <div class="feature-tag">Risco Geográfico</div>
+            <div class="feature-tag">Sobrevida Infantil</div>
+            <div class="feature-tag">Sobrevida Individual</div>
+            <div class="feature-tag">Predição de Óbito Infantil</div>
+            <div class="feature-tag">Jornada do Paciente Crônico</div>
         </div>
-    </section>
 
-    <!-- Formalism Section -->
-    <section id="formalism" class="py-32 bg-white/[0.01] border-y border-white/5">
-        <div class="max-w-7xl mx-auto px-6">
-            <div class="text-center mb-20">
-                <h2 class="text-4xl font-black mb-4 uppercase">Métricas de <span class="text-indigo-500">Criticidade</span></h2>
-                <p class="text-slate-400 max-w-2xl mx-auto italic">Traduzindo a física de sistemas complexos para a geometria estatística do xadrez.</p>
-            </div>
-            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-                <div class="glass p-8 rounded-3xl hover:border-indigo-500/30 transition-all group">
-                    <i data-lucide="line-chart" class="text-indigo-500 mb-6 group-hover:scale-110 transition-transform"></i>
-                    <h3 class="font-bold text-lg mb-4">Hurst Exponent ($H$)</h3>
-                    <p class="text-sm text-slate-500 leading-relaxed">Analisa a auto-similaridade das séries temporais de busca. Se $H > 0.5$, o motor detecta persistência estrutural; se $H < 0.5$, ele identifica reversões de médoa iminentes na árvore de decisão.</p>
-                </div>
-                <div class="glass p-8 rounded-3xl hover:border-emerald-500/30 transition-all group">
-                    <i data-lucide="activity" class="text-emerald-500 mb-6 group-hover:scale-110 transition-transform"></i>
-                    <h3 class="font-bold text-lg mb-4">Suscetibilidade ($\chi$)</h3>
-                    <p class="text-sm text-slate-500 leading-relaxed">Mede a resposta da variância estrutural às flutuações de $\xi$. Picos em $\chi$ sinalizam transições de fase computacionais onde a árvore "estala" para uma nova configuração estratégica.</p>
-                </div>
-                <div class="glass p-8 rounded-3xl hover:border-purple-500/30 transition-all group">
-                    <i data-lucide="box" class="text-purple-500 mb-6 group-hover:scale-110 transition-transform"></i>
-                    <h3 class="font-bold text-lg mb-4">Difusão de Retornos</h3>
-                    <p class="text-sm text-slate-500 leading-relaxed">Utiliza matrizes de difusão 2D para estimar como o valor $v$ se dispersa entre os nós. Isso evita que o bot fique preso em "poços de potencial" estratégicos sub-ótimos.</p>
-                </div>
-                <div class="glass p-8 rounded-3xl hover:border-red-500/30 transition-all group">
-                    <i data-lucide="binary" class="text-red-500 mb-6 group-hover:scale-110 transition-transform"></i>
-                    <h3 class="font-bold text-lg mb-4">Lei de Potência</h3>
-                    <p class="text-sm text-slate-500 leading-relaxed">A distribuição de visitas $P(N) \sim N^{-\gamma}$ é o selo da criticidade. Quando o motor atinge este estado, ele opera com máxima eficiência de processamento de informação.</p>
-                </div>
-            </div>
+        <!-- IA -->
+        <div class="space-y-2">
+            <h3 class="text-white font-bold text-[9px] uppercase tracking-widest border-b border-emerald-500/20 pb-1 mb-4">
+                IA, ML & Inferência
+            </h3>
+
+            <div class="feature-tag">Clusterização Municipal</div>
+            <div class="feature-tag">Arquétipos Territoriais</div>
+            <div class="feature-tag">Forecast de Internações</div>
+            <div class="feature-tag">Previsão de Demanda</div>
+            <div class="feature-tag">Tempo de Permanência (LOS)</div>
+            <div class="feature-tag">Inferência Causal</div>
+            <div class="feature-tag">Inferência Causal com PSM</div>
+            <div class="feature-tag">Classificação de Readmissão</div>
+            <div class="feature-tag">NLP de Sintomas e Tópicos</div>
         </div>
-    </section>
 
-    <!-- Algorithm Deep Dive -->
-    <section id="algorithm" class="py-32 max-w-7xl mx-auto px-6">
-        <div class="grid lg:grid-cols-2 gap-20 items-center">
-            <div class="order-2 lg:order-1 glass p-1 rounded-3xl overflow-hidden shadow-2xl">
-                <div class="bg-black/60 p-10">
-                    <div class="flex items-center gap-3 mb-8 border-b border-white/5 pb-4">
-                        <i data-lucide="code" class="text-slate-500 w-4 h-4"></i>
-                        <span class="mono text-[10px] text-slate-400">core_meta_stable.py</span>
-                    </div>
-                    <pre class="mono text-sm leading-relaxed text-indigo-300 overflow-x-auto">
-<span class="text-slate-500"># Estimação da Meta-Estabilidade Estrutural</span>
-def estimate_meta_score(hurst, autocorr, var):
-    <span class="text-slate-500">"""
-    Regime Crítico: 0.4H + 0.3A + 0.3(1/V)
-    Objetivo: Maximizar variância sem colapsar a ordem.
-    """</span>
-    score = (0.4 * hurst +
-             0.3 * autocorr +
-             0.3 * (1.0 / (1.0 + var)))
-    return np.nanmean(score)
+        <!-- GESTÃO -->
+        <div class="space-y-2">
+            <h3 class="text-white font-bold text-[9px] uppercase tracking-widest border-b border-rose-500/20 pb-1 mb-4">
+                Gestão & Planejamento
+            </h3>
 
-<span class="text-slate-500"># Campo escalar xi adaptativo</span>
-xi = 1.0 / (1.0 + current_tree_variance)
-update_puct_exploration(xi)
-                    </pre>
-                </div>
-            </div>
-            <div class="order-1 lg:order-2">
-                <h2 class="text-4xl font-black mb-8 uppercase italic">O Loop de <span class="text-emerald-500">Auto-Organização</span></h2>
-                <div class="space-y-6 text-slate-400">
-                    <p>
-                        A meta-estabilidade não é um estado estático, mas um equilíbrio dinâmico. No QWAN, o sistema monitora constantemente a variância das visitas na raiz da árvore. Se a busca se torna determinística demais (congelamento), $\xi$ aumenta a temperatura, forçando a exploração. Se a busca se torna errática (caos), $\xi$ reduz a entropia para consolidar o melhor movimento.
-                    </p>
-                    <ul class="space-y-4">
-                        <li class="flex items-start gap-4">
-                            <i data-lucide="check" class="text-emerald-500 shrink-0 mt-1"></i>
-                            <span><strong>Resiliência Pós-Erro:</strong> O score metaestável permite que o bot se recupere rapidamente de avaliações errôneas em posições táticas complexas.</span>
-                        </li>
-                        <li class="flex items-start gap-4">
-                            <i data-lucide="check" class="text-emerald-500 shrink-0 mt-1"></i>
-                            <span><strong>Poda Baseada em Suscetibilidade:</strong> Nós com baixa resposta a variações de $\xi$ são podados agressivamente, focando recursos onde a decisão é crítica.</span>
-                        </li>
-                    </ul>
-                </div>
-            </div>
+            <div class="feature-tag">Fluxo de Pacientes</div>
+            <div class="feature-tag">Referência e Contrarreferência</div>
+            <div class="feature-tag">Alocação de Recursos APS</div>
+            <div class="feature-tag">Otimização de Recursos</div>
+            <div class="feature-tag">Capacidade Hospitalar</div>
+            <div class="feature-tag">Fluxo de Pronto-Socorro</div>
+            <div class="feature-tag">Auditoria Ambulatorial</div>
+            <div class="feature-tag">Anomalias de Faturamento</div>
         </div>
-    </section>
 
-    <!-- Article Summary -->
-    <section id="article" class="py-32 bg-indigo-600/5">
-        <div class="max-w-4xl mx-auto px-6">
-            <div class="text-center mb-16">
-                <i data-lucide="file-text" class="text-indigo-400 w-12 h-12 mx-auto mb-6"></i>
-                <h2 class="text-4xl font-black uppercase">Resumo da Pesquisa</h2>
-            </div>
-            <div class="glass p-12 rounded-[3rem] border-indigo-500/20 relative overflow-hidden">
-                <div class="absolute top-0 right-0 w-32 h-32 bg-indigo-500/10 blur-[60px] rounded-full"></div>
-                <div class="prose prose-invert max-w-none text-slate-300 leading-[1.8]">
-                    <p class="text-xl italic text-white mb-8 border-l-4 border-indigo-500 pl-6">
-                        "Investigamos a hipótese de que existe um regime intermediário de $\xi$ no qual a variância estrutural da árvore de busca e o desempenho competitivo coexistem de forma otimizada..."
-                    </p>
-                    <p class="mb-6">
-                        O artigo formaliza a arquitetura do **QWAN Chess Engine** como um sistema adaptativo de alta dimensão. Através da análise de leis de potência e suscetibilidade computacional, demonstramos que motores de xadrez operam melhor não em determinismo absoluto, mas em regimes de <strong>criticidade finita</strong>.
-                    </p>
-                    <p>
-                        A conclusão sugere que o "Elo ótimo" emerge no limiar entre a ordem e o caos, criando uma ponte formal entre a teoria de aprendizado por reforço e a econofísica.
-                    </p>
-                </div>
-                <div class="mt-12 pt-8 border-t border-white/5 flex flex-wrap gap-8 justify-center items-center">
-                    <div class="text-center">
-                        <div class="text-2xl font-black text-white">3.12</div>
-                        <div class="text-[10px] text-slate-500 uppercase tracking-widest">Tail Index Médio</div>
-                    </div>
-                    <div class="text-center">
-                        <div class="text-2xl font-black text-white">0.548</div>
-                        <div class="text-[10px] text-slate-500 uppercase tracking-widest">Hurst Coeff.</div>
-                    </div>
-                    <div class="text-center">
-                        <div class="text-2xl font-black text-white">Critical</div>
-                        <div class="text-[10px] text-slate-500 uppercase tracking-widest">Phase State</div>
-                    </div>
-                </div>
-            </div>
+        <!-- TERRITÓRIO -->
+        <div class="space-y-2">
+            <h3 class="text-white font-bold text-[9px] uppercase tracking-widest border-b border-violet-500/20 pb-1 mb-4">
+                Território & Redes
+            </h3>
+
+            <div class="feature-tag">Redes Hospitalares Complexas</div>
+            <div class="feature-tag">Análise Espacial LISA</div>
+            <div class="feature-tag">Painel Geográfico</div>
+            <div class="feature-tag">Vulnerabilidade Territorial</div>
+            <div class="feature-tag">Resiliência Territorial</div>
+            <div class="feature-tag">Sequência de Eventos Clínicos</div>
+            <div class="feature-tag">Readmissão e Sobrevivência</div>
+            <div class="feature-tag">Fluxos Assistenciais Regionais</div>
         </div>
-    </section>
 
-    <!-- Footer -->
-    <footer class="py-20 border-t border-white/5 text-center">
-        <div class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-10">
-            <div class="text-left">
-                <div class="flex items-center gap-2 mb-2">
-                    <i data-lucide="brain-circuit" class="text-indigo-500"></i>
-                    <span class="font-black text-lg tracking-tighter">QWAN PROJECT</span>
-                </div>
-                <p class="text-slate-500 text-xs max-w-sm leading-relaxed">
-                    Pesquisa avançada em Criticidade Computacional, Redes Neurais e Teoria de Sistemas Complexos aplicada ao Xadrez.
-                </p>
-            </div>
-            <div class="flex gap-4">
-                <a href="https://github.com/goldenluke/qwan_zero_pipeline" target="_blank" class="bg-white/5 border border-white/10 px-8 py-4 rounded-2xl font-bold flex items-center gap-3 hover:bg-white/10 transition">
-                    <i data-lucide="github"></i> CONTRIBUA NO GITHUB
-                </a>
-            </div>
+        <!-- PRODUÇÃO -->
+        <div class="space-y-2">
+            <h3 class="text-white font-bold text-[9px] uppercase tracking-widest border-b border-amber-500/20 pb-1 mb-4">
+                Produção Atual
+            </h3>
+
+            <div class="feature-tag">Indicadores Epidemiológicos</div>
+            <div class="feature-tag">Clusterização Municipal</div>
+            <div class="feature-tag">Arquétipos Territoriais</div>
+            <div class="feature-tag">Forecast de Internações</div>
+            <div class="feature-tag">Fluxo de Pacientes</div>
+            <div class="feature-tag">Painel Geográfico</div>
+            <div class="feature-tag">Análise Espacial</div>
+            <div class="feature-tag">Pipelines Automatizados</div>
         </div>
-        <div class="mt-20 text-[10px] text-slate-600 uppercase tracking-[0.4em]">
-            Computational Criticality Engine • Experimental Build v4.0.0
-        </div>
-    </footer>
 
-    <script>
-        // Iniciar ícones
-        lucide.createIcons();
+    </div>
 
-        // Scroll Suave
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                const targetId = this.getAttribute('href');
-                if (targetId.startsWith('#')) {
-                    e.preventDefault();
-                    document.querySelector(targetId).scrollIntoView({
-                        behavior: 'smooth'
-                    });
-                }
-            });
-        });
-    </script>
+</section>
+
+<!-- 6. PITCH DE APRESENTAÇÃO -->
+<section id="pitch" class="py-32 max-w-7xl mx-auto px-6 text-center border-t border-white/5">
+<h2 class="text-4xl font-black uppercase mb-12 italic tracking-tighter underline decoration-emerald-500/30 text-center font-black">Pitch de Apresentação</h2>
+<div class="pdf-container glass mb-12">
+<iframe src="https://goldenluke.github.io/qwan_zero_pipeline/LabSUS%20(2)%20(2)%20(1)-1.pdf"
+class="w-full h-full grayscale hover:grayscale-0 transition-all duration-1000" frameborder="0"></iframe>
+</div>
+</section>
+
+<!-- 7. MANUAL TÉCNICO -->
+<section id="documentation" class="py-32 max-w-7xl mx-auto px-6 text-center border-t border-white/5">
+<h2 class="text-4xl font-black uppercase mb-12 italic tracking-tighter underline decoration-cyan-500/30 text-center font-black">Manual Técnico</h2>
+<div class="pdf-container glass mb-12 text-center text-center">
+<iframe src="https://goldenluke.github.io/qwan_zero_pipeline/Padr%C3%A3o%20de%20Projeto%20LabSUS%20-%20Manual%20de%20Refer%C3%AAncia%20T%C3%A9cnica.pdf"
+class="w-full h-full grayscale hover:grayscale-0 transition-all duration-1000" frameborder="0"></iframe>
+</div>
+</section>
+
+<!-- Rodapé -->
+<footer class="py-24 border-t border-white/5 text-center bg-slate-950/50">
+<div class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-12 text-left text-xs uppercase tracking-widest font-bold">
+<div class="space-y-4 max-w-4xl text-center md:text-left">
+<div class="flex items-center gap-2 justify-center md:justify-start">
+<i data-lucide="activity" class="text-cyan-500"></i>
+<span class="font-black text-2xl tracking-tighter italic uppercase text-white">LabSUS — UFT</span>
+</div>
+<div class="text-slate-300 border-l-2 border-cyan-500 pl-4 py-1">
+Arquitetura: <span class="text-cyan-400 font-bold uppercase text-center font-black">Lucas Amaral Dourado</span>
+</div>
+
+<div class="mt-8 pt-8 border-t border-white/5 grid md:grid-cols-2 lg:grid-cols-4 gap-8 text-center md:text-left text-center">
+<div class="space-y-2">
+<h4 class="text-cyan-400 font-black tracking-widest italic underline underline-offset-4 mb-3 uppercase">Orientação</h4>
+<p class="text-white text-[11px] leading-tight mb-1 font-bold italic">Profa. Dra. Kelly Cristina Gomes</p>
+</div>
+<div class="space-y-2">
+<h4 class="text-cyan-400 font-black tracking-widest italic underline underline-offset-4 mb-3 uppercase">Colaboração</h4>
+<p class="text-white text-[11px] leading-tight mb-1 font-bold italic">Profa. Ma. Michelle de Jesus Pantoja Filgueira</p>
+</div>
+<div class="space-y-2">
+<h4 class="text-cyan-400 font-black tracking-widest italic underline underline-offset-4 mb-3 uppercase text-center font-black">Colaboração</h4>
+<p class="text-white text-[11px] leading-tight mb-1 font-bold italic">Prof. Dr. Thiago M. B. Rodrigues</p>
+</div>
+<div class="space-y-2 text-center">
+<h4 class="text-cyan-400 font-black tracking-widest italic underline underline-offset-4 mb-3 uppercase font-black">Colaboração</h4>
+<p class="text-white text-[11px] leading-tight mb-1 font-bold italic">Prof. Dr. Ary Henrique</p>
+</div>
+</div>
+
+<!-- LICENÇA ÉTICA -->
+<div class="mt-12 pt-12 border-t border-white/10 text-center md:text-left text-center">
+<h4 class="text-cyan-400 font-black tracking-[0.2em] text-[10px] uppercase mb-6 flex items-center gap-2 justify-center md:justify-start">
+<i data-lucide="shield-check" class="w-4 h-4"></i> Licença Ética LabSUS — UFT (Base MIT)
+</h4>
+<div class="text-[9px] leading-relaxed text-slate-400 space-y-4 font-mono uppercase italic text-justify italic">
+<p class="text-white font-bold">Edição Institucional – Universidade Federal do Tocantins</p>
+<p>Copyright (c) 2026 Universidade Federal do Tocantins (UFT) / Autor: Lucas Amaral Dourado</p>
+<p>Fica concedida, gratuitamente, a permissão para utilizar o Software para fins de pesquisa, educação e análise em saúde pública não comercial, sob condições de uso ético estritas: proibição de uso para fins bélicos, discriminação ou vigilância em massa. Licenciamento completo no respectivo repositório GitHub.</p>
+<p class="border-t border-white/10 pt-4">O SOFTWARE É FORNECIDO "NO ESTADO EM QUE SE ENCONTRA", SEM GARANTIA DE QUALQUER TIPO. OS RESULTADOS SÃO MODELOS ESTATÍSTICOS E NÃO SUBSTITUEM AVALIAÇÃO PROFISSIONAL ESPECIALIZADA.</p>
+</div>
+</div>
+</div>
+</div>
+</footer>
+
+<script>
+lucide.createIcons();
+function openLightbox(src) {
+const modal = document.getElementById('lightbox');
+const modalImg = document.getElementById('lightbox-content');
+modal.style.display = "block";
+modalImg.src = src;
+document.body.style.overflow = 'hidden';
+}
+
+function closeLightbox() {
+document.getElementById('lightbox').style.display = 'none';
+document.body.style.overflow = 'auto';
+}
+
+document.addEventListener('keydown', (e) => {
+if (e.key === 'Escape') closeLightbox();
+});
+</script>
 </body>
 </html>
